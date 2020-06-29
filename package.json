@@ -11,5 +11,8 @@
   "bugs": {
     "url": "https://github.com/christianliebel/paint/issues"
   },
-  "homepage": "https://github.com/christianliebel/paint#readme"
+  "homepage": "https://github.com/christianliebel/paint#readme",
+  "devDependencies": {
+    "snowpack": "^2.6.1"
+  }
 }
