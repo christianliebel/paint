@@ -2,6 +2,9 @@
   "name": "paint",
   "version": "1.0.0",
   "description": "A web-based clone of Microsoft Paint.",
+  "scripts": {
+    "start": "snowpack dev"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/christianliebel/paint.git"
