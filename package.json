@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/christianliebel/paint#readme",
   "devDependencies": {
+    "lit-element": "^2.3.1",
     "snowpack": "^2.6.1"
   }
 }
