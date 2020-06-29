@@ -1,0 +1,15 @@
+{
+  "name": "paint",
+  "version": "1.0.0",
+  "description": "A web-based clone of Microsoft Paint.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christianliebel/paint.git"
+  },
+  "author": "Christian Liebel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/christianliebel/paint/issues"
+  },
+  "homepage": "https://github.com/christianliebel/paint#readme"
+}
