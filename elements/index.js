@@ -1,3 +1,4 @@
+import './app.js';
 import './canvas.js';
 import './inset-container.js';
 import './menu-bar.js';
