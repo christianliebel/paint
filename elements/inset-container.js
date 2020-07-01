@@ -1,5 +1,4 @@
-import {html, LitElement} from '../web_modules/lit-element.js';
-import {css} from "../web_modules/lit-element";
+import {css, html, LitElement} from '../web_modules/lit-element.js';
 
 class InsetContainer extends LitElement {
     static get styles() {
