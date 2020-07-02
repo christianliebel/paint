@@ -80,7 +80,7 @@ class Canvas extends LitElement {
 
     firstUpdated() {
         const canvas = this.shadowRoot.querySelector('canvas');
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d', { desynchronized: true });
         context.fillStyle = 'white';
         context.fillRect(0, 0, 1024, 768);
     }
