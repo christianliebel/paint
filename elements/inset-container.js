@@ -4,6 +4,7 @@ class InsetContainer extends LitElement {
     static get styles() {
         return css`
             :host {
+                box-sizing: border-box;
                 border: 1px solid var(--canvas);
                 border-bottom-color: var(--highlight-text);
                 border-right-color: var(--highlight-text);
