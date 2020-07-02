@@ -18,6 +18,10 @@ class App extends LitElement {
                 flex-direction: column;
                 background-color: var(--canvas);
                 color: var(--button-text);
+                
+                user-select: none;
+                -webkit-user-select: none;
+                cursor: default;
             }
             
             div {
