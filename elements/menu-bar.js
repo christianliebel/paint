@@ -6,19 +6,25 @@ class MenuBar extends LitElement {
             :host {
                 background-color: var(--button-face);
                 display: flex;
-                align-items: center;
                 height: 20px;
             }
             
             ul {
                 list-style-type: none;
                 display: flex;
-                padding: 0;
-                margin: 0 6px;
+                margin: 0;
+                padding: 1px 0;
             }
             
-            li + li {
-                margin-left: 12px;
+            li {
+                display: flex;
+                align-items: center;
+                padding: 0 6px;
+            }
+            
+            li.active {
+                background-color: var(--highlight);
+                color: var(--highlight-text);
             }
             
             span.mnemonic {
