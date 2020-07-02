@@ -30,6 +30,12 @@ class Tool extends LitElement {
                 background: var(--selected-background);
             }
             
+            /* TODO: REMOVE */
+            :host(:not(.active)) {
+                filter: saturate(0%);
+                pointer-events: none;
+            }
+            
             :host(.active) div {
                 border: 1px solid var(--button-face);
                 border-top: 1px solid var(--canvas);
