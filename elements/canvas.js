@@ -1,6 +1,13 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
 
 class Canvas extends LitElement {
+    static get properties() {
+        return {
+            canvasWidth: {attribute: false},
+            canvasHeight: {attribute: false},
+        };
+    }
+
     static get styles() {
         return css`
             :host {
@@ -30,7 +37,14 @@ class Canvas extends LitElement {
                 overflow: auto;
             }
             
-            canvas { width: 1024px; height: 768px; margin: 3px; }
+            div.document {
+                vertical-align: top;
+                display: inline-grid;
+                grid-template-columns: 3px auto 3px;
+                grid-template-rows: 3px auto 3px;
+            }
+            
+            paint-handle { place-self: center; }
         `;
     }
 
@@ -38,10 +52,30 @@ class Canvas extends LitElement {
         return html`
             <div class="frame">
                 <div class="scroll-container">
-                    <canvas @mousemove="${this.onMouseMove}"></canvas>
+                    <div class="document">
+                        <paint-handle disabled></paint-handle>
+                        <paint-handle disabled></paint-handle>
+                        <paint-handle></paint-handle>
+                        <paint-handle disabled></paint-handle>
+                        <canvas width="${this.canvasWidth}" height="${this.canvasHeight}"
+                            @mousedown="${this.onMouseDown}" @contextmenu="${this.onMouseDown}"
+                            @mouseenter="${this.onMouseEnter}" @mouseleave="${this.onMouseLeave}"></canvas>
+                        <paint-handle></paint-handle>
+                        <paint-handle disabled></paint-handle>
+                        <paint-handle></paint-handle>
+                        <paint-handle></paint-handle>
+                    </div>
                 </div>
             </div>
         `;
+    }
+
+    constructor() {
+        super();
+
+        // Canvas defaults to screen dimensions
+        this.canvasWidth = screen.width;
+        this.canvasHeight = screen.height;
     }
 
     firstUpdated() {
