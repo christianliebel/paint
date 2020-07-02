@@ -23,6 +23,8 @@ class StatusBar extends LitElement {
             paint-inset-container {
                 margin-left: 2px;
                 flex: 1;
+                overflow: hidden;
+                white-space: nowrap;
             }
             
             paint-inset-container.tool {
