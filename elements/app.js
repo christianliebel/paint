@@ -53,6 +53,12 @@ class App extends LitElement {
         `;
     }
 
+    constructor() {
+        super();
+        this.primaryColor = 'black';
+        this.secondaryColor = 'white';
+    }
+
     render() {
         return html`
             <paint-menu-bar></paint-menu-bar>
@@ -60,8 +66,14 @@ class App extends LitElement {
                 <paint-tool-bar></paint-tool-bar>
                 <paint-canvas></paint-canvas>
             </div>
-            <paint-tool-bar class="color-bar"></paint-tool-bar>
             <paint-status-bar></paint-status-bar>
+            <paint-tool-bar class="color-bar">
+                <paint-color-box
+                    primaryColor="${this.primaryColor}" secondaryColor="${this.secondaryColor}"
+                    @primary-color-selected="${(e) => this.primaryColor = e.detail.value}"
+                    @secondary-color-selected="${(e) => this.secondaryColor = e.detail.value}">
+                </paint-color-box>
+            </paint-tool-bar>
         `;
     }
 }

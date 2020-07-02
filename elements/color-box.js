@@ -3,8 +3,8 @@ import {css, html, LitElement} from '../web_modules/lit-element.js';
 class ColorBox extends LitElement {
     static get properties() {
         return {
-            primaryColor: {attribute: false},
-            secondaryColor: {attribute: false}
+            primaryColor: {type: String},
+            secondaryColor: {type: String}
         };
     }
 
@@ -24,14 +24,6 @@ class ColorBox extends LitElement {
                 grid-row: 1/span 2;
             }
         `;
-    }
-
-    constructor() {
-        super();
-        this.primaryColor = 'black';
-        this.secondaryColor = 'white';
-        this.addEventListener('primary-color-selected', e => this.primaryColor = e.detail.value);
-        this.addEventListener('secondary-color-selected', e => this.secondaryColor = e.detail.value);
     }
 
     render() {
