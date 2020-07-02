@@ -1,6 +1,12 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
 
 class StatusBar extends LitElement {
+    static get properties() {
+        return {
+            coordinateText: {type: String}
+        };
+    }
+
     static get styles() {
         return css`
             :host {
@@ -38,8 +44,10 @@ class StatusBar extends LitElement {
             <paint-ruler></paint-ruler>
             <div>
                 <paint-inset-container>For Help, click Help Topics on the Help Menu.</paint-inset-container>
-                <paint-inset-container class="tool">0,0</paint-inset-container>
                 <paint-inset-container class="tool"></paint-inset-container>
+                <paint-inset-container class="tool">
+                    ${this.coordinateText}
+                </paint-inset-container>
             </div>
         `;
     }

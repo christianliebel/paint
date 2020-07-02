@@ -1,6 +1,14 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
 
 class App extends LitElement {
+    static get properties() {
+        return {
+            coordinateText: {attribute: false},
+            primaryColor: {attribute: false},
+            secondaryColor: {attribute: false}
+        }
+    }
+
     static get styles() {
         return css`
             :host {
