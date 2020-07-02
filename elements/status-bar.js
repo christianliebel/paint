@@ -10,7 +10,7 @@ class StatusBar extends LitElement {
                 flex-direction: column;
             }
             
-            hr {
+            paint-ruler {
                 margin: 0 0 2px 0;
             }
             
@@ -33,7 +33,7 @@ class StatusBar extends LitElement {
 
     render() {
         return html`
-            <hr>
+            <paint-ruler></paint-ruler>
             <div>
                 <paint-inset-container>For Help, click Help Topics on the Help Menu.</paint-inset-container>
                 <paint-inset-container class="tool">0,0</paint-inset-container>
