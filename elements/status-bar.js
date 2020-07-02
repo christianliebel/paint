@@ -36,6 +36,12 @@ class StatusBar extends LitElement {
             paint-inset-container.tool {
                 max-width: 115px;
             }
+            
+            paint-inset-container.tool img {
+                align-self: flex-start;
+                margin-right: 3px;
+                image-rendering: pixelated;
+            }
         `;
     }
 
@@ -44,9 +50,12 @@ class StatusBar extends LitElement {
             <paint-ruler></paint-ruler>
             <div>
                 <paint-inset-container>For Help, click Help Topics on the Help Menu.</paint-inset-container>
-                <paint-inset-container class="tool"></paint-inset-container>
                 <paint-inset-container class="tool">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAOklEQVQokWPAAv5jE8QGmIhVSHXNFIP/SJiBAZX+z4BdnIGUsCEaEGsiVnV0iapB5uchbjN+moHhPwBmmBjumUjVpgAAAABJRU5ErkJggg==" alt="">
                     ${this.coordinateText}
+                </paint-inset-container>
+                <paint-inset-container class="tool">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPAQMAAAABGAcJAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAChJREFUCB1jYBJiYOJiYPoHJoUYgODXKhCpxMSgACZXMDAUgdm/VgEAbW0GLYF8fC8AAAAASUVORK5CYII=" alt="">
                 </paint-inset-container>
             </div>
         `;
