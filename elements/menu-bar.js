@@ -17,9 +17,7 @@ class MenuBar extends LitElement {
             }
             
             li {
-                display: flex;
-                align-items: center;
-                padding: 0 6px;
+                padding: 1px 6px;
             }
             
             li.active {
