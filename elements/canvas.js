@@ -3,8 +3,11 @@ import {css, html, LitElement} from '../web_modules/lit-element.js';
 class Canvas extends LitElement {
     static get properties() {
         return {
+            inCanvas: {attribute: false},
             canvasWidth: {attribute: false},
             canvasHeight: {attribute: false},
+            primaryColor: {type: String},
+            secondaryColor: {type: String}
         };
     }
 
@@ -82,17 +85,50 @@ class Canvas extends LitElement {
         const canvas = this.shadowRoot.querySelector('canvas');
         const context = canvas.getContext('2d', { desynchronized: true });
         context.fillStyle = 'white';
-        context.fillRect(0, 0, 1024, 768);
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.imageSmoothingEnabled = false;
+        this.context = context;
+
+        document.addEventListener('mousemove', evt => this.onMouseMove(evt));
+        document.addEventListener('mouseup', () => this.onMouseUp());
+    }
+
+    onMouseDown(event) {
+        const {left, top} = this.shadowRoot.querySelector('canvas').getBoundingClientRect();
+        this.mouseDown = true;
+        this.context.beginPath();
+        this.context.strokeStyle = event.button === 2 ? this.secondaryColor : this.primaryColor;
+        this.context.moveTo(event.clientX - left, event.clientY - top);
+        event.preventDefault();
     }
 
     onMouseMove({clientX, clientY}) {
         const {left, top} = this.shadowRoot.querySelector('canvas').getBoundingClientRect();
-        this.dispatchEvent(new CustomEvent('coordinate', {
-            x: clientX - left,
-            y: clientY - top,
-            bubbles: true,
-            composed: true
-        }));
+        if (this.inCanvas) {
+            this.dispatchEvent(new CustomEvent('coordinate', {
+                detail: { x: clientX - left, y: clientY - top },
+                bubbles: true,
+                composed: true
+            }));
+        }
+
+        if (this.mouseDown) {
+            this.context.lineTo(clientX - left, clientY - top);
+            this.context.stroke();
+        }
+    }
+
+    onMouseUp() {
+        this.mouseDown = false;
+    }
+
+    onMouseEnter() {
+        this.inCanvas = true;
+    }
+
+    onMouseLeave() {
+        this.inCanvas = false;
+        this.dispatchEvent(new CustomEvent('coordinate', {bubbles: true, composed: true}));
     }
 }
 
