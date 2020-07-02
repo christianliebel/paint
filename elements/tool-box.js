@@ -1,6 +1,13 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
+import {tools} from '../data/tools';
 
 class ToolBox extends LitElement {
+    static get properties() {
+        return {
+            tool: {attribute: false}
+        };
+    }
+
     static get styles() {
         return css`
             :host {
@@ -18,26 +25,20 @@ class ToolBox extends LitElement {
         `;
     }
 
+    constructor() {
+        super();
+        this.tool = 'pencil';
+    }
+
     render() {
         return html`
-            <paint-tool tool="freeform" title="Free-Form Select"></paint-tool>
-            <paint-tool tool="select" title="Select"></paint-tool>
-            <paint-tool tool="eraser" title="Eraser/Color Eraser"></paint-tool>
-            <paint-tool tool="fill" title="Fill With Color"></paint-tool>
-            <paint-tool tool="pick" title="Pick Color"></paint-tool>
-            <paint-tool tool="magnifier" title="Magnifier"></paint-tool>
-            <paint-tool tool="pencil" title="Pencil" class="active"></paint-tool>
-            <paint-tool tool="brush" title="Brush"></paint-tool>            
-            <paint-tool tool="paintbrush" title="Paintbrush"></paint-tool>
-            <paint-tool tool="text" title="Text"></paint-tool>
-            <paint-tool tool="line" title="Line"></paint-tool>
-            <paint-tool tool="curve" title="Curve"></paint-tool>
-            <paint-tool tool="rectangle" title="Rectangle"></paint-tool>
-            <paint-tool tool="polygon" title="Polygon"></paint-tool>
-            <paint-tool tool="ellipse" title="Ellipse"></paint-tool>
-            <paint-tool tool="title" title="Rounded Rectangle"></paint-tool>
+            ${tools.map(tool => html`
+            <paint-tool .tool=${tool} title="${tool.tooltip}"
+                class="${this.tool === tool.id ? 'active' : ''}"
+                @mouseup="${() => this.tool = tool.id}"></paint-tool>`)}
             <paint-inset-container></paint-inset-container>
         `;
     }
 }
+
 customElements.define('paint-tool-box', ToolBox);

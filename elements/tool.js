@@ -1,6 +1,12 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
 
 class Tool extends LitElement {
+    static get properties() {
+        return {
+            tool: {type: Object}
+        };
+    }
+
     static get styles() {
         return css`
             :host {
@@ -21,6 +27,8 @@ class Tool extends LitElement {
                 border: 1px solid var(--canvas);
                 border-top: 1px solid var(--button-face);
                 border-left: 1px solid var(--button-face);
+                background-position: 2px 2px;
+                background-repeat: no-repeat;
             }
             
             :host(.active) {
@@ -40,13 +48,14 @@ class Tool extends LitElement {
                 border: 1px solid var(--button-face);
                 border-top: 1px solid var(--canvas);
                 border-left: 1px solid var(--canvas);
+                background-position: 3px 3px;
             }
         `;
     }
 
     render() {
         return html`
-            <div></div>
+            <div style="background-image: url('${this.tool.image}')"></div>
         `;
     }
 }
