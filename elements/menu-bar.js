@@ -28,12 +28,18 @@ class MenuBar extends LitElement {
             span.mnemonic {
                 text-decoration: underline;
             }
+            
+            .disabled {
+                color: var(--canvas);
+                text-shadow: 1px 1px 0 var(--highlight-text);
+            }
         `;
     }
 
     render() {
+        // TODO: Remove disabled from menu for first implementations
         return html`
-            <ul>
+            <ul class="disabled">
                 <li><span class="mnemonic">F</span>ile</li>
                 <li><span class="mnemonic">E</span>dit</li>
                 <li><span class="mnemonic">V</span>iew</li>
