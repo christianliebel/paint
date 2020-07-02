@@ -44,11 +44,29 @@ class App extends LitElement {
             }
             
             div > paint-tool-bar {
+                width: 57px;
                 min-width: 57px;
+            }
+            
+            paint-tool-bar {
+                display: flex;
+            }
+            
+            paint-tool-bar.tool-bar {
+                display: flex;
+                flex-direction: column;
             }
             
             paint-tool-bar.color-bar {
                 height: 47px;
+                align-items: center;
+            }
+            
+            paint-ruler { z-index: 1; }
+            
+            paint-tool-box {
+                margin-top: -2px;
+                flex: 1;
             }
         `;
     }
@@ -63,10 +81,14 @@ class App extends LitElement {
         return html`
             <paint-menu-bar></paint-menu-bar>
             <div>
-                <paint-tool-bar></paint-tool-bar>
-                <paint-canvas></paint-canvas>
+                <paint-tool-bar class="tool-bar">
+                    <paint-ruler></paint-ruler>
+                    <paint-tool-box></paint-tool-box>
+                    <paint-ruler></paint-ruler>
+                </paint-tool-bar>
+                <paint-canvas @coordinate="${this.onCoordinate}" primaryColor="${this.primaryColor}"
+                    secondaryColor="${this.secondaryColor}"></paint-canvas>
             </div>
-            <paint-status-bar></paint-status-bar>
             <paint-tool-bar class="color-bar">
                 <paint-color-box
                     primaryColor="${this.primaryColor}" secondaryColor="${this.secondaryColor}"
@@ -74,7 +96,12 @@ class App extends LitElement {
                     @secondary-color-selected="${(e) => this.secondaryColor = e.detail.value}">
                 </paint-color-box>
             </paint-tool-bar>
+            <paint-status-bar coordinateText="${this.coordinateText || ''}"></paint-status-bar>
         `;
+    }
+
+    onCoordinate({detail}) {
+        this.coordinateText = detail ? `${detail.x},${detail.y}` : undefined;
     }
 }
 
