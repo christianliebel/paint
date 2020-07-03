@@ -22,7 +22,7 @@ export const fileMenu = {
         mnemonic: 'S',
         shortcut: 'Ctrl+S',
         helpText: 'Saves the active document.',
-        disabled: true
+        action: save,
     }, {
         caption: 'Save As…',
         mnemonic: 'A',
