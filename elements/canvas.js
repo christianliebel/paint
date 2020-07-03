@@ -91,6 +91,9 @@ class Canvas extends LitElement {
 
         document.addEventListener('mousemove', evt => this.onMouseMove(evt));
         document.addEventListener('mouseup', () => this.onMouseUp());
+
+        this.dispatchEvent(new CustomEvent('drawing-context-created',
+            { detail: { canvas, context }, bubbles: true, composed: true }));
     }
 
     onMouseDown(event) {

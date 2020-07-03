@@ -53,10 +53,19 @@ class Tool extends LitElement {
         `;
     }
 
+    constructor() {
+        super();
+        this.addEventListener('mouseenter', () => this.dispatchEvent(new CustomEvent('set-help-text',
+            {detail: this.tool.helpText, bubbles: true, composed: true})));
+        this.addEventListener('mouseleave', () => this.dispatchEvent(new CustomEvent('reset-help-text',
+            {bubbles: true, composed: true})));
+    }
+
     render() {
         return html`
             <div style="background-image: url('${this.tool.image}')"></div>
         `;
     }
 }
+
 customElements.define('paint-tool', Tool);
