@@ -1,4 +1,4 @@
-import {clearImage} from '../actions/clear-image';
+import {clearImage} from '../actions/clear-image.js';
 
 export const imageMenu = {
     caption: 'Image',
