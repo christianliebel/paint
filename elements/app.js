@@ -1,11 +1,14 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
+import {menus} from '../menus/all.js';
 
 class App extends LitElement {
     static get properties() {
         return {
             coordinateText: {attribute: false},
+            helpText: {attribute: false},
             primaryColor: {attribute: false},
-            secondaryColor: {attribute: false}
+            secondaryColor: {attribute: false},
+            drawingContext: {attribute: false}
         }
     }
 
@@ -18,6 +21,7 @@ class App extends LitElement {
                 --highlight: rgb(0 0 128);
                 --highlight-text: white;
                 --selected-background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAAAAABX3VL4AAAADklEQVQIHWP4f4DhwH8ACoADf16N/DIAAAAASUVORK5CYII=');
+                --z-index-menu: 10;
                 
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 font-size: 9pt;
@@ -36,7 +40,6 @@ class App extends LitElement {
                 overflow: hidden;
                 flex: 1;
                 display: flex;
-                flex-direction: row;
             }
             
             div > paint-canvas {
@@ -75,18 +78,26 @@ class App extends LitElement {
         super();
         this.primaryColor = 'black';
         this.secondaryColor = 'white';
+        this.helpText = 'For Help, click Help Topics on the Help Menu.'; // TODO: Duplicate
+        this.addEventListener('set-help-text', event => this.helpText = event.detail || '');
+        this.addEventListener('reset-help-text', () => this.helpText = 'For Help, click Help Topics on the Help Menu.');
+        this.addEventListener('coordinate',
+                event => this.coordinateText = event.detail ? `${event.detail.x},${event.detail.y}` : '');
+        this.addEventListener('drawing-context-created', event => this.drawingContext = event.detail);
+        this.addEventListener('invoke-action',
+                event => event.detail(this.drawingContext.canvas, this.drawingContext.context));
     }
 
     render() {
         return html`
-            <paint-menu-bar></paint-menu-bar>
+            <paint-menu-bar .entries="${menus}"></paint-menu-bar>
             <div>
                 <paint-tool-bar class="tool-bar">
                     <paint-ruler></paint-ruler>
                     <paint-tool-box></paint-tool-box>
                     <paint-ruler></paint-ruler>
                 </paint-tool-bar>
-                <paint-canvas @coordinate="${this.onCoordinate}" primaryColor="${this.primaryColor}"
+                <paint-canvas primaryColor="${this.primaryColor}"
                     secondaryColor="${this.secondaryColor}"></paint-canvas>
             </div>
             <paint-tool-bar class="color-bar">
@@ -96,12 +107,8 @@ class App extends LitElement {
                     @secondary-color-selected="${(e) => this.secondaryColor = e.detail.value}">
                 </paint-color-box>
             </paint-tool-bar>
-            <paint-status-bar coordinateText="${this.coordinateText || ''}"></paint-status-bar>
+            <paint-status-bar helpText="${this.helpText}" coordinateText="${this.coordinateText}"></paint-status-bar>
         `;
-    }
-
-    onCoordinate({detail}) {
-        this.coordinateText = detail ? `${detail.x},${detail.y}` : undefined;
     }
 }
 

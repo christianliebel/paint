@@ -3,7 +3,8 @@ import {css, html, LitElement} from '../web_modules/lit-element.js';
 class StatusBar extends LitElement {
     static get properties() {
         return {
-            coordinateText: {type: String}
+            coordinateText: {type: String},
+            helpText: {type: String}
         };
     }
 
@@ -49,7 +50,7 @@ class StatusBar extends LitElement {
         return html`
             <paint-ruler></paint-ruler>
             <div>
-                <paint-inset-container>For Help, click Help Topics on the Help Menu.</paint-inset-container>
+                <paint-inset-container>${this.helpText}</paint-inset-container>
                 <paint-inset-container class="tool">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAOklEQVQokWPAAv5jE8QGmIhVSHXNFIP/SJiBAZX+z4BdnIGUsCEaEGsiVnV0iapB5uchbjN+moHhPwBmmBjumUjVpgAAAABJRU5ErkJggg==" alt="">
                     ${this.coordinateText}
