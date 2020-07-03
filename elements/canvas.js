@@ -48,6 +48,20 @@ class Canvas extends LitElement {
             }
             
             paint-handle { place-self: center; }
+            
+            @media print {
+                :host, * { border: 0 !important; }
+            
+                canvas {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: auto;
+                    height: auto;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
         `;
     }
 
