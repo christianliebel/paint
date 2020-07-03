@@ -84,8 +84,7 @@ class App extends LitElement {
         this.addEventListener('coordinate',
                 event => this.coordinateText = event.detail ? `${event.detail.x},${event.detail.y}` : '');
         this.addEventListener('drawing-context-created', event => this.drawingContext = event.detail);
-        this.addEventListener('invoke-action',
-                event => event.detail(this.drawingContext.canvas, this.drawingContext.context));
+        this.addEventListener('invoke-action', event => event.detail(this.drawingContext));
     }
 
     render() {
