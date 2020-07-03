@@ -1,5 +1,5 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
-import {tools} from '../data/tools';
+import {tools} from '../data/tools.js';
 
 class ToolBox extends LitElement {
     static get properties() {
