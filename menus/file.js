@@ -62,9 +62,13 @@ export const fileMenu = {
         disabled: true // not exposed to web
     }, {
         separator: true
-    // TODO: Recent files/NativeFS
-    // }, {
-    //     helpText: 'Opens this document.'
+    }, {
+        // TODO: Recent files/NativeFS
+        caption: 'Recent File',
+        disabled: true,
+        helpText: 'Opens this document.'
+    }, {
+        separator: true
     }, {
         caption: 'Exit',
         mnemonic: 'x',
