@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
   "scripts": {
-    "start": "snowpack dev"
+    "start": "snowpack dev",
+    "generate-sw": "workbox generateSW"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "devDependencies": {
     "browser-nativefs": "^0.8.2",
     "lit-element": "^2.3.1",
-    "snowpack": "^2.6.1"
+    "snowpack": "^2.6.1",
+    "workbox-cli": "^5.1.3"
   }
 }
