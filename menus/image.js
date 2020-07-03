@@ -33,6 +33,6 @@ export const imageMenu = {
         mnemonic: 'C',
         shortcut: 'Ctrl+Shft+N',
         helpText: 'Clears the picture or selection.',
-        disabled: true
+        action: clearImage
     }]
 };
