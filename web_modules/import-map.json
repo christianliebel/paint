@@ -1,5 +1,6 @@
 {
   "imports": {
+    "browser-nativefs": "./browser-nativefs.js",
     "lit-element": "./lit-element.js"
   }
 }

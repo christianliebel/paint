@@ -1,7 +1,7 @@
 {
   "name": "paint",
   "version": "1.0.0",
-  "description": "A web-based clone of Microsoft Paint.",
+  "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
   "scripts": {
     "start": "snowpack dev"
   },
@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/christianliebel/paint#readme",
   "devDependencies": {
+    "browser-nativefs": "^0.8.2",
     "lit-element": "^2.3.1",
     "snowpack": "^2.6.1"
   }
