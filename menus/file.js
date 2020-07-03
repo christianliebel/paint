@@ -16,7 +16,7 @@ export const fileMenu = {
         mnemonic: 'O',
         shortcut: 'Ctrl+O',
         helpText: 'Opens an existing document.',
-        disabled: true
+        action: open
     }, {
         caption: 'Save',
         mnemonic: 'S',
