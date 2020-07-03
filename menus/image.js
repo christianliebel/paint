@@ -1,4 +1,5 @@
 import {clearImage} from '../actions/clear-image.js';
+import {invertImage} from '../actions/invert-image.js';
 
 export const imageMenu = {
     caption: 'Image',
@@ -21,7 +22,7 @@ export const imageMenu = {
         mnemonic: 'I',
         shortcut: 'Ctrl+I',
         helpText: 'Inverts the colors of the picture or a selection.',
-        disabled: true
+        action: invertImage
     }, {
         caption: 'Attributes…',
         mnemonic: 'A',
