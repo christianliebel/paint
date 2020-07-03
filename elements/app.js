@@ -36,6 +36,19 @@ class App extends LitElement {
                 cursor: default;
             }
             
+            @media print {
+                * { display: none; }
+            
+                paint-canvas {
+                    display: block;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                }
+            }
+            
             div {
                 overflow: hidden;
                 flex: 1;

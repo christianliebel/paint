@@ -1,5 +1,6 @@
 import {open} from '../actions/open.js';
 import {save} from '../actions/save.js';
+import {print} from '../actions/print.js';
 
 export const fileMenu = {
     caption: 'File',
@@ -35,18 +36,18 @@ export const fileMenu = {
         caption: 'Print Preview',
         mnemonic: 'v',
         helpText: 'Displays full pages.',
-        disabled: true
+        action: print
     }, {
         caption: 'Page Setup…',
         mnemonic: 't',
         helpText: 'Changes the page layout.',
-        disabled: true
+        action: print
     }, {
         caption: 'Print…',
         mnemonic: 'P',
         shortcut: 'Ctrl+P',
         helpText: 'Prints the active document and sets printing options.',
-        disabled: true
+        action: print
     }, {
         separator: true
     }, {
