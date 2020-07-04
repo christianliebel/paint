@@ -34,7 +34,7 @@ This project demonstrates the use of:
 3. Run `npm start`
 4. Done!
 
-Whenever you introduce changes to public files, run `npm run generateSW` to update the cache manifest of the service worker.
+Whenever you introduce changes to public files, run `npm run generate-sw` to update the cache manifest of the service worker.
 
 ## Wait, I’ve seen this before
 You’re right! The awesome [JSPaint](https://jspaint.app/) ([GitHub](https://github.com/1j01/jspaint)) has been around for a long time and is, by far, more complete.
