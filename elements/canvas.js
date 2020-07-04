@@ -113,9 +113,8 @@ class Canvas extends LitElement {
 
     onMouseDown(event) {
         this.mouseDown = true;
-        const {x, y} = this.getCoordinates(event);
-
         if (this.tool && this.tool.onMouseDown) {
+            const {x, y} = this.getCoordinates(event);
             this.tool.onMouseDown({event, x, y, context: this.context, primaryColor: this.primaryColor, secondaryColor: this.secondaryColor, element: this });
         }
         event.preventDefault();
@@ -133,11 +132,11 @@ class Canvas extends LitElement {
     }
 
     onMouseUp(event) {
-        this.mouseDown = false;
-        const {x, y} = this.getCoordinates(event);
-        if (this.tool && this.tool.onMouseUp) {
+        if (this.mouseDown && this.tool && this.tool.onMouseUp) {
+            const {x, y} = this.getCoordinates(event);
             this.tool.onMouseUp({ event, x, y, context: this.context, primaryColor: this.primaryColor, secondaryColor: this.secondaryColor, element: this });
         }
+        this.mouseDown = false;
     }
 
     onMouseEnter() {
