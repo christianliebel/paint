@@ -31,24 +31,23 @@ class Tool extends LitElement {
                 background-repeat: no-repeat;
             }
             
-            :host(.active) {
+            :host(.active), :host(:active) {
                 border: 1px solid var(--highlight-text);
                 border-top: 1px solid var(--button-text);
                 border-left: 1px solid var(--button-text);
                 background: var(--selected-background);
             }
             
-            /* TODO: REMOVE */
-            :host(:not(.active)) {
-                filter: saturate(0%);
-                pointer-events: none;
-            }
-            
-            :host(.active) div {
+            :host(.active) div, :host(:active) div {
                 border: 1px solid var(--button-face);
                 border-top: 1px solid var(--canvas);
                 border-left: 1px solid var(--canvas);
                 background-position: 3px 3px;
+            }
+            
+            :host(:active) div {
+                background-color: var(--button-face);
+                background-position: 4px 4px;
             }
         `;
     }
