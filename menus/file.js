@@ -1,6 +1,8 @@
 import {open} from '../actions/open.js';
+import {saveAs} from '../actions/save-as.js';
 import {save} from '../actions/save.js';
 import {print} from '../actions/print.js';
+import {fileNew} from '../actions/new.js';
 
 export const fileMenu = {
     caption: 'File',
@@ -11,7 +13,7 @@ export const fileMenu = {
         mnemonic: 'N',
         shortcut: 'Ctrl+N',
         helpText: 'Creates a new document.',
-        disabled: true
+        action: fileNew
     }, {
         caption: 'Open…',
         mnemonic: 'O',
@@ -29,7 +31,7 @@ export const fileMenu = {
         mnemonic: 'A',
         shortcut: 'Ctrl+A',
         helpText: 'Saves the active document with a new name.',
-        disabled: true
+        action: saveAs
     }, {
         separator: true
     }, {

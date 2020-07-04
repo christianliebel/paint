@@ -1,5 +1,7 @@
-import {fileSave} from '../web_modules/browser-nativefs.js';
+import {saveAs} from './save-as.js';
 
 export function save({ canvas }) {
-    canvas.toBlob(blob => fileSave(blob, { fileName: 'Untitled.png', extensions: ['png'] }), 'image/png');
+    // TODO: Document Context
+    // TODO: Overwrite file if we have a handle, otherwise "save as"
+    saveAs({ canvas });
 }
