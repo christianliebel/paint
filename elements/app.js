@@ -8,7 +8,8 @@ class App extends LitElement {
             helpText: {attribute: false},
             primaryColor: {attribute: false},
             secondaryColor: {attribute: false},
-            drawingContext: {attribute: false}
+            drawingContext: {attribute: false},
+            tool: {attribute: false},
         }
     }
 
@@ -106,10 +107,11 @@ class App extends LitElement {
             <div>
                 <paint-tool-bar class="tool-bar">
                     <paint-ruler></paint-ruler>
-                    <paint-tool-box></paint-tool-box>
+                    <paint-tool-box @tool-selected="${event => this.tool = event.detail}"
+                        previewColor="${this.previewColor}"></paint-tool-box>
                     <paint-ruler></paint-ruler>
                 </paint-tool-bar>
-                <paint-canvas primaryColor="${this.primaryColor}"
+                <paint-canvas .tool="${this.tool}" primaryColor="${this.primaryColor}"
                     secondaryColor="${this.secondaryColor}"></paint-canvas>
             </div>
             <paint-tool-bar class="color-bar">

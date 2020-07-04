@@ -13,4 +13,4 @@ import './status-bar.js';
 import './tool.js';
 import './tool-bar.js';
 import './tool-box.js';
-import '../tools/register-sw.js';
+import '../helpers/register-sw.js';
