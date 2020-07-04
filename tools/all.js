@@ -1,3 +1,4 @@
+import {PickTool} from './pick.js';
 import {PencilTool} from './pencil.js';
 
 export const tools = [{
@@ -20,6 +21,8 @@ export const tools = [{
     tooltip: 'Pick Color',
     image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACVBMVEUAAAAAAAAArafQeB0vAAAAAXRSTlMAQObYZgAAAD5JREFUCB0FwTENgDAQAMD7BJgZ6IIEVLwEhr4I3CCiJASV3EFHFOZCK1Qn6kQl0TBtWBMXYmC5sSeeD8fLDwv/B/CGwemxAAAAAElFTkSuQmCC'
     helpText: 'Picks up a color from the picture for drawing.',
+    image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAFVBMVEUAAADAwMAAAAAAgICAgIDAwMD///8xPE7VAAAAAnRSTlMAAHaTzTgAAABRSURBVAhbNcrREYAwCAPQrgBOQHrHv2UDR3AFve4/gjTY/PCSo7UdYWAFvVEACthQ/D8OyILOywh/jcghW8IfI3QOIWqQdvQR50KgR3AJXvkAZRYNwZTWSqEAAAAASUVORK5CYII=',
+    instance: new PickTool()
 }, {
     tooltip: 'Magnifier',
     image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAADFBMVEUAAAAAAAAArad25P8qjoCKAAAAAXRSTlMAQObYZgAAADpJREFUCFtjYAhhYGBg/evAwCD//wKUqP//BZmASlwBqcsEqg7JAqpmkJoAJNiWAAnGlUCCASTDIAIA+9MVjTmiL1AAAAAASUVORK5CYII='

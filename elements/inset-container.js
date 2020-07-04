@@ -1,6 +1,7 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
 
 class InsetContainer extends LitElement {
+    // TODO: InsetContainer should not define align-items, maybe not even display: flex.
     static get styles() {
         return css`
             :host {

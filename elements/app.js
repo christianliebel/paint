@@ -1,6 +1,8 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
 import {menus} from '../menus/all.js';
 
+const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
+
 class App extends LitElement {
     static get properties() {
         return {
@@ -8,6 +10,7 @@ class App extends LitElement {
             helpText: {attribute: false},
             primaryColor: {attribute: false},
             secondaryColor: {attribute: false},
+            previewColor: {attribute: false},
             drawingContext: {attribute: false},
             tool: {attribute: false},
         }
@@ -90,15 +93,20 @@ class App extends LitElement {
 
     constructor() {
         super();
+        this.coordinateText = '';
+        this.helpText = defaultHelpText;
         this.primaryColor = 'black';
         this.secondaryColor = 'white';
-        this.helpText = 'For Help, click Help Topics on the Help Menu.'; // TODO: Duplicate
+        this.previewColor = 'transparent';
         this.addEventListener('set-help-text', event => this.helpText = event.detail || '');
-        this.addEventListener('reset-help-text', () => this.helpText = 'For Help, click Help Topics on the Help Menu.');
+        this.addEventListener('reset-help-text', () => this.helpText = defaultHelpText);
         this.addEventListener('coordinate',
                 event => this.coordinateText = event.detail ? `${event.detail.x},${event.detail.y}` : '');
         this.addEventListener('drawing-context-created', event => this.drawingContext = event.detail);
         this.addEventListener('invoke-action', event => event.detail(this.drawingContext));
+        this.addEventListener('primary-color-selected', event => this.primaryColor = event.detail);
+        this.addEventListener('secondary-color-selected', event => this.secondaryColor = event.detail);
+        this.addEventListener('preview-color', event => this.previewColor = event.detail || 'transparent');
     }
 
     render() {
@@ -115,10 +123,7 @@ class App extends LitElement {
                     secondaryColor="${this.secondaryColor}"></paint-canvas>
             </div>
             <paint-tool-bar class="color-bar">
-                <paint-color-box
-                    primaryColor="${this.primaryColor}" secondaryColor="${this.secondaryColor}"
-                    @primary-color-selected="${(e) => this.primaryColor = e.detail.value}"
-                    @secondary-color-selected="${(e) => this.secondaryColor = e.detail.value}">
+                <paint-color-box primaryColor="${this.primaryColor}" secondaryColor="${this.secondaryColor}">
                 </paint-color-box>
             </paint-tool-bar>
             <paint-status-bar helpText="${this.helpText}" coordinateText="${this.coordinateText}"></paint-status-bar>
