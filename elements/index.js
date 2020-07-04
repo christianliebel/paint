@@ -13,4 +13,5 @@ import './status-bar.js';
 import './tool.js';
 import './tool-bar.js';
 import './tool-box.js';
+import './tool-color-preview.js';
 import '../helpers/register-sw.js';

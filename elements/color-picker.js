@@ -37,15 +37,12 @@ class ColorPicker extends LitElement {
     }
 
     dispatchColorEvent(type) {
-        this.dispatchEvent(new CustomEvent(`${type}-color-selected`, {
-            detail: {value: this.color},
-            bubbles: true,
-            composed: true
-        }));
+        this.dispatchEvent(new CustomEvent(`${type}-color-selected`,
+            { detail: this.color, bubbles: true, composed: true }));
     }
 
     render() {
-        return html`<div class="frame" style="background-color: ${this.color || 'hotpink'};"></div>`;
+        return html`<div class="frame" style="background-color: ${this.color};"></div>`;
     }
 }
 

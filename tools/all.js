@@ -1,3 +1,4 @@
+import {PickTool} from './pick.js';
 import {PencilTool} from './pencil.js';
 
 export const tools = [{
@@ -19,6 +20,8 @@ export const tools = [{
 }, {
     tooltip: 'Pick Color',
     helpText: 'Picks up a color from the picture for drawing.',
+    image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAFVBMVEUAAADAwMAAAAAAgICAgIDAwMD///8xPE7VAAAAAnRSTlMAAHaTzTgAAABRSURBVAhbNcrREYAwCAPQrgBOQHrHv2UDR3AFve4/gjTY/PCSo7UdYWAFvVEACthQ/D8OyILOywh/jcghW8IfI3QOIWqQdvQR50KgR3AJXvkAZRYNwZTWSqEAAAAASUVORK5CYII=',
+    instance: new PickTool()
 }, {
     tooltip: 'Magnifier',
     helpText: 'Changes the magnification.',
