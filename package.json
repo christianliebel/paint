@@ -7,7 +7,9 @@
     "build": "snowpack build",
     "test": "echo 'Not supported yet'",
     "lint": "eslint \"**/*.js\"",
-    "generate-sw": "workbox generateSW"
+    "generate-sw": "workbox generateSW",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -40,5 +42,9 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
+  },
+  "snyk": true,
+  "dependencies": {
+    "snyk": "^1.360.0"
   }
 }
