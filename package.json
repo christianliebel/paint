@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/christianliebel/paint#readme",
   "devDependencies": {
+    "bresenham-line": "^2.0.0",
     "browser-nativefs": "^0.8.2",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
