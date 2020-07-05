@@ -102,6 +102,7 @@ class Canvas extends LitElement {
         context.fillStyle = 'white';
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.imageSmoothingEnabled = false;
+        this.canvas = canvas;
         this.context = context;
 
         document.addEventListener('mousemove', event => this.onMouseMove(event));
@@ -149,8 +150,10 @@ class Canvas extends LitElement {
     }
 
     getCoordinates({clientX, clientY}) {
-        const {left, top} = this.shadowRoot.querySelector('canvas').getBoundingClientRect();
-        return { x: clientX - left, y: clientY - top };
+        const {left, top} = this.canvas.getBoundingClientRect();
+        const x = Math.floor(Math.max(0, Math.min(this.canvas.width, clientX - left)));
+        const y = Math.floor(Math.max(0, Math.min(this.canvas.height, clientY - top)));
+        return {x, y};
     }
 }
 
