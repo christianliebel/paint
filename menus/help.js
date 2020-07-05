@@ -14,5 +14,10 @@ export const helpMenu = {
         mnemonic: 'A',
         helpText: 'Displays program information, version number, and copyright.',
         action: () => window.open('https://github.com/christianliebel/paint', '_blank')
+    }, {
+        // TODO: Move to About window once we have it
+        caption: 'Third-party Software',
+        helpText: 'Displays licenses of third-party software.',
+        action: () => window.open('3rdpartylicenses.txt', '_blank')
     }]
 };

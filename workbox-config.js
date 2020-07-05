@@ -6,7 +6,8 @@ module.exports = {
         "**/*.js",
         "assets/*.png",
         "manifest.webmanifest",
-        "favicon.ico"
+        "favicon.ico",
+        "3rdpartylicenses.txt"
     ],
     "globIgnores": [
         "sw.js",
