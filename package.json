@@ -4,6 +4,8 @@
   "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
   "scripts": {
     "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "echo 'Not supported yet'",
     "lint": "eslint \"**/*.js\"",
     "generate-sw": "workbox generateSW"
   },
