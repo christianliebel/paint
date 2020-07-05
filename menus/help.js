@@ -13,6 +13,6 @@ export const helpMenu = {
         caption: 'About Paint',
         mnemonic: 'A',
         helpText: 'Displays program information, version number, and copyright.',
-        disabled: true
+        action: () => window.open('https://github.com/christianliebel/paint', '_blank')
     }]
 };
