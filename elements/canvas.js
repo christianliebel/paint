@@ -67,6 +67,7 @@ class Canvas extends LitElement {
           height: auto;
           max-width: 100%;
           max-height: 100%;
+          image-rendering: pixelated;
         }
       }
     `;
@@ -138,6 +139,7 @@ class Canvas extends LitElement {
         event,
         x,
         y,
+        canvas: this.canvas,
         context: this.context,
         primaryColor: this.primaryColor,
         secondaryColor: this.secondaryColor,

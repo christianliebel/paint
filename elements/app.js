@@ -101,8 +101,8 @@ class App extends LitElement {
     super();
     this.coordinateText = '';
     this.helpText = defaultHelpText;
-    this.primaryColor = 'black';
-    this.secondaryColor = 'white';
+    this.primaryColor = '#000000';
+    this.secondaryColor = '#FFFFFF';
     this.previewColor = 'transparent';
     this.addEventListener(
       'set-help-text',
