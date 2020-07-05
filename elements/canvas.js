@@ -39,6 +39,7 @@ class Canvas extends LitElement {
       div.scroll-container {
         height: 100%;
         overflow: auto;
+        touch-action: none;
       }
 
       div.document {
@@ -83,10 +84,10 @@ class Canvas extends LitElement {
             <canvas
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
-              @mousedown="${this.onMouseDown}"
-              @contextmenu="${this.onMouseDown}"
-              @mouseenter="${this.onMouseEnter}"
-              @mouseleave="${this.onMouseLeave}"
+              @pointerdown="${this.onPointerDown}"
+              @contextmenu="${(event) => event.preventDefault()}"
+              @pointerenter="${this.onPointerEnter}"
+              @pointerleave="${this.onPointerLeave}"
             ></canvas>
             <paint-handle></paint-handle>
             <paint-handle disabled></paint-handle>
@@ -115,8 +116,10 @@ class Canvas extends LitElement {
     this.canvas = canvas;
     this.context = context;
 
-    document.addEventListener('mousemove', (event) => this.onMouseMove(event));
-    document.addEventListener('mouseup', (event) => this.onMouseUp(event));
+    document.addEventListener('pointermove', (event) =>
+      this.onPointerMove(event),
+    );
+    document.addEventListener('pointerup', (event) => this.onPointerUp(event));
 
     this.dispatchEvent(
       new CustomEvent('drawing-context-created', {
@@ -127,11 +130,11 @@ class Canvas extends LitElement {
     );
   }
 
-  onMouseDown(event) {
-    this.mouseDown = true;
-    if (this.tool && this.tool.onMouseDown) {
+  onPointerDown(event) {
+    this.pointerDown = true;
+    if (this.tool && this.tool.onPointerDown) {
       const { x, y } = this.getCoordinates(event);
-      this.tool.onMouseDown({
+      this.tool.onPointerDown({
         event,
         x,
         y,
@@ -144,7 +147,7 @@ class Canvas extends LitElement {
     event.preventDefault();
   }
 
-  onMouseMove(event) {
+  onPointerMove(event) {
     const { x, y } = this.getCoordinates(event);
     if (this.inCanvas) {
       this.dispatchEvent(
@@ -156,8 +159,8 @@ class Canvas extends LitElement {
       );
     }
 
-    if (this.mouseDown && this.tool && this.tool.onMouseMove) {
-      this.tool.onMouseMove({
+    if (this.pointerDown && this.tool && this.tool.onPointerMove) {
+      this.tool.onPointerMove({
         event,
         x,
         y,
@@ -169,10 +172,10 @@ class Canvas extends LitElement {
     }
   }
 
-  onMouseUp(event) {
-    if (this.mouseDown && this.tool && this.tool.onMouseUp) {
+  onPointerUp(event) {
+    if (this.pointerDown && this.tool && this.tool.onPointerUp) {
       const { x, y } = this.getCoordinates(event);
-      this.tool.onMouseUp({
+      this.tool.onPointerUp({
         event,
         x,
         y,
@@ -182,14 +185,14 @@ class Canvas extends LitElement {
         element: this,
       });
     }
-    this.mouseDown = false;
+    this.pointerDown = false;
   }
 
-  onMouseEnter() {
+  onPointerEnter() {
     this.inCanvas = true;
   }
 
-  onMouseLeave() {
+  onPointerLeave() {
     this.inCanvas = false;
     this.dispatchEvent(
       new CustomEvent('coordinate', { bubbles: true, composed: true }),
