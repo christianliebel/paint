@@ -1,5 +1,6 @@
 {
   "imports": {
+    "bresenham-line": "./bresenham-line.js",
     "browser-nativefs": "./browser-nativefs.js",
     "lit-element": "./lit-element.js"
   }
