@@ -73,8 +73,8 @@ class MenuBar extends LitElement {
           (entry) => html`
             <li
               @click="${() => this.onClick(entry)}"
-              @mouseenter="${() => this.onMouseEnter(entry)}"
-              @mouseleave="${() => this.onMouseLeave(entry)}"
+              @pointerenter="${() => this.onPointerEnter(entry)}"
+              @pointerleave="${() => this.onPointerLeave(entry)}"
               class="${this.activeMenu === entry
                 ? 'active'
                 : ''} ${entry.disabled ? 'disabled' : ''}"
@@ -94,7 +94,7 @@ class MenuBar extends LitElement {
     this.activeMenu = this.activeMenu === entry ? null : entry;
   }
 
-  onMouseEnter(entry) {
+  onPointerEnter(entry) {
     this.dispatchEvent(
       new CustomEvent('set-help-text', {
         detail: entry.helpText,
@@ -107,7 +107,7 @@ class MenuBar extends LitElement {
     }
   }
 
-  onMouseLeave() {
+  onPointerLeave() {
     this.dispatchEvent(
       new CustomEvent('reset-help-text', { bubbles: true, composed: true }),
     );

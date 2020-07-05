@@ -95,8 +95,8 @@ class Menu extends LitElement {
       <div
         class="menu-entry ${entry.disabled ? 'disabled' : ''}"
         @click="${() => this.execute(entry)}"
-        @mouseenter="${() => this.setHelpText(entry.helpText)}"
-        @mouseleave="${this.resetHelpText}"
+        @pointerenter="${() => this.setHelpText(entry.helpText)}"
+        @pointerleave="${this.resetHelpText}"
       >
         <span></span>
         <span>${entry.caption}</span>

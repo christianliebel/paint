@@ -56,7 +56,7 @@ class Tool extends LitElement {
 
   constructor() {
     super();
-    this.addEventListener('mouseenter', () =>
+    this.addEventListener('pointerenter', () =>
       this.dispatchEvent(
         new CustomEvent('set-help-text', {
           detail: this.tool.helpText,
@@ -65,7 +65,7 @@ class Tool extends LitElement {
         }),
       ),
     );
-    this.addEventListener('mouseleave', () =>
+    this.addEventListener('pointerleave', () =>
       this.dispatchEvent(
         new CustomEvent('reset-help-text', { bubbles: true, composed: true }),
       ),

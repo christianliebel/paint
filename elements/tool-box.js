@@ -53,7 +53,7 @@ class ToolBox extends LitElement {
           class="${this.tool === tool ? 'active' : ''} ${tool.instance
             ? ''
             : 'unavailable'}"
-          @mouseup="${() => this.selectTool(tool)}"
+          @pointerup="${() => this.selectTool(tool)}"
         ></paint-tool>`,
       )}
       <paint-inset-container>

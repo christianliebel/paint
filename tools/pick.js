@@ -1,9 +1,9 @@
 export class PickTool {
-  onMouseDown(args) {
-    this.onMouseMove(args);
+  onPointerDown(args) {
+    this.onPointerMove(args);
   }
 
-  onMouseMove({ x, y, context, element }) {
+  onPointerMove({ x, y, context, element }) {
     element.dispatchEvent(
       new CustomEvent(`preview-color`, {
         detail: this.pickColor(x, y, context),
@@ -13,7 +13,7 @@ export class PickTool {
     );
   }
 
-  onMouseUp({ event, x, y, context, element }) {
+  onPointerUp({ event, x, y, context, element }) {
     element.dispatchEvent(
       new CustomEvent(`preview-color`, { bubbles: true, composed: true }),
     );
