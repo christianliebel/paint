@@ -52,6 +52,10 @@ class Canvas extends LitElement {
       paint-handle {
         place-self: center;
       }
+      
+      canvas {
+        image-rendering: pixelated;
+      }
 
       @media print {
         :host,
@@ -67,7 +71,6 @@ class Canvas extends LitElement {
           height: auto;
           max-width: 100%;
           max-height: 100%;
-          image-rendering: pixelated;
         }
       }
     `;
@@ -81,14 +84,18 @@ class Canvas extends LitElement {
             <paint-handle disabled></paint-handle>
             <paint-handle disabled></paint-handle>
             <paint-handle disabled></paint-handle>
-            <canvas
             <paint-handle disabled></paint-handle>
+            <canvas class="main"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
               @pointerdown="${this.onPointerDown}"
               @contextmenu="${(event) => event.preventDefault()}"
               @pointerenter="${this.onPointerEnter}"
               @pointerleave="${this.onPointerLeave}"
+            ></canvas>
+            <canvas class="preview"
+              width="${this.canvasWidth}"
+              height="${this.canvasHeight}"
             ></canvas>
             <paint-handle></paint-handle>
             <paint-handle disabled></paint-handle>
@@ -131,20 +138,27 @@ class Canvas extends LitElement {
     );
   }
 
+  getDrawingContext(event, x, y) {
+    return {
+      event,
+      x,
+      y,
+      canvas: this.canvas,
+      context: this.context,
+      previewCanvas: this.previewCanvas,
+      previewContext: this.previewContext,
+      pointerDown: this.pointerDown,
+      primaryColor: this.primaryColor,
+      secondaryColor: this.secondaryColor,
+      element: this,
+    };
+  }
+
   onPointerDown(event) {
     this.pointerDown = true;
-    if (this.tool && this.tool.onPointerDown) {
+    if (this.tool.onPointerDown) {
       const { x, y } = this.getCoordinates(event);
-      this.tool.onPointerDown({
-        event,
-        x,
-        y,
-        canvas: this.canvas,
-        context: this.context,
-        primaryColor: this.primaryColor,
-        secondaryColor: this.secondaryColor,
-        element: this,
-      });
+      this.tool.onPointerDown(this.getDrawingContext(event, x, y));
     }
     event.preventDefault();
   }
@@ -154,38 +168,25 @@ class Canvas extends LitElement {
     if (this.inCanvas) {
       this.dispatchEvent(
         new CustomEvent('coordinate', {
-          detail: { x, y },
+          detail: {
+            x: Math.max(0, Math.min(this.canvas.width, x)),
+            y: Math.max(0, Math.min(this.canvas.height, y)),
+          },
           bubbles: true,
           composed: true,
         }),
       );
     }
 
-    if (this.pointerDown && this.tool && this.tool.onPointerMove) {
-      this.tool.onPointerMove({
-        event,
-        x,
-        y,
-        context: this.context,
-        primaryColor: this.primaryColor,
-        secondaryColor: this.secondaryColor,
-        element: this,
-      });
+    if (this.pointerDown && this.tool.onPointerMove) {
+      this.tool.onPointerMove(this.getDrawingContext(event, x, y));
     }
   }
 
   onPointerUp(event) {
-    if (this.pointerDown && this.tool && this.tool.onPointerUp) {
+    if (this.pointerDown && this.tool.onPointerUp) {
       const { x, y } = this.getCoordinates(event);
-      this.tool.onPointerUp({
-        event,
-        x,
-        y,
-        context: this.context,
-        primaryColor: this.primaryColor,
-        secondaryColor: this.secondaryColor,
-        element: this,
-      });
+      this.tool.onPointerUp(this.getDrawingContext(event, x, y));
     }
     this.pointerDown = false;
   }
@@ -203,12 +204,8 @@ class Canvas extends LitElement {
 
   getCoordinates({ clientX, clientY }) {
     const { left, top } = this.canvas.getBoundingClientRect();
-    const x = Math.floor(
-      Math.max(0, Math.min(this.canvas.width, clientX - left)),
-    );
-    const y = Math.floor(
-      Math.max(0, Math.min(this.canvas.height, clientY - top)),
-    );
+    const x = Math.floor(clientX - left);
+    const y = Math.floor(clientY - top);
     return { x, y };
   }
 }
