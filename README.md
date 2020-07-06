@@ -1,7 +1,8 @@
 # Paint: An open-source, Web Components-based remake of MS Paint using modern web capabilities
 
-![GitHub](https://img.shields.io/github/license/christianliebel/paint)
+![Node.js CI](https://github.com/christianliebel/paint/workflows/Node.js%20CI/badge.svg)
 [![Known Vulnerabilities](https://snyk.io/test/github/christianliebel/paint/badge.svg?targetFile=package.json)](https://snyk.io/test/github/christianliebel/paint?targetFile=package.json)
+![GitHub](https://img.shields.io/github/license/christianliebel/paint)
 
 Paint is back—right in your browser! Try it on [paint.js.org](https://paint.js.org).
 
