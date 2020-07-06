@@ -54,7 +54,13 @@ class Canvas extends LitElement {
       }
       
       canvas {
+        grid-row: 2;
+        grid-column: 2;
         image-rendering: pixelated;
+      }
+      
+      canvas.preview {
+        pointer-events: none;
       }
 
       @media print {
@@ -63,7 +69,7 @@ class Canvas extends LitElement {
           border: 0 !important;
         }
 
-        canvas {
+        canvas.main {
           position: fixed;
           top: 0;
           left: 0;
@@ -116,13 +122,17 @@ class Canvas extends LitElement {
   }
 
   firstUpdated() {
-    const canvas = this.shadowRoot.querySelector('canvas');
+    const canvas = this.shadowRoot.querySelector('canvas.main');
+    const previewCanvas = this.shadowRoot.querySelector('canvas.preview');
     const context = canvas.getContext('2d', { desynchronized: true });
+    const previewContext = previewCanvas.getContext('2d', { desynchronized: true });
     context.fillStyle = 'white';
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.imageSmoothingEnabled = false;
     this.canvas = canvas;
     this.context = context;
+    this.previewCanvas = previewCanvas;
+    this.previewContext = previewContext;
 
     document.addEventListener('pointermove', (event) =>
       this.onPointerMove(event),
@@ -176,6 +186,10 @@ class Canvas extends LitElement {
           composed: true,
         }),
       );
+    }
+
+    if (this.tool.onPreview) {
+      this.tool.onPreview(this.getDrawingContext(event, x, y));
     }
 
     if (this.pointerDown && this.tool.onPointerMove) {
