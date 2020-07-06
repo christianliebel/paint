@@ -80,9 +80,9 @@ class Canvas extends LitElement {
           <div class="document">
             <paint-handle disabled></paint-handle>
             <paint-handle disabled></paint-handle>
-            <paint-handle></paint-handle>
             <paint-handle disabled></paint-handle>
             <canvas
+            <paint-handle disabled></paint-handle>
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
               @pointerdown="${this.onPointerDown}"
