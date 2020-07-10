@@ -2,6 +2,7 @@
   "imports": {
     "bresenham-line": "./bresenham-line.js",
     "browser-nativefs": "./browser-nativefs.js",
+    "hotkeys-js": "./hotkeys-js.js",
     "lit-element": "./lit-element.js",
     "q-floodfill": "./q-floodfill.js"
   }

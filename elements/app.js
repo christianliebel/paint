@@ -1,5 +1,6 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
 import { menus } from '../menus/all.js';
+import hotkeys from '../web_modules/hotkeys-js.js';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
@@ -138,6 +139,31 @@ class App extends LitElement {
       'preview-color',
       (event) => (this.previewColor = event.detail || 'transparent'),
     );
+    this.registerHotkeys(menus);
+  }
+
+  registerHotkeys(menus) {
+    (menus || []).forEach(entry => {
+      this.registerHotkeys(entry.entries);
+
+      if (entry.shortcut) {
+        const hotkey = entry.shortcut.includes('Ctrl')
+          ? `${entry.shortcut},${entry.shortcut.replace('Ctrl', '⌘')}`
+          : entry.shortcut;
+        hotkeys(hotkey.replace('Shft', 'shift'), () => {
+          if (!entry.disabled && entry.action) {
+            this.dispatchEvent(
+              new CustomEvent('invoke-action', {
+                detail: entry.action,
+                bubbles: true,
+                composed: true,
+              }),
+            );
+          }
+          return false;
+        });
+      }
+    })
   }
 
   render() {
