@@ -196,8 +196,8 @@ class Canvas extends LitElement {
       );
     }
 
-    if (this.tool.onPreview) {
-      this.tool.onPreview(this.getDrawingContext(event, x, y));
+    if (this.tool.onPointerHover) {
+      this.tool.onPointerHover(this.getDrawingContext(event, x, y));
     }
 
     if (this.pointerDown && this.tool.onPointerMove) {
