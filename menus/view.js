@@ -1,3 +1,5 @@
+import { viewBitmap } from '../actions/view-bitmap.js';
+
 export const viewMenu = {
   caption: 'View',
   mnemonic: 'V',
@@ -73,7 +75,7 @@ export const viewMenu = {
       mnemonic: 'V',
       shortcut: 'Ctrl+F',
       helpText: 'Displays the entire picture.',
-      disabled: true,
+      action: viewBitmap,
     },
     {
       caption: 'Text Toolbar',
