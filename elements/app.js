@@ -12,6 +12,13 @@ class App extends LitElement {
       primaryColor: { attribute: false },
       secondaryColor: { attribute: false },
       previewColor: { attribute: false },
+      lineWidth: { attribute: false },
+      transparentBackground: { attribute: false },
+      eraserSize: { attribute: false },
+      magnifierSize: { attribute: false },
+      brushType: { attribute: false },
+      airbrushSize: { attribute: false },
+      fillStyle: { attribute: false },
       drawingContext: { attribute: false },
       tool: { attribute: false },
     };
@@ -102,6 +109,7 @@ class App extends LitElement {
     super();
     this.coordinateText = '';
     this.helpText = defaultHelpText;
+    this.lineWidth = 1;
     this.primaryColor = '#000000';
     this.secondaryColor = '#FFFFFF';
     this.previewColor = 'transparent';
@@ -139,6 +147,10 @@ class App extends LitElement {
       'preview-color',
       (event) => (this.previewColor = event.detail || 'transparent'),
     );
+    this.addEventListener(
+      'line-width-changed',
+      (event) => (this.lineWidth = event.detail),
+    );
     this.registerHotkeys(menus);
   }
 
@@ -175,6 +187,7 @@ class App extends LitElement {
           <paint-tool-box
             @tool-selected="${(event) => (this.tool = event.detail)}"
             previewColor="${this.previewColor}"
+            lineWidth="${this.lineWidth}"
           ></paint-tool-box>
           <paint-ruler></paint-ruler>
         </paint-tool-bar>
@@ -182,6 +195,7 @@ class App extends LitElement {
           .tool="${this.tool}"
           primaryColor="${this.primaryColor}"
           secondaryColor="${this.secondaryColor}"
+          lineWidth="${this.lineWidth}"
         ></paint-canvas>
       </div>
       <paint-tool-bar class="color-bar">
