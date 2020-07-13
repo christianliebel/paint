@@ -1,5 +1,6 @@
 import { copy } from '../actions/copy.js';
 import { paste } from '../actions/paste.js';
+import { cut } from '../actions/cut.js';
 
 export const editMenu = {
   caption: 'Edit',
@@ -28,7 +29,7 @@ export const editMenu = {
       mnemonic: 't',
       shortcut: 'Ctrl+X',
       helpText: 'Cuts the selection and puts it on the Clipboard.',
-      disabled: true,
+      action: cut,
     },
     {
       caption: 'Copy',
