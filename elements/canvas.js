@@ -6,9 +6,11 @@ class Canvas extends LitElement {
       inCanvas: { attribute: false },
       canvasWidth: { attribute: false },
       canvasHeight: { attribute: false },
+      lineWidth: { type: Number },
       primaryColor: { type: String },
       secondaryColor: { type: String },
       tool: { type: Object },
+      selection: { type: Object },
     };
   }
 
@@ -119,6 +121,8 @@ class Canvas extends LitElement {
     // Canvas defaults to screen dimensions
     this.canvasWidth = screen.width;
     this.canvasHeight = screen.height;
+
+    this.selection = {};
   }
 
   firstUpdated() {
@@ -141,7 +145,7 @@ class Canvas extends LitElement {
 
     this.dispatchEvent(
       new CustomEvent('drawing-context-created', {
-        detail: { canvas, context },
+        detail: { canvas, context, selection: this.selection },
         bubbles: true,
         composed: true,
       }),
@@ -160,6 +164,8 @@ class Canvas extends LitElement {
       pointerDown: this.pointerDown,
       primaryColor: this.primaryColor,
       secondaryColor: this.secondaryColor,
+      lineWidth: this.lineWidth,
+      selection: this.selection,
       element: this,
     };
   }
