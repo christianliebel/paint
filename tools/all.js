@@ -4,6 +4,7 @@ import { FillTool } from './fill.js';
 import { BrushTool } from './brush.js';
 import { RectangleTool } from './rectangle.js';
 import { LineTool } from './line.js';
+import { SelectTool } from './select.js';
 
 export const tools = [
   {
@@ -18,6 +19,7 @@ export const tools = [
       'Selects a rectangular part of the picture to move, copy, or edit.',
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAQ0lEQVQ4je2SMQ4AIAgDe/7/zzUYfIDioIm3wNKGpugKbDvu8MYuUsRqEsBjpNsWgFo6LTN1rVrCj3AgQlD6xNeR1AEwNEXpsKHoyQAAAABJRU5ErkJggg==',
+    instance: new SelectTool(),
   },
   {
     tooltip: 'Eraser/Color Eraser',
@@ -58,6 +60,7 @@ export const tools = [
     helpText: 'Draws using a brush with the selected shape and size.',
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAElBMVEUAAAD///8AAACAgACAgID///+JwSUpAAAAAnRSTlMAAHaTzTgAAAA0SURBVAhbY2BgFBRSFGQAAkZBZSMyGELGxopghrKxsRGYoQQEqAzV0NAgCMPVFQeDCaIYAGu+CkFHCSK2AAAAAElFTkSuQmCC',
+    instance: new BrushTool(),
   },
   {
     tooltip: 'Airbrush',
