@@ -5,7 +5,9 @@ class ToolBox extends LitElement {
   static get properties() {
     return {
       tool: { attribute: false },
+      // TODO: Move to context
       previewColor: { type: String },
+      lineWidth: { type: Number },
     };
   }
 
@@ -57,9 +59,12 @@ class ToolBox extends LitElement {
         ></paint-tool>`,
       )}
       <paint-inset-container>
-        <paint-tool-color-preview
+        <!--<paint-tool-color-preview
           previewColor="${this.previewColor}"
-        ></paint-tool-color-preview>
+        ></paint-tool-color-preview>-->
+        <paint-tool-line-width
+          lineWidth="${this.lineWidth}"
+        ></paint-tool-line-width>
       </paint-inset-container>
     `;
   }
