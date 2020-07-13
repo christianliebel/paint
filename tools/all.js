@@ -1,6 +1,7 @@
 import { PickTool } from './pick.js';
 import { PencilTool } from './pencil.js';
 import { FillTool } from './fill.js';
+import { BrushTool } from './brush.js';
 
 export const tools = [
   {
