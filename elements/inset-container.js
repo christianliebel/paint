@@ -2,6 +2,7 @@ import { css, html, LitElement } from '../web_modules/lit-element.js';
 
 class InsetContainer extends LitElement {
   // TODO: InsetContainer should not define align-items, maybe not even display: flex.
+  // TODO: button-face pixels bottom left, top right via before/after
   static get styles() {
     return css`
       :host {

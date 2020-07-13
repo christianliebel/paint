@@ -93,6 +93,7 @@ class Canvas extends LitElement {
             <paint-handle disabled></paint-handle>
             <paint-handle disabled></paint-handle>
             <paint-handle disabled></paint-handle>
+            <!-- contains the actual drawing -->
             <canvas class="main"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
@@ -101,6 +102,7 @@ class Canvas extends LitElement {
               @pointerenter="${this.onPointerEnter}"
               @pointerleave="${this.onPointerLeave}"
             ></canvas>
+            <!-- for operations with previews (line, rectangle, brush, …) -->
             <canvas class="preview"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
