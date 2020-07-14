@@ -1,7 +1,19 @@
-import { copy } from './copy.js';
-import { clearSelection } from './clear-selection.js';
+import { ClearSelectionAction } from './clear-selection.js';
+import { CopyAction } from './copy.js';
 
-export async function cut(drawingContext) {
-  await copy(drawingContext);
-  clearSelection(drawingContext);
+export class CutAction {
+  constructor() {
+    this.copy = new CopyAction();
+    this.clearSelection = new ClearSelectionAction();
+  }
+
+  canExecute(drawingContext) {
+    return this.copy.canExecute(drawingContext)
+      && this.clearSelection.canExecute(drawingContext);
+  }
+
+  async execute(drawingContext) {
+    await this.copy.execute(drawingContext);
+    this.clearSelection.execute(drawingContext);
+  }
 }

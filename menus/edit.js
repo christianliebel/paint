@@ -1,7 +1,10 @@
-import { copy } from '../actions/copy.js';
-import { paste } from '../actions/paste.js';
-import { cut } from '../actions/cut.js';
-import { clearSelection } from '../actions/clear-selection.js';
+import { ClearSelectionAction } from '../actions/clear-selection.js';
+import { CopyToAction } from '../actions/copy-to.js';
+import { PasteFromAction } from '../actions/paste-from.js';
+import { CutAction } from '../actions/cut.js';
+import { CopyAction } from '../actions/copy.js';
+import { PasteAction } from '../actions/paste.js';
+import { SelectAllAction } from '../actions/select-all.js';
 
 export const editMenu = {
   caption: 'Edit',
@@ -13,14 +16,12 @@ export const editMenu = {
       mnemonic: 'U',
       shortcut: 'Ctrl+Z',
       helpText: 'Undoes the last action.',
-      disabled: true,
     },
     {
       caption: 'Repeat',
       mnemonic: 'R',
       shortcut: 'F4',
       helpText: 'Redoes the previously undone action.',
-      disabled: true,
     },
     {
       separator: true,
@@ -30,15 +31,14 @@ export const editMenu = {
       mnemonic: 't',
       shortcut: 'Ctrl+X',
       helpText: 'Cuts the selection and puts it on the Clipboard.',
-      action: cut,
+      instance: new CutAction(),
     },
     {
       caption: 'Copy',
       mnemonic: 'C',
       shortcut: 'Ctrl+C',
       helpText: 'Copies the selection and puts it on the Clipboard.',
-      disabled: !(navigator.clipboard && navigator.clipboard.write),
-      action: copy,
+      instance: new CopyAction(),
     },
     {
       caption: 'Paste',
@@ -46,21 +46,21 @@ export const editMenu = {
       shortcut: 'Ctrl+V',
       helpText: 'Inserts the contents of the Clipboard.',
       disabled: !(navigator.clipboard && navigator.clipboard.read),
-      action: paste,
+      instance: new PasteAction(),
     },
     {
       caption: 'Clear Selection',
       mnemonic: 'l',
       shortcut: 'Del',
       helpText: 'Deletes the selection.',
-      action: clearSelection,
+      instance: new ClearSelectionAction(),
     },
     {
       caption: 'Select All',
       mnemonic: 'A',
       shortcut: 'Ctrl+L',
       helpText: 'Selects everything.',
-      disabled: true,
+      instance: new SelectAllAction(),
     },
     {
       separator: true,
@@ -69,13 +69,13 @@ export const editMenu = {
       caption: 'Copy To…',
       mnemonic: 'o',
       helpText: 'Copies the selection to a file.',
-      disabled: true,
+      instance: new CopyToAction(),
     },
     {
       caption: 'Paste From…',
       mnemonic: 'F',
       helpText: 'Pastes a file into the selection.',
-      disabled: true,
+      instance: new PasteFromAction(),
     },
   ],
 };

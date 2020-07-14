@@ -1,7 +1,9 @@
-import { clearImage } from './clear-image.js';
+import { ClearImageAction } from './clear-image.js';
 
-export function fileNew({ canvas, context }) {
+export class NewAction {
   // TODO: Document context
   // TODO: Confirm to close document
-  clearImage({ canvas, context });
+  execute(drawingContext) {
+    new ClearImageAction().execute(drawingContext);
+  }
 }

@@ -29,11 +29,13 @@ export class SelectTool {
 
     element.dispatchEvent(new CustomEvent('area', { bubbles: true, composed: true }));
 
-    drawingContext.selection = {
+    const width = x - this.startPosition.x;
+    const height = y - this.startPosition.y;
+    drawingContext.selection = (width === 0 && height === 0) ? null : {
       x: this.startPosition.x,
       y: this.startPosition.y,
-      width: x - this.startPosition.x,
-      height: y - this.startPosition.y,
+      width,
+      height,
     };
     updateContext(element);
   }

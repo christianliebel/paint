@@ -1,12 +1,13 @@
 import { getBlobFromSelection } from '../helpers/get-blob-from-selection.js';
+import { fileSave } from '../web_modules/browser-nativefs.js';
 
-export class CopyAction {
+export class CopyToAction {
   canExecute({ selection }) {
-    return navigator.clipboard?.write && selection;
+    return !!selection;
   }
 
   async execute({ context, selection }) {
     const blob = await getBlobFromSelection(context, selection);
-    await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+    await fileSave(blob);
   }
 }
