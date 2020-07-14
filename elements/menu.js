@@ -53,6 +53,10 @@ class Menu extends LitElement {
         align-items: center;
         position: relative;
       }
+      
+      .menu-entry span .mnemonic {
+        text-decoration: underline;
+      }
 
       .menu-entry span.shortcut {
         padding-left: 9px;
@@ -99,7 +103,7 @@ class Menu extends LitElement {
         @pointerleave="${this.resetHelpText}"
       >
         <span></span>
-        <span>${entry.caption}</span>
+        <span>${this.resolveMnemonic(entry.caption, entry.mnemonic)}</span>
         <span class="${entry.shortcut ? 'shortcut' : ''}"
           >${entry.shortcut}</span
         >
@@ -113,6 +117,11 @@ class Menu extends LitElement {
         </span>
       </div>
     `;
+  }
+
+  resolveMnemonic(caption, mnemonic) {
+    const index = caption.indexOf(mnemonic);
+    return html`${caption.substring(0, index)}<span class="mnemonic">${mnemonic}</span>${caption.substring(index + 1)}`;
   }
 
   execute(entry) {
