@@ -57,6 +57,10 @@ class Menu extends LitElement {
       .menu-entry span .mnemonic {
         text-decoration: underline;
       }
+      
+      .menu-entry:not(:hover) paint-menu {
+        display: none;
+      }
 
       .menu-entry span.shortcut {
         padding-left: 9px;
