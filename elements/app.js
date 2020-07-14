@@ -7,6 +7,7 @@ const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 class App extends LitElement {
   static get properties() {
     return {
+      areaText: { attribute: false },
       coordinateText: { attribute: false },
       helpText: { attribute: false },
       primaryColor: { attribute: false },
@@ -108,6 +109,7 @@ class App extends LitElement {
 
   constructor() {
     super();
+    this.areaText = '';
     this.coordinateText = '';
     this.helpText = defaultHelpText;
     this.lineWidth = 1;
@@ -127,6 +129,13 @@ class App extends LitElement {
       (event) =>
         (this.coordinateText = event.detail
           ? `${event.detail.x},${event.detail.y}`
+          : ''),
+    );
+    this.addEventListener(
+      'area',
+      (event) =>
+        (this.areaText = event.detail
+          ? `${event.detail.width}x${event.detail.height}`
           : ''),
     );
     this.addEventListener(
@@ -209,6 +218,7 @@ class App extends LitElement {
       <paint-status-bar
         helpText="${this.helpText}"
         coordinateText="${this.coordinateText}"
+        areaText="${this.areaText}"
       ></paint-status-bar>
     `;
   }
