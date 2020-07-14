@@ -1,4 +1,4 @@
-import { SaveAsAction } from './save-as';
+import { SaveAsAction } from './save-as.js';
 
 export class SaveAction {
   execute(drawingContext) {

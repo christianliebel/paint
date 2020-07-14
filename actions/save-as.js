@@ -1,7 +1,7 @@
 import { fileSave } from '../web_modules/browser-nativefs.js';
 
 export class SaveAsAction {
-  execute() {
+  execute({ canvas }) {
     // TODO: File name from document context
     canvas.toBlob(
       (blob) => fileSave(blob, { fileName: 'Untitled.png', extensions: ['png'] }),

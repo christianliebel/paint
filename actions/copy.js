@@ -7,6 +7,7 @@ export class CopyAction {
 
   async execute({ context, selection }) {
     const blob = await getBlobFromSelection(context, selection);
+    // eslint-disable-next-line no-undef
     await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
   }
 }

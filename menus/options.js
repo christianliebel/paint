@@ -1,5 +1,5 @@
-import { SaveColorsAction } from '../actions/save-colors';
-import { GetColorsAction } from '../actions/get-colors';
+import { SaveColorsAction } from '../actions/save-colors.js';
+import { GetColorsAction } from '../actions/get-colors.js';
 
 export const optionsMenu = {
   caption: 'Options',

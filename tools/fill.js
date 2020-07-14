@@ -1,7 +1,7 @@
 import FloodFill from '../web_modules/q-floodfill.js';
 
 export class FillTool {
-  onPointerDown(x, y, { event, canvas, context }, color) {
+  onPointerDown(x, y, { canvas, context }, color) {
     const floodFill = new FloodFill(
       context.getImageData(0, 0, canvas.width, canvas.height),
     );

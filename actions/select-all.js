@@ -1,4 +1,4 @@
-import { updateContext } from '../helpers/update-context';
+import { updateContext } from '../helpers/update-context.js';
 
 export class SelectAllAction {
   execute(drawingContext) {
