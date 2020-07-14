@@ -22,7 +22,6 @@ class App extends LitElement {
       fillStyle: { attribute: false },
       drawingContext: { attribute: false },
       tool: { attribute: false },
-      selection: { attribute: false },
     };
   }
 
