@@ -66,6 +66,12 @@ class Menu extends LitElement {
         width: 9px;
         margin-left: 6px;
       }
+      
+      .menu-entry .opener svg {
+        height: 7px;
+        width: 4px;
+        margin-left: 10px;
+      }
 
       .menu-entry span.shortcut {
         padding-left: 9px;
@@ -135,7 +141,11 @@ class Menu extends LitElement {
         >
         <span class="opener">
           ${entry.entries
-            ? html`<paint-menu
+            ? html`
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 7">
+                <path d="M0,0v7h1V6h1V5h1V4h1V3H3V2H2V1H1V0H0z"/>
+              </svg>
+              <paint-menu
                 class="submenu"
                 .entries="${entry.entries}"
               ></paint-menu>`
