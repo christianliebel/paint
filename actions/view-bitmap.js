@@ -1,3 +1,5 @@
-export function viewBitmap({ canvas }) {
-  canvas.requestFullscreen();
+export class ViewBitmapAction {
+  async execute({ canvas }) {
+    await canvas.requestFullscreen();
+  }
 }

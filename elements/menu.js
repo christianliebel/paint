@@ -4,6 +4,7 @@ class Menu extends LitElement {
   static get properties() {
     return {
       entries: { type: Array },
+      drawingContext: { type: Object },
     };
   }
 
@@ -123,10 +124,10 @@ class Menu extends LitElement {
 
     return html`
       <div
-        class="menu-entry ${entry.disabled ? 'disabled' : ''}"
+        class="menu-entry ${this.isDisabled(entry) ? 'disabled' : ''}"
         @click="${() => this.execute(entry)}"
         @pointerenter="${() => this.setHelpText(entry.helpText)}"
-        @pointerleave="${this.resetHelpText}"
+        @pointerleave="${() => this.setHelpText()}"
       >
         <span class="selection">
           ${entry.checked ? html`
@@ -148,6 +149,7 @@ class Menu extends LitElement {
               <paint-menu
                 class="submenu"
                 .entries="${entry.entries}"
+                .drawingContext="${this.drawingContext}"
               ></paint-menu>`
             : ''}
         </span>
@@ -160,11 +162,16 @@ class Menu extends LitElement {
     return html`${caption.substring(0, index)}<span class="mnemonic">${mnemonic}</span>${caption.substring(index + 1)}`;
   }
 
+  isDisabled({ instance, entries }) {
+    return !(entries || instance &&
+      (!instance.canExecute || instance.canExecute(this.drawingContext)));
+  }
+
   execute(entry) {
-    if (!entry.disabled && entry.action) {
+    if (!this.isDisabled(entry) && entry.instance?.execute) {
       this.dispatchEvent(
         new CustomEvent('invoke-action', {
-          detail: entry.action,
+          detail: entry.instance.execute.bind(entry.instance),
           bubbles: true,
           composed: true,
         }),
@@ -182,12 +189,6 @@ class Menu extends LitElement {
         bubbles: true,
         composed: true,
       }),
-    );
-  }
-
-  resetHelpText() {
-    this.dispatchEvent(
-      new CustomEvent('set-help-text', { bubbles: true, composed: true }),
     );
   }
 }

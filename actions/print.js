@@ -1,3 +1,5 @@
-export function print() {
-  window.print();
+export class PrintAction {
+  execute() {
+    window.print();
+  }
 }

@@ -1,7 +1,9 @@
-import { saveAs } from './save-as.js';
+import { SaveAsAction } from './save-as';
 
-export function save({ canvas }) {
-  // TODO: Document Context
-  // TODO: Overwrite file if we have a handle, otherwise "save as"
-  saveAs({ canvas });
+export class SaveAction {
+  execute(drawingContext) {
+    // TODO: Document Context
+    // TODO: Overwrite file if we have a handle, otherwise "save as"
+    new SaveAsAction().execute(drawingContext);
+  }
 }

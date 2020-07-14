@@ -194,13 +194,16 @@ class Canvas extends LitElement {
       return;
     }
 
-    // Do not move this down, required for correct hover behavior
-    this.pointerDown = false;
-
     const { x, y } = this.getCoordinates(event);
     if (this.tool.onPointerUp) {
       this.tool.onPointerUp(...this.getToolEventArgs(x, y));
     }
+
+    // This position is important for correct preview behavior
+    // -> after the right-click pointer (secondary tool color) is up,
+    //    tools should preview the primary color again
+    this.pointerDown = false;
+
     if (this.tool.onPointerHover) {
       this.tool.onPointerHover(...this.getToolEventArgs(x, y));
     }

@@ -153,11 +153,12 @@ class App extends LitElement {
         const hotkey = entry.shortcut.includes('Ctrl')
           ? `${entry.shortcut},${entry.shortcut.replace('Ctrl', '⌘')}`
           : entry.shortcut;
+        // TODO: Replace PgUp, PgDn + others…
         hotkeys(hotkey.replace('Shft', 'shift'), () => {
-          if (!entry.disabled && entry.action) {
+          if (entry.instance?.canExecute(this.drawingContext)) {
             this.dispatchEvent(
               new CustomEvent('invoke-action', {
-                detail: entry.action,
+                detail: entry.instance.execute.bind(entry.instance),
                 bubbles: true,
                 composed: true,
               }),
@@ -171,7 +172,10 @@ class App extends LitElement {
 
   render() {
     return html`
-      <paint-menu-bar .entries="${menus}"></paint-menu-bar>
+      <paint-menu-bar
+        .entries="${menus}"
+        .drawingContext="${this.drawingContext}"
+      ></paint-menu-bar>
       <div>
         <paint-tool-bar class="tool-bar">
           <paint-ruler></paint-ruler>

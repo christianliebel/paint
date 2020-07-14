@@ -4,6 +4,8 @@ class MenuBar extends LitElement {
   static get properties() {
     return {
       entries: { type: Array },
+      drawingContext: { type: Object },
+
       activeMenu: { attribute: false },
     };
   }
@@ -81,7 +83,11 @@ class MenuBar extends LitElement {
             >
               ${entry.caption}
               ${!entry.disabled && entry.entries
-                ? html`<paint-menu .entries="${entry.entries}"></paint-menu>`
+                ? html`<paint-menu
+                         .entries="${entry.entries}"
+                         .drawingContext="${this.drawingContext}"
+                       >
+                       </paint-menu>`
                 : ''}
             </li>
           `,

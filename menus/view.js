@@ -1,4 +1,4 @@
-import { viewBitmap } from '../actions/view-bitmap.js';
+import { ViewBitmapAction } from '../actions/view-bitmap.js';
 
 export const viewMenu = {
   caption: 'View',
@@ -11,7 +11,6 @@ export const viewMenu = {
       mnemonic: 'T',
       checked: true,
       helpText: 'Shows or hides the tool box.',
-      disabled: true,
     },
     {
       caption: 'Color Box',
@@ -19,14 +18,12 @@ export const viewMenu = {
       mnemonic: 'C',
       checked: true,
       helpText: 'Shows or hides the color box.',
-      disabled: true,
     },
     {
       caption: 'Status Bar',
       mnemonic: 'S',
       checked: true,
       helpText: 'Shows or hides the status bar.',
-      disabled: true,
     },
     {
       separator: true,
@@ -40,18 +37,15 @@ export const viewMenu = {
         mnemonic: 'N',
         shortcut: 'Ctrl+PgUp',
         helpText: 'Zooms the picture to 100%.',
-        disabled: true,
       }, {
         caption: 'Large Size',
         mnemonic: 'L',
         shortcut: 'Ctrl+PgDn',
         helpText: 'Zooms the picture to 400%.',
-        disabled: true,
       }, {
         caption: 'Custom…',
         mnemonic: 'u',
         helpText: 'Zooms the picture.',
-        disabled: true,
       }, {
         separator: true,
       }, {
@@ -59,13 +53,11 @@ export const viewMenu = {
         mnemonic: 'G',
         shortcut: 'Ctrl+G',
         helpText: 'Shows or hides the grid.',
-        disabled: true,
       }, {
         caption: 'Show Thumbnail',
         mnemonic: 'h',
         helpText: 'Shows or hides the thumbnail view of the picture.',
         checked: true,
-        disabled: true,
       }],
     },
     {
@@ -73,7 +65,7 @@ export const viewMenu = {
       mnemonic: 'V',
       shortcut: 'Ctrl+F',
       helpText: 'Displays the entire picture.',
-      action: viewBitmap,
+      action: new ViewBitmapAction(),
     },
     {
       caption: 'Text Toolbar',
