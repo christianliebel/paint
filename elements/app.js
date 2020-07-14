@@ -73,16 +73,16 @@ class App extends LitElement {
 
       paint-tool-bar {
         display: flex;
-      }
-
-      paint-tool-bar.tool-bar {
-        display: flex;
         flex-direction: column;
       }
 
-      paint-tool-bar.color-bar {
-        height: 47px;
-        align-items: center;
+      paint-tool-bar.color-box {
+        height: 49px;
+        justify-content: space-between;
+      }
+      
+      paint-tool-bar.color-box paint-color-box {
+        margin-top: 7px;
       }
 
       paint-ruler {
@@ -116,6 +116,11 @@ class App extends LitElement {
       fillStyle: null,
       tool: tools[6], // Pencil
       selection: null,
+      view: {
+        statusBar: true,
+        colorBox: true,
+        toolBox: true,
+      }
     };
     this.addEventListener(
       'set-help-text',
@@ -177,28 +182,30 @@ class App extends LitElement {
         .drawingContext="${this.drawingContext}"
       ></paint-menu-bar>
       <div>
-        <paint-tool-bar class="tool-bar">
+      ${this.drawingContext.view.toolBox ? html`
+        <paint-tool-bar>
           <paint-ruler></paint-ruler>
           <paint-tool-box
             .drawingContext="${this.drawingContext}"
           ></paint-tool-box>
           <paint-ruler></paint-ruler>
-        </paint-tool-bar>
+        </paint-tool-bar>` : ''}
         <paint-canvas
             .drawingContext="${this.drawingContext}"
         ></paint-canvas>
       </div>
-      <paint-tool-bar class="color-bar">
-        <paint-color-box
-            .drawingContext="${this.drawingContext}"
-        >
-        </paint-color-box>
-      </paint-tool-bar>
-      <paint-status-bar
-        helpText="${this.helpText}"
-        coordinateText="${this.coordinateText}"
-        areaText="${this.areaText}"
-      ></paint-status-bar>
+      ${this.drawingContext.view.colorBox ? html`
+        <paint-tool-bar class="color-box">
+          <paint-color-box .drawingContext="${this.drawingContext}">
+          </paint-color-box>
+          <paint-ruler></paint-ruler>
+        </paint-tool-bar>` : ''}
+      ${this.drawingContext.view.statusBar ? html`
+        <paint-status-bar
+          helpText="${this.helpText}"
+          coordinateText="${this.coordinateText}"
+          areaText="${this.areaText}"
+        ></paint-status-bar>` : ''}
     `;
   }
 }

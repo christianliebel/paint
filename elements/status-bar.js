@@ -13,19 +13,10 @@ class StatusBar extends LitElement {
     return css`
       :host {
         background-color: var(--button-face);
-        height: 25px;
+        box-sizing: border-box;
+        height: 23px;
         display: flex;
-        flex-direction: column;
-      }
-
-      paint-ruler {
-        margin: 0 0 2px 0;
-      }
-
-      div {
-        flex: 1;
-        display: flex;
-        padding-left: 2px;
+        padding: 2px 0 0 2px;
       }
 
       paint-inset-container {
@@ -49,24 +40,21 @@ class StatusBar extends LitElement {
 
   render() {
     return html`
-      <paint-ruler></paint-ruler>
-      <div>
-        <paint-inset-container>${this.helpText}</paint-inset-container>
-        <paint-inset-container class="tool">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAOklEQVQokWPAAv5jE8QGmIhVSHXNFIP/SJiBAZX+z4BdnIGUsCEaEGsiVnV0iapB5uchbjN+moHhPwBmmBjumUjVpgAAAABJRU5ErkJggg=="
-            alt=""
-          />
-          ${this.coordinateText}
-        </paint-inset-container>
-        <paint-inset-container class="tool">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPAQMAAAABGAcJAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAChJREFUCB1jYBJiYOJiYPoHJoUYgODXKhCpxMSgACZXMDAUgdm/VgEAbW0GLYF8fC8AAAAASUVORK5CYII="
-            alt=""
-          />
-          ${this.areaText}
-        </paint-inset-container>
-      </div>
+      <paint-inset-container>${this.helpText}</paint-inset-container>
+      <paint-inset-container class="tool">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAOklEQVQokWPAAv5jE8QGmIhVSHXNFIP/SJiBAZX+z4BdnIGUsCEaEGsiVnV0iapB5uchbjN+moHhPwBmmBjumUjVpgAAAABJRU5ErkJggg=="
+          alt=""
+        />
+        ${this.coordinateText}
+      </paint-inset-container>
+      <paint-inset-container class="tool">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPAQMAAAABGAcJAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAChJREFUCB1jYBJiYOJiYPoHJoUYgODXKhCpxMSgACZXMDAUgdm/VgEAbW0GLYF8fC8AAAAASUVORK5CYII="
+          alt=""
+        />
+        ${this.areaText}
+      </paint-inset-container>
     `;
   }
 }

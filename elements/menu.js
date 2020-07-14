@@ -130,7 +130,7 @@ class Menu extends LitElement {
         @pointerleave="${() => this.setHelpText()}"
       >
         <span class="selection">
-          ${entry.checked ? html`
+          ${this.isChecked(entry) ? html`
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">
             <path class="shadow" fill="transparent" d="M4,7v2h1V8h1V7h1V6h1V5h1V2H8L4,7z"/>
             <path d="M1,3v3h1v1h1v1h1V7h1V6h1V5h1V4h1V1H7v1H6v1H5v1H4v1H3V4H2V3H1z"/>
@@ -160,6 +160,13 @@ class Menu extends LitElement {
   resolveMnemonic(caption, mnemonic) {
     const index = caption.indexOf(mnemonic);
     return html`${caption.substring(0, index)}<span class="mnemonic">${mnemonic}</span>${caption.substring(index + 1)}`;
+  }
+
+  isChecked(entry) {
+    // TODO: entry.checked should eventually go away
+    return entry.checked
+      || entry.instance?.isChecked
+      && entry.instance.isChecked(this.drawingContext);
   }
 
   isDisabled({ instance, entries }) {
