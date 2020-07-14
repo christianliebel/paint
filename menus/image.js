@@ -9,7 +9,7 @@ export const imageMenu = {
     {
       caption: 'Flip/Rotate…',
       mnemonic: 'F',
-      shortcut: 'Ctrl+R',
+      // shortcut: 'Ctrl+R', <- prevents reloading
       helpText: 'Flips or rotates the picture or a selection.',
     },
     {
