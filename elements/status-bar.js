@@ -3,8 +3,9 @@ import { css, html, LitElement } from '../web_modules/lit-element.js';
 class StatusBar extends LitElement {
   static get properties() {
     return {
-      coordinateText: { type: String },
       helpText: { type: String },
+      coordinateText: { type: String },
+      areaText: { type: String },
     };
   }
 
@@ -63,6 +64,7 @@ class StatusBar extends LitElement {
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPAQMAAAABGAcJAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAChJREFUCB1jYBJiYOJiYPoHJoUYgODXKhCpxMSgACZXMDAUgdm/VgEAbW0GLYF8fC8AAAAASUVORK5CYII="
             alt=""
           />
+          ${this.areaText}
         </paint-inset-container>
       </div>
     `;
