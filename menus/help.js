@@ -22,6 +22,7 @@ export const helpMenu = {
     {
       // TODO: Move to About window once we have it
       caption: 'Third-party Software',
+      mnemonic: 'T',
       helpText: 'Displays licenses of third-party software.',
       action: () => window.open('3rdpartylicenses.txt', '_blank'),
     },
