@@ -1,5 +1,6 @@
 import { SaveColorsAction } from '../actions/save-colors.js';
 import { GetColorsAction } from '../actions/get-colors.js';
+import { DrawOpaque } from '../actions/draw-opaque';
 
 export const optionsMenu = {
   caption: 'Options',
@@ -27,6 +28,7 @@ export const optionsMenu = {
       caption: 'Draw Opaque',
       mnemonic: 'D',
       helpText: 'Makes the current selection either opaque or transparent.',
+      instance: new DrawOpaque(),
     },
   ],
 };
