@@ -66,12 +66,17 @@ class ToolBox extends LitElement {
   }
 
   getToolHtml(index) {
+    // TODO(refactor): do not use indices
     if (index === 4) {
       return html`<paint-tool-color-preview .drawingContext="${this.drawingContext}"></paint-tool-color-preview>`;
     }
 
     if ([10, 11].includes(index)) {
       return html`<paint-tool-line-width .drawingContext="${this.drawingContext}"></paint-tool-line-width>`;
+    }
+
+    if ([12, 13, 14, 15].includes(index)) {
+      return html`<paint-tool-fill-style .drawingContext="${this.drawingContext}"></paint-tool-fill-style>`;
     }
   }
 }
