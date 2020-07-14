@@ -1,4 +1,7 @@
 import { ViewBitmapAction } from '../actions/view-bitmap.js';
+import { StatusBarAction } from '../actions/status-bar.js';
+import { ToolBoxAction } from '../actions/tool-box.js';
+import { ColorBoxAction } from '../actions/color-box.js';
 
 export const viewMenu = {
   caption: 'View',
@@ -9,21 +12,21 @@ export const viewMenu = {
       caption: 'Tool Box',
       shortcut: 'Ctrl+T',
       mnemonic: 'T',
-      checked: true,
       helpText: 'Shows or hides the tool box.',
+      instance: new ToolBoxAction(),
     },
     {
       caption: 'Color Box',
       shortcut: 'Ctrl+A',
       mnemonic: 'C',
-      checked: true,
       helpText: 'Shows or hides the color box.',
+      instance: new ColorBoxAction(),
     },
     {
       caption: 'Status Bar',
       mnemonic: 'S',
-      checked: true,
       helpText: 'Shows or hides the status bar.',
+      instance: new StatusBarAction(),
     },
     {
       separator: true,
@@ -65,7 +68,7 @@ export const viewMenu = {
       mnemonic: 'V',
       shortcut: 'Ctrl+F',
       helpText: 'Displays the entire picture.',
-      action: new ViewBitmapAction(),
+      instance: new ViewBitmapAction(),
     },
     {
       caption: 'Text Toolbar',
