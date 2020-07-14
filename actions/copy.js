@@ -1,5 +1,4 @@
-export async function copy({ context, selection: {x, y, width, height} }) {
-  // TODO: Copy selection
+export async function copy({ context, selection: { x, y, width, height } }) {
   const selection = context.getImageData(x, y, width, height);
   const canvas = document.createElement('canvas');
   canvas.width = width;
