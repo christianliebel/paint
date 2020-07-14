@@ -1,6 +1,7 @@
 import { copy } from '../actions/copy.js';
 import { paste } from '../actions/paste.js';
 import { cut } from '../actions/cut.js';
+import { clearSelection } from '../actions/clear-selection.js';
 
 export const editMenu = {
   caption: 'Edit',
@@ -52,7 +53,7 @@ export const editMenu = {
       mnemonic: 'l',
       shortcut: 'Del',
       helpText: 'Deletes the selection.',
-      disabled: true,
+      action: clearSelection,
     },
     {
       caption: 'Select All',
