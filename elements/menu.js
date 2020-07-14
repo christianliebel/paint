@@ -48,9 +48,8 @@ class Menu extends LitElement {
       }
 
       .menu-entry span {
-        height: 20px;
-        display: flex;
-        align-items: center;
+        box-sizing: border-box;
+        padding: 2px 0;
         position: relative;
       }
       
@@ -61,6 +60,12 @@ class Menu extends LitElement {
       .menu-entry:not(:hover) paint-menu {
         display: none;
       }
+      
+      .menu-entry .selection svg {
+        height: 9px;
+        width: 9px;
+        margin-left: 6px;
+      }
 
       .menu-entry span.shortcut {
         padding-left: 9px;
@@ -69,16 +74,27 @@ class Menu extends LitElement {
       .menu-entry:hover span {
         background-color: var(--highlight);
         color: var(--highlight-text);
+        fill: var(--highlight-text);
         text-shadow: none;
       }
 
       .menu-entry.disabled:hover span {
         color: var(--canvas);
+        fill: var(--canvas);
+      }
+
+      .menu-entry.disabled:hover svg .shadow {
+        fill: transparent;
       }
 
       .disabled {
         color: var(--canvas);
+        fill: var(--canvas);
         text-shadow: 1px 1px 0 var(--highlight-text);
+      }
+      
+      .disabled svg .shadow {
+        fill: var(--highlight-text);
       }
     `;
   }
@@ -106,7 +122,13 @@ class Menu extends LitElement {
         @pointerenter="${() => this.setHelpText(entry.helpText)}"
         @pointerleave="${this.resetHelpText}"
       >
-        <span></span>
+        <span class="selection">
+          ${entry.checked ? html`
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">
+            <path class="shadow" fill="transparent" d="M4,7v2h1V8h1V7h1V6h1V5h1V2H8L4,7z"/>
+            <path d="M1,3v3h1v1h1v1h1V7h1V6h1V5h1V4h1V1H7v1H6v1H5v1H4v1H3V4H2V3H1z"/>
+          </svg>` : ''}
+        </span>
         <span>${this.resolveMnemonic(entry.caption, entry.mnemonic)}</span>
         <span class="${entry.shortcut ? 'shortcut' : ''}"
           >${entry.shortcut}</span
