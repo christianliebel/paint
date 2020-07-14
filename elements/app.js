@@ -113,7 +113,10 @@ class App extends LitElement {
       magnifierSize: null,
       brushType: null,
       airbrushSize: null,
-      fillStyle: null,
+      fillStyle: {
+        stroke: true,
+        fill: false,
+      },
       tool: tools[6], // Pencil
       selection: null,
       view: {
