@@ -139,7 +139,7 @@ class App extends LitElement {
       ],
       previewColor: null,
       drawOpaque: true,
-      eraserSize: null,
+      eraserSize: 8,
       magnifierSize: null,
       brushType: null,
       airbrushSize: null,

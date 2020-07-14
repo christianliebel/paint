@@ -1,7 +1,22 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
-import { CURVE, ELLIPSE, LINE, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, tools } from '../tools/all.js';
+import {
+  AIRBRUSH,
+  BRUSH,
+  CURVE,
+  ELLIPSE,
+  ERASER,
+  FREE_FORM_SELECT,
+  LINE,
+  MAGNIFIER,
+  PICK_COLOR,
+  POLYGON,
+  RECTANGLE,
+  ROUNDED_RECTANGLE,
+  SELECT,
+  TEXT,
+  tools,
+} from '../tools/all.js';
 import { updateContext } from '../helpers/update-context.js';
-import { FREE_FORM_SELECT, SELECT } from '../tools/all';
 
 class ToolBox extends LitElement {
   static get properties() {
@@ -67,7 +82,7 @@ class ToolBox extends LitElement {
   }
 
   getToolHtml(tool) {
-    if (tool === PICK_COLOR) {
+    if (PICK_COLOR === tool) {
       return html`<paint-tool-color-preview .drawingContext="${this.drawingContext}"></paint-tool-color-preview>`;
     }
 
@@ -75,12 +90,28 @@ class ToolBox extends LitElement {
       return html`<paint-tool-line-width .drawingContext="${this.drawingContext}"></paint-tool-line-width>`;
     }
 
-    if ([RECTANGLE, ELLIPSE, POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
+    if ([RECTANGLE, ELLIPSE, POLYGON, ROUNDED_RECTANGLE, TEXT].includes(tool)) {
       return html`<paint-tool-fill-style .drawingContext="${this.drawingContext}"></paint-tool-fill-style>`;
     }
 
-    if([FREE_FORM_SELECT, SELECT].includes(tool)) {
+    if ([FREE_FORM_SELECT, SELECT].includes(tool)) {
       return html`<paint-tool-draw-opaque .drawingContext="${this.drawingContext}"></paint-tool-draw-opaque>`;
+    }
+
+    if (ERASER === tool) {
+      return html`<paint-tool-eraser-size .drawingContext="${this.drawingContext}"></paint-tool-eraser-size>`;
+    }
+
+    if (BRUSH === tool) {
+      return html`TBD`;
+    }
+
+    if (AIRBRUSH === tool) {
+      return html`TBD`;
+    }
+
+    if (MAGNIFIER === tool) {
+      return html`TBD`;
     }
 
     return '';

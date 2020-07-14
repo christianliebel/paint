@@ -207,10 +207,14 @@ class Canvas extends LitElement {
     if (this.tool.onPointerHover) {
       this.tool.onPointerHover(...this.getToolEventArgs(x, y));
     }
+
+    // TODO: Switch to previous tool after picker action
   }
 
   onPointerEnter() {
     this.inCanvas = true;
+    const { canvas, tool } = this.drawingContext;
+    canvas.style.cursor = tool.cursor ?? 'default';
   }
 
   onPointerLeave() {
