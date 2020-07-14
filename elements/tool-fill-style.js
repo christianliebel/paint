@@ -1,5 +1,5 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
-import { updateContext } from '../helpers/update-context';
+import { updateContext } from '../helpers/update-context.js';
 
 export class ToolFillStyle extends LitElement {
   static get properties() {
