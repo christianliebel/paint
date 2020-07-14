@@ -11,8 +11,6 @@ export class ToolFillStyle extends LitElement {
   static get styles() {
     return css`
       ul {
-        display: flex;
-        flex-direction: column;
         list-style-type: none;
         margin: 0;
         padding: 3px 2px;
