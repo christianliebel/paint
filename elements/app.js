@@ -1,6 +1,7 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
 import { menus } from '../menus/all.js';
 import hotkeys from '../web_modules/hotkeys-js.js';
+import { tools } from '../tools/all.js';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
@@ -10,18 +11,7 @@ class App extends LitElement {
       areaText: { attribute: false },
       coordinateText: { attribute: false },
       helpText: { attribute: false },
-      primaryColor: { attribute: false },
-      secondaryColor: { attribute: false },
-      previewColor: { attribute: false },
-      lineWidth: { attribute: false },
-      transparentBackground: { attribute: false },
-      eraserSize: { attribute: false },
-      magnifierSize: { attribute: false },
-      brushType: { attribute: false },
-      airbrushSize: { attribute: false },
-      fillStyle: { attribute: false },
       drawingContext: { attribute: false },
-      tool: { attribute: false },
     };
   }
 
@@ -111,17 +101,25 @@ class App extends LitElement {
     this.areaText = '';
     this.coordinateText = '';
     this.helpText = defaultHelpText;
-    this.lineWidth = 1;
-    this.primaryColor = '#000000';
-    this.secondaryColor = '#FFFFFF';
-    this.previewColor = 'transparent';
+    this.drawingContext = {
+      lineWidth: 1,
+      colors: {
+        primary: '#000000',
+        secondary: '#FFFFFF',
+      },
+      previewColor: null,
+      transparentBackground: false,
+      eraserSize: null,
+      magnifierSize: null,
+      brushType: null,
+      airbrushSize: null,
+      fillStyle: null,
+      tool: tools[6], // Pencil
+      selection: null,
+    };
     this.addEventListener(
       'set-help-text',
-      (event) => (this.helpText = event.detail || ''),
-    );
-    this.addEventListener(
-      'reset-help-text',
-      () => (this.helpText = defaultHelpText),
+      (event) => (this.helpText = event.detail ?? defaultHelpText),
     );
     this.addEventListener(
       'coordinate',
@@ -138,27 +136,11 @@ class App extends LitElement {
           : ''),
     );
     this.addEventListener(
-      'drawing-context-created',
+      'drawing-context-changed',
       (event) => (this.drawingContext = event.detail),
     );
     this.addEventListener('invoke-action', (event) =>
       event.detail(this.drawingContext),
-    );
-    this.addEventListener(
-      'primary-color-selected',
-      (event) => (this.primaryColor = event.detail),
-    );
-    this.addEventListener(
-      'secondary-color-selected',
-      (event) => (this.secondaryColor = event.detail),
-    );
-    this.addEventListener(
-      'preview-color',
-      (event) => (this.previewColor = event.detail || 'transparent'),
-    );
-    this.addEventListener(
-      'line-width-changed',
-      (event) => (this.lineWidth = event.detail),
     );
     this.registerHotkeys(menus);
   }
@@ -184,7 +166,7 @@ class App extends LitElement {
           return false;
         });
       }
-    })
+    });
   }
 
   render() {
@@ -194,23 +176,17 @@ class App extends LitElement {
         <paint-tool-bar class="tool-bar">
           <paint-ruler></paint-ruler>
           <paint-tool-box
-            @tool-selected="${(event) => (this.tool = event.detail)}"
-            previewColor="${this.previewColor}"
-            lineWidth="${this.lineWidth}"
+            .drawingContext="${this.drawingContext}"
           ></paint-tool-box>
           <paint-ruler></paint-ruler>
         </paint-tool-bar>
         <paint-canvas
-          .tool="${this.tool}"
-          primaryColor="${this.primaryColor}"
-          secondaryColor="${this.secondaryColor}"
-          lineWidth="${this.lineWidth}"
+            .drawingContext="${this.drawingContext}"
         ></paint-canvas>
       </div>
       <paint-tool-bar class="color-bar">
         <paint-color-box
-          primaryColor="${this.primaryColor}"
-          secondaryColor="${this.secondaryColor}"
+            .drawingContext="${this.drawingContext}"
         >
         </paint-color-box>
       </paint-tool-bar>

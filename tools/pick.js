@@ -1,32 +1,20 @@
+import { updateContext } from '../helpers/update-context.js';
+
 export class PickTool {
-  onPointerDown(args) {
-    this.onPointerMove(args);
+  onPointerDown(...args) {
+    this.onPointerMove(...args);
   }
 
-  onPointerMove({ x, y, context, element }) {
-    element.dispatchEvent(
-      new CustomEvent(`preview-color`, {
-        detail: this.pickColor(x, y, context),
-        bubbles: true,
-        composed: true,
-      }),
-    );
+  onPointerMove(x, y, drawingContext) {
+    drawingContext.previewColor = this.pickColor(x, y, drawingContext.context);
+    updateContext(drawingContext.element);
   }
 
-  onPointerUp({ event, x, y, context, element }) {
-    element.dispatchEvent(
-      new CustomEvent(`preview-color`, { bubbles: true, composed: true }),
-    );
-    element.dispatchEvent(
-      new CustomEvent(
-        `${event.button === 2 ? 'secondary' : 'primary'}-color-selected`,
-        {
-          detail: this.pickColor(x, y, context),
-          bubbles: true,
-          composed: true,
-        },
-      ),
-    );
+  onPointerUp(x, y, drawingContext, color) {
+    drawingContext.previewColor = null;
+    drawingContext.colors[color.key]
+      = this.pickColor(x, y, drawingContext.context);
+    updateContext(drawingContext.element);
   }
 
   pickColor(x, y, context) {

@@ -67,7 +67,7 @@ class Tool extends LitElement {
     );
     this.addEventListener('pointerleave', () =>
       this.dispatchEvent(
-        new CustomEvent('reset-help-text', { bubbles: true, composed: true }),
+        new CustomEvent('set-help-text', { bubbles: true, composed: true }),
       ),
     );
   }

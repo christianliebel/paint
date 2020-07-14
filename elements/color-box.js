@@ -3,9 +3,9 @@ import { css, html, LitElement } from '../web_modules/lit-element.js';
 class ColorBox extends LitElement {
   static get properties() {
     return {
-      primaryColor: { type: String },
-      secondaryColor: { type: String },
-      colors: { attribute: false },
+      drawingContext: { type: Object },
+
+      palette: { attribute: false },
     };
   }
 
@@ -29,7 +29,7 @@ class ColorBox extends LitElement {
 
   constructor() {
     super();
-    this.colors = [
+    this.palette = [
       '#000000', // black
       '#808080', // gray
       '#800000', // maroon
@@ -64,14 +64,19 @@ class ColorBox extends LitElement {
   render() {
     return html`
       <paint-color-switcher
-        primaryColor="${this.primaryColor}"
-        secondaryColor="${this.secondaryColor}"
+        primaryColor="${this.drawingContext.colors.primary}"
+        secondaryColor="${this.drawingContext.colors.secondary}"
       >
       </paint-color-switcher>
-      ${this.colors.map(
-        (color) =>
-          html`<paint-color-picker color="${color}"></paint-color-picker>`,
-      )}
+      ${this.palette.map(
+      (color) =>
+        html`
+            <paint-color-picker
+              color="${color}"
+              .drawingContext="${this.drawingContext}"
+            >
+            </paint-color-picker>`,
+    )}
     `;
   }
 }

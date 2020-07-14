@@ -11,12 +11,12 @@ export class ToolColorPreview extends LitElement {
 
   static get properties() {
     return {
-      previewColor: { type: String },
+      drawingContext: { type: Object },
     };
   }
 
   render() {
-    this.style.backgroundColor = this.previewColor;
+    this.style.backgroundColor = this.drawingContext.previewColor;
   }
 }
 
