@@ -1,3 +1,5 @@
+import { AboutAction } from '../actions/about.js';
+
 export const helpMenu = {
   caption: 'Help',
   mnemonic: 'H',
@@ -15,22 +17,7 @@ export const helpMenu = {
       caption: 'About Paint',
       mnemonic: 'A',
       helpText: 'Displays program information, version number, and copyright.',
-      instance: {
-        execute() {
-          window.open('https://github.com/christianliebel/paint', '_blank');
-        },
-      },
-    },
-    {
-      // TODO: Move to About window once we have it
-      caption: 'Third-party Software',
-      mnemonic: 'T',
-      helpText: 'Displays licenses of third-party software.',
-      instance: {
-        execute() {
-          window.open('3rdpartylicenses.txt', '_blank');
-        },
-      },
+      instance: new AboutAction(),
     },
   ],
 };

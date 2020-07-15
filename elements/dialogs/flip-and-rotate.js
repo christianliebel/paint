@@ -11,7 +11,7 @@ export class FlipAndRotate extends LitElement {
         top: 0;
         right: 0;
       }
-    
+
       .content {
         display: flex;
         padding: 13px;
@@ -46,7 +46,7 @@ export class FlipAndRotate extends LitElement {
 
   render() {
     return html`
-      <paint-window caption="Flip and Rotate">
+      <paint-window caption="Flip and Rotate" help close>
         <div class="content">
           <div>
             <fieldset>

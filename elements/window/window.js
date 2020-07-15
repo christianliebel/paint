@@ -4,6 +4,8 @@ export class Window extends LitElement {
   static get properties() {
     return {
       caption: { type: String },
+      help: { type: Boolean },
+      close: { type: Boolean },
     };
   }
 
@@ -68,11 +70,17 @@ export class Window extends LitElement {
       <div class="wrapper">
         <div class="title-bar" @pointerdown="${this.onPointerDown}">
           <span class="title">${this.caption}</span>
-          <paint-window-title-bar-button help></paint-window-title-bar-button>
-          <paint-window-title-bar-button
-            close
-            @click="${this.onClose}"
-          ></paint-window-title-bar-button>
+          ${this.help
+            ? html`<paint-window-title-bar-button
+                help
+              ></paint-window-title-bar-button>`
+            : ''}
+          ${this.close
+            ? html`<paint-window-title-bar-button
+                close
+                @click="${this.onClose}"
+              ></paint-window-title-bar-button>`
+            : ''}
         </div>
         <div class="content">
           <slot></slot>

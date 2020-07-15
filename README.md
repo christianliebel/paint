@@ -25,6 +25,7 @@ This project demonstrates the use of:
 - [Native File System API](https://web.dev/native-file-system/) for file system access (via [browser-nativefs](https://github.com/GoogleChromeLabs/browser-nativefs))
 - [Async Clipboard API](https://web.dev/image-support-for-async-clipboard/) for clipboard access
 - [Web Share API Level 2](https://web.dev/web-share/#sharing-files) for sharing images to other applications via _File > Send…_
+- [StorageManager API](https://web.dev/storage-for-the-web/#check) for estimating storage usage in _Help > About Paint_
 - [Snowpack](https://www.snowpack.dev/), a bundle-free, O(1) build system
 
 ## Goals
