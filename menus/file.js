@@ -3,6 +3,7 @@ import { OpenAction } from '../actions/open.js';
 import { SaveAction } from '../actions/save.js';
 import { SaveAsAction } from '../actions/save-as.js';
 import { PrintAction } from '../actions/print.js';
+import { SendAction } from '../actions/send.js';
 
 export const fileMenu = {
   caption: 'File',
@@ -58,6 +59,15 @@ export const fileMenu = {
       shortcut: 'Ctrl+P',
       helpText: 'Prints the active document and sets printing options.',
       instance: new PrintAction(),
+    },
+    {
+      separator: true,
+    },
+    {
+      caption: 'Send…',
+      mnemonic: 'e',
+      helpText: 'Sends a picture by using mail or fax.',
+      instance: new SendAction(),
     },
     {
       separator: true,
