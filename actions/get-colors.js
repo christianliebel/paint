@@ -44,8 +44,9 @@ export class GetColorsAction {
       palette.push(`rgb(${r} ${g} ${b})`);
     }
 
-    palette.slice(0, 26)
-      .forEach((color, index) => drawingContext.palette[index] = color);
+    palette
+      .slice(0, 26)
+      .forEach((color, index) => (drawingContext.palette[index] = color));
     updateContext(drawingContext.element);
   }
 }

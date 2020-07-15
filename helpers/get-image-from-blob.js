@@ -6,5 +6,5 @@ export function getImageFromBlob(blob) {
       res(image);
     };
     image.src = URL.createObjectURL(blob);
-  })
+  });
 }

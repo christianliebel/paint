@@ -80,7 +80,7 @@ class App extends LitElement {
         height: 49px;
         justify-content: space-between;
       }
-      
+
       paint-tool-bar.color-box paint-color-box {
         margin-top: 7px;
       }
@@ -187,7 +187,7 @@ class App extends LitElement {
   }
 
   registerHotkeys(menus) {
-    (menus || []).forEach(entry => {
+    (menus || []).forEach((entry) => {
       this.registerHotkeys(entry.entries);
 
       if (entry.shortcut) {
@@ -212,37 +212,38 @@ class App extends LitElement {
   }
 
   render() {
-    document.title = `${this.drawingContext.title} - Paint`
+    document.title = `${this.drawingContext.title} - Paint`;
     return html`
       <paint-menu-bar
         .entries="${menus}"
         .drawingContext="${this.drawingContext}"
       ></paint-menu-bar>
       <div>
-      ${this.drawingContext.view.toolBox ? html`
-        <paint-tool-bar>
-          <paint-ruler></paint-ruler>
-          <paint-tool-box
-            .drawingContext="${this.drawingContext}"
-          ></paint-tool-box>
-          <paint-ruler></paint-ruler>
-        </paint-tool-bar>` : ''}
-        <paint-canvas
-            .drawingContext="${this.drawingContext}"
-        ></paint-canvas>
+        ${this.drawingContext.view.toolBox
+          ? html` <paint-tool-bar>
+              <paint-ruler></paint-ruler>
+              <paint-tool-box
+                .drawingContext="${this.drawingContext}"
+              ></paint-tool-box>
+              <paint-ruler></paint-ruler>
+            </paint-tool-bar>`
+          : ''}
+        <paint-canvas .drawingContext="${this.drawingContext}"></paint-canvas>
       </div>
-      ${this.drawingContext.view.colorBox ? html`
-        <paint-tool-bar class="color-box">
-          <paint-color-box .drawingContext="${this.drawingContext}">
-          </paint-color-box>
-          <paint-ruler></paint-ruler>
-        </paint-tool-bar>` : ''}
-      ${this.drawingContext.view.statusBar ? html`
-        <paint-status-bar
-          helpText="${this.helpText}"
-          coordinateText="${this.coordinateText}"
-          areaText="${this.areaText}"
-        ></paint-status-bar>` : ''}
+      ${this.drawingContext.view.colorBox
+        ? html` <paint-tool-bar class="color-box">
+            <paint-color-box .drawingContext="${this.drawingContext}">
+            </paint-color-box>
+            <paint-ruler></paint-ruler>
+          </paint-tool-bar>`
+        : ''}
+      ${this.drawingContext.view.statusBar
+        ? html` <paint-status-bar
+            helpText="${this.helpText}"
+            coordinateText="${this.coordinateText}"
+            areaText="${this.areaText}"
+          ></paint-status-bar>`
+        : ''}
     `;
   }
 }

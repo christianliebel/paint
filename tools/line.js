@@ -2,7 +2,7 @@ import bresenhamLine from '../web_modules/bresenham-line.js';
 
 export class LineTool {
   onPointerDown(x, y, { previewContext, context }, color) {
-    this.startPosition = {x, y};
+    this.startPosition = { x, y };
     previewContext.fillStyle = context.fillStyle = color.value;
   }
 
@@ -17,7 +17,7 @@ export class LineTool {
   drawLine(x, y, targetContext, previewContext, canvas) {
     // TODO: Midpoint, circle, line width
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
-    for(let point of bresenhamLine({ x,y }, this.startPosition)) {
+    for (let point of bresenhamLine({ x, y }, this.startPosition)) {
       targetContext.fillRect(point.x, point.y, 1, 1);
     }
   }

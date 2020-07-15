@@ -44,4 +44,3 @@ export class SaveColorsAction {
     await fileSave(blob, { fileName: 'untitled.pal' });
   }
 }
-

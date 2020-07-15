@@ -84,10 +84,10 @@ class MenuBar extends LitElement {
               ${entry.caption}
               ${!entry.disabled && entry.entries
                 ? html`<paint-menu
-                         .entries="${entry.entries}"
-                         .drawingContext="${this.drawingContext}"
-                       >
-                       </paint-menu>`
+                    .entries="${entry.entries}"
+                    .drawingContext="${this.drawingContext}"
+                  >
+                  </paint-menu>`
                 : ''}
             </li>
           `,

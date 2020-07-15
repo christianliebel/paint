@@ -53,21 +53,21 @@ class Menu extends LitElement {
         padding: 2px 0;
         position: relative;
       }
-      
+
       .menu-entry span .mnemonic {
         text-decoration: underline;
       }
-      
+
       .menu-entry:not(:hover) paint-menu {
         display: none;
       }
-      
+
       .menu-entry .selection svg {
         height: 9px;
         width: 9px;
         margin-left: 6px;
       }
-      
+
       .menu-entry .opener svg {
         height: 7px;
         width: 4px;
@@ -99,7 +99,7 @@ class Menu extends LitElement {
         fill: var(--canvas);
         text-shadow: 1px 1px 0 var(--highlight-text);
       }
-      
+
       .disabled svg .shadow {
         fill: var(--highlight-text);
       }
@@ -130,11 +130,18 @@ class Menu extends LitElement {
         @pointerleave="${() => this.setHelpText()}"
       >
         <span class="selection">
-          ${this.isChecked(entry) ? html`
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">
-            <path class="shadow" fill="transparent" d="M4,7v2h1V8h1V7h1V6h1V5h1V2H8L4,7z"/>
-            <path d="M1,3v3h1v1h1v1h1V7h1V6h1V5h1V4h1V1H7v1H6v1H5v1H4v1H3V4H2V3H1z"/>
-          </svg>` : ''}
+          ${this.isChecked(entry)
+            ? html` <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">
+                <path
+                  class="shadow"
+                  fill="transparent"
+                  d="M4,7v2h1V8h1V7h1V6h1V5h1V2H8L4,7z"
+                />
+                <path
+                  d="M1,3v3h1v1h1v1h1V7h1V6h1V5h1V4h1V1H7v1H6v1H5v1H4v1H3V4H2V3H1z"
+                />
+              </svg>`
+            : ''}
         </span>
         <span>${this.resolveMnemonic(entry.caption, entry.mnemonic)}</span>
         <span class="${entry.shortcut ? 'shortcut' : ''}"
@@ -142,15 +149,14 @@ class Menu extends LitElement {
         >
         <span class="opener">
           ${entry.entries
-            ? html`
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 7">
-                <path d="M0,0v7h1V6h1V5h1V4h1V3H3V2H2V1H1V0H0z"/>
-              </svg>
-              <paint-menu
-                class="submenu"
-                .entries="${entry.entries}"
-                .drawingContext="${this.drawingContext}"
-              ></paint-menu>`
+            ? html` <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 7">
+                  <path d="M0,0v7h1V6h1V5h1V4h1V3H3V2H2V1H1V0H0z" />
+                </svg>
+                <paint-menu
+                  class="submenu"
+                  .entries="${entry.entries}"
+                  .drawingContext="${this.drawingContext}"
+                ></paint-menu>`
             : ''}
         </span>
       </div>
@@ -159,19 +165,26 @@ class Menu extends LitElement {
 
   resolveMnemonic(caption, mnemonic) {
     const index = caption.indexOf(mnemonic);
-    return html`${caption.substring(0, index)}<span class="mnemonic">${mnemonic}</span>${caption.substring(index + 1)}`;
+    return html`${caption.substring(0, index)}<span class="mnemonic"
+        >${mnemonic}</span
+      >${caption.substring(index + 1)}`;
   }
 
   isChecked(entry) {
     // TODO: entry.checked should eventually go away
-    return entry.checked
-      || entry.instance?.isChecked
-      && entry.instance.isChecked(this.drawingContext);
+    return (
+      entry.checked ||
+      (entry.instance?.isChecked &&
+        entry.instance.isChecked(this.drawingContext))
+    );
   }
 
   isDisabled({ instance, entries }) {
-    return !(entries || instance &&
-      (!instance.canExecute || instance.canExecute(this.drawingContext)));
+    return !(
+      entries ||
+      (instance &&
+        (!instance.canExecute || instance.canExecute(this.drawingContext)))
+    );
   }
 
   execute(entry) {

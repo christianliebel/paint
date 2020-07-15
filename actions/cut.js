@@ -8,8 +8,10 @@ export class CutAction {
   }
 
   canExecute(drawingContext) {
-    return this.copy.canExecute(drawingContext)
-      && this.clearSelection.canExecute(drawingContext);
+    return (
+      this.copy.canExecute(drawingContext) &&
+      this.clearSelection.canExecute(drawingContext)
+    );
   }
 
   async execute(drawingContext) {

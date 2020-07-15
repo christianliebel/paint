@@ -15,11 +15,11 @@ export class ToolEraserSize extends LitElement {
         margin: 0;
         padding: 1px;
       }
-      
+
       li {
         margin-bottom: 2px;
       }
-      
+
       li .selection-wrapper {
         box-sizing: border-box;
         width: 14px;
@@ -29,15 +29,15 @@ export class ToolEraserSize extends LitElement {
         justify-content: center;
         margin: auto;
       }
-      
+
       li.selected .selection-wrapper {
         background-color: var(--highlight);
       }
-      
+
       li div.size {
         background-color: var(--button-text);
       }
-      
+
       li.selected div.size {
         background-color: var(--highlight-text);
       }
@@ -52,16 +52,20 @@ export class ToolEraserSize extends LitElement {
   render() {
     return html`
       <ul>
-        ${this.eraserSizes.map(size => html`
-          <li
-            class="${size === this.drawingContext.eraserSize ? 'selected' : ''}"
-            @click="${() => this.selectSize(size)}"
-          >
-            <div class="selection-wrapper">
-              <div class="size" style="${this.getStyle(size)}"></div>
-            </div>
-          </li>
-        `)}
+        ${this.eraserSizes.map(
+          (size) => html`
+            <li
+              class="${size === this.drawingContext.eraserSize
+                ? 'selected'
+                : ''}"
+              @click="${() => this.selectSize(size)}"
+            >
+              <div class="selection-wrapper">
+                <div class="size" style="${this.getStyle(size)}"></div>
+              </div>
+            </li>
+          `,
+        )}
       </ul>
     `;
   }

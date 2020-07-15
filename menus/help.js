@@ -18,7 +18,7 @@ export const helpMenu = {
       instance: {
         execute() {
           window.open('https://github.com/christianliebel/paint', '_blank');
-        }
+        },
       },
     },
     {
@@ -29,7 +29,7 @@ export const helpMenu = {
       instance: {
         execute() {
           window.open('3rdpartylicenses.txt', '_blank');
-        }
+        },
       },
     },
   ],
