@@ -61,15 +61,15 @@ class ToolBox extends LitElement {
   render() {
     return html`
       ${tools.map(
-      (tool) => html` <paint-tool
+        (tool) => html` <paint-tool
           .tool=${tool}
           title="${tool.tooltip}"
-          class="${this.drawingContext.tool === tool ? 'active' : ''} ${tool.instance
-        ? ''
-        : 'unavailable'}"
+          class="${this.drawingContext.tool === tool
+            ? 'active'
+            : ''} ${tool.instance ? '' : 'unavailable'}"
           @pointerup="${() => this.selectTool(tool)}"
         ></paint-tool>`,
-    )}
+      )}
       <paint-inset-container>
         ${this.getToolHtml(this.drawingContext.tool)}
       </paint-inset-container>
@@ -83,23 +83,33 @@ class ToolBox extends LitElement {
 
   getToolHtml(tool) {
     if (PICK_COLOR === tool) {
-      return html`<paint-tool-color-preview .drawingContext="${this.drawingContext}"></paint-tool-color-preview>`;
+      return html`<paint-tool-color-preview
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-color-preview>`;
     }
 
     if ([LINE, CURVE].includes(tool)) {
-      return html`<paint-tool-line-width .drawingContext="${this.drawingContext}"></paint-tool-line-width>`;
+      return html`<paint-tool-line-width
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-line-width>`;
     }
 
     if ([RECTANGLE, ELLIPSE, POLYGON, ROUNDED_RECTANGLE, TEXT].includes(tool)) {
-      return html`<paint-tool-fill-style .drawingContext="${this.drawingContext}"></paint-tool-fill-style>`;
+      return html`<paint-tool-fill-style
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-fill-style>`;
     }
 
     if ([FREE_FORM_SELECT, SELECT].includes(tool)) {
-      return html`<paint-tool-draw-opaque .drawingContext="${this.drawingContext}"></paint-tool-draw-opaque>`;
+      return html`<paint-tool-draw-opaque
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-draw-opaque>`;
     }
 
     if (ERASER === tool) {
-      return html`<paint-tool-eraser-size .drawingContext="${this.drawingContext}"></paint-tool-eraser-size>`;
+      return html`<paint-tool-eraser-size
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-eraser-size>`;
     }
 
     if (BRUSH === tool) {

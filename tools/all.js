@@ -16,8 +16,7 @@ export const FREE_FORM_SELECT = {
 
 export const SELECT = {
   tooltip: 'Select',
-  helpText:
-    'Selects a rectangular part of the picture to move, copy, or edit.',
+  helpText: 'Selects a rectangular part of the picture to move, copy, or edit.',
   image:
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAKElEQVQ4y2NgGBbgPxQTYuOU/0+h5dTxAtl6WQZNLAwDL1CUkIY4AABdMRvtVCCWxwAAAABJRU5ErkJggg==',
   instance: new SelectTool(),
@@ -25,8 +24,7 @@ export const SELECT = {
 
 export const ERASER = {
   tooltip: 'Eraser/Color Eraser',
-  helpText:
-    'Erases a portion of the picture, using the selected eraser shape.',
+  helpText: 'Erases a portion of the picture, using the selected eraser shape.',
   image:
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAYElEQVQ4y2NgGGjASED+PyF9+Az4//H/egxBfsZAFL0sJGtuYIBgKGAhWTMaYKFEM3oYEKe5AXsg/scZlHg0o3jhChYjdBjxa8YXC9hcwYgvDP4TcAEjoZT4n4LUOtQBAKrjIRo4xtzPAAAAAElFTkSuQmCC',
   instance: new EraserTool(),

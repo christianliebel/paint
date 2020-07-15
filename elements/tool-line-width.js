@@ -15,7 +15,7 @@ export class ToolLineWidth extends LitElement {
         margin: 0;
         padding: 1px 2px;
       }
-      
+
       li {
         margin-top: 2px;
         display: flex;
@@ -24,20 +24,20 @@ export class ToolLineWidth extends LitElement {
         height: 10px;
         box-sizing: border-box;
       }
-      
+
       li:nth-child(odd) {
         padding-bottom: 1px;
       }
-      
+
       li div {
         width: 27px;
         background-color: var(--button-text);
       }
-      
+
       li.selected {
         background-color: var(--highlight);
       }
-      
+
       li.selected div {
         background-color: var(--highlight-text);
       }
@@ -52,11 +52,16 @@ export class ToolLineWidth extends LitElement {
   render() {
     return html`
       <ul>
-        ${this.lineWidths.map(lineWidth => html`
-        <li @click="${() => this.onUpdateWidth(lineWidth)}"
-            class="${this.drawingContext.lineWidth === lineWidth ? 'selected' : ''}">
-          <div style="height: ${lineWidth}px"></div>
-        </li>`)}
+        ${this.lineWidths.map(
+          (lineWidth) => html` <li
+            @click="${() => this.onUpdateWidth(lineWidth)}"
+            class="${this.drawingContext.lineWidth === lineWidth
+              ? 'selected'
+              : ''}"
+          >
+            <div style="height: ${lineWidth}px"></div>
+          </li>`,
+        )}
       </ul>
     `;
   }

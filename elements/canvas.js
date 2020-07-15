@@ -53,13 +53,13 @@ class Canvas extends LitElement {
       paint-handle {
         place-self: center;
       }
-      
+
       canvas {
         grid-row: 2;
         grid-column: 2;
         image-rendering: pixelated;
       }
-      
+
       canvas.preview {
         pointer-events: none;
       }
@@ -94,7 +94,8 @@ class Canvas extends LitElement {
             <paint-handle disabled></paint-handle>
             <paint-handle disabled></paint-handle>
             <!-- contains the actual drawing -->
-            <canvas class="main"
+            <canvas
+              class="main"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
               @pointerdown="${this.onPointerDown}"
@@ -103,7 +104,8 @@ class Canvas extends LitElement {
               @pointerleave="${this.onPointerLeave}"
             ></canvas>
             <!-- for operations with previews (line, rectangle, brush, …) -->
-            <canvas class="preview"
+            <canvas
+              class="preview"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
             ></canvas>
@@ -129,7 +131,9 @@ class Canvas extends LitElement {
     const canvas = this.shadowRoot.querySelector('canvas.main');
     const previewCanvas = this.shadowRoot.querySelector('canvas.preview');
     const context = canvas.getContext('2d', { desynchronized: true });
-    const previewContext = previewCanvas.getContext('2d', { desynchronized: true });
+    const previewContext = previewCanvas.getContext('2d', {
+      desynchronized: true,
+    });
     context.fillStyle = 'white';
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.imageSmoothingEnabled = false;
@@ -143,9 +147,7 @@ class Canvas extends LitElement {
     document.addEventListener('pointermove', (event) =>
       this.onPointerMove(event),
     );
-    document.addEventListener('pointerup', (event) =>
-      this.onPointerUp(event)
-    );
+    document.addEventListener('pointerup', (event) => this.onPointerUp(event));
   }
 
   getToolEventArgs(x, y) {

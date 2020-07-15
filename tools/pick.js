@@ -13,8 +13,11 @@ export class PickTool {
   onPointerUp(x, y, drawingContext, color) {
     drawingContext.previewColor = null;
     console.log(color.key);
-    drawingContext.colors[color.key]
-      = this.pickColor(x, y, drawingContext.context);
+    drawingContext.colors[color.key] = this.pickColor(
+      x,
+      y,
+      drawingContext.context,
+    );
     updateContext(drawingContext.element);
   }
 

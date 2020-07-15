@@ -15,7 +15,7 @@ export class ToolDrawOpaque extends LitElement {
         margin: 0;
         padding: 1px 0;
       }
-      
+
       li {
         box-sizing: border-box;
         height: 29px;
@@ -27,21 +27,21 @@ export class ToolDrawOpaque extends LitElement {
         image-rendering: pixelated;
         background-repeat: no-repeat;
       }
-      
+
       li.selected {
         background-color: var(--highlight);
       }
-      
+
       li.opaque {
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAXAQMAAAC7/GShAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAGRJREFUCFtjuJ277XYCQwMDA4MCAwQ0W1nOUWBoWaTkocDAoqTEARKx4lBgaFikBCRZgOJAEeudHQoouiDsnscS0xUYhKYsmcLAMAlIKjBMer4EJNKyBiTSAhLpaZmVjqoL7AYAf/8iQr5WGX0AAAAASUVORK5CYII=');
         background-position: 2px 3px;
       }
-      
+
       li.transparent {
         background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAXAQMAAAC7/GShAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAGlJREFUCFtjuJ277XYCQwMDA4MCAwQ0W1nOUWBoWaTkocDAoqTEARKx4lBgaFikBCRZgOJAEeudHQoouiDsuZN8TiowcEatWsvA0BnVtVaBoXOaz2mgSJjGaqBI0IqVQJEgj5WousBuAABA1CB3t6hRhgAAAABJRU5ErkJggg==');
         background-position: 1px 3px;
       }
-      
+
       img {
         image-rendering: pixelated;
       }

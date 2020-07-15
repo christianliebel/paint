@@ -10,16 +10,23 @@ export class SelectTool {
   onPointerMove(x, y, { element, canvas, previewContext }) {
     // TODO: Scope to canvas
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
-    previewContext.strokeRect(this.startPosition.x + 0.5, this.startPosition.y + 0.5, x - this.startPosition.x, y - this.startPosition.y);
+    previewContext.strokeRect(
+      this.startPosition.x + 0.5,
+      this.startPosition.y + 0.5,
+      x - this.startPosition.x,
+      y - this.startPosition.y,
+    );
 
-    element.dispatchEvent(new CustomEvent('area', {
-      detail: {
-        width: Math.abs(x - this.startPosition.x),
-        height: Math.abs(y - this.startPosition.y),
-      },
-      bubbles: true,
-      composed: true,
-    }));
+    element.dispatchEvent(
+      new CustomEvent('area', {
+        detail: {
+          width: Math.abs(x - this.startPosition.x),
+          height: Math.abs(y - this.startPosition.y),
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   onPointerUp(x, y, drawingContext) {
@@ -27,16 +34,21 @@ export class SelectTool {
     previewContext.setLineDash([]);
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
 
-    element.dispatchEvent(new CustomEvent('area', { bubbles: true, composed: true }));
+    element.dispatchEvent(
+      new CustomEvent('area', { bubbles: true, composed: true }),
+    );
 
     const width = x - this.startPosition.x;
     const height = y - this.startPosition.y;
-    drawingContext.selection = (width === 0 && height === 0) ? null : {
-      x: this.startPosition.x,
-      y: this.startPosition.y,
-      width,
-      height,
-    };
+    drawingContext.selection =
+      width === 0 && height === 0
+        ? null
+        : {
+            x: this.startPosition.x,
+            y: this.startPosition.y,
+            width,
+            height,
+          };
     updateContext(element);
   }
 }
