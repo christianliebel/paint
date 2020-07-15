@@ -1,4 +1,4 @@
-import { html } from '../web_modules/lit-element';
+import { html } from '../web_modules/lit-element.js';
 
 export function renderMnemonic(caption, mnemonic) {
   const index = caption.indexOf(mnemonic);
