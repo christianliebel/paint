@@ -1,3 +1,4 @@
+import './dialogs/flip-and-rotate.js';
 import './window/window.js';
 import './window/title-bar-button.js';
 import './app.js';

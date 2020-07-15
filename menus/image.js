@@ -1,5 +1,6 @@
 import { InvertColorsAction } from '../actions/invert-image.js';
 import { ClearImageAction } from '../actions/clear-image.js';
+import { FlipRotateAction } from '../actions/flip-rotate.js';
 
 export const imageMenu = {
   caption: 'Image',
@@ -11,6 +12,7 @@ export const imageMenu = {
       mnemonic: 'F',
       // shortcut: 'Ctrl+R', <- prevents reloading
       helpText: 'Flips or rotates the picture or a selection.',
+      instance: new FlipRotateAction(),
     },
     {
       caption: 'Stretch/Skew…',
