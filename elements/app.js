@@ -154,6 +154,9 @@ class App extends LitElement {
         colorBox: true,
         toolBox: true,
       },
+      document: {
+        title: 'untitled',
+      },
     };
     this.addEventListener(
       'set-help-text',
@@ -209,6 +212,7 @@ class App extends LitElement {
   }
 
   render() {
+    document.title = `${this.drawingContext.title} - Paint`
     return html`
       <paint-menu-bar
         .entries="${menus}"
