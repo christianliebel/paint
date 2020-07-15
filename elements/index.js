@@ -1,4 +1,5 @@
 import './window/window.js';
+import './window/title-bar-button.js';
 import './app.js';
 import './canvas.js';
 import './color-box.js';
