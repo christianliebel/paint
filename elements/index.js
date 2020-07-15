@@ -1,3 +1,4 @@
+import './window/window.js';
 import './app.js';
 import './canvas.js';
 import './color-box.js';
