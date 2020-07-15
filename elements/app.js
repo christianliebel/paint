@@ -39,6 +39,8 @@ class App extends LitElement {
         user-select: none;
         -webkit-user-select: none;
         cursor: default;
+
+        -webkit-tap-highlight-color: transparent;
       }
 
       @media print {
