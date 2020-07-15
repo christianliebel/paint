@@ -7,7 +7,6 @@ import './handle.js';
 import './inset-container.js';
 import './menu.js';
 import './menu-bar.js';
-import './menu-item.js';
 import './ruler.js';
 import './status-bar.js';
 import './tool.js';
