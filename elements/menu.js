@@ -1,4 +1,5 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
+import { renderMnemonic } from '../helpers/render-mnemonic.js';
 
 class Menu extends LitElement {
   static get properties() {
@@ -143,7 +144,7 @@ class Menu extends LitElement {
               </svg>`
             : ''}
         </span>
-        <span>${this.resolveMnemonic(entry.caption, entry.mnemonic)}</span>
+        <span>${renderMnemonic(entry.caption, entry.mnemonic)}</span>
         <span class="${entry.shortcut ? 'shortcut' : ''}"
           >${entry.shortcut}</span
         >
@@ -161,13 +162,6 @@ class Menu extends LitElement {
         </span>
       </div>
     `;
-  }
-
-  resolveMnemonic(caption, mnemonic) {
-    const index = caption.indexOf(mnemonic);
-    return html`${caption.substring(0, index)}<span class="mnemonic"
-        >${mnemonic}</span
-      >${caption.substring(index + 1)}`;
   }
 
   isChecked(entry) {

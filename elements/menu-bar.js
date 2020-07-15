@@ -1,4 +1,5 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
+import { renderMnemonic } from '../helpers/render-mnemonic.js';
 
 class MenuBar extends LitElement {
   static get properties() {
@@ -81,7 +82,7 @@ class MenuBar extends LitElement {
                 ? 'active'
                 : ''} ${entry.disabled ? 'disabled' : ''}"
             >
-              ${entry.caption}
+              ${renderMnemonic(entry.caption, entry.mnemonic)}
               ${!entry.disabled && entry.entries
                 ? html`<paint-menu
                     .entries="${entry.entries}"
