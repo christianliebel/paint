@@ -1,6 +1,6 @@
 import { SaveColorsAction } from '../actions/save-colors.js';
 import { GetColorsAction } from '../actions/get-colors.js';
-import { DrawOpaque } from '../actions/draw-opaque';
+import { DrawOpaque } from '../actions/draw-opaque.js';
 
 export const optionsMenu = {
   caption: 'Options',
