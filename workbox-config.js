@@ -3,7 +3,10 @@ module.exports = {
     "globPatterns": [
         "**/*.css",
         "**/*.html",
-        "**/*.js"
+        "**/*.js",
+        "assets/*.png",
+        "manifest.webmanifest",
+        "favicon.ico"
     ],
     "globIgnores": [
         "sw.js",
