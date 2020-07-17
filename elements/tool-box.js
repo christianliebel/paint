@@ -1,10 +1,11 @@
 import {css, html, LitElement} from '../web_modules/lit-element.js';
-import {tools} from '../data/tools.js';
+import {tools} from '../tools/all.js';
 
 class ToolBox extends LitElement {
     static get properties() {
         return {
-            tool: {attribute: false}
+            tool: {attribute: false},
+            previewColor: {type: String},
         };
     }
 
@@ -21,23 +22,41 @@ class ToolBox extends LitElement {
                 width: 41px;
                 height: 66px;
                 margin-top: 3px;
+                display: block;
+            }
+            
+            paint-inset-container * { height: 100%; }
+            
+            paint-tool.unavailable {
+                filter: saturate(0%) opacity(50%);
+                pointer-events: none;
             }
         `;
     }
 
     constructor() {
         super();
-        this.tool = 'pencil';
+    }
+
+    firstUpdated() {
+        this.selectTool(tools[6]);
     }
 
     render() {
         return html`
             ${tools.map(tool => html`
             <paint-tool .tool=${tool} title="${tool.tooltip}"
-                class="${this.tool === tool.id ? 'active' : ''}"
-                @mouseup="${() => this.tool = tool.id}"></paint-tool>`)}
-            <paint-inset-container></paint-inset-container>
+                class="${this.tool === tool ? 'active' : ''} ${tool.instance ? '' : 'unavailable'}"
+                @mouseup="${() => this.selectTool(tool)}"></paint-tool>`)}
+            <paint-inset-container>
+                <paint-tool-color-preview previewColor="${this.previewColor}"></paint-tool-color-preview>
+            </paint-inset-container>
         `;
+    }
+
+    selectTool(tool) {
+        this.tool = tool;
+        this.dispatchEvent(new CustomEvent('tool-selected', { detail: tool.instance, bubbles: true, composed: true }))
     }
 }
 

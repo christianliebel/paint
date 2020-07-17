@@ -7,7 +7,8 @@ class Canvas extends LitElement {
             canvasWidth: {attribute: false},
             canvasHeight: {attribute: false},
             primaryColor: {type: String},
-            secondaryColor: {type: String}
+            secondaryColor: {type: String},
+            tool: {type: Object},
         };
     }
 
@@ -103,40 +104,40 @@ class Canvas extends LitElement {
         context.imageSmoothingEnabled = false;
         this.context = context;
 
-        document.addEventListener('mousemove', evt => this.onMouseMove(evt));
-        document.addEventListener('mouseup', () => this.onMouseUp());
+        document.addEventListener('mousemove', event => this.onMouseMove(event));
+        document.addEventListener('mouseup', event => this.onMouseUp(event));
 
         this.dispatchEvent(new CustomEvent('drawing-context-created',
             { detail: { canvas, context }, bubbles: true, composed: true }));
     }
 
     onMouseDown(event) {
-        const {left, top} = this.shadowRoot.querySelector('canvas').getBoundingClientRect();
         this.mouseDown = true;
-        this.context.beginPath();
-        this.context.strokeStyle = event.button === 2 ? this.secondaryColor : this.primaryColor;
-        this.context.moveTo(event.clientX - left, event.clientY - top);
+        const {x, y} = this.getCoordinates(event);
+
+        if (this.tool && this.tool.onMouseDown) {
+            this.tool.onMouseDown({event, x, y, context: this.context, primaryColor: this.primaryColor, secondaryColor: this.secondaryColor, element: this });
+        }
         event.preventDefault();
     }
 
-    onMouseMove({clientX, clientY}) {
-        const {left, top} = this.shadowRoot.querySelector('canvas').getBoundingClientRect();
+    onMouseMove(event) {
+        const {x, y} = this.getCoordinates(event);
         if (this.inCanvas) {
-            this.dispatchEvent(new CustomEvent('coordinate', {
-                detail: { x: clientX - left, y: clientY - top },
-                bubbles: true,
-                composed: true
-            }));
+            this.dispatchEvent(new CustomEvent('coordinate', { detail: { x, y }, bubbles: true, composed: true }));
         }
 
-        if (this.mouseDown) {
-            this.context.lineTo(clientX - left, clientY - top);
-            this.context.stroke();
+        if (this.mouseDown && this.tool && this.tool.onMouseMove) {
+            this.tool.onMouseMove({ event, x, y, context: this.context, primaryColor: this.primaryColor, secondaryColor: this.secondaryColor, element: this });
         }
     }
 
-    onMouseUp() {
+    onMouseUp(event) {
         this.mouseDown = false;
+        const {x, y} = this.getCoordinates(event);
+        if (this.tool && this.tool.onMouseUp) {
+            this.tool.onMouseUp({ event, x, y, context: this.context, primaryColor: this.primaryColor, secondaryColor: this.secondaryColor, element: this });
+        }
     }
 
     onMouseEnter() {
@@ -146,6 +147,11 @@ class Canvas extends LitElement {
     onMouseLeave() {
         this.inCanvas = false;
         this.dispatchEvent(new CustomEvent('coordinate', {bubbles: true, composed: true}));
+    }
+
+    getCoordinates({clientX, clientY}) {
+        const {left, top} = this.shadowRoot.querySelector('canvas').getBoundingClientRect();
+        return { x: clientX - left, y: clientY - top };
     }
 }
 
