@@ -3,6 +3,7 @@ import { PencilTool } from './pencil.js';
 import { FillTool } from './fill.js';
 import { BrushTool } from './brush.js';
 import { RectangleTool } from './rectangle.js';
+import { LineTool } from './line.js';
 
 export const tools = [
   {
@@ -75,6 +76,7 @@ export const tools = [
     helpText: 'Draws a straight line with the selected line width.',
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAFklEQVQ4y2NgoAz8H9U8qnlU87DRDABNiA/xUZW66AAAAABJRU5ErkJggg==',
+    instance: new LineTool(),
   },
   {
     tooltip: 'Curve',
