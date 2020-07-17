@@ -11,7 +11,8 @@ module.exports = {
     "globIgnores": [
         "sw.js",
         "workbox*.js",
-        "node_modules/**"
+        "node_modules/**",
+        "docs/**"
     ],
     "swDest": "sw.js",
     "skipWaiting": true,
