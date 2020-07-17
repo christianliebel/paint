@@ -5,6 +5,7 @@ import { BrushTool } from './brush.js';
 import { RectangleTool } from './rectangle.js';
 import { LineTool } from './line.js';
 import { SelectTool } from './select.js';
+import { EraserTool } from './eraser.js';
 
 export const FREE_FORM_SELECT = {
   tooltip: 'Free-Form Select',
@@ -28,6 +29,8 @@ export const ERASER = {
     'Erases a portion of the picture, using the selected eraser shape.',
   image:
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAYElEQVQ4y2NgGGjASED+PyF9+Az4//H/egxBfsZAFL0sJGtuYIBgKGAhWTMaYKFEM3oYEKe5AXsg/scZlHg0o3jhChYjdBjxa8YXC9hcwYgvDP4TcAEjoZT4n4LUOtQBAKrjIRo4xtzPAAAAAElFTkSuQmCC',
+  instance: new EraserTool(),
+  cursor: 'none',
 };
 
 export const FILL = {
@@ -44,7 +47,6 @@ export const PICK_COLOR = {
   image:
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACVBMVEUAAAAAAAAArafQeB0vAAAAAXRSTlMAQObYZgAAAD5JREFUCB0FwTENgDAQAMD7BJgZ6IIEVLwEhr4I3CCiJASV3EFHFOZCK1Qn6kQl0TBtWBMXYmC5sSeeD8fLDwv/B/CGwemxAAAAAElFTkSuQmCC',
   instance: new PickTool(),
-  detailsSelector: 'paint-tool-color-preview',
 };
 
 export const MAGNIFIER = {
