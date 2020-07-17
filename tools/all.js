@@ -2,6 +2,7 @@ import { PickTool } from './pick.js';
 import { PencilTool } from './pencil.js';
 import { FillTool } from './fill.js';
 import { BrushTool } from './brush.js';
+import { RectangleTool } from './rectangle.js';
 
 export const tools = [
   {
@@ -86,6 +87,7 @@ export const tools = [
     helpText: 'Draws a rectangle with the selected fill style.',
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAJUlEQVQ4y2NgGPKAkYGB4T+lhlBiwH8WSm0fNWAwGECVhDTEAQBUugQbgUfDcwAAAABJRU5ErkJggg==',
+    instance: new RectangleTool(),
   },
   {
     tooltip: 'Polygon',
