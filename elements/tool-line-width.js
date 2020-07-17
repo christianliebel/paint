@@ -1,9 +1,10 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
+import { updateContext } from '../helpers/update-context.js';
 
 export class ToolLineWidth extends LitElement {
   static get properties() {
     return {
-      lineWidth: {type: Number},
+      drawingContext: { type: Object },
     };
   }
 
@@ -55,7 +56,7 @@ export class ToolLineWidth extends LitElement {
       <ul>
         ${this.lineWidths.map(lineWidth => html`
         <li @click="${() => this.onUpdateWidth(lineWidth)}"
-            class="${this.lineWidth === lineWidth ? 'selected' : ''}">
+            class="${this.drawingContext.lineWidth === lineWidth ? 'selected' : ''}">
           <div style="height: ${lineWidth}px"></div>
         </li>`)}
       </ul>
@@ -63,12 +64,8 @@ export class ToolLineWidth extends LitElement {
   }
 
   onUpdateWidth(lineWidth) {
-    this.lineWidth = lineWidth;
-    this.dispatchEvent(new CustomEvent('line-width-changed', {
-      detail: lineWidth,
-      bubbles: true,
-      composed: true
-    }));
+    this.drawingContext.lineWidth = lineWidth;
+    updateContext(this);
   }
 }
 

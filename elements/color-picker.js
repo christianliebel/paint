@@ -1,8 +1,10 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
+import { updateContext } from '../helpers/update-context.js';
 
 class ColorPicker extends LitElement {
   static get properties() {
     return {
+      drawingContext: { type: Object },
       color: { type: String },
     };
   }
@@ -37,13 +39,8 @@ class ColorPicker extends LitElement {
   }
 
   dispatchColorEvent(type) {
-    this.dispatchEvent(
-      new CustomEvent(`${type}-color-selected`, {
-        detail: this.color,
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    this.drawingContext.colors[type] = this.color;
+    updateContext(this);
   }
 
   render() {

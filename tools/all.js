@@ -41,6 +41,7 @@ export const tools = [
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACVBMVEUAAAAAAAAArafQeB0vAAAAAXRSTlMAQObYZgAAAD5JREFUCB0FwTENgDAQAMD7BJgZ6IIEVLwEhr4I3CCiJASV3EFHFOZCK1Qn6kQl0TBtWBMXYmC5sSeeD8fLDwv/B/CGwemxAAAAAElFTkSuQmCC',
     instance: new PickTool(),
+    detailsSelector: 'paint-tool-color-preview',
   },
   {
     tooltip: 'Magnifier',
@@ -80,12 +81,14 @@ export const tools = [
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAFklEQVQ4y2NgoAz8H9U8qnlU87DRDABNiA/xUZW66AAAAABJRU5ErkJggg==',
     instance: new LineTool(),
+    detailsSelector: 'paint-tool-line-width',
   },
   {
     tooltip: 'Curve',
     helpText: 'Draws a curved line with the selected line width.',
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAACZJREFUCB0FwQENADAIACB0bq9hFKMZ1SgHD8vQNM2wgqQoiiRwH0MVAtphf7+PAAAAAElFTkSuQmCC',
+    detailsSelector: 'paint-tool-line-width',
   },
   {
     tooltip: 'Rectangle',

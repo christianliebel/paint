@@ -1,17 +1,16 @@
 import bresenhamLine from '../web_modules/bresenham-line.js';
 
 export class LineTool {
-  onPointerDown({ event, x, y, previewContext, context, primaryColor }) {
+  onPointerDown(x, y, { event, previewContext, context }, color) {
     this.startPosition = {x, y};
-    const color = event.button === 2 ? secondaryColor : primaryColor;
-    previewContext.fillStyle = context.fillStyle = color;
+    previewContext.fillStyle = context.fillStyle = color.value;
   }
 
-  onPointerMove({ x, y, previewContext, canvas, lineWidth }) {
+  onPointerMove(x, y, { previewContext, canvas, lineWidth }) {
     this.drawLine(x, y, previewContext, previewContext, canvas, lineWidth);
   }
 
-  onPointerUp({ x, y, previewContext, context, canvas, lineWidth }) {
+  onPointerUp(x, y, { previewContext, context, canvas, lineWidth }) {
     this.drawLine(x, y, context, previewContext, canvas, lineWidth);
   }
 

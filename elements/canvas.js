@@ -1,16 +1,15 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
+import { updateContext } from '../helpers/update-context.js';
 
 class Canvas extends LitElement {
   static get properties() {
     return {
+      drawingContext: { type: Object },
+
       inCanvas: { attribute: false },
       canvasWidth: { attribute: false },
       canvasHeight: { attribute: false },
-      lineWidth: { type: Number },
-      primaryColor: { type: String },
-      secondaryColor: { type: String },
-      tool: { type: Object },
-      selection: { type: Object },
+      tool: { attribute: false },
     };
   }
 
@@ -85,6 +84,7 @@ class Canvas extends LitElement {
   }
 
   render() {
+    this.tool = this.drawingContext.tool.instance;
     return html`
       <div class="frame">
         <div class="scroll-container">
@@ -123,8 +123,6 @@ class Canvas extends LitElement {
     // Canvas defaults to screen dimensions
     this.canvasWidth = screen.width;
     this.canvasHeight = screen.height;
-
-    this.selection = {};
   }
 
   firstUpdated() {
@@ -135,48 +133,34 @@ class Canvas extends LitElement {
     context.fillStyle = 'white';
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.imageSmoothingEnabled = false;
-    this.canvas = canvas;
-    this.context = context;
-    this.previewCanvas = previewCanvas;
-    this.previewContext = previewContext;
+    this.drawingContext.canvas = canvas;
+    this.drawingContext.context = context;
+    this.drawingContext.previewCanvas = previewCanvas;
+    this.drawingContext.previewContext = previewContext;
+    this.drawingContext.element = this;
+    updateContext(this);
 
     document.addEventListener('pointermove', (event) =>
       this.onPointerMove(event),
     );
-    document.addEventListener('pointerup', (event) => this.onPointerUp(event));
-
-    this.dispatchEvent(
-      new CustomEvent('drawing-context-created', {
-        detail: { canvas, context, selection: this.selection },
-        bubbles: true,
-        composed: true,
-      }),
+    document.addEventListener('pointerup', (event) =>
+      this.onPointerUp(event)
     );
   }
 
-  getDrawingContext(event, x, y) {
-    return {
-      event,
-      x,
-      y,
-      canvas: this.canvas,
-      context: this.context,
-      previewCanvas: this.previewCanvas,
-      previewContext: this.previewContext,
-      pointerDown: this.pointerDown,
-      primaryColor: this.primaryColor,
-      secondaryColor: this.secondaryColor,
-      lineWidth: this.lineWidth,
-      selection: this.selection,
-      element: this,
-    };
+  getToolEventArgs(x, y) {
+    const { colors } = this.drawingContext;
+    const key = this.pointerDown ? this.previewColor : 'primary';
+    const color = { key, value: colors[key] };
+    return [x, y, this.drawingContext, color];
   }
 
   onPointerDown(event) {
     this.pointerDown = true;
+    this.previewColor = event.button !== 2 ? 'primary' : 'secondary';
     if (this.tool.onPointerDown) {
       const { x, y } = this.getCoordinates(event);
-      this.tool.onPointerDown(this.getDrawingContext(event, x, y));
+      this.tool.onPointerDown(...this.getToolEventArgs(x, y));
     }
     event.preventDefault();
   }
@@ -187,8 +171,8 @@ class Canvas extends LitElement {
       this.dispatchEvent(
         new CustomEvent('coordinate', {
           detail: {
-            x: Math.max(0, Math.min(this.canvas.width, x)),
-            y: Math.max(0, Math.min(this.canvas.height, y)),
+            x: Math.max(0, Math.min(this.drawingContext.canvas.width, x)),
+            y: Math.max(0, Math.min(this.drawingContext.canvas.height, y)),
           },
           bubbles: true,
           composed: true,
@@ -197,20 +181,29 @@ class Canvas extends LitElement {
     }
 
     if (this.tool.onPointerHover) {
-      this.tool.onPointerHover(this.getDrawingContext(event, x, y));
+      this.tool.onPointerHover(...this.getToolEventArgs(x, y));
     }
 
     if (this.pointerDown && this.tool.onPointerMove) {
-      this.tool.onPointerMove(this.getDrawingContext(event, x, y));
+      this.tool.onPointerMove(...this.getToolEventArgs(x, y));
     }
   }
 
   onPointerUp(event) {
-    if (this.pointerDown && this.tool.onPointerUp) {
-      const { x, y } = this.getCoordinates(event);
-      this.tool.onPointerUp(this.getDrawingContext(event, x, y));
+    if (!this.pointerDown) {
+      return;
     }
+
+    // Do not move this down, required for correct hover behavior
     this.pointerDown = false;
+
+    const { x, y } = this.getCoordinates(event);
+    if (this.tool.onPointerUp) {
+      this.tool.onPointerUp(...this.getToolEventArgs(x, y));
+    }
+    if (this.tool.onPointerHover) {
+      this.tool.onPointerHover(...this.getToolEventArgs(x, y));
+    }
   }
 
   onPointerEnter() {
@@ -225,7 +218,7 @@ class Canvas extends LitElement {
   }
 
   getCoordinates({ clientX, clientY }) {
-    const { left, top } = this.canvas.getBoundingClientRect();
+    const { left, top } = this.drawingContext.canvas.getBoundingClientRect();
     const x = Math.floor(clientX - left);
     const y = Math.floor(clientY - top);
     return { x, y };

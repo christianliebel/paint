@@ -187,7 +187,7 @@ class Menu extends LitElement {
 
   resetHelpText() {
     this.dispatchEvent(
-      new CustomEvent('reset-help-text', { bubbles: true, composed: true }),
+      new CustomEvent('set-help-text', { bubbles: true, composed: true }),
     );
   }
 }

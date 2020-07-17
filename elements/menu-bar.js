@@ -109,7 +109,7 @@ class MenuBar extends LitElement {
 
   onPointerLeave() {
     this.dispatchEvent(
-      new CustomEvent('reset-help-text', { bubbles: true, composed: true }),
+      new CustomEvent('set-help-text', { bubbles: true, composed: true }),
     );
   }
 }

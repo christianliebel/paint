@@ -1,11 +1,13 @@
+import { updateContext } from '../helpers/update-context.js';
+
 export class SelectTool {
-  onPointerDown({ previewContext, x, y }) {
+  onPointerDown(x, y, { previewContext }) {
     this.startPosition = { x, y };
 
     previewContext.setLineDash([4]);
   }
 
-  onPointerMove({ element, canvas, previewContext, x, y }) {
+  onPointerMove(x, y, { element, canvas, previewContext }) {
     // TODO: Scope to canvas
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
     previewContext.strokeRect(this.startPosition.x + 0.5, this.startPosition.y + 0.5, x - this.startPosition.x, y - this.startPosition.y);
@@ -20,15 +22,19 @@ export class SelectTool {
     }));
   }
 
-  onPointerUp({ canvas, element, selection, previewContext, x, y }) {
+  onPointerUp(x, y, drawingContext) {
+    const { canvas, element, previewContext } = drawingContext;
     previewContext.setLineDash([]);
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
 
     element.dispatchEvent(new CustomEvent('area', { bubbles: true, composed: true }));
 
-    selection.x = this.startPosition.x;
-    selection.y = this.startPosition.y;
-    selection.width = x - this.startPosition.x;
-    selection.height = y - this.startPosition.y;
+    drawingContext.selection = {
+      x: this.startPosition.x,
+      y: this.startPosition.y,
+      width: x - this.startPosition.x,
+      height: y - this.startPosition.y,
+    };
+    updateContext(element);
   }
 }
