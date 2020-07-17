@@ -1,5 +1,6 @@
 import { PickTool } from './pick.js';
 import { PencilTool } from './pencil.js';
+import { FillTool } from './fill.js';
 
 export const tools = [
   {
@@ -27,6 +28,7 @@ export const tools = [
     helpText: 'Fills an area with the current drawing color.',
     image:
       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAgMAAABinRfyAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACVBMVEUAAAAAAAAArafQeB0vAAAAAXRSTlMAQObYZgAAAEJJREFUCB0FwaENgDAQAMAjKR4BottUoRH/JKCrmAbDCAi25A4ATNAxfCzr2+T5bPLKkDUPOWYXQ97C3oTKrFCg4AeVvwo78oeFFAAAAABJRU5ErkJggg==',
+    instance: new FillTool(),
   },
   {
     tooltip: 'Pick Color',

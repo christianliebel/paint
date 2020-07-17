@@ -26,6 +26,7 @@
     "lint-staged": "^10.2.11",
     "lit-element": "^2.3.1",
     "prettier": "^2.0.5",
+    "q-floodfill": "^1.1.1",
     "snowpack": "^2.6.1",
     "workbox-cli": "^5.1.3"
   },

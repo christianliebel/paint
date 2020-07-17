@@ -5,6 +5,7 @@ class ColorBox extends LitElement {
     return {
       primaryColor: { type: String },
       secondaryColor: { type: String },
+      colors: { attribute: false },
     };
   }
 
@@ -26,6 +27,40 @@ class ColorBox extends LitElement {
     `;
   }
 
+  constructor() {
+    super();
+    this.colors = [
+      '#000000', // black
+      '#808080', // gray
+      '#800000', // maroon
+      '#808000', // olive
+      '#008000', // green
+      '#008080', // teal
+      '#000080', // navy
+      '#800080', // purple
+      '#808040',
+      '#004040',
+      '#0080FF',
+      '#004080',
+      '#4000FF',
+      '#804000',
+      '#FFFFFF', // white
+      '#C0C0C0', // silver
+      '#FF0000', // red
+      '#FFFF00', // yellow
+      '#00FF00', // lime
+      '#00FFFF', // aqua
+      '#0000FF', // blue
+      '#FF00FF', // fuchsia
+      '#FFFF80',
+      '#00FF80',
+      '#80FFFF',
+      '#8080FF',
+      '#FF0080',
+      '#FF8040',
+    ];
+  }
+
   render() {
     return html`
       <paint-color-switcher
@@ -33,34 +68,10 @@ class ColorBox extends LitElement {
         secondaryColor="${this.secondaryColor}"
       >
       </paint-color-switcher>
-      <paint-color-picker color="black"></paint-color-picker>
-      <paint-color-picker color="gray"></paint-color-picker>
-      <paint-color-picker color="maroon"></paint-color-picker>
-      <paint-color-picker color="olive"></paint-color-picker>
-      <paint-color-picker color="green"></paint-color-picker>
-      <paint-color-picker color="teal"></paint-color-picker>
-      <paint-color-picker color="navy"></paint-color-picker>
-      <paint-color-picker color="purple"></paint-color-picker>
-      <paint-color-picker color="rgb(128 128 64)"></paint-color-picker>
-      <paint-color-picker color="rgb(0 64 64)"></paint-color-picker>
-      <paint-color-picker color="rgb(0 128 255)"></paint-color-picker>
-      <paint-color-picker color="rgb(0 64 128)"></paint-color-picker>
-      <paint-color-picker color="rgb(64 0 255)"></paint-color-picker>
-      <paint-color-picker color="rgb(128 64 0)"></paint-color-picker>
-      <paint-color-picker color="white"></paint-color-picker>
-      <paint-color-picker color="silver"></paint-color-picker>
-      <paint-color-picker color="red"></paint-color-picker>
-      <paint-color-picker color="yellow"></paint-color-picker>
-      <paint-color-picker color="lime"></paint-color-picker>
-      <paint-color-picker color="aqua"></paint-color-picker>
-      <paint-color-picker color="blue"></paint-color-picker>
-      <paint-color-picker color="fuchsia"></paint-color-picker>
-      <paint-color-picker color="rgb(255 255 128)"></paint-color-picker>
-      <paint-color-picker color="rgb(0 255 128)"></paint-color-picker>
-      <paint-color-picker color="rgb(128 255 255)"></paint-color-picker>
-      <paint-color-picker color="rgb(128 128 255)"></paint-color-picker>
-      <paint-color-picker color="rgb(255 0 128)"></paint-color-picker>
-      <paint-color-picker color="rgb(255 128 64)"></paint-color-picker>
+      ${this.colors.map(
+        (color) =>
+          html`<paint-color-picker color="${color}"></paint-color-picker>`,
+      )}
     `;
   }
 }
