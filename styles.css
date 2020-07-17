@@ -1,10 +1,10 @@
 body {
-    margin: 0;
-    overscroll-behavior: none;
-    display: flex;
+  margin: 0;
+  overscroll-behavior: none;
+  display: flex;
 }
 
 paint-app {
-    height: 100vh;
-    width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
