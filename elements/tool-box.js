@@ -1,5 +1,5 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
-import { tools } from '../tools/all.js';
+import { CURVE, ELLIPSE, LINE, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, tools } from '../tools/all.js';
 import { updateContext } from '../helpers/update-context.js';
 
 class ToolBox extends LitElement {
@@ -45,17 +45,17 @@ class ToolBox extends LitElement {
   render() {
     return html`
       ${tools.map(
-        (tool) => html` <paint-tool
+      (tool) => html` <paint-tool
           .tool=${tool}
           title="${tool.tooltip}"
           class="${this.drawingContext.tool === tool ? 'active' : ''} ${tool.instance
-            ? ''
-            : 'unavailable'}"
+        ? ''
+        : 'unavailable'}"
           @pointerup="${() => this.selectTool(tool)}"
         ></paint-tool>`,
-      )}
+    )}
       <paint-inset-container>
-        ${this.getToolHtml(tools.indexOf(this.drawingContext.tool))}
+        ${this.getToolHtml(this.drawingContext.tool)}
       </paint-inset-container>
     `;
   }
@@ -65,17 +65,16 @@ class ToolBox extends LitElement {
     updateContext(this);
   }
 
-  getToolHtml(index) {
-    // TODO(refactor): do not use indices
-    if (index === 4) {
+  getToolHtml(tool) {
+    if (tool === PICK_COLOR) {
       return html`<paint-tool-color-preview .drawingContext="${this.drawingContext}"></paint-tool-color-preview>`;
     }
 
-    if ([10, 11].includes(index)) {
+    if ([LINE, CURVE].includes(tool)) {
       return html`<paint-tool-line-width .drawingContext="${this.drawingContext}"></paint-tool-line-width>`;
     }
 
-    if ([12, 13, 14, 15].includes(index)) {
+    if ([RECTANGLE, ELLIPSE, POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
       return html`<paint-tool-fill-style .drawingContext="${this.drawingContext}"></paint-tool-fill-style>`;
     }
   }

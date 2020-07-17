@@ -1,7 +1,7 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
 import { menus } from '../menus/all.js';
 import hotkeys from '../web_modules/hotkeys-js.js';
-import { tools } from '../tools/all.js';
+import { PENCIL } from '../tools/all.js';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
@@ -117,7 +117,7 @@ class App extends LitElement {
         stroke: true,
         fill: false,
       },
-      tool: tools[6], // Pencil
+      tool: PENCIL,
       selection: null,
       view: {
         statusBar: true,
