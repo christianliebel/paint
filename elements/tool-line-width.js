@@ -11,8 +11,6 @@ export class ToolLineWidth extends LitElement {
   static get styles() {
     return css`
       ul {
-        display: flex;
-        flex-direction: column;
         list-style-type: none;
         margin: 0;
         padding: 1px 2px;

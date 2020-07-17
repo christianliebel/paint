@@ -138,7 +138,7 @@ class App extends LitElement {
         '#FF8040',
       ],
       previewColor: null,
-      transparentBackground: false,
+      drawOpaque: true,
       eraserSize: null,
       magnifierSize: null,
       brushType: null,
