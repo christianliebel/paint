@@ -151,9 +151,18 @@ class Canvas extends LitElement {
   }
 
   getToolEventArgs(x, y) {
-    const { colors } = this.drawingContext;
-    const key = this.pointerDown ? this.previewColor : 'primary';
-    const color = { key, value: colors[key] };
+    const strokeKey = this.pointerDown ? this.previewColor : 'primary';
+    const fillKey = strokeKey === 'primary' ? 'secondary' : 'primary';
+    const color = {
+      stroke: {
+        key: strokeKey,
+        value: this.drawingContext.colors[strokeKey],
+      },
+      fill: {
+        key: fillKey,
+        value: this.drawingContext.colors[fillKey],
+      },
+    };
     return [x, y, this.drawingContext, color];
   }
 

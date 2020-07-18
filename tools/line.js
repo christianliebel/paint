@@ -3,7 +3,7 @@ import bresenhamLine from '../web_modules/bresenham-line.js';
 export class LineTool {
   onPointerDown(x, y, { previewContext, context }, color) {
     this.startPosition = { x, y };
-    previewContext.fillStyle = context.fillStyle = color.value;
+    previewContext.fillStyle = context.fillStyle = color.stroke.value;
   }
 
   onPointerMove(x, y, { previewContext, canvas, lineWidth }) {

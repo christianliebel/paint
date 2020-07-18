@@ -2,7 +2,7 @@ import bresenhamLine from '../web_modules/bresenham-line.js';
 
 export class PencilTool {
   onPointerDown(x, y, { context }, color) {
-    context.fillStyle = color.value;
+    context.fillStyle = color.stroke.value;
     context.fillRect(x, y, 1, 1);
     this.previous = { x, y };
   }

@@ -3,12 +3,12 @@ import bresenhamLine from '../web_modules/bresenham-line.js';
 export class BrushTool {
   onPointerHover(x, y, { canvas, previewContext }, color) {
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
-    previewContext.fillStyle = color.value;
+    previewContext.fillStyle = color.stroke.value;
     previewContext.fillRect(x - 2, y - 2, 5, 5);
   }
 
   onPointerDown(x, y, { context }, color) {
-    context.fillStyle = color.value;
+    context.fillStyle = color.stroke.value;
     context.fillRect(x - 2, y - 2, 5, 5);
     this.previous = { x, y };
   }
