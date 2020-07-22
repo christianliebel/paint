@@ -14,7 +14,8 @@ export class PasteAction {
         for (let type of item.types) {
           if (type.match(/^image\//)) {
             const blob = await item.getType(type);
-            await getImageFromBlob(blob, context);
+            const image = await getImageFromBlob(blob);
+            context.drawImage(image, 0, 0);
           }
         }
       } catch (e) {
