@@ -11,9 +11,9 @@ class ColorSwitcher extends LitElement {
   static get styles() {
     return css`
       :host {
-        border: 1px solid var(--highlight-text);
-        border-top-color: var(--canvas);
-        border-left-color: var(--canvas);
+        border: 1px solid var(--button-light);
+        border-top-color: var(--button-dark);
+        border-left-color: var(--button-dark);
         background: var(--selected-background);
         image-rendering: pixelated;
       }
@@ -21,8 +21,8 @@ class ColorSwitcher extends LitElement {
       div.frame {
         box-sizing: border-box;
         border: 1px solid var(--button-face);
-        border-top-color: var(--button-text);
-        border-left-color: var(--button-text);
+        border-top-color: var(--button-darker);
+        border-left-color: var(--button-darker);
         height: 100%;
         padding: 3px 2px;
         position: relative;
@@ -32,9 +32,9 @@ class ColorSwitcher extends LitElement {
         box-sizing: border-box;
         width: 15px;
         height: 15px;
-        border: 1px solid var(--canvas);
-        border-top-color: var(--highlight-text);
-        border-left-color: var(--highlight-text);
+        border: 1px solid var(--button-dark);
+        border-top-color: var(--button-light);
+        border-left-color: var(--button-light);
         position: absolute;
         z-index: 2;
       }

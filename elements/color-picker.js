@@ -12,16 +12,16 @@ class ColorPicker extends LitElement {
   static get styles() {
     return css`
       :host {
-        border: 1px solid var(--highlight-text);
-        border-top-color: var(--canvas);
-        border-left-color: var(--canvas);
+        border: 1px solid var(--button-light);
+        border-top-color: var(--button-dark);
+        border-left-color: var(--button-dark);
       }
 
       div.frame {
         box-sizing: border-box;
         border: 1px solid var(--button-face);
-        border-top-color: var(--button-text);
-        border-left-color: var(--button-text);
+        border-top-color: var(--button-darker);
+        border-left-color: var(--button-darker);
         height: 100%;
       }
     `;

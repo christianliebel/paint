@@ -7,9 +7,9 @@ class InsetContainer extends LitElement {
     return css`
       :host {
         box-sizing: border-box;
-        border: 1px solid var(--canvas);
-        border-bottom-color: var(--highlight-text);
-        border-right-color: var(--highlight-text);
+        border: 1px solid var(--button-dark);
+        border-bottom-color: var(--button-light);
+        border-right-color: var(--button-light);
 
         display: flex;
         align-items: flex-end;

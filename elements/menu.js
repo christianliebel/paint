@@ -18,7 +18,7 @@ class Menu extends LitElement {
         z-index: var(--z-index-menu);
         display: inline-block;
         box-sizing: border-box;
-        border: 1px solid var(--button-text);
+        border: 1px solid var(--button-darker);
         border-top: 1px solid var(--button-face);
         border-left: 1px solid var(--button-face);
         background-color: var(--button-face);
@@ -32,8 +32,8 @@ class Menu extends LitElement {
 
       div.frame {
         border: 1px solid var(--canvas);
-        border-top: 1px solid var(--highlight-text);
-        border-left: 1px solid var(--highlight-text);
+        border-top: 1px solid var(--button-light);
+        border-left: 1px solid var(--button-light);
         display: grid;
         grid-template-columns: 22px auto auto 19px;
         padding: 1px;
@@ -79,30 +79,34 @@ class Menu extends LitElement {
         padding-left: 9px;
       }
 
+      .menu-entry span {
+        fill: var(--button-text);
+      }
+
       .menu-entry:hover span {
         background-color: var(--highlight);
         color: var(--highlight-text);
         fill: var(--highlight-text);
-        text-shadow: none;
       }
 
       .menu-entry.disabled:hover span {
-        color: var(--canvas);
-        fill: var(--canvas);
+        color: var(--highlight-disabled-text);
+        fill: var(--highlight-disabled-text);
+        text-shadow: none;
       }
 
       .menu-entry.disabled:hover svg .shadow {
         fill: transparent;
       }
 
-      .disabled {
-        color: var(--canvas);
-        fill: var(--canvas);
-        text-shadow: 1px 1px 0 var(--highlight-text);
+      .menu-entry.disabled span {
+        color: var(--disabled-text);
+        fill: var(--disabled-text);
+        text-shadow: 1px 1px 0 var(--disabled-text-backdrop);
       }
 
       .disabled svg .shadow {
-        fill: var(--highlight-text);
+        fill: var(--disabled-text-backdrop);
       }
     `;
   }

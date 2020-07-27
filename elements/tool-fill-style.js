@@ -44,7 +44,7 @@ export class ToolFillStyle extends LitElement {
       }
 
       li .item.fill {
-        background-color: var(--canvas);
+        background-color: var(--button-dark);
       }
     `;
   }

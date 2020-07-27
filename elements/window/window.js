@@ -13,8 +13,8 @@ export class Window extends LitElement {
     return css`
       :host {
         border: 1px solid var(--button-face);
-        border-right-color: var(--button-text);
-        border-bottom-color: var(--button-text);
+        border-right-color: var(--button-darker);
+        border-bottom-color: var(--button-darker);
         background-color: var(--button-face);
         display: flex;
         position: absolute;
@@ -22,9 +22,9 @@ export class Window extends LitElement {
       }
 
       .wrapper {
-        border: 1px solid var(--highlight-text);
-        border-right-color: var(--canvas);
-        border-bottom-color: var(--canvas);
+        border: 1px solid var(--button-light);
+        border-right-color: var(--button-dark);
+        border-bottom-color: var(--button-dark);
         padding: 1px;
         flex: 1;
         display: flex;

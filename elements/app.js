@@ -19,11 +19,18 @@ class App extends LitElement {
     return css`
       :host {
         --button-face: rgb(192 192 192);
-        --canvas: rgb(128 128 128);
+        --button-light: white;
+        --button-dark: rgb(128 128 128);
+        --button-darker: black;
         --button-text: black;
+        --canvas: rgb(128 128 128);
+        --disabled-text: rgb(128 128 128);
         --highlight: rgb(0 0 128);
         --highlight-text: white;
+        --highlight-disabled-text: rgb(128 128 128);
+        --disabled-text-backdrop: white;
         --selected-background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAAAAABX3VL4AAAADklEQVQIHWP4f4DhwH8ACoADf16N/DIAAAAASUVORK5CYII=');
+
         --z-index-menu: 10;
         --z-index-dialog: 20;
 
@@ -42,6 +49,22 @@ class App extends LitElement {
         cursor: default;
 
         -webkit-tap-highlight-color: transparent;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :host {
+          --button-face: rgb(64 64 64);
+          --button-light: rgb(128 128 128);
+          --button-dark: rgb(32 32 32);
+          --button-text: white;
+          --canvas: rgb(32 32 32);
+          --disabled-text: rgb(64 64 64);
+          --highlight: rgb(0 0 128);
+          --highlight-text: white;
+          --highlight-disabled-text: rgb(128 128 128);
+          --disabled-text-backdrop: rgb(192 192 192);
+          --selected-background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAAAAABX3VL4AAAADklEQVQIHWNocGBwaAAABIYBga3c92oAAAAASUVORK5CYII=');
+        }
       }
 
       @media print {

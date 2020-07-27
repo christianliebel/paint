@@ -14,9 +14,9 @@ export class TitleBarButton extends LitElement {
         box-sizing: border-box;
         width: 16px;
         height: 14px;
-        border: 1px solid var(--highlight-text);
-        border-bottom-color: var(--button-text);
-        border-right-color: var(--button-text);
+        border: 1px solid var(--button-light);
+        border-bottom-color: var(--button-darker);
+        border-right-color: var(--button-darker);
         background-color: var(--button-face);
       }
 
@@ -24,16 +24,16 @@ export class TitleBarButton extends LitElement {
         box-sizing: border-box;
         height: 12px;
         border: 1px solid transparent;
-        border-bottom-color: var(--canvas);
-        border-right-color: var(--canvas);
+        border-bottom-color: var(--button-dark);
+        border-right-color: var(--button-dark);
         display: flex;
         justify-content: center;
       }
 
       :host(:active) {
-        border: 1px solid var(--button-text);
-        border-bottom-color: var(--highlight-text);
-        border-right-color: var(--highlight-text);
+        border: 1px solid var(--button-darker);
+        border-bottom-color: var(--button-light);
+        border-right-color: var(--button-light);
       }
 
       :host(:active) div.wrapper {

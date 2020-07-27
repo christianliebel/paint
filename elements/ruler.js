@@ -5,8 +5,8 @@ class Ruler extends LitElement {
     return css`
       :host {
         display: block;
-        border-top: 1px solid var(--canvas);
-        border-bottom: 1px solid var(--highlight-text);
+        border-top: 1px solid var(--button-dark);
+        border-bottom: 1px solid var(--button-light);
       }
     `;
   }

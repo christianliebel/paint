@@ -40,6 +40,10 @@ export class About extends LitElement {
         margin-right: 1px;
         float: right;
       }
+
+      a {
+        color: var(--button-text);
+      }
     `;
   }
 

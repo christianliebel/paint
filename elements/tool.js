@@ -14,42 +14,60 @@ class Tool extends LitElement {
         box-sizing: border-box;
         width: 25px;
         height: 25px;
-        border: 1px solid var(--button-text);
-        border-top: 1px solid var(--highlight-text);
-        border-left: 1px solid var(--highlight-text);
+        border: 1px solid var(--button-darker);
+        border-top: 1px solid var(--button-light);
+        border-left: 1px solid var(--button-light);
         background-color: var(--button-face);
-        image-rendering: pixelated;
       }
 
-      div {
-        box-sizing: border-box;
+      div.wrapper {
         height: 100%;
-        border: 1px solid var(--canvas);
+        border: 1px solid var(--button-dark);
         border-top: 1px solid var(--button-face);
         border-left: 1px solid var(--button-face);
-        background-position: 2px 2px;
+      }
+
+      div.tool {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        image-rendering: pixelated;
+        background-image: url('assets/tools-light.png');
         background-repeat: no-repeat;
+        margin: 2px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        div.tool {
+          background-image: url('assets/tools-dark.png');
+        }
       }
 
       :host(.active),
       :host(:active) {
-        border: 1px solid var(--highlight-text);
-        border-top: 1px solid var(--button-text);
-        border-left: 1px solid var(--button-text);
-        background: var(--selected-background);
+        border: 1px solid var(--button-light);
+        border-top: 1px solid var(--button-darker);
+        border-left: 1px solid var(--button-darker);
+        background-image: var(--selected-background);
       }
 
-      :host(.active) div,
-      :host(:active) div {
+      :host(.active) div.wrapper,
+      :host(:active) div.wrapper {
         border: 1px solid var(--button-face);
-        border-top: 1px solid var(--canvas);
-        border-left: 1px solid var(--canvas);
-        background-position: 3px 3px;
+        border-top: 1px solid var(--button-dark);
+        border-left: 1px solid var(--button-dark);
       }
 
-      :host(:active) div {
+      :host(:active) div.wrapper {
         background-color: var(--button-face);
-        background-position: 4px 4px;
+      }
+
+      :host(.active) div.tool {
+        margin: 3px;
+      }
+
+      :host(:active) div.tool {
+        margin: 4px;
       }
     `;
   }
@@ -74,7 +92,12 @@ class Tool extends LitElement {
 
   render() {
     return html`
-      <div style="background-image: url('${this.tool.image}')"></div>
+      <div class="wrapper">
+        <div
+          class="tool"
+          style="background-position: ${this.tool.imagePosition}"
+        ></div>
+      </div>
     `;
   }
 }

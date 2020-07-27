@@ -35,6 +35,12 @@ class StatusBar extends LitElement {
         margin-right: 3px;
         image-rendering: pixelated;
       }
+
+      @media (prefers-color-scheme: dark) {
+        img {
+          filter: invert(1);
+        }
+      }
     `;
   }
 
