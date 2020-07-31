@@ -2,15 +2,12 @@
 const e="chooseFileSystemEntries"in self?"chooseFileSystemEntries":"showOpenFilePicker"in self&&"showOpenFilePicker";
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const t=e?"chooseFileSystemEntries"===e?import('./common/file-open-nativefs-a9b57b6b.js'):import('./common/file-open-nativefs-539a2c46.js'):import('./common/file-open-legacy-37886591.js');async function fileOpen(...e){return (await t).default(...e)}
+const t=e?"chooseFileSystemEntries"===e?import('./common/file-open-fac3d0b1.js'):import('./common/file-open-6ce9eb2c.js'):import('./common/file-open-f9a5f1c4.js');async function fileOpen(...e){return (await t).default(...e)}
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const t$1=e?"chooseFileSystemEntries"===e?import('./common/directory-open-nativefs-edd3f2a1.js'):import('./common/directory-open-nativefs-20e5d376.js'):import('./common/directory-open-legacy-aed60324.js');async function directoryOpen(...e){return (await t$1).default(...e)}
+const t$1=e?"chooseFileSystemEntries"===e?import('./common/directory-open-7bae6a7f.js'):import('./common/directory-open-eb3669c5.js'):import('./common/directory-open-50706e94.js');async function directoryOpen(...e){return (await t$1).default(...e)}
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const s=e?"chooseFileSystemEntries"===e?import('./common/file-save-nativefs-2c1b0849.js'):import('./common/file-save-nativefs-403dc0ac.js'):import('./common/file-save-legacy-df95654f.js');async function fileSave(...e){return (await s).default(...e)}
+const s=e?"chooseFileSystemEntries"===e?import('./common/file-save-15adb038.js'):import('./common/file-save-3e74be39.js'):import('./common/file-save-70a78426.js');async function fileSave(...e){return (await s).default(...e)}
 
-// @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const t$2=async t=>new Promise(e=>{const a=document.createElement("canvas");a.width=t.naturalWidth,a.height=t.naturalHeight;a.getContext("2d").drawImage(t,0,0),a.toBlob(t=>{e(t);});});
-
-export { directoryOpen, fileOpen, fileSave, t$2 as imageToBlob };
+export { directoryOpen, fileOpen, fileSave };
