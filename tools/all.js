@@ -6,6 +6,7 @@ import { RectangleTool } from './rectangle.js';
 import { LineTool } from './line.js';
 import { SelectTool } from './select.js';
 import { EraserTool } from './eraser.js';
+import { EllipseTool } from './ellipse.js';
 
 export const FREE_FORM_SELECT = {
   tooltip: 'Free-Form Select',
@@ -106,6 +107,7 @@ export const ELLIPSE = {
   tooltip: 'Ellipse',
   helpText: 'Draws an ellipse with the selected fill style.',
   imagePosition: '-224px 0',
+  instance: new EllipseTool(),
 };
 
 export const ROUNDED_RECTANGLE = {
