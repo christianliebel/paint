@@ -1,4 +1,4 @@
-import bresenhamLine from '../web_modules/bresenham-line.js';
+import { line } from '../web_modules/bresenham-zingl.js';
 
 export class BrushTool {
   onPointerHover(x, y, { canvas, previewContext }, color) {
@@ -14,9 +14,9 @@ export class BrushTool {
   }
 
   onPointerMove(x, y, { context }) {
-    for (let point of bresenhamLine(this.previous, { x, y })) {
-      context.fillRect(point.x - 2, point.y - 2, 5, 5);
-    }
+    line(this.previous.x, this.previous.y, x, y, (x, y) => {
+      context.fillRect(x - 2, y - 2, 5, 5);
+    });
     this.previous = { x, y };
   }
 }

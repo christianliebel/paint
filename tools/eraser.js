@@ -1,4 +1,4 @@
-import bresenhamLine from '../web_modules/bresenham-line.js';
+import { line } from '../web_modules/bresenham-zingl.js';
 
 export class EraserTool {
   onPointerHover(x, y, { canvas, previewContext, eraserSize, colors }) {
@@ -6,10 +6,10 @@ export class EraserTool {
 
     if (x > 0 && x < canvas.width && y > 0 && y < canvas.height) {
       previewContext.fillStyle = 'black';
-      previewContext.fillRect(...this.getFillRectArgs({ x, y }, eraserSize));
+      previewContext.fillRect(...this.getFillRectArgs(x, y, eraserSize));
       previewContext.fillStyle = colors.secondary;
       previewContext.fillRect(
-        ...this.getFillRectArgs({ x, y }, eraserSize - 2),
+        ...this.getFillRectArgs(x, y, eraserSize - 2),
       );
     }
   }
@@ -21,13 +21,13 @@ export class EraserTool {
 
   onPointerMove(x, y, { eraserSize, context }) {
     // TODO: Color eraser
-    for (let point of bresenhamLine(this.previous, { x, y })) {
-      context.fillRect(...this.getFillRectArgs(point, eraserSize));
-    }
+    line(this.previous.x, this.previous.y, x, y, (x, y) => {
+      context.fillRect(...this.getFillRectArgs(x, y, eraserSize));
+    });
     this.previous = { x, y };
   }
 
-  getFillRectArgs({ x, y }, eraserSize) {
+  getFillRectArgs(x, y, eraserSize) {
     return [x - eraserSize / 2, y - eraserSize / 2, eraserSize, eraserSize];
   }
 }

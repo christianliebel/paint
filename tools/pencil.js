@@ -1,4 +1,4 @@
-import bresenhamLine from '../web_modules/bresenham-line.js';
+import { line } from '../web_modules/bresenham-zingl.js';
 
 export class PencilTool {
   onPointerDown(x, y, { context }, color) {
@@ -8,9 +8,9 @@ export class PencilTool {
   }
 
   onPointerMove(x, y, { context }) {
-    for (let point of bresenhamLine(this.previous, { x, y })) {
-      context.fillRect(point.x, point.y, 1, 1);
-    }
+    line(this.previous.x, this.previous.y, x, y, (x, y) => {
+      context.fillRect(x, y, 1, 1);
+    });
     this.previous = { x, y };
   }
 }

@@ -1,4 +1,4 @@
-import bresenhamLine from '../web_modules/bresenham-line.js';
+import { line } from '../web_modules/bresenham-zingl.js';
 
 export class RectangleTool {
   onPointerDown(x, y) {
@@ -77,12 +77,10 @@ export class RectangleTool {
   getPointsForLine(x1, y1, x2, y2, lineWidth) {
     const points = [];
     for (let i = 0; i < lineWidth; i++) {
-      points.push(
-        ...bresenhamLine({ x: x1 + i, y: y1 + i }, { x: x2, y: y1 + i }),
-        ...bresenhamLine({ x: x1 + i, y: y1 + i }, { x: x1 + i, y: y2 }),
-        ...bresenhamLine({ x: x2 - i, y: y2 - i }, { x: x2 - i, y: y1 }),
-        ...bresenhamLine({ x: x2 - i, y: y2 - i }, { x: x1, y: y2 - i }),
-      );
+      line(x1 + i, y1 + i, x2, y1 + i, (x, y) => points.push({x, y}));
+      line(x1 + i, y1 + i, x1 + i, y2, (x, y) => points.push({x, y}));
+      line(x2 - i, y2 - i, x2 - i, y1, (x, y) => points.push({x, y}));
+      line(x2 - i, y2 - i, x1, y2 - i, (x, y) => points.push({x, y}));
     }
     return points;
   }
