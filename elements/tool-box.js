@@ -93,7 +93,11 @@ class ToolBox extends LitElement {
       ></paint-tool-line-width>`;
     }
 
-    if ([RECTANGLE, /* ELLIPSE, */ POLYGON, ROUNDED_RECTANGLE, TEXT].includes(tool)) {
+    if (
+      [RECTANGLE, /* ELLIPSE, */ POLYGON, ROUNDED_RECTANGLE, TEXT].includes(
+        tool,
+      )
+    ) {
       return html`<paint-tool-fill-style
         .drawingContext="${this.drawingContext}"
       ></paint-tool-fill-style>`;

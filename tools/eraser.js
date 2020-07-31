@@ -14,9 +14,10 @@ export class EraserTool {
     }
   }
 
-  onPointerDown(x, y, { context, colors: { secondary } }) {
+  onPointerDown(x, y, { context, eraserSize, colors: { secondary } }) {
     context.fillStyle = secondary;
     this.previous = { x, y };
+    context.fillRect(...this.getFillRectArgs(x, y, eraserSize));
   }
 
   onPointerMove(x, y, { eraserSize, context }) {

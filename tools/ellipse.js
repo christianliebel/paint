@@ -15,7 +15,7 @@ export class EllipseTool {
   }
 
   drawEllipse(x, y, canvas, targetContext, previewContext) {
-    // TODO: Fill style
+    // TODO: Fill styles, no anti-alias
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
       targetContext.fillRect(x, y, 1, 1);
