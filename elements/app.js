@@ -1,7 +1,7 @@
 import { css, html, LitElement } from '../web_modules/lit-element.js';
 import { menus } from '../menus/all.js';
 import hotkeys from '../web_modules/hotkeys-js.js';
-import { PENCIL } from '../tools/all.js';
+import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
@@ -127,63 +127,7 @@ class App extends LitElement {
     this.areaText = '';
     this.coordinateText = '';
     this.helpText = defaultHelpText;
-    this.drawingContext = {
-      lineWidth: 1,
-      colors: {
-        primary: '#000000',
-        secondary: '#FFFFFF',
-      },
-      palette: [
-        '#000000', // black
-        '#808080', // gray
-        '#800000', // maroon
-        '#808000', // olive
-        '#008000', // green
-        '#008080', // teal
-        '#000080', // navy
-        '#800080', // purple
-        '#808040',
-        '#004040',
-        '#0080FF',
-        '#004080',
-        '#4000FF',
-        '#804000',
-        '#FFFFFF', // white
-        '#C0C0C0', // silver
-        '#FF0000', // red
-        '#FFFF00', // yellow
-        '#00FF00', // lime
-        '#00FFFF', // aqua
-        '#0000FF', // blue
-        '#FF00FF', // fuchsia
-        '#FFFF80',
-        '#00FF80',
-        '#80FFFF',
-        '#8080FF',
-        '#FF0080',
-        '#FF8040',
-      ],
-      previewColor: null,
-      drawOpaque: true,
-      eraserSize: 8,
-      magnifierSize: null,
-      brushType: null,
-      airbrushSize: null,
-      fillStyle: {
-        stroke: true,
-        fill: false,
-      },
-      tool: PENCIL,
-      selection: null,
-      view: {
-        statusBar: true,
-        colorBox: true,
-        toolBox: true,
-      },
-      document: {
-        title: 'untitled',
-      },
-    };
+    this.drawingContext = DRAWING_CONTEXT;
     this.addEventListener(
       'set-help-text',
       (event) => (this.helpText = event.detail ?? defaultHelpText),
@@ -238,7 +182,7 @@ class App extends LitElement {
   }
 
   render() {
-    document.title = `${this.drawingContext.title} - Paint`;
+    document.title = `${this.drawingContext.document.title} - Paint`;
     return html`
       <paint-menu-bar
         .entries="${menus}"
