@@ -76,7 +76,7 @@ export class About extends LitElement {
               href="3rdpartylicenses.txt"
               target="_blank"
               rel="noopener noreferrer"
-              >Made possible by third party software</a
+              >Made possible by third-party software</a
             ><br />
             <br />
             <br />
