@@ -116,7 +116,9 @@ class ToolBox extends LitElement {
     }
 
     if (BRUSH === tool) {
-      return html`TBD`;
+      return html`<paint-tool-brush
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-brush>`;
     }
 
     if (AIRBRUSH === tool) {
