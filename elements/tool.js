@@ -18,6 +18,7 @@ class Tool extends LitElement {
         border-top: 1px solid var(--button-light);
         border-left: 1px solid var(--button-light);
         background-color: var(--button-face);
+        image-rendering: pixelated;
       }
 
       div.wrapper {
@@ -25,13 +26,13 @@ class Tool extends LitElement {
         border: 1px solid var(--button-dark);
         border-top: 1px solid var(--button-face);
         border-left: 1px solid var(--button-face);
+        box-sizing: border-box;
       }
 
       div.tool {
         display: inline-block;
         width: 16px;
         height: 16px;
-        image-rendering: pixelated;
         background-image: url('assets/tools-light.png');
         background-repeat: no-repeat;
         margin: 2px;
