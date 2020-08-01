@@ -77,10 +77,10 @@ export class RectangleTool {
   getPointsForLine(x1, y1, x2, y2, lineWidth) {
     const points = [];
     for (let i = 0; i < lineWidth; i++) {
-      line(x1 + i, y1 + i, x2, y1 + i, (x, y) => points.push({x, y}));
-      line(x1 + i, y1 + i, x1 + i, y2, (x, y) => points.push({x, y}));
-      line(x2 - i, y2 - i, x2 - i, y1, (x, y) => points.push({x, y}));
-      line(x2 - i, y2 - i, x1, y2 - i, (x, y) => points.push({x, y}));
+      line(x1 + i, y1 + i, x2, y1 + i, (x, y) => points.push({ x, y }));
+      line(x1 + i, y1 + i, x1 + i, y2, (x, y) => points.push({ x, y }));
+      line(x2 - i, y2 - i, x2 - i, y1, (x, y) => points.push({ x, y }));
+      line(x2 - i, y2 - i, x1, y2 - i, (x, y) => points.push({ x, y }));
     }
     return points;
   }

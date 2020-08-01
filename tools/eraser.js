@@ -8,9 +8,7 @@ export class EraserTool {
       previewContext.fillStyle = 'black';
       previewContext.fillRect(...this.getFillRectArgs(x, y, eraserSize));
       previewContext.fillStyle = colors.secondary;
-      previewContext.fillRect(
-        ...this.getFillRectArgs(x, y, eraserSize - 2),
-      );
+      previewContext.fillRect(...this.getFillRectArgs(x, y, eraserSize - 2));
     }
   }
 
