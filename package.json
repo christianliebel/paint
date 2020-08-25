@@ -31,7 +31,7 @@
     "eslint-config-prettier": "^6.11.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.0",
     "snowpack": "^2.9.0",
     "workbox-cli": "^5.1.3"
   },
