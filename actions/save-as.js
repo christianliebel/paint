@@ -5,7 +5,7 @@ export class SaveAsAction {
     // TODO: File name from document context
     canvas.toBlob(
       (blob) =>
-        fileSave(blob, { fileName: 'Untitled.png', extensions: ['png'] }),
+        fileSave(blob, { fileName: 'Untitled.png', extensions: ['.png'] }),
       'image/png',
     );
     // TODO: Update document context with saved file

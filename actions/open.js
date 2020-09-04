@@ -3,7 +3,7 @@ import { getImageFromBlob } from '../helpers/get-image-from-blob.js';
 
 export class OpenAction {
   async execute({ canvas, previewCanvas, context }) {
-    const file = await fileOpen({ extensions: ['png'] });
+    const file = await fileOpen({ extensions: ['.png'] });
     const image = await getImageFromBlob(file);
     canvas.width = previewCanvas.width = image.width;
     canvas.height = previewCanvas.height = image.height;
