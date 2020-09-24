@@ -22,7 +22,7 @@ This project demonstrates the use of:
 - [Web Components](https://www.webcomponents.org/introduction), the native component model of the web (via [lit-element](https://lit-element.polymer-project.org/))
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) for offline capability (via [Workbox](https://developers.google.com/web/tools/workbox))
 - [Web App Manifest](https://github.com/w3c/manifest) for installability
-- [Native File System API](https://web.dev/native-file-system/) for file system access (via [browser-nativefs](https://github.com/GoogleChromeLabs/browser-nativefs))
+- [File System Access API](https://web.dev/native-file-system/) for file system access (via [browser-nativefs](https://github.com/GoogleChromeLabs/browser-nativefs))
 - [Async Clipboard API](https://web.dev/image-support-for-async-clipboard/) for clipboard access
 - [Web Share API Level 2](https://web.dev/web-share/#sharing-files) for sharing images to other applications via _File > Send…_
 - [StorageManager API](https://web.dev/storage-for-the-web/#check) for estimating storage usage in _Help > About Paint_
