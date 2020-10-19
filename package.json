@@ -32,7 +32,7 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
-    "snowpack": "^2.14.1",
+    "snowpack": "^2.14.3",
     "workbox-cli": "^5.1.4"
   },
   "husky": {
