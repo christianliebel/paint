@@ -8,5 +8,11 @@
     "icons": [{
         "src": "assets/icon.png",
         "sizes": "196x196"
+    }],
+    "file_handlers": [{
+        "action": "/",
+        "accept": {
+            "image/png": [".png"]
+        }
     }]
 }

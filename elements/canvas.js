@@ -148,6 +148,8 @@ class Canvas extends LitElement {
       this.onPointerMove(event),
     );
     document.addEventListener('pointerup', (event) => this.onPointerUp(event));
+
+    this.dispatchEvent(new CustomEvent('canvas-ready', { bubbles: true, composed: true }));
   }
 
   getToolEventArgs(x, y) {

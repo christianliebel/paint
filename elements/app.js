@@ -2,6 +2,7 @@ import { css, html, LitElement } from '../web_modules/lit-element.js';
 import { menus } from '../menus/all.js';
 import hotkeys from '../web_modules/hotkeys-js.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { getLaunchImage } from '../helpers/file-handling-api.js';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
@@ -152,6 +153,9 @@ class App extends LitElement {
     );
     this.addEventListener('invoke-action', (event) =>
       event.detail(this.drawingContext),
+    );
+    this.addEventListener('canvas-ready', (event) =>
+      getLaunchImage(this.drawingContext),
     );
     this.registerHotkeys(menus);
   }
