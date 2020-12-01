@@ -33,7 +33,7 @@
     "lint-staged": "^10.5.2",
     "prettier": "^2.2.1",
     "snowpack": "^2.17.1",
-    "workbox-cli": "^5.1.4"
+    "workbox-cli": "^6.0.0"
   },
   "husky": {
     "hooks": {
