@@ -22,7 +22,7 @@
   "dependencies": {
     "bresenham-zingl": "^0.1.1",
     "browser-nativefs": "^0.12.0",
-    "hotkeys-js": "^3.8.1",
+    "hotkeys-js": "^3.8.2",
     "lit-element": "^2.4.0",
     "q-floodfill": "^1.3.1"
   },
