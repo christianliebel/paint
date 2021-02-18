@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "bresenham-zingl": "./bresenham-zingl.js",
+    "browser-fs-access": "./browser-fs-access.js",
+    "hotkeys-js": "./hotkeys-js.js",
+    "lit-element": "./lit-element.js",
+    "q-floodfill": "./q-floodfill.js"
+  }
+}
