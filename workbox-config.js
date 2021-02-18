@@ -1,16 +1,8 @@
 module.exports = {
-  globDirectory: '.',
-  globPatterns: [
-    '**/*.css',
-    '**/*.html',
-    '**/*.js',
-    'assets/*.png',
-    'manifest.webmanifest',
-    'favicon.ico',
-    '3rdpartylicenses.txt',
+  "globDirectory": "build/",
+  "globPatterns": [
+    "**/*.{js,json,txt,png,ico,html,webmanifest,css}"
   ],
-  globIgnores: ['sw.js', 'workbox*.js', 'node_modules/**', 'docs/**'],
-  swDest: 'sw.js',
-  skipWaiting: true,
-  sourcemap: false,
+  "skipWaiting": true,
+  "swDest": "build/sw.js"
 };
