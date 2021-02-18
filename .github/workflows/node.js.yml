@@ -29,15 +29,15 @@ jobs:
         run: npm run build
 
       - name: Generate Service Worker
-        if: github.ref == 'ref/head/main'
+        if: github.ref == 'refs/heads/main'
         run: npm run generate-sw
 
       - name: Add .nojekyll file
-        if: github.ref == 'ref/head/main'
+        if: github.ref == 'refs/heads/main'
         run: touch build/.nojekyll
 
       - name: Deploy
-        if: github.ref == 'ref/head/main'
+        if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
