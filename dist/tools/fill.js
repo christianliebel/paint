@@ -4,7 +4,7 @@ export class FillTool {
     canvas,
     context
   }, color) {
-    const floodFill = new FloodFill.default(context.getImageData(0, 0, canvas.width, canvas.height));
+    const floodFill = new FloodFill(context.getImageData(0, 0, canvas.width, canvas.height));
     floodFill.fill(color.stroke.value, x, y, 0);
     context.putImageData(floodFill.imageData, 0, 0);
   }
