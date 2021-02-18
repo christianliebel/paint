@@ -22,7 +22,7 @@ This project demonstrates the use of:
 - [Web Components](https://www.webcomponents.org/introduction), the native component model of the web (via [lit-element](https://lit-element.polymer-project.org/))
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) for offline capability (via [Workbox](https://developers.google.com/web/tools/workbox))
 - [Web App Manifest](https://github.com/w3c/manifest) for installability
-- [File System Access API](https://web.dev/native-file-system/) for file system access (via [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access))
+- [File System Access API](https://web.dev/file-system-access/) for file system access (via [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access))
 - [File Handling API](https://web.dev/file-handling/) for registering as a handler for *.png files
 - [Async Clipboard API](https://web.dev/image-support-for-async-clipboard/) for clipboard access
 - [Web Share API Level 2](https://web.dev/web-share/#sharing-files) for sharing images to other applications via _File > Send…_
