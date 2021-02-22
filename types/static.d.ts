@@ -57,3 +57,50 @@ declare module '*.png' {
 }
 
 /* CUSTOM: ADD YOUR OWN HERE */
+
+declare module 'bresenham-zingl' {
+  export function line(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => any);
+  export function ellipseRect(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => any);
+}
+
+// Type declarations for Clipboard API
+// https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
+interface Clipboard {
+  write(items: ClipboardItem[]): Promise<any>;
+  read(): Promise<ClipboardItem[]>;
+}
+
+declare const ClipboardItem: {
+  new(item: { [key: string]: Blob }): ClipboardItem;
+}
+
+interface ClipboardItem {
+  types: string[];
+  getType(type: string): Promise<Blob>;
+}
+
+// Type declarations for File Handling API
+interface FileSystemFileHandle {
+  getFile(): Promise<File>;
+}
+
+interface LaunchParams {
+  files: FileSystemFileHandle[];
+}
+
+interface LaunchQueue {
+  setConsumer(consumer: (launchParams: LaunchParams) => any): void;
+}
+
+interface Window {
+  launchQueue: LaunchQueue;
+}
+
+// Type declarations for Web Share API + Files ("Level 2")
+interface ShareData {
+  files?: File[];
+}
+
+interface Navigator {
+  canShare?: (data?: ShareData) => boolean;
+}
