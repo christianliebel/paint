@@ -1,5 +1,14 @@
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
 export class RectangleTool {
+  constructor() {
+    _defineProperty(this, "startPosition", {
+      x: 0,
+      y: 0
+    });
+  }
+
   onPointerDown(x, y) {
     this.startPosition = {
       x,
@@ -13,7 +22,9 @@ export class RectangleTool {
     fillStyle,
     previewContext
   }, color) {
-    this.drawRectangle(x, y, previewContext, previewContext, fillStyle, lineWidth, canvas, color);
+    if (canvas && previewContext) {
+      this.drawRectangle(x, y, previewContext, previewContext, fillStyle, lineWidth, canvas, color);
+    }
   }
 
   onPointerUp(x, y, {
@@ -23,15 +34,17 @@ export class RectangleTool {
     fillStyle,
     previewContext
   }, color) {
-    this.drawRectangle(x, y, context, previewContext, fillStyle, lineWidth, canvas, color);
+    if (canvas && context && previewContext) {
+      this.drawRectangle(x, y, context, previewContext, fillStyle, lineWidth, canvas, color);
+    }
   }
 
   drawRectangle(x, y, targetContext, previewContext, fillStyle, lineWidth, canvas, color) {
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
-    let x1 = Math.min(this.startPosition.x, x);
-    let x2 = Math.max(this.startPosition.x, x);
-    let y1 = Math.min(this.startPosition.y, y);
-    let y2 = Math.max(this.startPosition.y, y);
+    const x1 = Math.min(this.startPosition.x, x);
+    const x2 = Math.max(this.startPosition.x, x);
+    const y1 = Math.min(this.startPosition.y, y);
+    const y2 = Math.max(this.startPosition.y, y);
     const width = Math.abs(x2 - x1);
     const height = Math.abs(y2 - y1);
 

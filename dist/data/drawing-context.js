@@ -25,12 +25,12 @@ export const DRAWING_CONTEXT = {
   previewColor: null,
   drawOpaque: true,
   eraserSize: 8,
-  magnifierSize: null,
+  magnifierSize: -1,
   brush: {
     type: 'circle',
     size: 4
   },
-  airbrushSize: null,
+  airbrushSize: -1,
   fillStyle: {
     stroke: true,
     fill: false
@@ -44,5 +44,10 @@ export const DRAWING_CONTEXT = {
   },
   document: {
     title: 'untitled'
-  }
+  },
+  element: null,
+  previewCanvas: null,
+  previewContext: null,
+  canvas: null,
+  context: null
 };

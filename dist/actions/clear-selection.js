@@ -10,7 +10,7 @@ export class ClearSelectionAction {
     context,
     colors
   }) {
-    if (selection) {
+    if (selection && context) {
       context.fillStyle = colors.secondary;
       const {
         x,

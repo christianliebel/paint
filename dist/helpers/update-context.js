@@ -1,5 +1,5 @@
 export function updateContext(element) {
-  element.dispatchEvent(new CustomEvent('drawing-context-changed', {
+  element?.dispatchEvent(new CustomEvent('drawing-context-changed', {
     detail: { ...element.drawingContext
     },
     bubbles: true,

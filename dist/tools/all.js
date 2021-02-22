@@ -68,14 +68,12 @@ export const LINE = {
   tooltip: 'Line',
   helpText: 'Draws a straight line with the selected line width.',
   imagePosition: '-160px 0',
-  instance: new LineTool(),
-  detailsSelector: 'paint-tool-line-width'
+  instance: new LineTool()
 };
 export const CURVE = {
   tooltip: 'Curve',
   helpText: 'Draws a curved line with the selected line width.',
-  imagePosition: '-176px 0',
-  detailsSelector: 'paint-tool-line-width'
+  imagePosition: '-176px 0'
 };
 export const RECTANGLE = {
   tooltip: 'Rectangle',

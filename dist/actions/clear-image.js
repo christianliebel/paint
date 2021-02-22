@@ -10,8 +10,10 @@ export class ClearImageAction {
     context,
     colors
   }) {
-    context.fillStyle = colors.secondary;
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    if (canvas && context) {
+      context.fillStyle = colors.secondary;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    }
   }
 
 }

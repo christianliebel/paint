@@ -1,3 +1,4 @@
+import { toBlob } from './to-blob.js';
 export async function getBlobFromSelection(context, {
   x,
   y,
@@ -8,6 +9,6 @@ export async function getBlobFromSelection(context, {
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
-  canvas.getContext('2d').putImageData(selectionData, 0, 0);
-  return new Promise(res => canvas.toBlob(res));
+  canvas.getContext('2d')?.putImageData(selectionData, 0, 0);
+  return toBlob(canvas);
 }

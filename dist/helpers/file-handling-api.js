@@ -4,9 +4,8 @@ export function getLaunchImage({
   previewCanvas,
   context
 }) {
-  if ('launchQueue' in window) {
-    // eslint-disable-next-line no-undef
-    launchQueue.setConsumer(async params => {
+  if ('launchQueue' in window && canvas && previewCanvas && context) {
+    window.launchQueue.setConsumer(async params => {
       const [handle] = params.files;
 
       if (handle) {

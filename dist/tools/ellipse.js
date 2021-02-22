@@ -1,21 +1,34 @@
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 import { ellipseRect } from '../../_snowpack/pkg/bresenham-zingl.js';
 export class EllipseTool {
+  constructor() {
+    _defineProperty(this, "startPosition", {
+      x: 0,
+      y: 0
+    });
+  }
+
   onPointerDown(x, y, {
     previewContext,
     context
   }, color) {
-    this.startPosition = {
-      x,
-      y
-    };
-    context.fillStyle = previewContext.fillStyle = color.stroke.value;
+    if (context && previewContext) {
+      this.startPosition = {
+        x,
+        y
+      };
+      context.fillStyle = previewContext.fillStyle = color.stroke.value;
+    }
   }
 
   onPointerMove(x, y, {
     canvas,
     previewContext
   }) {
-    this.drawEllipse(x, y, canvas, previewContext, previewContext);
+    if (canvas && previewContext) {
+      this.drawEllipse(x, y, canvas, previewContext, previewContext);
+    }
   }
 
   onPointerUp(x, y, {
@@ -23,7 +36,9 @@ export class EllipseTool {
     context,
     previewContext
   }) {
-    this.drawEllipse(x, y, canvas, context, previewContext);
+    if (canvas && context && previewContext) {
+      this.drawEllipse(x, y, canvas, context, previewContext);
+    }
   }
 
   drawEllipse(x, y, canvas, targetContext, previewContext) {

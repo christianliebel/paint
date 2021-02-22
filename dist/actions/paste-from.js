@@ -4,10 +4,12 @@ export class PasteFromAction {
   async execute({
     context
   }) {
-    // TODO: Paste to selection
-    const blob = await fileOpen();
-    const image = await getImageFromBlob(blob, context);
-    context.drawImage(image, 0, 0);
+    if (context) {
+      // TODO: Paste to selection
+      const blob = await fileOpen();
+      const image = await getImageFromBlob(blob);
+      context.drawImage(image, 0, 0);
+    }
   }
 
 }

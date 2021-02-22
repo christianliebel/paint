@@ -1,18 +1,22 @@
 import { updateContext } from '../helpers/update-context.js';
 export class PickTool {
-  onPointerDown(...args) {
-    this.onPointerMove(...args);
+  onPointerDown(x, y, drawingContext) {
+    this.onPointerMove(x, y, drawingContext);
   }
 
   onPointerMove(x, y, drawingContext) {
-    drawingContext.previewColor = this.pickColor(x, y, drawingContext.context);
-    updateContext(drawingContext.element);
+    if (drawingContext.context) {
+      drawingContext.previewColor = this.pickColor(x, y, drawingContext.context);
+      updateContext(drawingContext.element);
+    }
   }
 
   onPointerUp(x, y, drawingContext, color) {
-    drawingContext.previewColor = null;
-    drawingContext.colors[color.stroke.key] = this.pickColor(x, y, drawingContext.context);
-    updateContext(drawingContext.element);
+    if (drawingContext.context) {
+      drawingContext.previewColor = null;
+      drawingContext.colors[color.stroke.key] = this.pickColor(x, y, drawingContext.context);
+      updateContext(drawingContext.element);
+    }
   }
 
   pickColor(x, y, context) {

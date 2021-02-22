@@ -1,51 +1,66 @@
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 import { drawCircle } from '../helpers/draw-circle.js';
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
 export class BrushTool {
+  constructor() {
+    _defineProperty(this, "previous", {
+      x: 0,
+      y: 0
+    });
+  }
+
   onPointerHover(x, y, {
     canvas,
     brush,
     previewContext
   }, color) {
-    previewContext.clearRect(0, 0, canvas.width, canvas.height);
-    previewContext.fillStyle = color.stroke.value;
-    this.drawBrush(x, y, brush, previewContext);
+    if (canvas && previewContext) {
+      previewContext.clearRect(0, 0, canvas.width, canvas.height);
+      previewContext.fillStyle = color.stroke.value;
+      this.drawBrush(x, y, brush, previewContext);
+    }
   }
 
   onPointerDown(x, y, {
     brush,
     context
   }, color) {
-    context.fillStyle = color.stroke.value;
-    this.drawBrush(x, y, brush, context);
-    this.previous = {
-      x,
-      y
-    };
+    if (context) {
+      context.fillStyle = color.stroke.value;
+      this.drawBrush(x, y, brush, context);
+      this.previous = {
+        x,
+        y
+      };
+    }
   }
 
   onPointerMove(x, y, {
     brush,
     context
   }) {
-    let previousBresenham = { ...this.previous
-    };
-    line(this.previous.x, this.previous.y, x, y, (x, y) => {
-      // Position difference is required for forward lines to ensure
-      // continuous drawing.
-      const diff = {
-        x: x - previousBresenham.x,
-        y: y - previousBresenham.y
+    if (context) {
+      let previousBresenham = { ...this.previous
       };
-      this.drawBrush(x, y, brush, context, diff);
-      previousBresenham = {
+      line(this.previous.x, this.previous.y, x, y, (x, y) => {
+        // Position difference is required for forward lines to ensure
+        // continuous drawing.
+        const diff = {
+          x: x - previousBresenham.x,
+          y: y - previousBresenham.y
+        };
+        this.drawBrush(x, y, brush, context, diff);
+        previousBresenham = {
+          x,
+          y
+        };
+      });
+      this.previous = {
         x,
         y
       };
-    });
-    this.previous = {
-      x,
-      y
-    };
+    }
   }
 
   drawBrush(x, y, {

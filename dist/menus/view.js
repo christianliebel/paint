@@ -66,7 +66,6 @@ export const viewMenu = {
     caption: 'Text Toolbar',
     mnemonic: 'e',
     checked: true,
-    helpText: 'Shows or hides the text toolbar.',
-    disabled: true
+    helpText: 'Shows or hides the text toolbar.'
   }]
 };

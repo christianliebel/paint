@@ -38,7 +38,6 @@ export const editMenu = {
     mnemonic: 'P',
     shortcut: 'Ctrl+V',
     helpText: 'Inserts the contents of the Clipboard.',
-    disabled: !(navigator.clipboard && navigator.clipboard.read),
     instance: new PasteAction()
   }, {
     caption: 'Clear Selection',

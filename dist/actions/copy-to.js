@@ -11,8 +11,10 @@ export class CopyToAction {
     context,
     selection
   }) {
-    const blob = await getBlobFromSelection(context, selection);
-    await fileSave(blob);
+    if (context && selection) {
+      const blob = await getBlobFromSelection(context, selection);
+      await fileSave(blob);
+    }
   }
 
 }

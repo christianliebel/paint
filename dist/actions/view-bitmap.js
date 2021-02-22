@@ -2,7 +2,9 @@ export class ViewBitmapAction {
   async execute({
     canvas
   }) {
-    await canvas.requestFullscreen();
+    if (canvas) {
+      await canvas.requestFullscreen();
+    }
   }
 
 }

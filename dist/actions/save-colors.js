@@ -43,9 +43,12 @@ export class SaveColorsAction {
       dataView.setUint8(offset + 3, 0); // peFlags
     }
 
-    const blob = new Blob([buffer]);
+    const blob = new Blob([buffer], {
+      type: 'application/octet-stream'
+    });
     await fileSave(blob, {
-      fileName: 'untitled.pal'
+      fileName: 'untitled.pal',
+      extensions: ['.pal']
     });
   }
 
