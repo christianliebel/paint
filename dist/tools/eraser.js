@@ -1,12 +1,10 @@
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
 export class EraserTool {
   constructor() {
-    _defineProperty(this, "previous", {
+    this.previous = {
       x: 0,
       y: 0
-    });
+    };
   }
 
   onPointerHover(x, y, {
