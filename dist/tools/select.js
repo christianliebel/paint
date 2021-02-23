@@ -1,10 +1,12 @@
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 import { updateContext } from '../helpers/update-context.js';
 export class SelectTool {
   constructor() {
-    this.startPosition = {
+    _defineProperty(this, "startPosition", {
       x: 0,
       y: 0
-    };
+    });
   }
 
   onPointerDown(x, y, {
