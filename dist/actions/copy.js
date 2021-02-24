@@ -3,7 +3,7 @@ export class CopyAction {
   canExecute({
     selection
   }) {
-    return navigator.clipboard?.write && !!selection;
+    return 'write' in navigator.clipboard && !!selection;
   }
 
   async execute({
