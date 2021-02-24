@@ -4,7 +4,7 @@ import type { Action } from '../models/action';
 
 export class CopyAction implements Action {
   canExecute({ selection }: DrawingContext): boolean {
-    return navigator.clipboard?.write && !!selection;
+    return 'write' in navigator.clipboard && !!selection;
   }
 
   async execute({ context, selection }: DrawingContext): Promise<void> {
