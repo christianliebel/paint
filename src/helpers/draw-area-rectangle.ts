@@ -5,7 +5,7 @@ export function drawAreaRectangle(
   startPosition: Point,
   endPosition: Point,
   previewContext: CanvasRenderingContext2D | null,
-) {
+): void {
   // TODO: Scope to canvas
   clearContext(previewContext);
   previewContext?.setLineDash([4]);

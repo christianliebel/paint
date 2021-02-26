@@ -14,7 +14,6 @@ import { FONT_SIZES } from '../../data/font-sizes';
 import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility';
 import { getLocalFonts } from '../../helpers/get-local-fonts';
 import { updateContext } from '../../helpers/update-context';
-import type { TextContext } from '../../models/text-context';
 
 @customElement('paint-dialog-text-toolbar')
 export class TextToolbarDialog extends LitElement {
