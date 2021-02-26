@@ -1,5 +1,6 @@
 {
   "imports": {
+    "break-styled-lines": "./break-styled-lines.js",
     "bresenham-zingl": "./bresenham-zingl.js",
     "browser-fs-access": "./browser-fs-access.js",
     "hotkeys-js": "./hotkeys-js.js",

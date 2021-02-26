@@ -32,6 +32,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { css, customElement, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
 import { updateContext } from '../helpers/update-context.js';
 export let Canvas = _decorate([customElement('paint-canvas')], function (_initialize, _LitElement) {
   class Canvas extends _LitElement {
@@ -156,9 +157,12 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
         place-self: center;
       }
 
-      canvas {
+      canvas, paint-text-area {
         grid-row: 2;
         grid-column: 2;
+      }
+
+      canvas {
         image-rendering: pixelated;
       }
 
@@ -213,6 +217,9 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
             ></canvas>
+            <paint-text-area
+              .drawingContext="${this.drawingContext}"
+            ></paint-text-area>
             <paint-handle></paint-handle>
             <paint-handle disabled></paint-handle>
             <paint-handle></paint-handle>
@@ -283,6 +290,9 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
       value: function onPointerDown(event) {
         this.pointerDown = true;
         this.previewColor = event.button !== 2 ? 'primary' : 'secondary';
+        this.drawingContext.text.active = false;
+        evaluateTextToolbarVisibility(this.drawingContext);
+        updateContext(this);
 
         if (this.tool?.onPointerDown) {
           const {

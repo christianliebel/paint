@@ -32,6 +32,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { css, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
 import { AIRBRUSH, BRUSH, CURVE, ERASER, FREE_FORM_SELECT, LINE, MAGNIFIER, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, SELECT, TEXT, tools } from '../tools/all.js';
 import { updateContext } from '../helpers/update-context.js';
 
@@ -114,6 +115,8 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
       key: "selectTool",
       value: function selectTool(tool) {
         if (this.drawingContext) {
+          this.drawingContext.text.active = false;
+          evaluateTextToolbarVisibility(this.drawingContext);
           this.drawingContext.tool = tool;
           updateContext(this);
         }
@@ -136,13 +139,13 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
 
         if ([RECTANGLE,
         /* ELLIPSE, */
-        POLYGON, ROUNDED_RECTANGLE, TEXT].includes(tool)) {
+        POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
           return html`<paint-tool-fill-style
         .drawingContext="${this.drawingContext}"
       ></paint-tool-fill-style>`;
         }
 
-        if ([FREE_FORM_SELECT, SELECT].includes(tool)) {
+        if ([FREE_FORM_SELECT, SELECT, TEXT].includes(tool)) {
           return html`<paint-tool-draw-opaque
         .drawingContext="${this.drawingContext}"
       ></paint-tool-draw-opaque>`;

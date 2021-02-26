@@ -1,5 +1,6 @@
 import './dialogs/about.js';
 import './dialogs/flip-and-rotate.js';
+import './dialogs/text-toolbar.js';
 import './window/window.js';
 import './window/title-bar-button.js';
 import './app.js';
@@ -13,6 +14,7 @@ import './menu.js';
 import './menu-bar.js';
 import './ruler.js';
 import './status-bar.js';
+import './text-area.js';
 import './tool.js';
 import './tool-bar.js';
 import './tool-box.js';

@@ -30,43 +30,56 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
-export let TitleBarButton = _decorate([customElement('paint-window-title-bar-button')], function (_initialize, _LitElement) {
-  class TitleBarButton extends _LitElement {
-    constructor() {
-      super();
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+import { css, customElement, html, internalProperty, LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
+import { DRAWING_CONTEXT } from '../../data/drawing-context.js';
+import { FONT_SIZES } from '../../data/font-sizes.js';
+import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility.js';
+import { getLocalFonts } from '../../helpers/get-local-fonts.js';
+import { updateContext } from '../../helpers/update-context.js';
+export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolbar')], function (_initialize, _LitElement) {
+  class TextToolbarDialog extends _LitElement {
+    constructor(...args) {
+      super(...args);
 
       _initialize(this);
-
-      this.addEventListener('pointerdown', evt => {
-        evt.stopPropagation();
-      });
     }
 
   }
 
   return {
-    F: TitleBarButton,
+    F: TextToolbarDialog,
     d: [{
       kind: "field",
       decorators: [property({
-        type: Boolean
+        type: Object
       })],
-      key: "help",
+      key: "drawingContext",
 
       value() {
-        return false;
+        return DRAWING_CONTEXT;
       }
 
     }, {
       kind: "field",
-      decorators: [property({
-        type: Boolean
-      })],
-      key: "close",
+      decorators: [internalProperty()],
+      key: "fonts",
 
       value() {
-        return false;
+        return [];
+      }
+
+    }, {
+      kind: "field",
+      key: "fontSizes",
+
+      value() {
+        return FONT_SIZES;
       }
 
     }, {
@@ -75,75 +88,110 @@ export let TitleBarButton = _decorate([customElement('paint-window-title-bar-but
       key: "styles",
       value: function styles() {
         return css`
-      :host {
-        box-sizing: border-box;
-        width: 16px;
-        height: 14px;
-        border: 1px solid var(--button-light);
-        border-bottom-color: var(--button-darker);
-        border-right-color: var(--button-darker);
-        background-color: var(--button-face);
+      paint-window {
+        position: absolute;
+        top: 0;
       }
 
-      div.wrapper {
-        box-sizing: border-box;
-        height: 12px;
-        border: 1px solid transparent;
-        border-bottom-color: var(--button-dark);
-        border-right-color: var(--button-dark);
+      .content {
         display: flex;
-        justify-content: center;
+        align-items: start;
+        padding: 4px 7px 4px 5px;
       }
 
-      :host(:active) {
-        border: 1px solid var(--button-darker);
-        border-bottom-color: var(--button-light);
-        border-right-color: var(--button-light);
+      .font-list {
+        width: 164px;
+        height: 20px;
+
+        margin-right: 9px;
       }
 
-      :host(:active) div.wrapper {
-        border: 1px solid var(--canvas);
-        border-bottom-color: transparent;
-        border-right-color: transparent;
+      .font-sizes {
+        width: 72px;
+        height: 21px;
+
+        margin-right: 11px;
       }
 
-      :host(:active) svg {
-        margin: 1px 0 0 1px;
-      }
-
-      path {
-        fill: var(--button-text);
+      button {
+        height: 22px;
+        width: 23px;
       }
     `;
       }
     }, {
       kind: "method",
-      key: "render",
-      value: function render() {
-        return html` <div class="wrapper">${this.getButton()}</div> `;
+      key: "firstUpdated",
+      value: async function firstUpdated(_changedProperties) {
+        _get(_getPrototypeOf(TextToolbarDialog.prototype), "firstUpdated", this).call(this, _changedProperties);
+
+        this.fonts = await getLocalFonts();
+        this.addEventListener('close', () => {
+          this.drawingContext.text.showToolbar = false;
+          evaluateTextToolbarVisibility(this.drawingContext);
+          updateContext(this);
+        });
       }
     }, {
       kind: "method",
-      key: "getButton",
-      value: function getButton() {
-        if (this.help) {
-          return html`
-        <svg viewBox="0 0 6 9" width="6" height="9">
-          <path d="M0,1h1V0h4v1h1v2H5v1H4v2H2V4h1V3h1V1H2v2H0V1z" />
-          <path d="M2,7h2v2H2V7z" />
-        </svg>
-      `;
+      key: "updateFont",
+      value: function updateFont(event) {
+        this.drawingContext.text.font = event.target.value;
+        updateContext(this);
+      }
+    }, {
+      kind: "method",
+      key: "updateSize",
+      value: function updateSize(event) {
+        this.drawingContext.text.size = parseInt(event.target.value);
+        updateContext(this);
+      }
+    }, {
+      kind: "method",
+      key: "toggle",
+      value: function toggle(key) {
+        this.drawingContext.text[key] = !this.drawingContext.text[key];
+        updateContext(this);
+      }
+    }, {
+      kind: "method",
+      key: "render",
+      value: function render() {
+        if (!this.drawingContext.view.textToolbar) {
+          return html``;
         }
 
-        if (this.close) {
-          return html`
-        <svg viewBox="0 0 8 9" width="8" height="9">
-          <path
-            d="M0,1h2v1h1v1h2V2h1V1h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V7H5V6H3v1H2v1H0V7h1V6h1V5h1V4H2V3H1V2H0V1z"
-          />
-        </svg>
-      `;
-        }
+        return html`
+      <paint-window caption="Fonts" tool close>
+        <div class="content">
+          <select
+            class="font-list"
+            @change="${event => this.updateFont(event)}"
+          >
+            ${this.fonts.map(font => html` <option
+                value="${font}"
+                ?selected="${font === this.drawingContext.text.font}"
+              >
+                ${font}
+              </option>`)}
+          </select>
+          <select
+            class="font-sizes"
+            @change="${event => this.updateSize(event)}"
+          >
+            ${this.fontSizes.map(size => html` <option
+                  value="${size}"
+                  ?selected="${size === this.drawingContext.text.size}"
+                >
+                  ${size}
+                </option>`)}
+          </select>
+          <button @click="${() => this.toggle('bold')}">B</button>
+          <button @click="${() => this.toggle('italic')}">I</button>
+          <button @click="${() => this.toggle('underline')}">U</button>
+        </div>
+      </paint-window>
+    `;
       }
     }]
   };

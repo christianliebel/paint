@@ -1,5 +1,8 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+import { clearContext } from '../helpers/clear-context.js';
+import { dispatchAreaEvent } from '../helpers/dispatch-area-event.js';
+import { drawAreaRectangle } from '../helpers/draw-area-rectangle.js';
 import { updateContext } from '../helpers/update-context.js';
 export class SelectTool {
   constructor() {
@@ -16,7 +19,6 @@ export class SelectTool {
       x,
       y
     };
-    previewContext?.setLineDash([4]);
   }
 
   onPointerMove(x, y, {
@@ -24,17 +26,14 @@ export class SelectTool {
     canvas,
     previewContext
   }) {
-    // TODO: Scope to canvas
-    previewContext?.clearRect(0, 0, canvas?.width ?? 0, canvas?.height ?? 0);
-    previewContext?.strokeRect(this.startPosition.x + 0.5, this.startPosition.y + 0.5, x - this.startPosition.x, y - this.startPosition.y);
-    element?.dispatchEvent(new CustomEvent('area', {
-      detail: {
-        width: Math.abs(x - this.startPosition.x),
-        height: Math.abs(y - this.startPosition.y)
-      },
-      bubbles: true,
-      composed: true
-    }));
+    drawAreaRectangle(this.startPosition, {
+      x,
+      y
+    }, previewContext);
+    dispatchAreaEvent(this.startPosition, {
+      x,
+      y
+    }, element);
   }
 
   onPointerUp(x, y, drawingContext) {
@@ -43,8 +42,7 @@ export class SelectTool {
       element,
       previewContext
     } = drawingContext;
-    previewContext?.setLineDash([]);
-    previewContext?.clearRect(0, 0, canvas?.width ?? 0, canvas?.height ?? 0);
+    clearContext(previewContext);
     element?.dispatchEvent(new CustomEvent('area', {
       bubbles: true,
       composed: true

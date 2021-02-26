@@ -30,29 +30,32 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
-export let TitleBarButton = _decorate([customElement('paint-window-title-bar-button')], function (_initialize, _LitElement) {
-  class TitleBarButton extends _LitElement {
-    constructor() {
-      super();
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+import breakLines from '../../_snowpack/pkg/break-styled-lines.js';
+import { css, customElement, html, LitElement, property, query } from '../../_snowpack/pkg/lit-element.js';
+import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { clearContext } from '../helpers/clear-context.js'; // TODO: Draw select box around text area
+
+export let TextArea = _decorate([customElement('paint-text-area')], function (_initialize, _LitElement) {
+  class TextArea extends _LitElement {
+    constructor(...args) {
+      super(...args);
 
       _initialize(this);
-
-      this.addEventListener('pointerdown', evt => {
-        evt.stopPropagation();
-      });
     }
 
   }
 
   return {
-    F: TitleBarButton,
+    F: TextArea,
     d: [{
       kind: "field",
-      decorators: [property({
-        type: Boolean
-      })],
-      key: "help",
+      key: "editingActive",
 
       value() {
         return false;
@@ -60,90 +63,181 @@ export let TitleBarButton = _decorate([customElement('paint-window-title-bar-but
 
     }, {
       kind: "field",
-      decorators: [property({
-        type: Boolean
-      })],
-      key: "close",
+      decorators: [property()],
+      key: "drawingContext",
 
       value() {
-        return false;
+        return DRAWING_CONTEXT;
       }
 
+    }, {
+      kind: "field",
+      decorators: [query('textarea')],
+      key: "textarea",
+      value: void 0
     }, {
       kind: "get",
       static: true,
       key: "styles",
       value: function styles() {
         return css`
-      :host {
+      textarea {
+        position: absolute;
         box-sizing: border-box;
-        width: 16px;
-        height: 14px;
-        border: 1px solid var(--button-light);
-        border-bottom-color: var(--button-darker);
-        border-right-color: var(--button-darker);
-        background-color: var(--button-face);
+        border: 1px dashed var(--highlight);
+        padding: 0;
+        background-color: transparent;
+        color: transparent;
+        resize: none;
+        outline: 0;
+        overflow: hidden;
       }
 
-      div.wrapper {
-        box-sizing: border-box;
-        height: 12px;
-        border: 1px solid transparent;
-        border-bottom-color: var(--button-dark);
-        border-right-color: var(--button-dark);
-        display: flex;
-        justify-content: center;
-      }
-
-      :host(:active) {
-        border: 1px solid var(--button-darker);
-        border-bottom-color: var(--button-light);
-        border-right-color: var(--button-light);
-      }
-
-      :host(:active) div.wrapper {
-        border: 1px solid var(--canvas);
-        border-bottom-color: transparent;
-        border-right-color: transparent;
-      }
-
-      :host(:active) svg {
-        margin: 1px 0 0 1px;
-      }
-
-      path {
-        fill: var(--button-text);
+      textarea::selection {
+        background-color: var(--highlight);
+        color: var(--highlight-text);
       }
     `;
       }
     }, {
       kind: "method",
-      key: "render",
-      value: function render() {
-        return html` <div class="wrapper">${this.getButton()}</div> `;
+      key: "firstUpdated",
+      value: function firstUpdated(_changedProperties) {
+        _get(_getPrototypeOf(TextArea.prototype), "firstUpdated", this).call(this, _changedProperties);
+
+        if (!this.textarea) {
+          throw new Error('Textarea not found.');
+        }
+
+        const textarea = this.textarea;
+        textarea.addEventListener('input', () => {
+          requestAnimationFrame(() => textarea.scrollTop = 0);
+          this.drawPreview();
+        });
       }
     }, {
       kind: "method",
-      key: "getButton",
-      value: function getButton() {
-        if (this.help) {
-          return html`
-        <svg viewBox="0 0 6 9" width="6" height="9">
-          <path d="M0,1h1V0h4v1h1v2H5v1H4v2H2V4h1V3h1V1H2v2H0V1z" />
-          <path d="M2,7h2v2H2V7z" />
-        </svg>
-      `;
+      key: "render",
+      value: function render() {
+        const {
+          context,
+          previewContext,
+          text
+        } = this.drawingContext;
+        this.style.display = text.active ? 'block' : 'none';
+
+        if (this.editingActive && !text.active) {
+          this.commitTextBox();
         }
 
-        if (this.close) {
-          return html`
-        <svg viewBox="0 0 8 9" width="8" height="9">
-          <path
-            d="M0,1h2v1h1v1h2V2h1V1h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V7H5V6H3v1H2v1H0V7h1V6h1V5h1V4H2V3H1V2H0V1z"
-          />
-        </svg>
-      `;
+        this.editingActive = text.active;
+
+        if (context && previewContext && text.active) {
+          this.textarea?.focus();
+          this.textarea?.scroll(0, 0);
+          this.drawPreview();
         }
+
+        return html`<textarea style="${this.getTextAreaStyle()}"></textarea>`;
+      }
+    }, {
+      kind: "method",
+      key: "getTextAreaStyle",
+      value: function getTextAreaStyle() {
+        const {
+          colors,
+          text
+        } = this.drawingContext;
+        const {
+          width,
+          height,
+          x,
+          y,
+          font,
+          size,
+          bold,
+          italic,
+          underline
+        } = text;
+        return `
+      width: ${width}px;
+      height: ${height}px;
+      transform: translate(${x}px, ${y}px);
+      font-family: "${font}"; 
+      font-size: ${size}px;
+      font-weight: ${bold ? 'bold' : 'normal'};
+      font-style: ${italic ? 'italic' : 'normal'};
+      text-decoration: ${underline ? 'underline' : 'none'};
+      caret-color: ${colors.primary};
+    `;
+      }
+    }, {
+      kind: "method",
+      key: "drawPreview",
+      value: function drawPreview() {
+        if (this.drawingContext.previewContext) {
+          clearContext(this.drawingContext.previewContext);
+          this.drawTextBox(this.drawingContext.previewContext);
+        }
+      }
+    }, {
+      kind: "method",
+      key: "commitTextBox",
+      value: function commitTextBox() {
+        if (this.editingActive && !this.drawingContext.text.active && this.textarea && this.drawingContext.previewContext && this.drawingContext.context) {
+          this.editingActive = false;
+          clearContext(this.drawingContext.previewContext);
+          this.drawTextBox(this.drawingContext.context);
+          this.textarea.value = '';
+        }
+      }
+    }, {
+      kind: "method",
+      key: "drawTextBox",
+      value: function drawTextBox(context) {
+        const {
+          x,
+          y,
+          width,
+          height,
+          size,
+          font,
+          bold,
+          italic,
+          underline
+        } = this.drawingContext.text;
+
+        if (this.drawingContext.drawOpaque) {
+          context.fillStyle = this.drawingContext.colors.secondary;
+          context.fillRect(x ?? 0, y ?? 0, width ?? 0, height ?? 0);
+        }
+
+        context.fillStyle = this.drawingContext.colors.primary;
+        const italicStyle = italic ? 'italic ' : '';
+        const boldStyle = bold ? 'bold ' : '';
+        context.font = `${italicStyle}${boldStyle}${size}px ${font}`;
+        const padding = 1;
+        const maxWidth = (width ?? 0) - padding * 2;
+        const metrics = context.measureText('');
+        const lineHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+        (this.textarea?.value ?? '').split('\n').map(line => breakLines(line, maxWidth, context.font).split('\n')).reduce((previous, current) => previous.concat(current), []).forEach((line, index) => {
+          const correctedX = (x ?? 0) + padding;
+          const correctedY = (y ?? 0) + size + lineHeight * index;
+
+          if (correctedY - (y ?? 0) >= (height ?? 0)) {
+            return;
+          }
+
+          context.fillText(line, correctedX, correctedY);
+
+          if (underline) {
+            const {
+              alphabeticBaseline,
+              width
+            } = context.measureText(line);
+            context.fillRect(correctedX, correctedY + 1, width, 1);
+          }
+        });
       }
     }]
   };

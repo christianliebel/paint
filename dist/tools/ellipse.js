@@ -1,6 +1,7 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import { ellipseRect } from '../../_snowpack/pkg/bresenham-zingl.js';
+import { clearContext } from '../helpers/clear-context.js';
 export class EllipseTool {
   constructor() {
     _defineProperty(this, "startPosition", {
@@ -43,7 +44,7 @@ export class EllipseTool {
 
   drawEllipse(x, y, canvas, targetContext, previewContext) {
     // TODO: Fill styles, no anti-alias
-    previewContext.clearRect(0, 0, canvas.width, canvas.height);
+    clearContext(previewContext);
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
       targetContext.fillRect(x, y, 1, 1);
     });

@@ -57,7 +57,9 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
     F: Window,
     d: [{
       kind: "field",
-      decorators: [property()],
+      decorators: [property({
+        type: String
+      })],
       key: "caption",
 
       value() {
@@ -66,7 +68,9 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
 
     }, {
       kind: "field",
-      decorators: [property()],
+      decorators: [property({
+        type: Boolean
+      })],
       key: "help",
 
       value() {
@@ -75,7 +79,9 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
 
     }, {
       kind: "field",
-      decorators: [property()],
+      decorators: [property({
+        type: Boolean
+      })],
       key: "close",
 
       value() {
@@ -145,6 +151,12 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
         box-sizing: border-box;
         padding: 1px 2px;
         margin-bottom: 1px;
+      }
+
+      :host[tool] div.title-bar {
+        height: 15px;
+        font-size: 9px;
+        /* TODO: More stuff */
       }
 
       div.title-bar span.title {

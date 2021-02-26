@@ -31,7 +31,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import hotkeys from '../../_snowpack/pkg/hotkeys-js.js';
-import { css, customElement, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
+import { css, customElement, html, internalProperty, LitElement } from '../../_snowpack/pkg/lit-element.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { getLaunchImage } from '../helpers/file-handling-api.js';
 import { menus } from '../menus/all.js';
@@ -72,9 +72,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
     F: App,
     d: [{
       kind: "field",
-      decorators: [property({
-        attribute: false
-      })],
+      decorators: [internalProperty()],
       key: "areaText",
 
       value() {
@@ -83,9 +81,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
 
     }, {
       kind: "field",
-      decorators: [property({
-        attribute: false
-      })],
+      decorators: [internalProperty()],
       key: "coordinateText",
 
       value() {
@@ -94,9 +90,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
 
     }, {
       kind: "field",
-      decorators: [property({
-        attribute: false
-      })],
+      decorators: [internalProperty()],
       key: "helpText",
 
       value() {
@@ -105,9 +99,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
 
     }, {
       kind: "field",
-      decorators: [property({
-        attribute: false
-      })],
+      decorators: [internalProperty()],
       key: "drawingContext",
 
       value() {
@@ -138,8 +130,8 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
         --z-index-dialog: 20;
 
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol';
+          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+          'Segoe UI Symbol';
         font-size: 9pt;
 
         display: inline-flex;
@@ -241,7 +233,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
             const hotkey = entry.shortcut.includes('Ctrl') ? `${entry.shortcut},${entry.shortcut.replace('Ctrl', '⌘')}` : entry.shortcut; // TODO: Replace PgUp, PgDn + others…
 
             hotkeys(hotkey.replace('Shft', 'shift'), () => {
-              if (entry.instance && 'canExecute' in entry.instance && typeof entry.instance.canExecute === 'function' && entry.instance.canExecute(this.drawingContext)) {
+              if (this.canActionExecute(entry, this.drawingContext)) {
                 this.dispatchEvent(new CustomEvent('invoke-action', {
                   detail: entry.instance?.execute.bind(entry.instance),
                   bubbles: true,
@@ -256,37 +248,51 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
       }
     }, {
       kind: "method",
+      key: "canActionExecute",
+      value: function canActionExecute(entry, drawingContext) {
+        if (!entry.instance) {
+          return false;
+        }
+
+        if (!entry.instance.canExecute) {
+          return true;
+        }
+
+        return entry.instance.canExecute(drawingContext);
+      }
+    }, {
+      kind: "method",
       key: "render",
       value: function render() {
         document.title = `${this.drawingContext.document.title} - Paint`;
         return html`
-        <paint-menu-bar
-                .entries="${menus}"
+      <paint-menu-bar
+        .entries="${menus}"
+        .drawingContext="${this.drawingContext}"
+      ></paint-menu-bar>
+      <div>
+        ${this.drawingContext.view.toolBox ? html` <paint-tool-bar>
+              <paint-ruler></paint-ruler>
+              <paint-tool-box
                 .drawingContext="${this.drawingContext}"
-        ></paint-menu-bar>
-        <div>
-            ${this.drawingContext.view.toolBox ? html`
-                        <paint-tool-bar>
-                            <paint-ruler></paint-ruler>
-                            <paint-tool-box
-                                    .drawingContext="${this.drawingContext}"
-                            ></paint-tool-box>
-                            <paint-ruler></paint-ruler>
-                        </paint-tool-bar>` : ''}
-            <paint-canvas .drawingContext="${this.drawingContext}"></paint-canvas>
-        </div>
-        ${this.drawingContext.view.colorBox ? html`
-                    <paint-tool-bar class="color-box">
-                        <paint-color-box .drawingContext="${this.drawingContext}">
-                        </paint-color-box>
-                        <paint-ruler></paint-ruler>
-                    </paint-tool-bar>` : ''}
-        ${this.drawingContext.view.statusBar ? html`
-                    <paint-status-bar
-                            helpText="${this.helpText}"
-                            coordinateText="${this.coordinateText}"
-                            areaText="${this.areaText}"
-                    ></paint-status-bar>` : ''}
+              ></paint-tool-box>
+              <paint-ruler></paint-ruler>
+            </paint-tool-bar>` : ''}
+        <paint-canvas .drawingContext="${this.drawingContext}"></paint-canvas>
+      </div>
+      ${this.drawingContext.view.colorBox ? html` <paint-tool-bar class="color-box">
+            <paint-color-box .drawingContext="${this.drawingContext}">
+            </paint-color-box>
+            <paint-ruler></paint-ruler>
+          </paint-tool-bar>` : ''}
+      ${this.drawingContext.view.statusBar ? html` <paint-status-bar
+            helpText="${this.helpText}"
+            coordinateText="${this.coordinateText}"
+            areaText="${this.areaText}"
+          ></paint-status-bar>` : ''}
+      ${this.drawingContext.view.textToolbar ? html` <paint-dialog-text-toolbar
+            .drawingContext="${this.drawingContext}"
+          ></paint-dialog-text-toolbar>` : ''}
     `;
       }
     }]

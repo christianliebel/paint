@@ -1,6 +1,7 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
+import { clearContext } from '../helpers/clear-context.js';
 export class EraserTool {
   constructor() {
     _defineProperty(this, "previous", {
@@ -16,7 +17,7 @@ export class EraserTool {
     colors
   }) {
     if (canvas && previewContext) {
-      previewContext.clearRect(0, 0, canvas.width, canvas.height);
+      clearContext(previewContext);
 
       if (x > 0 && x < canvas.width && y > 0 && y < canvas.height) {
         previewContext.fillStyle = 'black';

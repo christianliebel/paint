@@ -7,6 +7,7 @@ import { LineTool } from './line.js';
 import { SelectTool } from './select.js';
 import { EraserTool } from './eraser.js';
 import { EllipseTool } from './ellipse.js';
+import { TextTool } from './text.js';
 export const FREE_FORM_SELECT = {
   tooltip: 'Free-Form Select',
   helpText: 'Selects a free-form part of the picture to move, copy, or edit.',
@@ -62,7 +63,8 @@ export const AIRBRUSH = {
 export const TEXT = {
   tooltip: 'Text',
   helpText: 'Inserts text into the picture.',
-  imagePosition: '-144px 0'
+  imagePosition: '-144px 0',
+  instance: new TextTool()
 };
 export const LINE = {
   tooltip: 'Line',

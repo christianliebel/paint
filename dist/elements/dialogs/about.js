@@ -36,8 +36,8 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-import { css, html, LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
-export let About = _decorate(null, function (_initialize, _LitElement) {
+import { css, customElement, html, LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
+export let About = _decorate([customElement('paint-dialog-about')], function (_initialize, _LitElement) {
   class About extends _LitElement {
     constructor(...args) {
       super(...args);
@@ -198,4 +198,3 @@ export let About = _decorate(null, function (_initialize, _LitElement) {
     }]
   };
 }, LitElement);
-customElements.define('paint-dialog-about', About);

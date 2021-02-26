@@ -2341,6 +2341,80 @@ function property(options) {
         legacyProperty(options, protoOrDescriptor, name) :
         standardProperty(options, protoOrDescriptor);
 }
+/**
+ * Declares a private or protected property that still triggers updates to the
+ * element when it changes.
+ *
+ * Properties declared this way must not be used from HTML or HTML templating
+ * systems, they're solely for properties internal to the element. These
+ * properties may be renamed by optimization tools like closure compiler.
+ * @category Decorator
+ */
+function internalProperty(options) {
+    return property({ attribute: false, hasChanged: options === null || options === void 0 ? void 0 : options.hasChanged });
+}
+/**
+ * A property decorator that converts a class property into a getter that
+ * executes a querySelector on the element's renderRoot.
+ *
+ * @param selector A DOMString containing one or more selectors to match.
+ * @param cache An optional boolean which when true performs the DOM query only
+ * once and caches the result.
+ *
+ * See: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+ *
+ * @example
+ *
+ * ```ts
+ * class MyElement {
+ *   @query('#first')
+ *   first;
+ *
+ *   render() {
+ *     return html`
+ *       <div id="first"></div>
+ *       <div id="second"></div>
+ *     `;
+ *   }
+ * }
+ * ```
+ * @category Decorator
+ */
+function query(selector, cache) {
+    return (protoOrDescriptor, 
+    // tslint:disable-next-line:no-any decorator
+    name) => {
+        const descriptor = {
+            get() {
+                return this.renderRoot.querySelector(selector);
+            },
+            enumerable: true,
+            configurable: true,
+        };
+        if (cache) {
+            const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
+            descriptor.get = function () {
+                if (this[key] === undefined) {
+                    (this[key] =
+                        this.renderRoot.querySelector(selector));
+                }
+                return this[key];
+            };
+        }
+        return (name !== undefined) ?
+            legacyQuery(descriptor, protoOrDescriptor, name) :
+            standardQuery(descriptor, protoOrDescriptor);
+    };
+}
+const legacyQuery = (descriptor, proto, name) => {
+    Object.defineProperty(proto, name, descriptor);
+};
+const standardQuery = (descriptor, element) => ({
+    kind: 'method',
+    placement: 'prototype',
+    key: element.key,
+    descriptor,
+});
 
 /**
 @license
@@ -2645,4 +2719,4 @@ LitElement['finalized'] = true;
  */
 LitElement.render = render$1;
 
-export { LitElement, css, customElement, html, property };
+export { LitElement, css, customElement, html, internalProperty, property, query };

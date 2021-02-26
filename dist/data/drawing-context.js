@@ -40,10 +40,20 @@ export const DRAWING_CONTEXT = {
   view: {
     statusBar: true,
     colorBox: true,
-    toolBox: true
+    toolBox: true,
+    textToolbar: false
   },
   document: {
     title: 'untitled'
+  },
+  text: {
+    active: false,
+    font: 'Arial',
+    size: 12,
+    showToolbar: false,
+    bold: false,
+    italic: false,
+    underline: false
   },
   element: null,
   previewCanvas: null,

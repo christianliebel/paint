@@ -1,6 +1,7 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
+import { clearContext } from '../helpers/clear-context.js';
 export class RectangleTool {
   constructor() {
     _defineProperty(this, "startPosition", {
@@ -40,7 +41,7 @@ export class RectangleTool {
   }
 
   drawRectangle(x, y, targetContext, previewContext, fillStyle, lineWidth, canvas, color) {
-    previewContext.clearRect(0, 0, canvas.width, canvas.height);
+    clearContext(previewContext);
     const x1 = Math.min(this.startPosition.x, x);
     const x2 = Math.max(this.startPosition.x, x);
     const y1 = Math.min(this.startPosition.y, y);

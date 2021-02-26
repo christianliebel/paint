@@ -1,5 +1,6 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+import { clearContext } from '../helpers/clear-context.js';
 import { drawCircle } from '../helpers/draw-circle.js';
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
 export class BrushTool {
@@ -16,7 +17,7 @@ export class BrushTool {
     previewContext
   }, color) {
     if (canvas && previewContext) {
-      previewContext.clearRect(0, 0, canvas.width, canvas.height);
+      clearContext(previewContext);
       previewContext.fillStyle = color.stroke.value;
       this.drawBrush(x, y, brush, previewContext);
     }

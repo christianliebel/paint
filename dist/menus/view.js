@@ -1,3 +1,4 @@
+import { TextToolbarAction } from '../actions/text-toolbar.js';
 import { ViewBitmapAction } from '../actions/view-bitmap.js';
 import { StatusBarAction } from '../actions/status-bar.js';
 import { ToolBoxAction } from '../actions/tool-box.js';
@@ -65,7 +66,7 @@ export const viewMenu = {
   }, {
     caption: 'Text Toolbar',
     mnemonic: 'e',
-    checked: true,
-    helpText: 'Shows or hides the text toolbar.'
+    helpText: 'Shows or hides the text toolbar.',
+    instance: new TextToolbarAction()
   }]
 };
