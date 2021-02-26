@@ -46,10 +46,10 @@ export class EllipseTool implements Tool {
     targetContext: CanvasRenderingContext2D,
     previewContext: CanvasRenderingContext2D,
   ): void {
-    // TODO: Fill styles, no anti-alias
+    // TODO: Fill styles
     clearContext(previewContext);
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
-      targetContext.fillRect(x, y, 1, 1);
+      targetContext.fillRect(Math.floor(x), Math.floor(y), 1, 1);
     });
   }
 }
