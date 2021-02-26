@@ -1,6 +1,7 @@
-import { css, CSSResult, html, LitElement, TemplateResult } from 'lit-element';
+import { css, CSSResult, customElement, html, LitElement, TemplateResult } from 'lit-element';
 import { renderMnemonic } from '../../helpers/render-mnemonic';
 
+@customElement('paint-dialog-flip-and-rotate')
 export class FlipAndRotate extends LitElement {
   static get styles(): CSSResult {
     return css`
@@ -100,5 +101,3 @@ export class FlipAndRotate extends LitElement {
     );
   }
 }
-
-customElements.define('paint-dialog-flip-and-rotate', FlipAndRotate);

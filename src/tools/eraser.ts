@@ -1,4 +1,5 @@
 import { line } from 'bresenham-zingl';
+import { clearContext } from '../helpers/clear-context';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
 import type { Tool } from '../models/tool';
@@ -8,7 +9,7 @@ export class EraserTool implements Tool {
 
   onPointerHover(x: number, y: number, { canvas, previewContext, eraserSize, colors }: DrawingContext): void {
     if (canvas && previewContext) {
-      previewContext.clearRect(0, 0, canvas.width, canvas.height);
+      clearContext(previewContext);
 
       if (x > 0 && x < canvas.width && y > 0 && y < canvas.height) {
         previewContext.fillStyle = 'black';

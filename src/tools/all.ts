@@ -8,6 +8,7 @@ import { LineTool } from './line';
 import { SelectTool } from './select';
 import { EraserTool } from './eraser';
 import { EllipseTool } from './ellipse';
+import { TextTool } from './text';
 
 export const FREE_FORM_SELECT: ToolDefinition = {
   tooltip: 'Free-Form Select',
@@ -74,6 +75,7 @@ export const TEXT: ToolDefinition = {
   tooltip: 'Text',
   helpText: 'Inserts text into the picture.',
   imagePosition: '-144px 0',
+  instance: new TextTool(),
 };
 
 export const LINE: ToolDefinition = {

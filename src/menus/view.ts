@@ -1,3 +1,4 @@
+import { TextToolbarAction } from '../actions/text-toolbar';
 import { ViewBitmapAction } from '../actions/view-bitmap';
 import { StatusBarAction } from '../actions/status-bar';
 import { ToolBoxAction } from '../actions/tool-box';
@@ -81,8 +82,8 @@ export const viewMenu: MenuEntry = {
     {
       caption: 'Text Toolbar',
       mnemonic: 'e',
-      checked: true,
       helpText: 'Shows or hides the text toolbar.',
+      instance: new TextToolbarAction(),
     },
   ],
 };

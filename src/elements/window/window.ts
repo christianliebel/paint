@@ -4,9 +4,9 @@ import type { PointerPosition } from '../../models/pointer-position';
 
 @customElement('paint-window')
 export class Window extends LitElement {
-  @property() caption = '';
-  @property() help = false;
-  @property() close = false;
+  @property({ type: String }) caption = '';
+  @property({ type: Boolean }) help = false;
+  @property({ type: Boolean }) close = false;
 
   position: Point = { x: 100, y: 50 };
   mousePosition: PointerPosition | null = null;
@@ -46,6 +46,12 @@ export class Window extends LitElement {
         box-sizing: border-box;
         padding: 1px 2px;
         margin-bottom: 1px;
+      }
+
+      :host[tool] div.title-bar {
+        height: 15px;
+        font-size: 9px;
+        /* TODO: More stuff */
       }
 
       div.title-bar span.title {

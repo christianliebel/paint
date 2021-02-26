@@ -1,5 +1,14 @@
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import {
+  css,
+  CSSResult,
+  customElement,
+  html,
+  LitElement,
+  property,
+  TemplateResult,
+} from 'lit-element';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
+import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
@@ -60,9 +69,12 @@ export class Canvas extends LitElement {
         place-self: center;
       }
 
-      canvas {
+      canvas, paint-text-area {
         grid-row: 2;
         grid-column: 2;
+      }
+
+      canvas {
         image-rendering: pixelated;
       }
 
@@ -115,6 +127,9 @@ export class Canvas extends LitElement {
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
             ></canvas>
+            <paint-text-area
+              .drawingContext="${this.drawingContext}"
+            ></paint-text-area>
             <paint-handle></paint-handle>
             <paint-handle disabled></paint-handle>
             <paint-handle></paint-handle>
@@ -130,8 +145,12 @@ export class Canvas extends LitElement {
       throw new Error('Shadow root not present.');
     }
 
-    const canvas = this.shadowRoot.querySelector('canvas.main') as HTMLCanvasElement;
-    const previewCanvas = this.shadowRoot.querySelector('canvas.preview') as HTMLCanvasElement;
+    const canvas = this.shadowRoot.querySelector(
+      'canvas.main',
+    ) as HTMLCanvasElement;
+    const previewCanvas = this.shadowRoot.querySelector(
+      'canvas.preview',
+    ) as HTMLCanvasElement;
     const context = canvas.getContext('2d', { desynchronized: true });
     const previewContext = previewCanvas.getContext('2d', {
       desynchronized: true,
@@ -156,10 +175,15 @@ export class Canvas extends LitElement {
     );
     document.addEventListener('pointerup', (event) => this.onPointerUp(event));
 
-    this.dispatchEvent(new CustomEvent('canvas-ready', { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent('canvas-ready', { bubbles: true, composed: true }),
+    );
   }
 
-  getToolEventArgs(x: number, y: number): [number, number, DrawingContext, ToolColor] {
+  getToolEventArgs(
+    x: number,
+    y: number,
+  ): [number, number, DrawingContext, ToolColor] {
     const strokeKey = this.pointerDown ? this.previewColor : 'primary';
     const fillKey = strokeKey === 'primary' ? 'secondary' : 'primary';
     const color: ToolColor = {
@@ -178,6 +202,11 @@ export class Canvas extends LitElement {
   onPointerDown(event: PointerEvent): void {
     this.pointerDown = true;
     this.previewColor = event.button !== 2 ? 'primary' : 'secondary';
+
+    this.drawingContext.text.active = false;
+    evaluateTextToolbarVisibility(this.drawingContext);
+    updateContext(this);
+
     if (this.tool?.onPointerDown) {
       const { x, y } = this.getCoordinates(event);
       this.tool.onPointerDown(...this.getToolEventArgs(x, y));

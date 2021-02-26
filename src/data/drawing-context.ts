@@ -56,9 +56,19 @@ export const DRAWING_CONTEXT: DrawingContext = {
     statusBar: true,
     colorBox: true,
     toolBox: true,
+    textToolbar: false,
   },
   document: {
     title: 'untitled',
+  },
+  text: {
+    active: false,
+    font: 'Arial',
+    size: 12,
+    showToolbar: false,
+    bold: false,
+    italic: false,
+    underline: false
   },
   element: null,
   previewCanvas: null,

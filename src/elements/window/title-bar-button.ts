@@ -2,8 +2,8 @@ import { css, CSSResult, customElement, html, LitElement, property, TemplateResu
 
 @customElement('paint-window-title-bar-button')
 export class TitleBarButton extends LitElement {
-  @property() help = false;
-  @property() close = false;
+  @property({ type: Boolean }) help = false;
+  @property({ type: Boolean }) close = false;
 
   static get styles(): CSSResult {
     return css`

@@ -1,3 +1,4 @@
+import { clearContext } from '../helpers/clear-context';
 import { drawCircle } from '../helpers/draw-circle';
 import { line } from 'bresenham-zingl';
 import type { Brush } from '../models/brush';
@@ -10,7 +11,7 @@ export class BrushTool implements Tool {
 
   onPointerHover(x: number, y: number, { canvas, brush, previewContext }: DrawingContext, color: ToolColor): void {
     if (canvas && previewContext) {
-      previewContext.clearRect(0, 0, canvas.width, canvas.height);
+      clearContext(previewContext);
       previewContext.fillStyle = color.stroke.value;
       this.drawBrush(x, y, brush, previewContext);
     }

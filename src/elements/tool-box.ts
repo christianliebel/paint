@@ -1,5 +1,6 @@
 import { css, html, LitElement, property, TemplateResult } from 'lit-element';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
+import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import type { ToolDefinition } from '../models/tool-definition';
 import {
   AIRBRUSH,
@@ -70,6 +71,8 @@ class ToolBox extends LitElement {
 
   selectTool(tool: ToolDefinition): void {
     if (this.drawingContext) {
+      this.drawingContext.text.active = false;
+      evaluateTextToolbarVisibility(this.drawingContext);
       this.drawingContext.tool = tool;
       updateContext(this);
     }
@@ -89,7 +92,7 @@ class ToolBox extends LitElement {
     }
 
     if (
-      [RECTANGLE, /* ELLIPSE, */ POLYGON, ROUNDED_RECTANGLE, TEXT].includes(
+      [RECTANGLE, /* ELLIPSE, */ POLYGON, ROUNDED_RECTANGLE].includes(
         tool,
       )
     ) {
@@ -98,7 +101,7 @@ class ToolBox extends LitElement {
       ></paint-tool-fill-style>`;
     }
 
-    if ([FREE_FORM_SELECT, SELECT].includes(tool)) {
+    if ([FREE_FORM_SELECT, SELECT, TEXT].includes(tool)) {
       return html`<paint-tool-draw-opaque
         .drawingContext="${this.drawingContext}"
       ></paint-tool-draw-opaque>`;
