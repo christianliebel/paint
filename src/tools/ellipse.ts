@@ -1,4 +1,5 @@
 import { ellipseRect } from 'bresenham-zingl';
+import { clearContext } from '../helpers/clear-context';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
 import type { ToolColor, Tool } from '../models/tool';
@@ -27,7 +28,7 @@ export class EllipseTool implements Tool {
 
   drawEllipse(x: number, y: number, canvas: HTMLCanvasElement, targetContext: CanvasRenderingContext2D, previewContext: CanvasRenderingContext2D): void {
     // TODO: Fill styles, no anti-alias
-    previewContext.clearRect(0, 0, canvas.width, canvas.height);
+    clearContext(previewContext);
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
       targetContext.fillRect(x, y, 1, 1);
     });

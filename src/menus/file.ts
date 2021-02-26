@@ -35,7 +35,6 @@ export const fileMenu: MenuEntry = {
     {
       caption: 'Save As…',
       mnemonic: 'A',
-      shortcut: 'Ctrl+A',
       helpText: 'Saves the active document with a new name.',
       instance: new SaveAsAction(),
     },

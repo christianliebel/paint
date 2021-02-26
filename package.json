@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/christianliebel/paint#readme",
   "dependencies": {
+    "break-styled-lines": "^1.2.2",
     "bresenham-zingl": "^0.1.1",
     "browser-fs-access": "^0.13.1",
     "hotkeys-js": "^3.8.2",

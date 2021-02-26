@@ -1,4 +1,5 @@
 import { line } from 'bresenham-zingl';
+import { clearContext } from '../helpers/clear-context';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
 import type { Tool, ToolColor } from '../models/tool';
@@ -60,7 +61,7 @@ export class RectangleTool implements Tool {
     canvas: HTMLCanvasElement,
     color: ToolColor,
   ): void {
-    previewContext.clearRect(0, 0, canvas.width, canvas.height);
+    clearContext(previewContext);
 
     const x1 = Math.min(this.startPosition.x, x);
     const x2 = Math.max(this.startPosition.x, x);

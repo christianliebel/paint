@@ -1,5 +1,6 @@
-import { css, CSSResult, html, LitElement, property, PropertyValues, TemplateResult } from 'lit-element';
+import { css, CSSResult, customElement, html, LitElement, property, PropertyValues, TemplateResult } from 'lit-element';
 
+@customElement('paint-dialog-about')
 export class About extends LitElement {
   @property({ attribute: false }) totalFreeMemory?: number;
   @property({ attribute: false }) freeMemoryPercentage?: number;
@@ -120,5 +121,3 @@ export class About extends LitElement {
     );
   }
 }
-
-customElements.define('paint-dialog-about', About);

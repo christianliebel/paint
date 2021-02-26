@@ -104,3 +104,19 @@ interface ShareData {
 interface Navigator {
   canShare?: (data?: ShareData) => boolean;
 }
+
+// Type declarations for Local Font Access API
+interface FontMetadata {
+  blob(): Promise<Blob>;
+  postscriptName: string;
+  fullName: string;
+  family: string;
+}
+
+interface FontManager {
+  query(): AsyncIterable<FontMetadata>;
+}
+
+interface Navigator {
+  fonts: FontManager;
+}

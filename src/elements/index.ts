@@ -1,5 +1,6 @@
 import './dialogs/about';
 import './dialogs/flip-and-rotate';
+import './dialogs/text-toolbar';
 import './window/window';
 import './window/title-bar-button';
 import './app';
@@ -13,6 +14,7 @@ import './menu';
 import './menu-bar';
 import './ruler';
 import './status-bar';
+import './text-area';
 import './tool';
 import './tool-bar';
 import './tool-box';

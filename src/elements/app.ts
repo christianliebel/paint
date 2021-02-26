@@ -1,18 +1,27 @@
 import hotkeys from 'hotkeys-js';
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import {
+  css,
+  CSSResult,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  TemplateResult,
+} from 'lit-element';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { getLaunchImage } from '../helpers/file-handling-api';
 import { menus } from '../menus/all';
+import type { DrawingContext } from '../models/drawing-context';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
 @customElement('paint-app')
 export class App extends LitElement {
-  @property({ attribute: false }) areaText = '';
-  @property({ attribute: false }) coordinateText = '';
-  @property({ attribute: false }) helpText = defaultHelpText;
-  @property({ attribute: false }) drawingContext = DRAWING_CONTEXT;
+  @internalProperty() areaText = '';
+  @internalProperty() coordinateText = '';
+  @internalProperty() helpText = defaultHelpText;
+  @internalProperty() drawingContext = DRAWING_CONTEXT;
 
   static get styles(): CSSResult {
     return css`
@@ -34,8 +43,8 @@ export class App extends LitElement {
         --z-index-dialog: 20;
 
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol';
+          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+          'Segoe UI Symbol';
         font-size: 9pt;
 
         display: inline-flex;
@@ -127,38 +136,25 @@ export class App extends LitElement {
     this.coordinateText = '';
     this.helpText = defaultHelpText;
     this.drawingContext = DRAWING_CONTEXT;
-    this.addEventListener(
-      'set-help-text',
-      ((event: CustomEvent) => {
-        this.helpText = event.detail ?? defaultHelpText;
-      }) as EventListener,
-    );
-    this.addEventListener(
-      'coordinate',
-      ((event: CustomEvent) => {
-        this.coordinateText = event.detail ? `${event.detail.x},${event.detail.y}` : '';
-      }) as EventListener,
-    );
-    this.addEventListener(
-      'area',
-      ((event: CustomEvent) => {
-        this.areaText = event.detail
-          ? `${event.detail.width}x${event.detail.height}`
-          : '';
-      }) as EventListener,
-    );
-    this.addEventListener(
-      'drawing-context-changed',
-      ((event: CustomEvent) => {
-        this.drawingContext = event.detail;
-      }) as EventListener,
-    );
-    this.addEventListener(
-      'invoke-action',
-      ((event: CustomEvent) => {
-        event.detail(this.drawingContext);
-      }) as EventListener,
-    );
+    this.addEventListener('set-help-text', ((event: CustomEvent) => {
+      this.helpText = event.detail ?? defaultHelpText;
+    }) as EventListener);
+    this.addEventListener('coordinate', ((event: CustomEvent) => {
+      this.coordinateText = event.detail
+        ? `${event.detail.x},${event.detail.y}`
+        : '';
+    }) as EventListener);
+    this.addEventListener('area', ((event: CustomEvent) => {
+      this.areaText = event.detail
+        ? `${event.detail.width}x${event.detail.height}`
+        : '';
+    }) as EventListener);
+    this.addEventListener('drawing-context-changed', ((event: CustomEvent) => {
+      this.drawingContext = event.detail;
+    }) as EventListener);
+    this.addEventListener('invoke-action', ((event: CustomEvent) => {
+      event.detail(this.drawingContext);
+    }) as EventListener);
     this.addEventListener('canvas-ready', () =>
       getLaunchImage(this.drawingContext),
     );
@@ -181,7 +177,7 @@ export class App extends LitElement {
           : entry.shortcut;
         // TODO: Replace PgUp, PgDn + others…
         hotkeys(hotkey.replace('Shft', 'shift'), () => {
-          if (entry.instance && 'canExecute' in entry.instance && typeof entry.instance.canExecute === 'function' && entry.instance.canExecute(this.drawingContext)) {
+          if (this.canActionExecute(entry, this.drawingContext)) {
             this.dispatchEvent(
               new CustomEvent('invoke-action', {
                 detail: entry.instance?.execute.bind(entry.instance),
@@ -196,42 +192,56 @@ export class App extends LitElement {
     });
   }
 
+  canActionExecute(entry: MenuEntry, drawingContext: DrawingContext): boolean {
+    if (!entry.instance) {
+      return false;
+    }
+
+    if (!entry.instance.canExecute) {
+      return true;
+    }
+
+    return entry.instance.canExecute(drawingContext);
+  }
+
   render(): TemplateResult {
     document.title = `${this.drawingContext.document.title} - Paint`;
     return html`
-        <paint-menu-bar
-                .entries="${menus}"
+      <paint-menu-bar
+        .entries="${menus}"
+        .drawingContext="${this.drawingContext}"
+      ></paint-menu-bar>
+      <div>
+        ${this.drawingContext.view.toolBox
+          ? html` <paint-tool-bar>
+              <paint-ruler></paint-ruler>
+              <paint-tool-box
                 .drawingContext="${this.drawingContext}"
-        ></paint-menu-bar>
-        <div>
-            ${this.drawingContext.view.toolBox
-                    ? html`
-                        <paint-tool-bar>
-                            <paint-ruler></paint-ruler>
-                            <paint-tool-box
-                                    .drawingContext="${this.drawingContext}"
-                            ></paint-tool-box>
-                            <paint-ruler></paint-ruler>
-                        </paint-tool-bar>`
-                    : ''}
-            <paint-canvas .drawingContext="${this.drawingContext}"></paint-canvas>
-        </div>
-        ${this.drawingContext.view.colorBox
-                ? html`
-                    <paint-tool-bar class="color-box">
-                        <paint-color-box .drawingContext="${this.drawingContext}">
-                        </paint-color-box>
-                        <paint-ruler></paint-ruler>
-                    </paint-tool-bar>`
-                : ''}
-        ${this.drawingContext.view.statusBar
-                ? html`
-                    <paint-status-bar
-                            helpText="${this.helpText}"
-                            coordinateText="${this.coordinateText}"
-                            areaText="${this.areaText}"
-                    ></paint-status-bar>`
-                : ''}
+              ></paint-tool-box>
+              <paint-ruler></paint-ruler>
+            </paint-tool-bar>`
+          : ''}
+        <paint-canvas .drawingContext="${this.drawingContext}"></paint-canvas>
+      </div>
+      ${this.drawingContext.view.colorBox
+        ? html` <paint-tool-bar class="color-box">
+            <paint-color-box .drawingContext="${this.drawingContext}">
+            </paint-color-box>
+            <paint-ruler></paint-ruler>
+          </paint-tool-bar>`
+        : ''}
+      ${this.drawingContext.view.statusBar
+        ? html` <paint-status-bar
+            helpText="${this.helpText}"
+            coordinateText="${this.coordinateText}"
+            areaText="${this.areaText}"
+          ></paint-status-bar>`
+        : ''}
+      ${this.drawingContext.view.textToolbar
+        ? html` <paint-dialog-text-toolbar
+            .drawingContext="${this.drawingContext}"
+          ></paint-dialog-text-toolbar>`
+        : ''}
     `;
   }
 }

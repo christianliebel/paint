@@ -1,3 +1,4 @@
+import type { TextContext } from './text-context';
 import type { Brush } from './brush';
 import type { FillStyle } from './fill-style';
 import type { Selection } from './selection';
@@ -9,7 +10,7 @@ export interface DrawingContext {
   magnifierSize: number;
   airbrushSize: number;
 
-  colors: { primary: string, secondary: string };
+  colors: { primary: string; secondary: string };
   palette: string[];
   previewColor: string | null;
   drawOpaque: boolean;
@@ -17,10 +18,16 @@ export interface DrawingContext {
   fillStyle: FillStyle;
   tool: ToolDefinition;
   selection: Selection | null;
-  view: { statusBar: boolean, colorBox: boolean, toolBox: boolean };
+  view: {
+    statusBar: boolean;
+    colorBox: boolean;
+    toolBox: boolean;
+    textToolbar: boolean;
+  };
   document: { title: string };
+  text: TextContext;
 
-  element: HTMLElement & { drawingContext: DrawingContext } | null;
+  element: (HTMLElement & { drawingContext: DrawingContext }) | null;
 
   previewCanvas: HTMLCanvasElement | null;
   previewContext: CanvasRenderingContext2D | null;
