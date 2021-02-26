@@ -26,10 +26,10 @@ export class EllipseTool implements Tool {
   }
 
   drawEllipse(x: number, y: number, canvas: HTMLCanvasElement, targetContext: CanvasRenderingContext2D, previewContext: CanvasRenderingContext2D): void {
-    // TODO: Fill styles, no anti-alias
+    // TODO: Fill styles
     previewContext.clearRect(0, 0, canvas.width, canvas.height);
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
-      targetContext.fillRect(x, y, 1, 1);
+      targetContext.fillRect(Math.floor(x), Math.floor(y), 1, 1);
     });
   }
 }
