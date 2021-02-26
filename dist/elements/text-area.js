@@ -232,7 +232,6 @@ export let TextArea = _decorate([customElement('paint-text-area')], function (_i
 
           if (underline) {
             const {
-              alphabeticBaseline,
               width
             } = context.measureText(line);
             context.fillRect(correctedX, correctedY + 1, width, 1);

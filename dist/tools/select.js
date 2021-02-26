@@ -12,9 +12,7 @@ export class SelectTool {
     });
   }
 
-  onPointerDown(x, y, {
-    previewContext
-  }) {
+  onPointerDown(x, y) {
     this.startPosition = {
       x,
       y
@@ -23,7 +21,6 @@ export class SelectTool {
 
   onPointerMove(x, y, {
     element,
-    canvas,
     previewContext
   }) {
     drawAreaRectangle(this.startPosition, {
@@ -38,7 +35,6 @@ export class SelectTool {
 
   onPointerUp(x, y, drawingContext) {
     const {
-      canvas,
       element,
       previewContext
     } = drawingContext;

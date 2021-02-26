@@ -34,7 +34,7 @@ export class TextTool {
     }, element);
   }
 
-  onPointerUp(x, y, drawingContext, color) {
+  onPointerUp(x, y, drawingContext) {
     clearContext(drawingContext.previewContext);
     const x1 = drawingContext.text.x = Math.min(x, this.startPosition.x);
     const y1 = drawingContext.text.y = Math.min(y, this.startPosition.y);
