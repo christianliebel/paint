@@ -5,7 +5,7 @@ import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-
 import { updateContext } from '../helpers/update-context';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
-import type { Tool, ToolColor } from '../models/tool';
+import type { Tool } from '../models/tool';
 
 export class TextTool implements Tool {
   private startPosition: Point = { x: 0, y: 0 };
@@ -23,12 +23,7 @@ export class TextTool implements Tool {
     dispatchAreaEvent(this.startPosition, { x, y }, element);
   }
 
-  onPointerUp(
-    x: number,
-    y: number,
-    drawingContext: DrawingContext,
-    color: ToolColor,
-  ): void {
+  onPointerUp(x: number, y: number, drawingContext: DrawingContext): void {
     clearContext(drawingContext.previewContext);
 
     const x1 = (drawingContext.text.x = Math.min(x, this.startPosition.x));

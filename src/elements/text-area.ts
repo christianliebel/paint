@@ -44,7 +44,7 @@ export class TextArea extends LitElement {
     `;
   }
 
-  protected firstUpdated(_changedProperties: PropertyValues) {
+  protected firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties);
 
     if (!this.textarea) {
@@ -93,14 +93,14 @@ export class TextArea extends LitElement {
     `;
   }
 
-  drawPreview() {
+  drawPreview(): void {
     if (this.drawingContext.previewContext) {
       clearContext(this.drawingContext.previewContext);
       this.drawTextBox(this.drawingContext.previewContext);
     }
   }
 
-  commitTextBox() {
+  commitTextBox(): void {
     if (
       this.editingActive &&
       !this.drawingContext.text.active &&
@@ -115,7 +115,7 @@ export class TextArea extends LitElement {
     }
   }
 
-  drawTextBox(context: CanvasRenderingContext2D) {
+  drawTextBox(context: CanvasRenderingContext2D): void {
     const {
       x,
       y,
@@ -158,7 +158,7 @@ export class TextArea extends LitElement {
         context.fillText(line, correctedX, correctedY);
 
         if (underline) {
-          const { alphabeticBaseline, width } = context.measureText(line);
+          const { width } = context.measureText(line);
           context.fillRect(correctedX, correctedY + 1, width, 1);
         }
       });

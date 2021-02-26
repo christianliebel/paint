@@ -4,7 +4,7 @@ export function dispatchAreaEvent(
   startPosition: Point,
   endPosition: Point,
   element: HTMLElement | null,
-) {
+): void {
   element?.dispatchEvent(
     new CustomEvent('area', {
       detail: {
