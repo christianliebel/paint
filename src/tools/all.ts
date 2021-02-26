@@ -1,4 +1,5 @@
 import type { ToolDefinition } from '../models/tool-definition';
+import { Airbrush } from './airbrush';
 import { PickTool } from './pick';
 import { PencilTool } from './pencil';
 import { FillTool } from './fill';
@@ -69,6 +70,7 @@ export const AIRBRUSH: ToolDefinition = {
   tooltip: 'Airbrush',
   helpText: 'Draws using an airbrush of the selected size.',
   imagePosition: '-128px 0',
+  instance: new Airbrush(),
 };
 
 export const TEXT: ToolDefinition = {
