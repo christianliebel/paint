@@ -12,7 +12,7 @@ export class TextToolbarAction implements Action {
     return drawingContext.text.active;
   }
 
-  execute(drawingContext: DrawingContext): void | Promise<void> {
+  execute(drawingContext: DrawingContext): void {
     drawingContext.text.showToolbar = !drawingContext.text.showToolbar;
     evaluateTextToolbarVisibility(drawingContext);
     updateContext(drawingContext.element);
