@@ -6,14 +6,14 @@ import type { DrawingContext } from '../models/drawing-context';
 
 export class OpenAction implements Action {
   async execute(drawingContext: DrawingContext): Promise<void> {
-      const file = await fileOpen({
-        extensions: ['.png'],
-        description: 'PNG Files',
-      });
-      drawingContext.document.handle = file.handle;
-      drawingContext.document.title = file.name;
-      updateContext(drawingContext.element);
+    const file = await fileOpen({
+      extensions: ['.png'],
+      description: 'PNG Files',
+    });
+    drawingContext.document.handle = file.handle;
+    drawingContext.document.title = file.name;
+    updateContext(drawingContext.element);
 
-      loadFileAndAdjustCanvas(file, drawingContext);
+    await loadFileAndAdjustCanvas(file, drawingContext);
   }
 }
