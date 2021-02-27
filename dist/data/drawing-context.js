@@ -41,7 +41,7 @@ export const DRAWING_CONTEXT = {
     statusBar: true,
     colorBox: true,
     toolBox: true,
-    textToolbar: false
+    textToolbar: true
   },
   document: {
     title: 'untitled'
