@@ -120,7 +120,9 @@ class ToolBox extends LitElement {
     }
 
     if (AIRBRUSH === tool) {
-      return html`TBD`;
+      return html`<paint-tool-airbrush
+              .drawingContext="${this.drawingContext}"
+      ></paint-tool-airbrush>`;
     }
 
     if (MAGNIFIER === tool) {

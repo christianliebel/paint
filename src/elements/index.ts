@@ -16,6 +16,7 @@ import './ruler';
 import './status-bar';
 import './text-area';
 import './tool';
+import './tool-airbrush';
 import './tool-bar';
 import './tool-box';
 import './tool-brush';

@@ -45,7 +45,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
     type: 'circle',
     size: 4,
   },
-  airbrushSize: -1,
+  airbrushSize: 9,
   fillStyle: {
     stroke: true,
     fill: false,
