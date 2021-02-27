@@ -33,8 +33,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { css, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
-import { AIRBRUSH, BRUSH, CURVE, ERASER, FREE_FORM_SELECT, LINE, MAGNIFIER, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, SELECT, TEXT, tools } from '../tools/all.js';
 import { updateContext } from '../helpers/update-context.js';
+import { AIRBRUSH, BRUSH, CURVE, ERASER, FREE_FORM_SELECT, LINE, MAGNIFIER, PENCIL, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, SELECT, TEXT, tools } from '../tools/all.js';
 
 let ToolBox = _decorate(null, function (_initialize, _LitElement) {
   class ToolBox extends _LitElement {
@@ -99,27 +99,37 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
       key: "render",
       value: function render() {
         return html`
-      ${tools.map(tool => html` <paint-tool
-          .tool=${tool}
-          title="${tool.tooltip}"
-          class="${this.drawingContext?.tool === tool ? 'active' : ''} ${tool.instance ? '' : 'unavailable'}"
-          @pointerup="${() => this.selectTool(tool)}"
-        ></paint-tool>`)}
-      <paint-inset-container>
-        ${this.getToolHtml(this.drawingContext?.tool)}
-      </paint-inset-container>
+        ${tools.map(tool => html`
+                    <paint-tool
+                            .tool=${tool}
+                            title="${tool.tooltip}"
+                            class="${this.drawingContext?.tool === tool ? 'active' : ''} ${tool.instance ? '' : 'unavailable'}"
+                            @pointerup="${() => this.selectTool(tool)}"
+                    ></paint-tool>`)}
+        <paint-inset-container>
+            ${this.getToolHtml(this.drawingContext.tool)}
+        </paint-inset-container>
     `;
       }
     }, {
       kind: "method",
       key: "selectTool",
       value: function selectTool(tool) {
-        if (this.drawingContext) {
-          this.drawingContext.text.active = false;
-          evaluateTextToolbarVisibility(this.drawingContext);
-          this.drawingContext.tool = tool;
-          updateContext(this);
+        this.drawingContext.text.active = false;
+        evaluateTextToolbarVisibility(this.drawingContext);
+
+        if (this.isEditingTool(this.drawingContext.tool)) {
+          this.drawingContext.previousEditingTool = this.drawingContext.tool;
         }
+
+        this.drawingContext.tool = tool;
+        updateContext(this);
+      }
+    }, {
+      kind: "method",
+      key: "isEditingTool",
+      value: function isEditingTool(tool) {
+        return [AIRBRUSH, BRUSH, CURVE, ERASER, LINE, PENCIL, POLYGON, RECTANGLE, ROUNDED_RECTANGLE].includes(tool);
       }
     }, {
       kind: "method",
@@ -140,31 +150,37 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
         if ([RECTANGLE,
         /* ELLIPSE, */
         POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
-          return html`<paint-tool-fill-style
-        .drawingContext="${this.drawingContext}"
-      ></paint-tool-fill-style>`;
+          return html`
+          <paint-tool-fill-style
+                  .drawingContext="${this.drawingContext}"
+          ></paint-tool-fill-style>`;
         }
 
         if ([FREE_FORM_SELECT, SELECT, TEXT].includes(tool)) {
-          return html`<paint-tool-draw-opaque
-        .drawingContext="${this.drawingContext}"
-      ></paint-tool-draw-opaque>`;
+          return html`
+          <paint-tool-draw-opaque
+                  .drawingContext="${this.drawingContext}"
+          ></paint-tool-draw-opaque>`;
         }
 
         if (ERASER === tool) {
-          return html`<paint-tool-eraser-size
-        .drawingContext="${this.drawingContext}"
-      ></paint-tool-eraser-size>`;
+          return html`
+          <paint-tool-eraser-size
+                  .drawingContext="${this.drawingContext}"
+          ></paint-tool-eraser-size>`;
         }
 
         if (BRUSH === tool) {
-          return html`<paint-tool-brush
-        .drawingContext="${this.drawingContext}"
-      ></paint-tool-brush>`;
+          return html`
+          <paint-tool-brush
+                  .drawingContext="${this.drawingContext}"
+          ></paint-tool-brush>`;
         }
 
         if (AIRBRUSH === tool) {
-          return html`TBD`;
+          return html`<paint-tool-airbrush
+              .drawingContext="${this.drawingContext}"
+      ></paint-tool-airbrush>`;
         }
 
         if (MAGNIFIER === tool) {

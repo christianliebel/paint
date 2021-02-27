@@ -16,6 +16,7 @@ import './ruler.js';
 import './status-bar.js';
 import './text-area.js';
 import './tool.js';
+import './tool-airbrush.js';
 import './tool-bar.js';
 import './tool-box.js';
 import './tool-brush.js';

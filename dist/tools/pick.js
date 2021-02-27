@@ -15,6 +15,11 @@ export class PickTool {
     if (drawingContext.context) {
       drawingContext.previewColor = null;
       drawingContext.colors[color.stroke.key] = this.pickColor(x, y, drawingContext.context);
+
+      if (drawingContext.previousEditingTool) {
+        drawingContext.tool = drawingContext.previousEditingTool;
+      }
+
       updateContext(drawingContext.element);
     }
   }

@@ -1,3 +1,4 @@
+import { Airbrush } from './airbrush.js';
 import { PickTool } from './pick.js';
 import { PencilTool } from './pencil.js';
 import { FillTool } from './fill.js';
@@ -58,7 +59,8 @@ export const BRUSH = {
 export const AIRBRUSH = {
   tooltip: 'Airbrush',
   helpText: 'Draws using an airbrush of the selected size.',
-  imagePosition: '-128px 0'
+  imagePosition: '-128px 0',
+  instance: new Airbrush()
 };
 export const TEXT = {
   tooltip: 'Text',
