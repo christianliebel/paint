@@ -22,6 +22,9 @@ export class PickTool implements Tool {
         y,
         drawingContext.context,
       );
+      if (drawingContext.previousEditingTool) {
+        drawingContext.tool = drawingContext.previousEditingTool;
+      }
       updateContext(drawingContext.element);
     }
   }
