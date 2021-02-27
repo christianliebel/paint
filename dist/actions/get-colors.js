@@ -3,7 +3,8 @@ import { updateContext } from '../helpers/update-context.js';
 export class GetColorsAction {
   async execute(drawingContext) {
     const file = await fileOpen({
-      extensions: ['.pal']
+      extensions: ['.pal'],
+      description: 'Palette'
     });
     const buffer = await file.arrayBuffer();
     const dataView = new DataView(buffer);

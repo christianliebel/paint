@@ -48,7 +48,8 @@ export class SaveColorsAction {
     });
     await fileSave(blob, {
       fileName: 'untitled.pal',
-      extensions: ['.pal']
+      extensions: ['.pal'],
+      description: 'Palette'
     });
   }
 

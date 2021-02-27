@@ -30,13 +30,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
+import { css, customElement, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
 import { updateContext } from '../helpers/update-context.js';
 import { AIRBRUSH, BRUSH, CURVE, ERASER, FREE_FORM_SELECT, LINE, MAGNIFIER, PENCIL, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, SELECT, TEXT, tools } from '../tools/all.js';
-
-let ToolBox = _decorate(null, function (_initialize, _LitElement) {
+export let ToolBox = _decorate([customElement('paint-tool-box')], function (_initialize, _LitElement) {
   class ToolBox extends _LitElement {
     constructor(...args) {
       super(...args);
@@ -99,16 +98,15 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
       key: "render",
       value: function render() {
         return html`
-        ${tools.map(tool => html`
-                    <paint-tool
-                            .tool=${tool}
-                            title="${tool.tooltip}"
-                            class="${this.drawingContext?.tool === tool ? 'active' : ''} ${tool.instance ? '' : 'unavailable'}"
-                            @pointerup="${() => this.selectTool(tool)}"
-                    ></paint-tool>`)}
-        <paint-inset-container>
-            ${this.getToolHtml(this.drawingContext.tool)}
-        </paint-inset-container>
+      ${tools.map(tool => html` <paint-tool
+          .tool=${tool}
+          title="${tool.tooltip}"
+          class="${this.drawingContext?.tool === tool ? 'active' : ''} ${tool.instance ? '' : 'unavailable'}"
+          @pointerup="${() => this.selectTool(tool)}"
+        ></paint-tool>`)}
+      <paint-inset-container>
+        ${this.getToolHtml(this.drawingContext.tool)}
+      </paint-inset-container>
     `;
       }
     }, {
@@ -150,37 +148,34 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
         if ([RECTANGLE,
         /* ELLIPSE, */
         POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
-          return html`
-          <paint-tool-fill-style
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-fill-style>`;
+          return html` <paint-tool-fill-style
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-fill-style>`;
         }
 
         if ([FREE_FORM_SELECT, SELECT, TEXT].includes(tool)) {
-          return html`
-          <paint-tool-draw-opaque
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-draw-opaque>`;
+          return html` <paint-tool-draw-opaque
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-draw-opaque>`;
         }
 
         if (ERASER === tool) {
-          return html`
-          <paint-tool-eraser-size
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-eraser-size>`;
+          return html` <paint-tool-eraser-size
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-eraser-size>`;
         }
 
         if (BRUSH === tool) {
-          return html`
-          <paint-tool-brush
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-brush>`;
+          return html` <paint-tool-brush
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-brush>`;
         }
 
         if (AIRBRUSH === tool) {
-          return html`<paint-tool-airbrush
-              .drawingContext="${this.drawingContext}"
-      ></paint-tool-airbrush>`;
+          return html`
+          <paint-tool-airbrush
+                  .drawingContext="${this.drawingContext}"
+          ></paint-tool-airbrush>`;
         }
 
         if (MAGNIFIER === tool) {
@@ -192,5 +187,3 @@ let ToolBox = _decorate(null, function (_initialize, _LitElement) {
     }]
   };
 }, LitElement);
-
-customElements.define('paint-tool-box', ToolBox);

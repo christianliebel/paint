@@ -1,9 +1,15 @@
+import { fileSave } from '../../_snowpack/pkg/browser-fs-access.js';
+import { toBlob } from '../helpers/to-blob.js';
 import { SaveAsAction } from './save-as.js';
 export class SaveAction {
-  execute(drawingContext) {
+  async execute(drawingContext) {
     // TODO: Document Context
-    // TODO: Overwrite file if we have a handle, otherwise "save as"
-    new SaveAsAction().execute(drawingContext);
+    if (drawingContext.canvas && drawingContext.document.handle) {
+      const blob = await toBlob(drawingContext.canvas);
+      await fileSave(blob, undefined, drawingContext.document.handle);
+    } else {
+      await new SaveAsAction().execute(drawingContext);
+    }
   }
 
 }

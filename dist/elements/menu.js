@@ -174,7 +174,7 @@ export let Menu = _decorate([customElement('paint-menu')], function (_initialize
       kind: "method",
       key: "render",
       value: function render() {
-        return html`<div class="frame">
+        return html` <div class="frame">
       ${this.entries.map(entry => this.getMenuEntry(entry))}
     </div>`;
       }
@@ -183,7 +183,7 @@ export let Menu = _decorate([customElement('paint-menu')], function (_initialize
       key: "getMenuEntry",
       value: function getMenuEntry(entry) {
         if ('separator' in entry) {
-          return html`<paint-ruler></paint-ruler>`;
+          return html` <paint-ruler></paint-ruler>`;
         }
 
         return html`
@@ -226,8 +226,7 @@ export let Menu = _decorate([customElement('paint-menu')], function (_initialize
       kind: "method",
       key: "isChecked",
       value: function isChecked(entry) {
-        // TODO: entry.checked should eventually go away
-        return !!(entry.checked || entry.instance?.isChecked && entry.instance.isChecked(this.drawingContext));
+        return !!(entry.instance?.isChecked && entry.instance.isChecked(this.drawingContext));
       }
     }, {
       kind: "method",
