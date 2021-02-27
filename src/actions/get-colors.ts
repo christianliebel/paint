@@ -1,11 +1,14 @@
 import { fileOpen } from 'browser-fs-access';
-import type { DrawingContext } from '../models/drawing-context';
 import { updateContext } from '../helpers/update-context';
 import type { Action } from '../models/action';
+import type { DrawingContext } from '../models/drawing-context';
 
 export class GetColorsAction implements Action {
   async execute(drawingContext: DrawingContext): Promise<void> {
-    const file = await fileOpen({ extensions: ['.pal'] });
+    const file = await fileOpen({
+      extensions: ['.pal'],
+      description: 'Palette',
+    });
     const buffer = await file.arrayBuffer();
     const dataView = new DataView(buffer);
     const textDecoder = new TextDecoder();

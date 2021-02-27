@@ -1,3 +1,4 @@
+import type { FileSystemHandle } from 'browser-fs-access';
 import type { TextContext } from './text-context';
 import type { Brush } from './brush';
 import type { FillStyle } from './fill-style';
@@ -25,7 +26,7 @@ export interface DrawingContext {
     toolBox: boolean;
     textToolbar: boolean;
   };
-  document: { title: string };
+  document: { title: string, handle?: FileSystemHandle };
   text: TextContext;
 
   element: (HTMLElement & { drawingContext: DrawingContext }) | null;

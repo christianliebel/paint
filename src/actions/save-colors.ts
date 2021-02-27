@@ -1,6 +1,6 @@
 import { fileSave } from 'browser-fs-access';
-import type { DrawingContext } from '../models/drawing-context';
 import type { Action } from '../models/action';
+import type { DrawingContext } from '../models/drawing-context';
 
 export class SaveColorsAction implements Action {
   async execute({ palette }: DrawingContext): Promise<void> {
@@ -43,6 +43,10 @@ export class SaveColorsAction implements Action {
     }
 
     const blob = new Blob([buffer], { type: 'application/octet-stream' });
-    await fileSave(blob, { fileName: 'untitled.pal', extensions: ['.pal'] });
+    await fileSave(blob, {
+      fileName: 'untitled.pal',
+      extensions: ['.pal'],
+      description: 'Palette',
+    });
   }
 }

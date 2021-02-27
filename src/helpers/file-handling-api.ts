@@ -1,20 +1,16 @@
+import type { FileSystemHandle } from 'browser-fs-access';
 import type { DrawingContext } from '../models/drawing-context';
-import { getImageFromBlob } from './get-image-from-blob';
+import { loadFileAndAdjustCanvas } from './load-file-and-adjust-canvas';
 
-export function getLaunchImage({ canvas, previewCanvas, context }: DrawingContext): void {
-  if ('launchQueue' in window && canvas && previewCanvas && context) {
-    window.launchQueue.setConsumer(async params => {
+export function getLaunchImage(drawingContext: DrawingContext): void {
+  if ('launchQueue' in window) {
+    window.launchQueue.setConsumer(async (params) => {
       const [handle] = params.files;
       if (handle) {
         const file = await handle.getFile();
-        const image = await getImageFromBlob(file);
-        // TODO: Update document context (file name)
-        // TODO: Duplicated from open.js, unify.
-        canvas.width = previewCanvas.width = image.width;
-        canvas.height = previewCanvas.height = image.height;
-        context.fillStyle = 'white';
-        context.fillRect(0, 0, image.width, image.height);
-        context.drawImage(image, 0, 0);
+        drawingContext.document.title = file.name;
+        drawingContext.document.handle = (handle as unknown) as FileSystemHandle;
+        await loadFileAndAdjustCanvas(file, drawingContext);
       }
     });
   }
