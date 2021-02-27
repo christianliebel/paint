@@ -56,7 +56,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
     statusBar: true,
     colorBox: true,
     toolBox: true,
-    textToolbar: false,
+    textToolbar: true,
   },
   document: {
     title: 'untitled',
