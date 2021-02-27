@@ -1,4 +1,12 @@
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import {
+  css,
+  CSSResult,
+  customElement,
+  html,
+  LitElement,
+  property,
+  TemplateResult,
+} from 'lit-element';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { renderMnemonic } from '../helpers/render-mnemonic';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
@@ -116,14 +124,14 @@ export class Menu extends LitElement {
   }
 
   render(): TemplateResult {
-    return html`<div class="frame">
+    return html` <div class="frame">
       ${this.entries.map((entry) => this.getMenuEntry(entry))}
     </div>`;
   }
 
   getMenuEntry(entry: MenuEntry | MenuSeparator): TemplateResult {
     if ('separator' in entry) {
-      return html`<paint-ruler></paint-ruler>`;
+      return html` <paint-ruler></paint-ruler>`;
     }
 
     return html`
@@ -168,11 +176,8 @@ export class Menu extends LitElement {
   }
 
   isChecked(entry: MenuEntry): boolean {
-    // TODO: entry.checked should eventually go away
     return !!(
-      entry.checked ||
-      (entry.instance?.isChecked &&
-        entry.instance.isChecked(this.drawingContext))
+      entry.instance?.isChecked && entry.instance.isChecked(this.drawingContext)
     );
   }
 
