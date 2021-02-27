@@ -1,4 +1,11 @@
-import { css, html, LitElement, property, TemplateResult } from 'lit-element';
+import {
+  css,
+  CSSResult,
+  html,
+  LitElement,
+  property,
+  TemplateResult,
+} from 'lit-element';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
@@ -25,7 +32,7 @@ class ToolBox extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
   @property({ attribute: false }) tool?: ToolDefinition;
 
-  static get styles() {
+  static get styles(): CSSResult {
     return css`
       :host {
         display: flex;
