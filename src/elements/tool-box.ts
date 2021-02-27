@@ -1,6 +1,7 @@
 import {
   css,
   CSSResult,
+  customElement,
   html,
   LitElement,
   property,
@@ -28,7 +29,8 @@ import {
   tools,
 } from '../tools/all';
 
-class ToolBox extends LitElement {
+@customElement('paint-tool-box')
+export class ToolBox extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
   @property({ attribute: false }) tool?: ToolDefinition;
 
@@ -61,20 +63,19 @@ class ToolBox extends LitElement {
 
   render(): TemplateResult {
     return html`
-        ${tools.map(
-                (tool) => html`
-                    <paint-tool
-                            .tool=${tool}
-                            title="${tool.tooltip}"
-                            class="${this.drawingContext?.tool === tool
-                                    ? 'active'
-                                    : ''} ${tool.instance ? '' : 'unavailable'}"
-                            @pointerup="${() => this.selectTool(tool)}"
-                    ></paint-tool>`,
-        )}
-        <paint-inset-container>
-            ${this.getToolHtml(this.drawingContext.tool)}
-        </paint-inset-container>
+      ${tools.map(
+      (tool) => html` <paint-tool
+          .tool=${tool}
+          title="${tool.tooltip}"
+          class="${this.drawingContext?.tool === tool
+        ? 'active'
+        : ''} ${tool.instance ? '' : 'unavailable'}"
+          @pointerup="${() => this.selectTool(tool)}"
+        ></paint-tool>`,
+    )}
+      <paint-inset-container>
+        ${this.getToolHtml(this.drawingContext.tool)}
+      </paint-inset-container>
     `;
   }
 
@@ -118,37 +119,34 @@ class ToolBox extends LitElement {
     }
 
     if ([RECTANGLE, /* ELLIPSE, */ POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
-      return html`
-          <paint-tool-fill-style
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-fill-style>`;
+      return html` <paint-tool-fill-style
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-fill-style>`;
     }
 
     if ([FREE_FORM_SELECT, SELECT, TEXT].includes(tool)) {
-      return html`
-          <paint-tool-draw-opaque
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-draw-opaque>`;
+      return html` <paint-tool-draw-opaque
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-draw-opaque>`;
     }
 
     if (ERASER === tool) {
-      return html`
-          <paint-tool-eraser-size
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-eraser-size>`;
+      return html` <paint-tool-eraser-size
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-eraser-size>`;
     }
 
     if (BRUSH === tool) {
-      return html`
-          <paint-tool-brush
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-brush>`;
+      return html` <paint-tool-brush
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-brush>`;
     }
 
     if (AIRBRUSH === tool) {
-      return html`<paint-tool-airbrush
-              .drawingContext="${this.drawingContext}"
-      ></paint-tool-airbrush>`;
+      return html`
+          <paint-tool-airbrush
+                  .drawingContext="${this.drawingContext}"
+          ></paint-tool-airbrush>`;
     }
 
     if (MAGNIFIER === tool) {
@@ -158,5 +156,3 @@ class ToolBox extends LitElement {
     return '';
   }
 }
-
-customElements.define('paint-tool-box', ToolBox);
