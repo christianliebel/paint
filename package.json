@@ -46,7 +46,7 @@
     "snowpack": "^3.0.13",
     "ts-jest": "^26.5.2",
     "ts-mockito": "^2.6.1",
-    "typescript": "^4.2.2",
+    "typescript": "^4.2.3",
     "workbox-cli": "^6.1.1"
   },
   "husky": {
