@@ -102,6 +102,10 @@ export class ToolBrush extends LitElement {
         margin-left: 4px;
       }
 
+      div.selected {
+        color: var(--highlight-text);
+      }
+
       svg {
         margin: 2px;
         width: 8px;
@@ -110,11 +114,7 @@ export class ToolBrush extends LitElement {
       }
 
       path {
-        fill: var(--button-text);
-      }
-
-      .selected path {
-        fill: var(--highlight-text);
+        fill: currentColor;
       }
 
       .selected .selection {

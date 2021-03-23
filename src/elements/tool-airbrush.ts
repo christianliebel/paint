@@ -62,14 +62,11 @@ export class ToolAirbrush extends LitElement {
 
       li.selected {
         background-color: var(--highlight);
+        color: var(--highlight-text);
       }
 
       path {
-        fill: var(--button-text);
-      }
-
-      .selected path {
-        fill: var(--highlight-text);
+        fill: currentColor;
       }
     `;
   }

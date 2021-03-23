@@ -15,6 +15,7 @@ export class TitleBarButton extends LitElement {
         border-bottom-color: var(--button-darker);
         border-right-color: var(--button-darker);
         background-color: var(--button-face);
+        color: var(--button-text);
       }
 
       div.wrapper {
@@ -44,7 +45,7 @@ export class TitleBarButton extends LitElement {
       }
 
       path {
-        fill: var(--button-text);
+        fill: currentColor;
       }
     `;
   }
