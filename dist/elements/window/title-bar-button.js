@@ -83,6 +83,7 @@ export let TitleBarButton = _decorate([customElement('paint-window-title-bar-but
         border-bottom-color: var(--button-darker);
         border-right-color: var(--button-darker);
         background-color: var(--button-face);
+        color: var(--button-text);
       }
 
       div.wrapper {
@@ -112,7 +113,7 @@ export let TitleBarButton = _decorate([customElement('paint-window-title-bar-but
       }
 
       path {
-        fill: var(--button-text);
+        fill: currentColor;
       }
     `;
       }

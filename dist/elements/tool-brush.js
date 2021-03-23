@@ -131,6 +131,10 @@ export let ToolBrush = _decorate([customElement('paint-tool-brush')], function (
         margin-left: 4px;
       }
 
+      div.selected {
+        color: var(--highlight-text);
+      }
+
       svg {
         margin: 2px;
         width: 8px;
@@ -139,11 +143,7 @@ export let ToolBrush = _decorate([customElement('paint-tool-brush')], function (
       }
 
       path {
-        fill: var(--button-text);
-      }
-
-      .selected path {
-        fill: var(--highlight-text);
+        fill: currentColor;
       }
 
       .selected .selection {
