@@ -32,7 +32,7 @@
     "@babel/plugin-proposal-decorators": "^7.13.5",
     "@babel/preset-typescript": "^7.13.0",
     "@snowpack/plugin-babel": "^2.1.6",
-    "@snowpack/plugin-dotenv": "^2.0.5",
+    "@snowpack/plugin-dotenv": "^2.1.0",
     "@snowpack/plugin-typescript": "^1.2.0",
     "@types/jest": "^26.0.22",
     "@types/snowpack-env": "^2.3.2",
