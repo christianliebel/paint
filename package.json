@@ -36,7 +36,7 @@
     "@snowpack/plugin-typescript": "^1.2.0",
     "@types/jest": "^26.0.22",
     "@types/snowpack-env": "^2.3.2",
-    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
