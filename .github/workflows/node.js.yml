@@ -36,6 +36,10 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: touch build/.nojekyll
 
+      - name: Add CNAME file
+        if: github.ref == 'refs/heads/main'
+        run: echo 'paint.js.org' > CNAME
+
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@4.0.0
