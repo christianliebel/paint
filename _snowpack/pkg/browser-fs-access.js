@@ -1,13 +1,33 @@
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const e=(()=>{if("top"in self&&self!==top)try{top.location;}catch{return !1}else {if("chooseFileSystemEntries"in self)return "chooseFileSystemEntries";if("showOpenFilePicker"in self)return "showOpenFilePicker"}return !1})();
+const e = (() => {
+  if ("top" in self && self !== top)
+    try {
+      top.location;
+    } catch {
+      return false;
+    }
+  else {
+    if ("chooseFileSystemEntries" in self)
+      return "chooseFileSystemEntries";
+    if ("showOpenFilePicker" in self)
+      return "showOpenFilePicker";
+  }
+  return false;
+})();
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const s=e?"chooseFileSystemEntries"===e?import('./common/file-open-5eb48e45.js'):import('./common/file-open-aa0e13c8.js'):import('./common/file-open-fa934aa6.js');async function fileOpen(...e){return (await s).default(...e)}
+const s = e ? e === "chooseFileSystemEntries" ? import('./common/file-open-8c73418b.js') : import('./common/file-open-a3930c46.js') : import('./common/file-open-85548c20.js');
+async function fileOpen(...e2) {
+  return (await s).default(...e2);
+}
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-e?"chooseFileSystemEntries"===e?import('./common/directory-open-abd2ea6b.js'):import('./common/directory-open-15776d53.js'):import('./common/directory-open-9af7c83d.js');
+const o = e ? e === "chooseFileSystemEntries" ? import('./common/directory-open-dbc36b9d.js') : import('./common/directory-open-cded4e8b.js') : import('./common/directory-open-f431f395.js');
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const s$1=e?"chooseFileSystemEntries"===e?import('./common/file-save-bedc4f3a.js'):import('./common/file-save-9ed27b87.js'):import('./common/file-save-f0a9af4f.js');async function fileSave(...e){return (await s$1).default(...e)}
+const s$1 = e ? e === "chooseFileSystemEntries" ? import('./common/file-save-a93ed966.js') : import('./common/file-save-9a176833.js') : import('./common/file-save-e0516be4.js');
+async function fileSave(...e2) {
+  return (await s$1).default(...e2);
+}
 
 export { fileOpen, fileSave };

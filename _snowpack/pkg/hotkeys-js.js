@@ -7,7 +7,6 @@
  * 
  * Licensed under the MIT license.
  */
-
 var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false; // 绑定事件
 
 function addEvent(object, event, method) {
@@ -268,10 +267,10 @@ function unbind(keysInfo) {
   } else if (typeof keysInfo === 'string') {
     for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
       args[_key - 1] = arguments[_key];
-    }
-
-    // support old method
+    } // support old method
     // eslint-disable-line
+
+
     var scope = args[0],
         method = args[1];
 

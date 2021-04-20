@@ -1,16 +1,10 @@
-import { updateContext } from '../helpers/update-context.js';
+import {updateContext} from "../helpers/update-context.js";
 export class ColorBoxAction {
-  isChecked({
-    view: {
-      colorBox
-    }
-  }) {
+  isChecked({view: {colorBox}}) {
     return colorBox;
   }
-
   execute(drawingContext) {
     drawingContext.view.colorBox = !drawingContext.view.colorBox;
     updateContext(drawingContext.element);
   }
-
 }
