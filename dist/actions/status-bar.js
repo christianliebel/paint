@@ -1,10 +1,16 @@
-import {updateContext} from "../helpers/update-context.js";
+import { updateContext } from '../helpers/update-context.js';
 export class StatusBarAction {
-  isChecked({view: {statusBar}}) {
+  isChecked({
+    view: {
+      statusBar
+    }
+  }) {
     return statusBar;
   }
+
   execute(drawingContext) {
     drawingContext.view.statusBar = !drawingContext.view.statusBar;
     updateContext(drawingContext.element);
   }
+
 }

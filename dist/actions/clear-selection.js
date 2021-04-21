@@ -1,12 +1,25 @@
 export class ClearSelectionAction {
-  canExecute({selection}) {
+  canExecute({
+    selection
+  }) {
     return !!selection;
   }
-  execute({selection, context, colors}) {
+
+  execute({
+    selection,
+    context,
+    colors
+  }) {
     if (selection && context) {
       context.fillStyle = colors.secondary;
-      const {x, y, width, height} = selection;
+      const {
+        x,
+        y,
+        width,
+        height
+      } = selection;
       context.fillRect(x, y, width, height);
     }
   }
+
 }
