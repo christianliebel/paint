@@ -1,12 +1,5 @@
-import {
-  css,
-  CSSResult,
-  customElement,
-  html,
-  LitElement,
-  property,
-  TemplateResult,
-} from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
@@ -34,7 +27,7 @@ export class ToolBox extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
   @property({ attribute: false }) tool?: ToolDefinition;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         display: flex;
@@ -143,10 +136,9 @@ export class ToolBox extends LitElement {
     }
 
     if (AIRBRUSH === tool) {
-      return html`
-          <paint-tool-airbrush
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-airbrush>`;
+      return html` <paint-tool-airbrush
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-airbrush>`;
     }
 
     if (MAGNIFIER === tool) {

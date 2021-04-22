@@ -1,13 +1,6 @@
 import hotkeys from 'hotkeys-js';
-import {
-  css,
-  CSSResult,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  TemplateResult,
-} from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { getLaunchImage } from '../helpers/file-handling-api';
 import { menus } from '../menus/all';
@@ -18,12 +11,12 @@ const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 
 @customElement('paint-app')
 export class App extends LitElement {
-  @internalProperty() areaText = '';
-  @internalProperty() coordinateText = '';
-  @internalProperty() helpText = defaultHelpText;
-  @internalProperty() drawingContext = DRAWING_CONTEXT;
+  @state() areaText = '';
+  @state() coordinateText = '';
+  @state() helpText = defaultHelpText;
+  @state() drawingContext = DRAWING_CONTEXT;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         --button-face: rgb(192 192 192);

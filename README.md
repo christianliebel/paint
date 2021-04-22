@@ -19,7 +19,7 @@ This project is in an early state. Not all tools and actions are implemented rig
 
 This project demonstrates the use of:
 
-- [Web Components](https://www.webcomponents.org/introduction), the native component model of the web (via [lit-element](https://lit-element.polymer-project.org/))
+- [Web Components](https://www.webcomponents.org/introduction), the native component model of the web (via [Lit](https://lit.dev/))
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) for offline capability (via [Workbox](https://developers.google.com/web/tools/workbox))
 - [Web App Manifest](https://github.com/w3c/manifest) for installability
 - [File System Access API](https://web.dev/file-system-access/) for file system access (via [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access))

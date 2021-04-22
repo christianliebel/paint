@@ -1,14 +1,12 @@
 import {
   css,
-  CSSResult,
-  customElement,
+  CSSResultGroup,
   html,
-  internalProperty,
   LitElement,
-  property,
   PropertyValues,
   TemplateResult,
-} from 'lit-element';
+} from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../../data/drawing-context';
 import { FONT_SIZES } from '../../data/font-sizes';
 import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility';
@@ -19,10 +17,10 @@ import { updateContext } from '../../helpers/update-context';
 export class TextToolbarDialog extends LitElement {
   @property({ type: Object }) drawingContext = DRAWING_CONTEXT;
 
-  @internalProperty() fonts: string[] = [];
+  @state() fonts: string[] = [];
   readonly fontSizes = FONT_SIZES;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       paint-window {
         position: absolute;

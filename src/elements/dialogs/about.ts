@@ -1,11 +1,19 @@
-import { css, CSSResult, customElement, html, LitElement, property, PropertyValues, TemplateResult } from 'lit-element';
+import {
+  css,
+  CSSResultGroup,
+  html,
+  LitElement,
+  PropertyValues,
+  TemplateResult,
+} from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('paint-dialog-about')
 export class About extends LitElement {
   @property({ attribute: false }) totalFreeMemory?: number;
   @property({ attribute: false }) freeMemoryPercentage?: number;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         position: absolute;
