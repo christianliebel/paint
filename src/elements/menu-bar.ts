@@ -1,4 +1,5 @@
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { renderMnemonic } from '../helpers/render-mnemonic';
 import type { MenuEntry } from '../models/menu';
@@ -9,7 +10,7 @@ export class MenuBar extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
   @property({ attribute: false }) activeMenu: MenuEntry | null = null;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         background-color: var(--button-face);

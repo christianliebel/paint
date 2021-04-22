@@ -1,11 +1,12 @@
-import { css, CSSResult, customElement, LitElement, property } from 'lit-element';
+import { css, CSSResultGroup, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 
 @customElement('paint-tool-color-preview')
 export class ToolColorPreview extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         display: block;

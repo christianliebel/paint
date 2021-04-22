@@ -1,4 +1,4 @@
-import { TemplateResult, html } from 'lit-element';
+import { TemplateResult, html } from 'lit';
 
 export function renderMnemonic(caption: string, mnemonic?: string): TemplateResult {
   const index = mnemonic ? caption.indexOf(mnemonic) : -1;

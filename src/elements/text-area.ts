@@ -1,15 +1,13 @@
 import breakLines from 'break-styled-lines';
 import {
   css,
-  CSSResult,
-  customElement,
+  CSSResultGroup,
   html,
   LitElement,
-  property,
   PropertyValues,
-  query,
   TemplateResult,
-} from 'lit-element';
+} from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { clearContext } from '../helpers/clear-context';
 
@@ -23,7 +21,7 @@ export class TextArea extends LitElement {
 
   @query('textarea') textarea?: HTMLTextAreaElement;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       textarea {
         position: absolute;

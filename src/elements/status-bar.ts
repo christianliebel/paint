@@ -1,4 +1,5 @@
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('paint-status-bar')
 export class StatusBar extends LitElement {
@@ -6,7 +7,7 @@ export class StatusBar extends LitElement {
   @property() coordinateText = '';
   @property() areaText = '';
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         background-color: var(--button-face);

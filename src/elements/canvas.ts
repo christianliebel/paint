@@ -1,12 +1,5 @@
-import {
-  css,
-  CSSResult,
-  customElement,
-  html,
-  LitElement,
-  property,
-  TemplateResult,
-} from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
@@ -28,7 +21,7 @@ export class Canvas extends LitElement {
   private pointerDown = false;
   private previewColor: 'primary' | 'secondary' = 'primary';
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         height: 100%;
@@ -69,7 +62,8 @@ export class Canvas extends LitElement {
         place-self: center;
       }
 
-      canvas, paint-text-area {
+      canvas,
+      paint-text-area {
         grid-row: 2;
         grid-column: 2;
       }

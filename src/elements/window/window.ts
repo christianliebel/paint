@@ -1,4 +1,5 @@
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import type { Point } from '../../models/point';
 import type { PointerPosition } from '../../models/pointer-position';
 
@@ -14,7 +15,7 @@ export class Window extends LitElement {
   pointerUpListener: (pointerPosition: PointerPosition) => void;
   pointerMoveListener: (pointerPosition: PointerPosition) => void;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         border: 1px solid var(--button-face);

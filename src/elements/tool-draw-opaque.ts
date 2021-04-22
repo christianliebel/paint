@@ -1,4 +1,5 @@
-import { css, CSSResult, customElement, html, LitElement, property, TemplateResult } from 'lit-element';
+import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { updateContext } from '../helpers/update-context';
 
@@ -6,7 +7,7 @@ import { updateContext } from '../helpers/update-context';
 export class ToolDrawOpaque extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       ul {
         list-style-type: none;
