@@ -30,7 +30,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { renderMnemonic } from '../helpers/render-mnemonic.js';
 export let Menu = _decorate([customElement('paint-menu')], function (_initialize, _LitElement) {

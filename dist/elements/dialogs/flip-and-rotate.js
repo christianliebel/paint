@@ -30,7 +30,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement } from '../../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
+import { customElement } from '../../../_snowpack/pkg/lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic.js';
 export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotate')], function (_initialize, _LitElement) {
   class FlipAndRotate extends _LitElement {

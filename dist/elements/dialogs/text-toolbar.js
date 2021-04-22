@@ -36,7 +36,8 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-import { css, customElement, html, internalProperty, LitElement, property } from '../../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
+import { customElement, property, state } from '../../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../../data/drawing-context.js';
 import { FONT_SIZES } from '../../data/font-sizes.js';
 import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility.js';
@@ -67,7 +68,7 @@ export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolb
 
     }, {
       kind: "field",
-      decorators: [internalProperty()],
+      decorators: [state()],
       key: "fonts",
 
       value() {

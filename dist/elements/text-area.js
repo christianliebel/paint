@@ -37,7 +37,8 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 import breakLines from '../../_snowpack/pkg/break-styled-lines.js';
-import { css, customElement, html, LitElement, property, query } from '../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement, property, query } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { clearContext } from '../helpers/clear-context.js'; // TODO: Draw select box around text area
 

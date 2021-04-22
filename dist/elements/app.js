@@ -31,7 +31,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import hotkeys from '../../_snowpack/pkg/hotkeys-js.js';
-import { css, customElement, html, internalProperty, LitElement } from '../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement, state } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { getLaunchImage } from '../helpers/file-handling-api.js';
 import { menus } from '../menus/all.js';
@@ -72,7 +73,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
     F: App,
     d: [{
       kind: "field",
-      decorators: [internalProperty()],
+      decorators: [state()],
       key: "areaText",
 
       value() {
@@ -81,7 +82,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
 
     }, {
       kind: "field",
-      decorators: [internalProperty()],
+      decorators: [state()],
       key: "coordinateText",
 
       value() {
@@ -90,7 +91,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
 
     }, {
       kind: "field",
-      decorators: [internalProperty()],
+      decorators: [state()],
       key: "helpText",
 
       value() {
@@ -99,7 +100,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
 
     }, {
       kind: "field",
-      decorators: [internalProperty()],
+      decorators: [state()],
       key: "drawingContext",
 
       value() {

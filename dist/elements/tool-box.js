@@ -30,7 +30,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
 import { updateContext } from '../helpers/update-context.js';
@@ -172,10 +173,9 @@ export let ToolBox = _decorate([customElement('paint-tool-box')], function (_ini
         }
 
         if (AIRBRUSH === tool) {
-          return html`
-          <paint-tool-airbrush
-                  .drawingContext="${this.drawingContext}"
-          ></paint-tool-airbrush>`;
+          return html` <paint-tool-airbrush
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-airbrush>`;
         }
 
         if (MAGNIFIER === tool) {

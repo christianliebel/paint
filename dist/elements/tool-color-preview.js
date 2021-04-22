@@ -30,7 +30,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
+import { css, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 export let ToolColorPreview = _decorate([customElement('paint-tool-color-preview')], function (_initialize, _LitElement) {
   class ToolColorPreview extends _LitElement {

@@ -30,7 +30,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement, property } from '../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 export let ColorSwitcher = _decorate([customElement('paint-color-switcher')], function (_initialize, _LitElement) {
   class ColorSwitcher extends _LitElement {
     constructor(...args) {

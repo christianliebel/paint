@@ -30,7 +30,8 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, customElement, html, LitElement } from '../../_snowpack/pkg/lit-element.js';
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement } from '../../_snowpack/pkg/lit/decorators.js';
 export let SelectBox = _decorate([customElement('paint-select-box')], function (_initialize, _LitElement) {
   class SelectBox extends _LitElement {
     constructor(...args) {
@@ -52,7 +53,7 @@ export let SelectBox = _decorate([customElement('paint-select-box')], function (
       :host {
         display: grid;
       }
-      
+
       div {
         border: 1px dashed var(--highlight);
       }
@@ -62,7 +63,10 @@ export let SelectBox = _decorate([customElement('paint-select-box')], function (
       kind: "method",
       key: "render",
       value: function render() {
-        return html`<div><slot></slot></div>`;
+        return html`
+        <div>
+            <slot></slot>
+        </div>`;
       }
     }]
   };
