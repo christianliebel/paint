@@ -2,7 +2,7 @@ import type { DrawingContext } from '../../models/drawing-context';
 import type { MenuAction } from '../../models/menu-action';
 
 export class InvertColorsAction implements MenuAction {
-  execute({ canvas, context, selection }: DrawingContext): void {
+  execute({ canvas, context, selection, history }: DrawingContext): void {
     if (context && canvas) {
       const previousCompositeOperation = context.globalCompositeOperation;
       context.globalCompositeOperation = 'difference';
@@ -20,6 +20,8 @@ export class InvertColorsAction implements MenuAction {
       }
 
       context.globalCompositeOperation = previousCompositeOperation;
+
+      history?.commit();
     }
   }
 }

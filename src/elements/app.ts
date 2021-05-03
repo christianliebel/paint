@@ -6,6 +6,7 @@ import { getLaunchImage } from '../helpers/file-handling-api';
 import { normalizeHotkey } from '../helpers/normalize-hotkey';
 import { registerDragDrop } from '../helpers/register-drag-drop';
 import { menus } from '../menus/all';
+import { History } from '../helpers/history';
 import type { DrawingContext } from '../models/drawing-context';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
 
@@ -131,6 +132,8 @@ export class App extends LitElement {
     this.coordinateText = '';
     this.helpText = defaultHelpText;
     this.drawingContext = DRAWING_CONTEXT;
+    // TODO: Overall architecture…
+    this.drawingContext.history = new History(this.drawingContext);
     this.addEventListener('set-help-text', ((event: CustomEvent) => {
       this.helpText = event.detail ?? defaultHelpText;
     }) as EventListener);

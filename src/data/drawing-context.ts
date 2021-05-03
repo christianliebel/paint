@@ -75,4 +75,5 @@ export const DRAWING_CONTEXT: DrawingContext = {
   previewContext: null,
   canvas: null,
   context: null,
+  history: null,
 };
