@@ -35,6 +35,7 @@ import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
 import { customElement, state } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { getLaunchImage } from '../helpers/file-handling-api.js';
+import { normalizeHotkey } from '../helpers/normalize-hotkey.js';
 import { menus } from '../menus/all.js';
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 export let App = _decorate([customElement('paint-app')], function (_initialize, _LitElement) {
@@ -221,19 +222,15 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
       kind: "method",
       key: "registerHotkeys",
       value: function registerHotkeys(menus) {
-        menus.forEach(entry => {
-          if ('separator' in entry && entry.separator) {
-            return;
-          }
-
+        menus.filter(entry => {
+          return !('separator' in entry && entry.separator);
+        }).forEach(entry => {
           if ('entries' in entry && Array.isArray(entry.entries)) {
             this.registerHotkeys(entry.entries);
           }
 
           if ('shortcut' in entry && typeof entry.shortcut === 'string') {
-            const hotkey = entry.shortcut.includes('Ctrl') ? `${entry.shortcut},${entry.shortcut.replace('Ctrl', '⌘')}` : entry.shortcut; // TODO: Replace PgUp, PgDn + others…
-
-            hotkeys(hotkey.replace('Shft', 'shift'), () => {
+            hotkeys(normalizeHotkey(entry.shortcut), () => {
               if (this.canActionExecute(entry, this.drawingContext)) {
                 this.dispatchEvent(new CustomEvent('invoke-action', {
                   detail: entry.instance?.execute.bind(entry.instance),
