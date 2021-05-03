@@ -3,6 +3,7 @@ import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { getLaunchImage } from '../helpers/file-handling-api';
+import { normalizeHotkey } from '../helpers/normalize-hotkey';
 import { menus } from '../menus/all';
 import type { DrawingContext } from '../models/drawing-context';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
@@ -155,34 +156,30 @@ export class App extends LitElement {
   }
 
   registerHotkeys(menus: (MenuEntry | MenuSeparator)[]): void {
-    menus.forEach((entry) => {
-      if ('separator' in entry && entry.separator) {
-        return;
-      }
+    menus
+      .filter((entry): entry is MenuEntry => {
+        return !('separator' in entry && entry.separator);
+      })
+      .forEach((entry) => {
+        if ('entries' in entry && Array.isArray(entry.entries)) {
+          this.registerHotkeys(entry.entries);
+        }
 
-      if ('entries' in entry && Array.isArray(entry.entries)) {
-        this.registerHotkeys(entry.entries);
-      }
-
-      if ('shortcut' in entry && typeof entry.shortcut === 'string') {
-        const hotkey = entry.shortcut.includes('Ctrl')
-          ? `${entry.shortcut},${entry.shortcut.replace('Ctrl', '⌘')}`
-          : entry.shortcut;
-        // TODO: Replace PgUp, PgDn + others…
-        hotkeys(hotkey.replace('Shft', 'shift'), () => {
-          if (this.canActionExecute(entry, this.drawingContext)) {
-            this.dispatchEvent(
-              new CustomEvent('invoke-action', {
-                detail: entry.instance?.execute.bind(entry.instance),
-                bubbles: true,
-                composed: true,
-              }),
-            );
-          }
-          return false;
-        });
-      }
-    });
+        if ('shortcut' in entry && typeof entry.shortcut === 'string') {
+          hotkeys(normalizeHotkey(entry.shortcut), () => {
+            if (this.canActionExecute(entry, this.drawingContext)) {
+              this.dispatchEvent(
+                new CustomEvent('invoke-action', {
+                  detail: entry.instance?.execute.bind(entry.instance),
+                  bubbles: true,
+                  composed: true,
+                }),
+              );
+            }
+            return false;
+          });
+        }
+      });
   }
 
   canActionExecute(entry: MenuEntry, drawingContext: DrawingContext): boolean {
