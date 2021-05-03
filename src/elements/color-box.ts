@@ -1,6 +1,7 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
+import { updateContext } from '../helpers/update-context';
 
 @customElement('paint-color-box')
 export class ColorBox extends LitElement {
@@ -29,6 +30,7 @@ export class ColorBox extends LitElement {
       <paint-color-switcher
         primaryColor="${this.drawingContext.colors.primary}"
         secondaryColor="${this.drawingContext.colors.secondary}"
+        @pointerdown="${(event: PointerEvent) => this.swapColors(event)}"
       >
       </paint-color-switcher>
       ${this.drawingContext.palette.map(
@@ -40,5 +42,17 @@ export class ColorBox extends LitElement {
           </paint-color-picker>`,
       )}
     `;
+  }
+
+  swapColors({ pointerType }: PointerEvent) {
+    // Swap colors only for pen and touch presses, but not for the mouse.
+    // Pen and touch don't have a secondary input mode, and classic Paint didn't
+    // offer to swap the colors with the mouse.
+    if (['pen', 'touch'].includes(pointerType)){
+      const { primary, secondary } = this.drawingContext.colors;
+      this.drawingContext.colors.primary = secondary;
+      this.drawingContext.colors.secondary = primary;
+      updateContext(this);
+    }
   }
 }
