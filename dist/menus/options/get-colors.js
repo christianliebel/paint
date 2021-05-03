@@ -1,5 +1,5 @@
-import { fileOpen } from '../../_snowpack/pkg/browser-fs-access.js';
-import { updateContext } from '../helpers/update-context.js';
+import { fileOpen } from '../../../_snowpack/pkg/browser-fs-access.js';
+import { updateContext } from '../../helpers/update-context.js';
 export class GetColorsAction {
   async execute(drawingContext) {
     const file = await fileOpen({

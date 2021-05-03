@@ -1,4 +1,4 @@
-import { updateContext } from '../helpers/update-context.js';
+import { updateContext } from '../../helpers/update-context.js';
 export class ColorBoxAction {
   isChecked({
     view: {

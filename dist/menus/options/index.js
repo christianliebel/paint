@@ -1,6 +1,6 @@
-import { SaveColorsAction } from '../actions/save-colors.js';
-import { GetColorsAction } from '../actions/get-colors.js';
-import { DrawOpaque } from '../actions/draw-opaque.js';
+import { SaveColorsAction } from './save-colors.js';
+import { GetColorsAction } from './get-colors.js';
+import { DrawOpaque } from './draw-opaque.js';
 export const optionsMenu = {
   caption: 'Options',
   mnemonic: 'O',

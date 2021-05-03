@@ -1,5 +1,5 @@
-import { updateContext } from '../helpers/update-context.js';
-import { ClearImageAction } from './clear-image.js';
+import { updateContext } from '../../helpers/update-context.js';
+import { ClearImageAction } from '../image/clear-image.js';
 export class NewAction {
   // TODO: Confirm to close document
   execute(drawingContext) {

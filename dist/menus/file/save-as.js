@@ -1,6 +1,6 @@
-import { fileSave } from '../../_snowpack/pkg/browser-fs-access.js';
-import { toBlob } from '../helpers/to-blob.js';
-import { updateContext } from '../helpers/update-context.js';
+import { fileSave } from '../../../_snowpack/pkg/browser-fs-access.js';
+import { toBlob } from '../../helpers/to-blob.js';
+import { updateContext } from '../../helpers/update-context.js';
 export class SaveAsAction {
   async execute({
     canvas,

@@ -1,6 +1,6 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import { toBlob } from '../helpers/to-blob.js';
+import { toBlob } from '../../helpers/to-blob.js';
 export class SendAction {
   constructor() {
     _defineProperty(this, "fakePng", this.getFileFromPngBlob(new Blob(), 'fake.png'));

@@ -1,5 +1,5 @@
-import { fileSave } from '../../_snowpack/pkg/browser-fs-access.js';
-import { toBlob } from '../helpers/to-blob.js';
+import { fileSave } from '../../../_snowpack/pkg/browser-fs-access.js';
+import { toBlob } from '../../helpers/to-blob.js';
 import { SaveAsAction } from './save-as.js';
 export class SaveAction {
   async execute(drawingContext) {

@@ -1,5 +1,5 @@
-import { getBlobFromSelection } from '../helpers/get-blob-from-selection.js';
-import { fileSave } from '../../_snowpack/pkg/browser-fs-access.js';
+import { getBlobFromSelection } from '../../helpers/get-blob-from-selection.js';
+import { fileSave } from '../../../_snowpack/pkg/browser-fs-access.js';
 export class CopyToAction {
   canExecute({
     selection

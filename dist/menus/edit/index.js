@@ -1,10 +1,10 @@
-import { ClearSelectionAction } from '../actions/clear-selection.js';
-import { CopyToAction } from '../actions/copy-to.js';
-import { PasteFromAction } from '../actions/paste-from.js';
-import { CutAction } from '../actions/cut.js';
-import { CopyAction } from '../actions/copy.js';
-import { PasteAction } from '../actions/paste.js';
-import { SelectAllAction } from '../actions/select-all.js';
+import { ClearSelectionAction } from './clear-selection.js';
+import { CopyToAction } from './copy-to.js';
+import { PasteFromAction } from './paste-from.js';
+import { CutAction } from './cut.js';
+import { CopyAction } from './copy.js';
+import { PasteAction } from './paste.js';
+import { SelectAllAction } from './select-all.js';
 export const editMenu = {
   caption: 'Edit',
   mnemonic: 'E',

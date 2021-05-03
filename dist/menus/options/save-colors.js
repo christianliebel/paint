@@ -1,4 +1,4 @@
-import { fileSave } from '../../_snowpack/pkg/browser-fs-access.js';
+import { fileSave } from '../../../_snowpack/pkg/browser-fs-access.js';
 export class SaveColorsAction {
   async execute({
     palette

@@ -1,6 +1,6 @@
-import { InvertColorsAction } from '../actions/invert-image.js';
-import { ClearImageAction } from '../actions/clear-image.js';
-import { FlipRotateAction } from '../actions/flip-rotate.js';
+import { InvertColorsAction } from './invert-image.js';
+import { ClearImageAction } from './clear-image.js';
+import { FlipRotateAction } from './flip-rotate.js';
 export const imageMenu = {
   caption: 'Image',
   mnemonic: 'I',

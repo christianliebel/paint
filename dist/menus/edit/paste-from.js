@@ -1,5 +1,5 @@
-import { fileOpen } from '../../_snowpack/pkg/browser-fs-access.js';
-import { getImageFromBlob } from '../helpers/get-image-from-blob.js';
+import { fileOpen } from '../../../_snowpack/pkg/browser-fs-access.js';
+import { getImageFromBlob } from '../../helpers/get-image-from-blob.js';
 export class PasteFromAction {
   async execute({
     context

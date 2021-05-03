@@ -1,4 +1,4 @@
-import { AboutAction } from '../actions/about.js';
+import { AboutAction } from './about.js';
 export const helpMenu = {
   caption: 'Help',
   mnemonic: 'H',

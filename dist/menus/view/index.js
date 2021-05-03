@@ -1,8 +1,8 @@
-import { TextToolbarAction } from '../actions/text-toolbar.js';
-import { ViewBitmapAction } from '../actions/view-bitmap.js';
-import { StatusBarAction } from '../actions/status-bar.js';
-import { ToolBoxAction } from '../actions/tool-box.js';
-import { ColorBoxAction } from '../actions/color-box.js';
+import { TextToolbarAction } from './text-toolbar.js';
+import { ViewBitmapAction } from './view-bitmap.js';
+import { StatusBarAction } from './status-bar.js';
+import { ToolBoxAction } from './tool-box.js';
+import { ColorBoxAction } from './color-box.js';
 export const viewMenu = {
   caption: 'View',
   mnemonic: 'V',

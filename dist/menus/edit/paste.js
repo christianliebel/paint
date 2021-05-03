@@ -1,4 +1,4 @@
-import { getImageFromBlob } from '../helpers/get-image-from-blob.js';
+import { getImageFromBlob } from '../../helpers/get-image-from-blob.js';
 export class PasteAction {
   canExecute() {
     // TODO: Is there something we can paste?

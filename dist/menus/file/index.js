@@ -1,9 +1,10 @@
-import { NewAction } from '../actions/new.js';
-import { OpenAction } from '../actions/open.js';
-import { SaveAction } from '../actions/save.js';
-import { SaveAsAction } from '../actions/save-as.js';
-import { PrintAction } from '../actions/print.js';
-import { SendAction } from '../actions/send.js';
+import { ExitAction } from './exit.js';
+import { NewAction } from './new.js';
+import { OpenAction } from './open.js';
+import { SaveAction } from './save.js';
+import { SaveAsAction } from './save-as.js';
+import { PrintAction } from './print.js';
+import { SendAction } from './send.js';
 export const fileMenu = {
   caption: 'File',
   mnemonic: 'F',
@@ -84,7 +85,6 @@ export const fileMenu = {
     mnemonic: 'x',
     shortcut: 'Alt+F4',
     helpText: 'Quits Paint.',
-    instance: null // closing the app's own tab is not possible
-
+    instance: new ExitAction()
   }]
 };

@@ -1,4 +1,4 @@
-import { getBlobFromSelection } from '../helpers/get-blob-from-selection.js';
+import { getBlobFromSelection } from '../../helpers/get-blob-from-selection.js';
 export class CopyAction {
   canExecute({
     selection
