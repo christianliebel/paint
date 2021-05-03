@@ -1,11 +1,11 @@
-import type { Action } from './action';
+import type { MenuAction } from './menu-action';
 
 export interface MenuEntry {
   caption: string,
   mnemonic?: string,
   helpText: string,
 
-  instance?: Action | null;
+  instance?: MenuAction | null;
   shortcut?: string;
   checked?: boolean;
   disabled?: boolean;
