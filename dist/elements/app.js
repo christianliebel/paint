@@ -36,6 +36,7 @@ import { customElement, state } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { getLaunchImage } from '../helpers/file-handling-api.js';
 import { normalizeHotkey } from '../helpers/normalize-hotkey.js';
+import { registerDragDrop } from '../helpers/register-drag-drop.js';
 import { menus } from '../menus/all.js';
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 export let App = _decorate([customElement('paint-app')], function (_initialize, _LitElement) {
@@ -65,6 +66,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
         event.detail(this.drawingContext);
       });
       this.addEventListener('canvas-ready', () => getLaunchImage(this.drawingContext));
+      registerDragDrop(this);
       this.registerHotkeys(menus);
     }
 
