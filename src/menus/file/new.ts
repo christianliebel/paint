@@ -7,6 +7,8 @@ export class NewAction implements MenuAction {
   // TODO: Confirm to close document
   execute(drawingContext: DrawingContext): void {
     updateDocumentContext(undefined, 'untitled', drawingContext);
+    drawingContext.history?.clear();
+    // TODO: Reset colors?
     new ClearImageAction().execute(drawingContext);
   }
 }

@@ -1,11 +1,13 @@
-import { ClearSelectionAction } from './clear-selection';
-import { CopyToAction } from './copy-to';
-import { PasteFromAction } from './paste-from';
-import { CutAction } from './cut';
-import { CopyAction } from './copy';
-import { PasteAction } from './paste';
-import { SelectAllAction } from './select-all';
 import type { MenuEntry } from '../../models/menu';
+import { ClearSelectionAction } from './clear-selection';
+import { CopyAction } from './copy';
+import { CopyToAction } from './copy-to';
+import { CutAction } from './cut';
+import { PasteAction } from './paste';
+import { PasteFromAction } from './paste-from';
+import { RedoAction } from './redo';
+import { SelectAllAction } from './select-all';
+import { UndoAction } from './undo';
 
 export const editMenu: MenuEntry = {
   caption: 'Edit',
@@ -17,12 +19,14 @@ export const editMenu: MenuEntry = {
       mnemonic: 'U',
       shortcut: 'Ctrl+Z',
       helpText: 'Undoes the last action.',
+      instance: new UndoAction(),
     },
     {
       caption: 'Repeat',
       mnemonic: 'R',
       shortcut: 'F4',
       helpText: 'Redoes the previously undone action.',
+      instance: new RedoAction(),
     },
     {
       separator: true,

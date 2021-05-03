@@ -1,8 +1,10 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
+import { clearCanvas } from '../helpers/clear-canvas';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
+import { ClearImageAction } from '../menus/image/clear-image';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
 import type { PointerPosition } from '../models/pointer-position';
@@ -154,14 +156,13 @@ export class Canvas extends LitElement {
       throw new Error('Canvas context not present.');
     }
 
-    context.fillStyle = 'white';
-    context.fillRect(0, 0, canvas.width, canvas.height);
     context.imageSmoothingEnabled = false;
     this.drawingContext.canvas = canvas;
     this.drawingContext.context = context;
     this.drawingContext.previewCanvas = previewCanvas;
     this.drawingContext.previewContext = previewContext;
     this.drawingContext.element = this;
+    clearCanvas(this.drawingContext);
     updateContext(this);
 
     document.addEventListener('pointermove', (event) =>
@@ -205,6 +206,7 @@ export class Canvas extends LitElement {
       const { x, y } = this.getCoordinates(event);
       this.tool.onPointerDown(...this.getToolEventArgs(x, y));
     }
+
     event.preventDefault();
   }
 
@@ -241,6 +243,8 @@ export class Canvas extends LitElement {
     if (this.tool?.onPointerUp) {
       this.tool.onPointerUp(...this.getToolEventArgs(x, y));
     }
+
+    this.drawingContext.history?.commit();
 
     // This position is important for correct preview behavior
     // -> after the right-click pointer (secondary tool color) is up,
