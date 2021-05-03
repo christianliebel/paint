@@ -33,6 +33,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
 import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { updateContext } from '../helpers/update-context.js';
 export let ColorBox = _decorate([customElement('paint-color-box')], function (_initialize, _LitElement) {
   class ColorBox extends _LitElement {
     constructor(...args) {
@@ -83,6 +84,7 @@ export let ColorBox = _decorate([customElement('paint-color-box')], function (_i
       <paint-color-switcher
         primaryColor="${this.drawingContext.colors.primary}"
         secondaryColor="${this.drawingContext.colors.secondary}"
+        @pointerdown="${event => this.swapColors(event)}"
       >
       </paint-color-switcher>
       ${this.drawingContext.palette.map(color => html` <paint-color-picker
@@ -91,6 +93,25 @@ export let ColorBox = _decorate([customElement('paint-color-box')], function (_i
           >
           </paint-color-picker>`)}
     `;
+      }
+    }, {
+      kind: "method",
+      key: "swapColors",
+      value: function swapColors({
+        pointerType
+      }) {
+        // Swap colors only for pen and touch presses, but not for the mouse.
+        // Pen and touch don't have a secondary input mode, and classic Paint didn't
+        // offer to swap the colors with the mouse.
+        if (['pen', 'touch'].includes(pointerType)) {
+          const {
+            primary,
+            secondary
+          } = this.drawingContext.colors;
+          this.drawingContext.colors.primary = secondary;
+          this.drawingContext.colors.secondary = primary;
+          updateContext(this);
+        }
       }
     }]
   };
