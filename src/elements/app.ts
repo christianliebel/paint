@@ -4,6 +4,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { getLaunchImage } from '../helpers/file-handling-api';
 import { normalizeHotkey } from '../helpers/normalize-hotkey';
+import { registerDragDrop } from '../helpers/register-drag-drop';
 import { menus } from '../menus/all';
 import type { DrawingContext } from '../models/drawing-context';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
@@ -152,6 +153,7 @@ export class App extends LitElement {
     this.addEventListener('canvas-ready', () =>
       getLaunchImage(this.drawingContext),
     );
+    registerDragDrop(this);
     this.registerHotkeys(menus);
   }
 

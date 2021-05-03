@@ -22,7 +22,7 @@ This project demonstrates the use of:
 - [Web Components](https://www.webcomponents.org/introduction), the native component model of the web (via [Lit](https://lit.dev/))
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) for offline capability (via [Workbox](https://developers.google.com/web/tools/workbox))
 - [Web App Manifest](https://github.com/w3c/manifest) for installability
-- [File System Access API](https://web.dev/file-system-access/) for file system access (via [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access))
+- [File System Access API](https://web.dev/file-system-access/) for file system access (via [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access)), including drag and drop
 - [File Handling API](https://web.dev/file-handling/) for registering as a handler for *.png files
 - [Async Clipboard API](https://web.dev/image-support-for-async-clipboard/) for clipboard access
 - [Web Share API](https://web.dev/web-share/#sharing-files) for sharing images to other applications via _File > Send…_
@@ -33,7 +33,7 @@ This project demonstrates the use of:
 
 ## Goals
 
-- This implementation tries to stick as closely as possible to the original Paint for Windows 95—not more, but also not less. Improvements to user experience (e.g., larger undo stack) are welcome, but features beyond the original scope should be avoided. You might want to check out [Felix Rieseberg’s windows95 to run the original Paint](https://github.com/felixrieseberg/windows95).
+- This implementation tries to stick as closely as possible to the original Paint for Windows 95—not more, but also not less. You might want to check out [Felix Rieseberg’s windows95 to run the original Paint](https://github.com/felixrieseberg/windows95).
 - This implementation should stay smaller (= transferred bytes) than Paint’s executable size of 340K.
 - Everything must be achieved with native web technology only, so no Cordova or Electron builds. Features that are not exposed to the web must be disabled in the menu.
 - Where modern web APIs are used, they should be [progressively enhanced](https://web.dev/progressively-enhance-your-pwa/).

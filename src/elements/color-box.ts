@@ -44,7 +44,7 @@ export class ColorBox extends LitElement {
     `;
   }
 
-  swapColors({ pointerType }: PointerEvent) {
+  swapColors({ pointerType }: PointerEvent): void {
     // Swap colors only for pen and touch presses, but not for the mouse.
     // Pen and touch don't have a secondary input mode, and classic Paint didn't
     // offer to swap the colors with the mouse.

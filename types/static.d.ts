@@ -79,10 +79,19 @@ interface ClipboardItem {
   getType(type: string): Promise<Blob>;
 }
 
-// Type declarations for File Handling API
+// Type declarations for File System Access API
+
 interface FileSystemFileHandle {
   getFile(): Promise<File>;
+  kind: 'directory' | 'file';
+  name: string;
 }
+
+interface DataTransferItem {
+  getAsFileSystemHandle(): Promise<FileSystemFileHandle>;
+}
+
+// Type declarations for File Handling API
 
 interface LaunchParams {
   files: FileSystemFileHandle[];
