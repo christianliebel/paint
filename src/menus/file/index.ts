@@ -1,3 +1,4 @@
+import { ExitAction } from './exit';
 import { NewAction } from './new';
 import { OpenAction } from './open';
 import { SaveAction } from './save';
@@ -100,7 +101,7 @@ export const fileMenu: MenuEntry = {
       mnemonic: 'x',
       shortcut: 'Alt+F4',
       helpText: 'Quits Paint.',
-      instance: null, // closing the app's own tab is not possible
+      instance: new ExitAction(),
     },
   ],
 };
