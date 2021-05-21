@@ -18,7 +18,7 @@ async function fileOpen(...e) {
 }
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const o = e ? "chooseFileSystemEntries" === e ? import('./common/directory-open-aacd5906.js') : import('./common/directory-open-5763cfe5.js') : import('./common/directory-open-27d94dc1.js');
+const o = e ? "chooseFileSystemEntries" === e ? import('./common/directory-open-b1926eca.js') : import('./common/directory-open-037507cf.js') : import('./common/directory-open-27d94dc1.js');
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
 const s$1 = e ? "chooseFileSystemEntries" === e ? import('./common/file-save-37f64574.js') : import('./common/file-save-43578d3f.js') : import('./common/file-save-9ebdfaae.js');

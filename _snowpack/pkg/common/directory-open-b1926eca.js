@@ -1,18 +1,18 @@
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
 const e = async (t, r, i = t.name) => {
   const a = [],
-        s = [];
+        n = [];
 
-  for await (const n of t.getEntries()) {
-    const t = `${i}/${n.name}`;
-    n.isFile ? s.push(n.getFile().then(e => Object.defineProperty(e, "webkitRelativePath", {
+  for await (const s of t.getEntries()) {
+    const o = `${i}/${s.name}`;
+    s.isFile ? n.push(s.getFile().then(e => (e.directoryHandle = t, Object.defineProperty(e, "webkitRelativePath", {
       configurable: !0,
       enumerable: !0,
-      get: () => t
-    }))) : n.isDirectory && r && a.push(e(n, r, t));
+      get: () => o
+    })))) : s.isDirectory && r && a.push(e(s, r, o));
   }
 
-  return [...(await Promise.all(a)).flat(), ...(await Promise.all(s))];
+  return [...(await Promise.all(a)).flat(), ...(await Promise.all(n))];
 };
 
 var directoryOpen = (async (t = {}) => {
