@@ -47,7 +47,7 @@ export class TextToolbarDialog extends LitElement {
         margin-right: 11px;
       }
 
-      button {
+      paint-button {
         height: 22px;
         width: 23px;
       }
@@ -119,9 +119,15 @@ export class TextToolbarDialog extends LitElement {
                 </option>`,
             )}
           </select>
-          <button @click="${() => this.toggle('bold')}">B</button>
-          <button @click="${() => this.toggle('italic')}">I</button>
-          <button @click="${() => this.toggle('underline')}">U</button>
+          <paint-button @click="${() => this.toggle('bold')}" tabindex="0">
+              B
+          </paint-button>
+          <paint-button @click="${() => this.toggle('italic')}" tabindex="0">
+              I
+          </paint-button>
+          <paint-button @click="${() => this.toggle('underline')}" tabindex="0">
+              U
+          </paint-button>
         </div>
       </paint-window>
     `;
