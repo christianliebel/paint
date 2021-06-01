@@ -1,10 +1,12 @@
 import { ClearSelectionAction } from './clear-selection.js';
-import { CopyToAction } from './copy-to.js';
-import { PasteFromAction } from './paste-from.js';
-import { CutAction } from './cut.js';
 import { CopyAction } from './copy.js';
+import { CopyToAction } from './copy-to.js';
+import { CutAction } from './cut.js';
 import { PasteAction } from './paste.js';
+import { PasteFromAction } from './paste-from.js';
+import { RedoAction } from './redo.js';
 import { SelectAllAction } from './select-all.js';
+import { UndoAction } from './undo.js';
 export const editMenu = {
   caption: 'Edit',
   mnemonic: 'E',
@@ -13,12 +15,14 @@ export const editMenu = {
     caption: 'Undo',
     mnemonic: 'U',
     shortcut: 'Ctrl+Z',
-    helpText: 'Undoes the last action.'
+    helpText: 'Undoes the last action.',
+    instance: new UndoAction()
   }, {
     caption: 'Repeat',
     mnemonic: 'R',
     shortcut: 'F4',
-    helpText: 'Redoes the previously undone action.'
+    helpText: 'Redoes the previously undone action.',
+    instance: new RedoAction()
   }, {
     separator: true
   }, {

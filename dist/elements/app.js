@@ -38,6 +38,7 @@ import { getLaunchImage } from '../helpers/file-handling-api.js';
 import { normalizeHotkey } from '../helpers/normalize-hotkey.js';
 import { registerDragDrop } from '../helpers/register-drag-drop.js';
 import { menus } from '../menus/all.js';
+import { History } from '../helpers/history.js';
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 export let App = _decorate([customElement('paint-app')], function (_initialize, _LitElement) {
   class App extends _LitElement {
@@ -49,7 +50,9 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
       this.areaText = '';
       this.coordinateText = '';
       this.helpText = defaultHelpText;
-      this.drawingContext = DRAWING_CONTEXT;
+      this.drawingContext = DRAWING_CONTEXT; // TODO: Overall architecture…
+
+      this.drawingContext.history = new History(this.drawingContext);
       this.addEventListener('set-help-text', event => {
         this.helpText = event.detail ?? defaultHelpText;
       });

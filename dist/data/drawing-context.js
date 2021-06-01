@@ -59,5 +59,6 @@ export const DRAWING_CONTEXT = {
   previewCanvas: null,
   previewContext: null,
   canvas: null,
-  context: null
+  context: null,
+  history: null
 };

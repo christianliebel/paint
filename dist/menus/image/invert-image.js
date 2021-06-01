@@ -2,7 +2,8 @@ export class InvertColorsAction {
   execute({
     canvas,
     context,
-    selection
+    selection,
+    history
   }) {
     if (context && canvas) {
       const previousCompositeOperation = context.globalCompositeOperation;
@@ -16,6 +17,7 @@ export class InvertColorsAction {
       }
 
       context.globalCompositeOperation = previousCompositeOperation;
+      history?.commit();
     }
   }
 

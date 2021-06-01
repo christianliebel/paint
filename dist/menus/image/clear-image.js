@@ -1,3 +1,4 @@
+import { clearCanvas } from '../../helpers/clear-canvas.js';
 export class ClearImageAction {
   canExecute({
     selection
@@ -5,15 +6,8 @@ export class ClearImageAction {
     return !selection;
   }
 
-  execute({
-    canvas,
-    context,
-    colors
-  }) {
-    if (canvas && context) {
-      context.fillStyle = colors.secondary;
-      context.fillRect(0, 0, canvas.width, canvas.height);
-    }
+  execute(drawingContext) {
+    clearCanvas(drawingContext);
   }
 
 }

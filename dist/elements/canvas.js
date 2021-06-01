@@ -33,6 +33,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
 import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { clearCanvas } from '../helpers/clear-canvas.js';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
 import { updateContext } from '../helpers/update-context.js';
 export let Canvas = _decorate([customElement('paint-canvas')], function (_initialize, _LitElement) {
@@ -252,14 +253,13 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
           throw new Error('Canvas context not present.');
         }
 
-        context.fillStyle = 'white';
-        context.fillRect(0, 0, canvas.width, canvas.height);
         context.imageSmoothingEnabled = false;
         this.drawingContext.canvas = canvas;
         this.drawingContext.context = context;
         this.drawingContext.previewCanvas = previewCanvas;
         this.drawingContext.previewContext = previewContext;
         this.drawingContext.element = this;
+        clearCanvas(this.drawingContext);
         updateContext(this);
         document.addEventListener('pointermove', event => this.onPointerMove(event));
         document.addEventListener('pointerup', event => this.onPointerUp(event));
@@ -349,10 +349,11 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
 
         if (this.tool?.onPointerUp) {
           this.tool.onPointerUp(...this.getToolEventArgs(x, y));
-        } // This position is important for correct preview behavior
+        }
+
+        this.drawingContext.history?.commit(); // This position is important for correct preview behavior
         // -> after the right-click pointer (secondary tool color) is up,
         //    tools should preview the primary color again
-
 
         this.pointerDown = false;
 
