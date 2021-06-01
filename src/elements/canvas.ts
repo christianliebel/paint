@@ -4,7 +4,6 @@ import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { clearCanvas } from '../helpers/clear-canvas';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
-import { ClearImageAction } from '../menus/image/clear-image';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
 import type { PointerPosition } from '../models/pointer-position';
