@@ -4,6 +4,7 @@ import './dialogs/text-toolbar';
 import './window/window';
 import './window/title-bar-button';
 import './app';
+import './button';
 import './canvas';
 import './color-box';
 import './color-picker';

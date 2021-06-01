@@ -36,7 +36,7 @@ export class FlipAndRotate extends LitElement {
         margin-left: 8px;
       }
 
-      .buttons button {
+      .buttons paint-button {
         margin-bottom: 5px;
       }
 
@@ -88,8 +88,12 @@ export class FlipAndRotate extends LitElement {
             </fieldset>
           </div>
           <div class="buttons">
-            <button @click="${this.onCancel}">OK</button>
-            <button @click="${this.onCancel}">Cancel</button>
+            <paint-button @click="${this.onCancel}" tabindex="0">
+                OK
+            </paint-button>
+            <paint-button @click="${this.onCancel}" tabindex="0">
+                Cancel
+            </paint-button>
           </div>
         </div>
       </paint-window>
@@ -97,8 +101,6 @@ export class FlipAndRotate extends LitElement {
   }
 
   onCancel(): void {
-    this.dispatchEvent(
-      new CustomEvent('close', { bubbles: true, composed: true }),
-    );
+    this.dispatchEvent(new CustomEvent('close'));
   }
 }
