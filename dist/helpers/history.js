@@ -18,6 +18,7 @@ export class History {
   }
 
   commit() {
+    this.drawingContext.document.dirty = true;
     this.stack.splice(this.stackPointer + 1);
 
     if (this.stack.length === MAX_STACK_SIZE + 1) {

@@ -30,6 +30,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 import hotkeys from '../../_snowpack/pkg/hotkeys-js.js';
 import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
 import { customElement, state } from '../../_snowpack/pkg/lit/decorators.js';
@@ -69,6 +75,8 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
         event.detail(this.drawingContext);
       });
       this.addEventListener('canvas-ready', () => getLaunchImage(this.drawingContext));
+      this.beforeUnloadListener = this.onBeforeUnload.bind(this);
+      window.addEventListener('beforeunload', this.beforeUnloadListener);
       registerDragDrop(this);
       this.registerHotkeys(menus);
     }
@@ -113,6 +121,10 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
         return DRAWING_CONTEXT;
       }
 
+    }, {
+      kind: "field",
+      key: "beforeUnloadListener",
+      value: void 0
     }, {
       kind: "get",
       static: true,
@@ -297,6 +309,25 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
             .drawingContext="${this.drawingContext}"
           ></paint-dialog-text-toolbar>` : ''}
     `;
+      }
+    }, {
+      kind: "method",
+      key: "onBeforeUnload",
+      value: function onBeforeUnload(event) {
+        if (this.drawingContext.document.dirty) {
+          event.preventDefault();
+          event.returnValue = '';
+        }
+      }
+    }, {
+      kind: "method",
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        _get(_getPrototypeOf(App.prototype), "disconnectedCallback", this).call(this);
+
+        if (this.beforeUnloadListener) {
+          window.removeEventListener('beforeunload', this.beforeUnloadListener);
+        }
       }
     }]
   };

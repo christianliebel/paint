@@ -260,6 +260,7 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
         this.drawingContext.previewContext = previewContext;
         this.drawingContext.element = this;
         clearCanvas(this.drawingContext);
+        this.drawingContext.document.dirty = false;
         updateContext(this);
         document.addEventListener('pointermove', event => this.onPointerMove(event));
         document.addEventListener('pointerup', event => this.onPointerUp(event));
