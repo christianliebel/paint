@@ -41,7 +41,7 @@ import { customElement, property, state } from '../../../_snowpack/pkg/lit/decor
 import { DRAWING_CONTEXT } from '../../data/drawing-context.js';
 import { FONT_SIZES } from '../../data/font-sizes.js';
 import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility.js';
-import { getLocalFonts } from '../../helpers/get-local-fonts.js';
+import { getFonts, requestLocalFonts } from '../../helpers/font-cache.js';
 import { updateContext } from '../../helpers/update-context.js';
 export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolbar')], function (_initialize, _LitElement) {
   class TextToolbarDialog extends _LitElement {
@@ -126,7 +126,7 @@ export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolb
       value: async function firstUpdated(_changedProperties) {
         _get(_getPrototypeOf(TextToolbarDialog.prototype), "firstUpdated", this).call(this, _changedProperties);
 
-        this.fonts = await getLocalFonts();
+        this.fonts = await getFonts();
         this.addEventListener('close', () => {
           this.drawingContext.text.showToolbar = false;
           evaluateTextToolbarVisibility(this.drawingContext);
@@ -167,6 +167,7 @@ export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolb
         <div class="content">
           <select
             class="font-list"
+            @click="${() => this.onFontListClick()}"
             @change="${event => this.updateFont(event)}"
           >
             ${this.fonts.map(font => html` <option
@@ -199,6 +200,14 @@ export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolb
         </div>
       </paint-window>
     `;
+      }
+    }, {
+      kind: "method",
+      key: "onFontListClick",
+      value: async function onFontListClick() {
+        if (requestLocalFonts()) {
+          this.fonts = await getFonts();
+        }
       }
     }]
   };
