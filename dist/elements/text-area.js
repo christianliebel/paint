@@ -219,8 +219,7 @@ export let TextArea = _decorate([customElement('paint-text-area')], function (_i
         context.font = `${italicStyle}${boldStyle}${size}px ${font}`;
         const padding = 1;
         const maxWidth = (width ?? 0) - padding * 2;
-        const metrics = context.measureText('');
-        const lineHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+        const lineHeight = TextArea.getLineHeight(context, size);
         (this.textarea?.value ?? '').split('\n').map(line => breakLines(line, maxWidth, context.font).split('\n')).reduce((previous, current) => previous.concat(current), []).forEach((line, index) => {
           const correctedX = (x ?? 0) + padding;
           const correctedY = (y ?? 0) + size + lineHeight * index;
@@ -238,6 +237,20 @@ export let TextArea = _decorate([customElement('paint-text-area')], function (_i
             context.fillRect(correctedX, correctedY + 1, width, 1);
           }
         });
+      }
+    }, {
+      kind: "method",
+      static: true,
+      key: "getLineHeight",
+      value: function getLineHeight(context, size) {
+        const metrics = context.measureText('');
+
+        if (typeof metrics.fontBoundingBoxAscent === 'number' && typeof metrics.fontBoundingBoxDescent === 'number') {
+          return metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+        } // Advanced text measurements not available. Roughly estimate line height.
+
+
+        return size * 1.2;
       }
     }]
   };
