@@ -132,6 +132,15 @@ export class Window extends LitElement {
     this.mousePosition = null;
   }
 
+  center(): void {
+    const { width, height } = this.getBoundingClientRect();
+    this.position = {
+      x: (innerWidth - width) / 2,
+      y: (innerHeight - height) / 2,
+    };
+    this.moveWindow();
+  }
+
   moveWindow(): void {
     this.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
   }
