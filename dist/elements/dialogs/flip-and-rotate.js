@@ -81,7 +81,7 @@ export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotat
         margin-left: 8px;
       }
 
-      .buttons button {
+      .buttons paint-button {
         margin-bottom: 5px;
       }
 
@@ -126,8 +126,12 @@ export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotat
             </fieldset>
           </div>
           <div class="buttons">
-            <button @click="${this.onCancel}">OK</button>
-            <button @click="${this.onCancel}">Cancel</button>
+            <paint-button @click="${this.onCancel}" tabindex="0">
+                OK
+            </paint-button>
+            <paint-button @click="${this.onCancel}" tabindex="0">
+                Cancel
+            </paint-button>
           </div>
         </div>
       </paint-window>
@@ -137,10 +141,7 @@ export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotat
       kind: "method",
       key: "onCancel",
       value: function onCancel() {
-        this.dispatchEvent(new CustomEvent('close', {
-          bubbles: true,
-          composed: true
-        }));
+        this.dispatchEvent(new CustomEvent('close'));
       }
     }]
   };

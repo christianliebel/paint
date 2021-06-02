@@ -97,19 +97,19 @@ export let TitleBarButton = _decorate([customElement('paint-window-title-bar-but
         justify-content: center;
       }
 
-      :host(:active) {
+      :host(:active:hover) {
         border: 1px solid var(--button-darker);
         border-bottom-color: var(--button-light);
         border-right-color: var(--button-light);
       }
 
-      :host(:active) div.wrapper {
+      :host(:active:hover) div.wrapper {
         border: 1px solid var(--canvas);
         border-bottom-color: transparent;
         border-right-color: transparent;
       }
 
-      :host(:active) svg {
+      :host(:active:hover) svg {
         margin: 1px 0 0 1px;
       }
 

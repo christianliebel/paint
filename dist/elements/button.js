@@ -30,21 +30,13 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
+import { customElement } from '../../_snowpack/pkg/lit/decorators.js'; // TODO: Disabled State
+// TODO: Check padding inside focus box
+// TODO: Allow "clicking" via keyboard
 
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
-import { customElement, property, state } from '../../../_snowpack/pkg/lit/decorators.js';
-import { DRAWING_CONTEXT } from '../../data/drawing-context.js';
-import { FONT_SIZES } from '../../data/font-sizes.js';
-import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility.js';
-import { getLocalFonts } from '../../helpers/get-local-fonts.js';
-import { updateContext } from '../../helpers/update-context.js';
-export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolbar')], function (_initialize, _LitElement) {
-  class TextToolbarDialog extends _LitElement {
+export let Button = _decorate([customElement('paint-button')], function (_initialize, _LitElement) {
+  class Button extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -54,151 +46,107 @@ export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolb
   }
 
   return {
-    F: TextToolbarDialog,
+    F: Button,
     d: [{
-      kind: "field",
-      decorators: [property({
-        type: Object
-      })],
-      key: "drawingContext",
-
-      value() {
-        return DRAWING_CONTEXT;
-      }
-
-    }, {
-      kind: "field",
-      decorators: [state()],
-      key: "fonts",
-
-      value() {
-        return [];
-      }
-
-    }, {
-      kind: "field",
-      key: "fontSizes",
-
-      value() {
-        return FONT_SIZES;
-      }
-
-    }, {
       kind: "get",
       static: true,
       key: "styles",
       value: function styles() {
         return css`
-      paint-window {
-        position: absolute;
-        top: 0;
+      :host, * {
+        box-sizing: border-box;
+      }
+      
+      :host {
+        display: inline-block;
+
+        background-color: var(--button-face);
+        color: var(--button-text);
+
+        border: 1px solid var(--button-light);
+        border-right-color: var(--button-darker);
+        border-bottom-color: var(--button-darker);
+
+        width: 75px;
+        height: 23px;
       }
 
-      .content {
+      div.inline-border {
+        width: 100%;
+        height: 100%;
+        
+        padding: 2px;
+        
+        border: 1px solid transparent;
+        border-right-color: var(--button-dark);
+        border-bottom-color: var(--button-dark);
+      }
+      
+      div.focus-border {
         display: flex;
-        align-items: start;
-        padding: 4px 7px 4px 5px;
+        align-items: center;
+        justify-content: center;
+        
+        width: 100%;
+        height: 100%;
       }
 
-      .font-list {
-        width: 164px;
-        height: 20px;
-
-        margin-right: 9px;
+      :host(:focus) {
+        border-color: var(--button-darker);
+        border-right-width: 2px;
+        border-bottom-width: 2px;
+        outline: none;
+      }
+      
+      :host(:focus) div.inline-border {
+        border-top-color: var(--button-light);
+        border-left-color: var(--button-light);
+        
+        padding-right: 1px;
+        padding-bottom: 1px;
       }
 
-      .font-sizes {
-        width: 72px;
-        height: 21px;
-
-        margin-right: 11px;
+      :host(:focus) div.focus-border {
+        border: 1px dotted var(--button-text);
       }
-
-      paint-button {
-        height: 22px;
-        width: 23px;
+      
+      :host(:active:hover) {
+        border-color: var(--button-darker);
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+      }
+      
+      :host(:active:hover) div.inline-border {
+        border-color: var(--button-dark);
+        
+        padding-right: 2px;
+        padding-bottom: 2px;
+      }
+      
+      :host(:active:hover) div.focus-border {
+        padding-top: 1px;
+        padding-left: 1px;
+      }
+      
+      path {
+        color: currentColor;
+      }
+      
+      ::slotted(.mnemonic) {
+        text-decoration: underline;
       }
     `;
-      }
-    }, {
-      kind: "method",
-      key: "firstUpdated",
-      value: async function firstUpdated(_changedProperties) {
-        _get(_getPrototypeOf(TextToolbarDialog.prototype), "firstUpdated", this).call(this, _changedProperties);
-
-        this.fonts = await getLocalFonts();
-        this.addEventListener('close', () => {
-          this.drawingContext.text.showToolbar = false;
-          evaluateTextToolbarVisibility(this.drawingContext);
-          updateContext(this);
-        });
-      }
-    }, {
-      kind: "method",
-      key: "updateFont",
-      value: function updateFont(event) {
-        this.drawingContext.text.font = event.target.value;
-        updateContext(this);
-      }
-    }, {
-      kind: "method",
-      key: "updateSize",
-      value: function updateSize(event) {
-        this.drawingContext.text.size = parseInt(event.target.value);
-        updateContext(this);
-      }
-    }, {
-      kind: "method",
-      key: "toggle",
-      value: function toggle(key) {
-        this.drawingContext.text[key] = !this.drawingContext.text[key];
-        updateContext(this);
       }
     }, {
       kind: "method",
       key: "render",
       value: function render() {
-        if (!this.drawingContext.view.textToolbar) {
-          return html``;
-        }
-
         return html`
-      <paint-window caption="Fonts" tool close>
-        <div class="content">
-          <select
-            class="font-list"
-            @change="${event => this.updateFont(event)}"
-          >
-            ${this.fonts.map(font => html` <option
-                value="${font}"
-                ?selected="${font === this.drawingContext.text.font}"
-              >
-                ${font}
-              </option>`)}
-          </select>
-          <select
-            class="font-sizes"
-            @change="${event => this.updateSize(event)}"
-          >
-            ${this.fontSizes.map(size => html` <option
-                  value="${size}"
-                  ?selected="${size === this.drawingContext.text.size}"
-                >
-                  ${size}
-                </option>`)}
-          </select>
-          <paint-button @click="${() => this.toggle('bold')}" tabindex="0">
-              B
-          </paint-button>
-          <paint-button @click="${() => this.toggle('italic')}" tabindex="0">
-              I
-          </paint-button>
-          <paint-button @click="${() => this.toggle('underline')}" tabindex="0">
-              U
-          </paint-button>
-        </div>
-      </paint-window>
-    `;
+        <div class="inline-border">
+            <div class="focus-border">
+                <slot></slot>
+            </div>
+        </div>`;
       }
     }]
   };

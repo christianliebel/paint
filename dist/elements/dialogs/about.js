@@ -94,9 +94,7 @@ export let About = _decorate([customElement('paint-dialog-about')], function (_i
         grid-template-rows: auto auto;
       }
 
-      button {
-        width: 75px;
-        height: 23px;
+      paint-button {
         margin-right: 1px;
         float: right;
       }
@@ -160,7 +158,7 @@ export let About = _decorate([customElement('paint-dialog-about')], function (_i
               <span>${this.getFreeMemoryPercentage()}% Free</span>
             </div>
             <br />
-            <button @click="${this.onOK}">OK</button>
+            <paint-button tabindex="0" @click="${this.onOK}">OK</paint-button>
           </div>
         </div>
       </paint-window>
@@ -191,10 +189,7 @@ export let About = _decorate([customElement('paint-dialog-about')], function (_i
       kind: "method",
       key: "onOK",
       value: function onOK() {
-        this.dispatchEvent(new CustomEvent('close', {
-          bubbles: true,
-          composed: true
-        }));
+        this.dispatchEvent(new CustomEvent('close'));
       }
     }]
   };

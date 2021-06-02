@@ -4,6 +4,7 @@ import './dialogs/text-toolbar.js';
 import './window/window.js';
 import './window/title-bar-button.js';
 import './app.js';
+import './button.js';
 import './canvas.js';
 import './color-box.js';
 import './color-picker.js';
