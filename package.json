@@ -8,7 +8,7 @@
     "test": "jest",
     "lint": "eslint \"src/**/*.{js,ts}\"",
     "generate-sw": "workbox generateSW",
-    "generate-license-file": "generate-license-file --input package.json --output public/3rdpartylicenses.txt"
+    "generate-license-file": "generate-license-file --input package.json --output build/3rdpartylicenses.txt"
   },
   "repository": {
     "type": "git",
