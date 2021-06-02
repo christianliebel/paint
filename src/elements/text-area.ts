@@ -138,9 +138,7 @@ export class TextArea extends LitElement {
 
     const padding = 1;
     const maxWidth = (width ?? 0) - padding * 2;
-    const metrics = context.measureText('');
-    const lineHeight =
-      metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+    const lineHeight = TextArea.getLineHeight(context, size);
     (this.textarea?.value ?? '')
       .split('\n')
       .map((line) => breakLines(line, maxWidth, context.font).split('\n'))
@@ -160,5 +158,24 @@ export class TextArea extends LitElement {
           context.fillRect(correctedX, correctedY + 1, width, 1);
         }
       });
+  }
+
+  private static getLineHeight(
+    context: CanvasRenderingContext2D,
+    size: number,
+  ): number {
+    const metrics = context.measureText('') as unknown as {
+      fontBoundingBoxAscent?: number;
+      fontBoundingBoxDescent?: number;
+    };
+    if (
+      typeof metrics.fontBoundingBoxAscent === 'number' &&
+      typeof metrics.fontBoundingBoxDescent === 'number'
+    ) {
+      return metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+    }
+
+    // Advanced text measurements not available. Roughly estimate line height.
+    return size * 1.2;
   }
 }
