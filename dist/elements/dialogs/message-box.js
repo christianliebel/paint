@@ -37,31 +37,26 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
-import { customElement, property } from '../../../_snowpack/pkg/lit/decorators.js';
-export let Window = _decorate([customElement('paint-window')], function (_initialize, _LitElement) {
-  class Window extends _LitElement {
-    constructor() {
-      super();
+import { customElement, property, query } from '../../../_snowpack/pkg/lit/decorators.js';
+import { renderMnemonic } from '../../helpers/render-mnemonic.js';
+export let MessageBox = _decorate([customElement('paint-dialog-message-box')], function (_initialize, _LitElement) {
+  class MessageBox extends _LitElement {
+    constructor(...args) {
+      super(...args);
 
       _initialize(this);
-
-      this.pointerMoveListener = this.onPointerMove.bind(this);
-      this.pointerUpListener = this.onPointerUp.bind(this);
-      document.addEventListener('pointermove', this.pointerMoveListener);
-      document.addEventListener('pointerup', this.pointerUpListener);
-      this.moveWindow();
     }
 
   }
 
   return {
-    F: Window,
+    F: MessageBox,
     d: [{
       kind: "field",
       decorators: [property({
         type: String
       })],
-      key: "caption",
+      key: "prompt",
 
       value() {
         return '';
@@ -70,39 +65,20 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
     }, {
       kind: "field",
       decorators: [property({
-        type: Boolean
+        type: String
       })],
-      key: "help",
+      key: "title",
 
       value() {
-        return false;
+        return '';
       }
 
     }, {
       kind: "field",
       decorators: [property({
-        type: Boolean
+        type: String
       })],
-      key: "close",
-
-      value() {
-        return false;
-      }
-
-    }, {
-      kind: "field",
-      key: "position",
-
-      value() {
-        return {
-          x: 100,
-          y: 50
-        };
-      }
-
-    }, {
-      kind: "field",
-      key: "mousePosition",
+      key: "icon",
 
       value() {
         return null;
@@ -110,11 +86,19 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
 
     }, {
       kind: "field",
-      key: "pointerUpListener",
-      value: void 0
+      decorators: [property({
+        type: String
+      })],
+      key: "layout",
+
+      value() {
+        return 'ok';
+      }
+
     }, {
       kind: "field",
-      key: "pointerMoveListener",
+      decorators: [query('paint-window')],
+      key: "window",
       value: void 0
     }, {
       kind: "get",
@@ -122,157 +106,123 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
       key: "styles",
       value: function styles() {
         return css`
-      :host {
-        border: 1px solid var(--button-face);
-        border-right-color: var(--button-darker);
-        border-bottom-color: var(--button-darker);
-        background-color: var(--button-face);
-        display: flex;
+      paint-window {
         position: absolute;
-        z-index: var(--z-index-dialog);
+        top: 0;
+
+        max-width: 400px;
       }
 
-      .wrapper {
-        border: 1px solid var(--button-light);
-        border-right-color: var(--button-dark);
-        border-bottom-color: var(--button-dark);
-        padding: 1px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
+      paint-window .content {
+        margin: 11px;
+        display: grid;
 
-      div.title-bar {
-        background-color: var(--highlight);
-        color: var(--highlight-text);
-        height: 18px;
-        display: flex;
-        font-weight: bold;
+        grid-template-columns: auto 1fr;
+        grid-row-gap: 17px;
         align-items: center;
-        box-sizing: border-box;
-        padding: 1px 2px;
-        margin-bottom: 1px;
       }
 
-      :host[tool] div.title-bar {
-        height: 15px;
-        font-size: 9px;
-        /* TODO: More stuff */
+      paint-window img.icon {
+        width: 32px;
+        height: 32px;
+
+        margin-right: 17px;
+
+        image-rendering: pixelated;
       }
 
-      div.title-bar span.title {
-        flex: 1;
+      paint-window .prompt {
+        grid-column-start: 2;
+        grid-column-end: 3;
       }
 
-      paint-window-title-bar-button:last-of-type {
-        margin-left: 2px;
+      paint-window .buttons {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 3;
+
+        display: flex;
+        justify-content: center;
+      }
+
+      paint-window .buttons paint-button + paint-button {
+        margin-left: 6px;
       }
     `;
+      }
+    }, {
+      kind: "method",
+      key: "firstUpdated",
+      value: function firstUpdated(_changedProperties) {
+        _get(_getPrototypeOf(MessageBox.prototype), "firstUpdated", this).call(this, _changedProperties);
+
+        requestAnimationFrame(() => this.window?.center());
       }
     }, {
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-      <div class="wrapper">
-        <div class="title-bar" @pointerdown="${this.onPointerDown}">
-          <span class="title">${this.caption}</span>
-          ${this.help ? html`<paint-window-title-bar-button
-                help
-              ></paint-window-title-bar-button>` : ''}
-          ${this.close ? html`<paint-window-title-bar-button
-                close
-                @click="${this.onClose}"
-              ></paint-window-title-bar-button>` : ''}
-        </div>
+      <paint-window caption="${this.title}" close>
         <div class="content">
-          <slot></slot>
+          ${this.getIcon()}
+          <div class="prompt">${this.prompt}</div>
+          <div class="buttons">${this.getDialogLayout()}</div>
         </div>
-      </div>
+      </paint-window>
     `;
       }
     }, {
       kind: "method",
-      key: "disconnectedCallback",
-      value: function disconnectedCallback() {
-        _get(_getPrototypeOf(Window.prototype), "disconnectedCallback", this).call(this);
-
-        document.removeEventListener('pointermove', this.pointerMoveListener);
-        document.removeEventListener('pointerup', this.pointerUpListener);
-      }
-    }, {
-      kind: "method",
-      key: "onPointerDown",
-      value: function onPointerDown({
-        clientX,
-        clientY
-      }) {
-        this.mousePosition = {
-          clientX,
-          clientY
-        };
-      }
-    }, {
-      kind: "method",
-      key: "onPointerMove",
-      value: function onPointerMove({
-        clientX,
-        clientY
-      }) {
-        if (this.mousePosition) {
-          clientX = Window.clamp(clientX, 0, innerWidth);
-          clientY = Window.clamp(clientY, 0, innerHeight);
-          const deltaX = clientX - this.mousePosition.clientX;
-          const deltaY = clientY - this.mousePosition.clientY;
-          this.position.x = this.position.x + deltaX;
-          this.position.y = this.position.y + deltaY;
-          this.mousePosition = {
-            clientX,
-            clientY
-          };
-          this.moveWindow();
+      key: "getIcon",
+      value: function getIcon() {
+        if (this.icon === 'warning') {
+          return html` <img
+        class="icon"
+        alt=""
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAElBMVEUAAAAAAAAAgACAgIDAwMD//wCJvpKsAAAAAXRSTlMAQObYZgAAAIxJREFUKJFlj9EJAjAMREN1gXy4gf0vZAGhOoCQ7L+KNpWkZ+6vD+71QrRzJ0yzxz+YA0A3LUCwYTYLGNAwlDgQaDBImr35dkq6Ay1ADsUCKQkworGBFiC5W/mV5yywhoVk7TayPMeBZ0uaZWYCtpB4w7/9SQBIKDgkp9MlHYAWIHR9nplfq2CILvAeH0wjUtKxjmmsAAAAAElFTkSuQmCC"
+      />`;
         }
+
+        return html``;
       }
     }, {
       kind: "method",
-      static: true,
-      key: "clamp",
-      value: function clamp(value, min, max) {
-        return Math.min(Math.max(value, min), max);
-      }
-    }, {
-      kind: "method",
-      key: "onPointerUp",
-      value: function onPointerUp() {
-        this.mousePosition = null;
-      }
-    }, {
-      kind: "method",
-      key: "center",
-      value: function center() {
-        const {
-          width,
-          height
-        } = this.getBoundingClientRect();
-        this.position = {
-          x: (innerWidth - width) / 2,
-          y: (innerHeight - height) / 2
-        };
-        this.moveWindow();
-      }
-    }, {
-      kind: "method",
-      key: "moveWindow",
-      value: function moveWindow() {
-        this.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
+      key: "getDialogLayout",
+      value: function getDialogLayout() {
+        if (this.layout === 'ok') {
+          return html` <paint-button
+        @click="${() => this.onClose('ok')}"
+        tabindex="0"
+        >OK
+      </paint-button>`;
+        }
+
+        if (this.layout === 'yes-no-cancel') {
+          return html`
+        <paint-button @click="${() => this.onClose('yes')}" tabindex="0"
+          >${renderMnemonic('Yes', 'Y')}
+        </paint-button>
+        <paint-button @click="${() => this.onClose('no')}" tabindex="0"
+          >${renderMnemonic('No', 'N')}
+        </paint-button>
+        <paint-button @click="${() => this.onClose('cancel')}" tabindex="0"
+          >Cancel
+        </paint-button>
+      `;
+        }
+
+        throw new Error('Unsupported Layout.');
       }
     }, {
       kind: "method",
       key: "onClose",
-      value: function onClose() {
+      value: function onClose(reason) {
         this.dispatchEvent(new CustomEvent('close', {
-          bubbles: true,
-          composed: true
+          detail: {
+            reason
+          }
         }));
       }
     }]
