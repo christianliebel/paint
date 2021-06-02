@@ -19,6 +19,8 @@ export class App extends LitElement {
   @state() helpText = defaultHelpText;
   @state() drawingContext = DRAWING_CONTEXT;
 
+  private readonly beforeUnloadListener?: (event: BeforeUnloadEvent) => void;
+
   static get styles(): CSSResultGroup {
     return css`
       :host {
@@ -156,7 +158,12 @@ export class App extends LitElement {
     this.addEventListener('canvas-ready', () =>
       getLaunchImage(this.drawingContext),
     );
+
+    this.beforeUnloadListener = this.onBeforeUnload.bind(this);
+    window.addEventListener('beforeunload', this.beforeUnloadListener);
+
     registerDragDrop(this);
+
     this.registerHotkeys(menus);
   }
 
@@ -238,5 +245,20 @@ export class App extends LitElement {
           ></paint-dialog-text-toolbar>`
         : ''}
     `;
+  }
+
+  onBeforeUnload(event: BeforeUnloadEvent): void {
+    if (this.drawingContext.document.dirty) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    if (this.beforeUnloadListener) {
+      window.removeEventListener('beforeunload', this.beforeUnloadListener);
+    }
   }
 }

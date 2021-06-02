@@ -162,6 +162,7 @@ export class Canvas extends LitElement {
     this.drawingContext.previewContext = previewContext;
     this.drawingContext.element = this;
     clearCanvas(this.drawingContext);
+    this.drawingContext.document.dirty = false;
     updateContext(this);
 
     document.addEventListener('pointermove', (event) =>
