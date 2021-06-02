@@ -103,7 +103,7 @@ export let ToolBox = _decorate([customElement('paint-tool-box')], function (_ini
           .tool=${tool}
           title="${tool.tooltip}"
           class="${this.drawingContext?.tool === tool ? 'active' : ''} ${tool.instance ? '' : 'unavailable'}"
-          @pointerup="${() => this.selectTool(tool)}"
+          @click="${() => this.selectTool(tool)}"
         ></paint-tool>`)}
       <paint-inset-container>
         ${this.getToolHtml(this.drawingContext.tool)}
