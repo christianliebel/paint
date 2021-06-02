@@ -1,6 +1,10 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
+// TODO: Disabled State
+// TODO: Check padding inside focus box
+// TODO: Allow "clicking" via keyboard
+
 @customElement('paint-button')
 export class Button extends LitElement {
   static get styles(): CSSResultGroup {
@@ -82,6 +86,10 @@ export class Button extends LitElement {
       
       path {
         color: currentColor;
+      }
+      
+      ::slotted(.mnemonic) {
+        text-decoration: underline;
       }
     `;
   }
