@@ -114,17 +114,8 @@ export class TextArea extends LitElement {
   }
 
   drawTextBox(context: CanvasRenderingContext2D): void {
-    const {
-      x,
-      y,
-      width,
-      height,
-      size,
-      font,
-      bold,
-      italic,
-      underline,
-    } = this.drawingContext.text;
+    const { x, y, width, height, size, font, bold, italic, underline } =
+      this.drawingContext.text;
 
     if (this.drawingContext.drawOpaque) {
       context.fillStyle = this.drawingContext.colors.secondary;

@@ -7,7 +7,11 @@ import type { Tool } from '../models/tool';
 export class EraserTool implements Tool {
   private previous: Point = { x: 0, y: 0 };
 
-  onPointerHover(x: number, y: number, { canvas, previewContext, eraserSize, colors }: DrawingContext): void {
+  onPointerHover(
+    x: number,
+    y: number,
+    { canvas, previewContext, eraserSize, colors }: DrawingContext,
+  ): void {
     if (canvas && previewContext) {
       clearContext(previewContext);
 
@@ -20,7 +24,11 @@ export class EraserTool implements Tool {
     }
   }
 
-  onPointerDown(x: number, y: number, { context, eraserSize, colors: { secondary } }: DrawingContext): void {
+  onPointerDown(
+    x: number,
+    y: number,
+    { context, eraserSize, colors: { secondary } }: DrawingContext,
+  ): void {
     if (context) {
       context.fillStyle = secondary;
       this.previous = { x, y };
@@ -28,7 +36,11 @@ export class EraserTool implements Tool {
     }
   }
 
-  onPointerMove(x: number, y: number, { eraserSize, context }: DrawingContext): void {
+  onPointerMove(
+    x: number,
+    y: number,
+    { eraserSize, context }: DrawingContext,
+  ): void {
     // TODO: Color eraser
     line(this.previous.x, this.previous.y, x, y, (x, y) => {
       context?.fillRect(...this.getFillRectArgs(x, y, eraserSize));
@@ -36,7 +48,11 @@ export class EraserTool implements Tool {
     this.previous = { x, y };
   }
 
-  getFillRectArgs(x: number, y: number, eraserSize: number): [number, number, number, number] {
+  getFillRectArgs(
+    x: number,
+    y: number,
+    eraserSize: number,
+  ): [number, number, number, number] {
     return [x - eraserSize / 2, y - eraserSize / 2, eraserSize, eraserSize];
   }
 }

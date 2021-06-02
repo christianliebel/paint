@@ -68,7 +68,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
     showToolbar: true,
     bold: false,
     italic: false,
-    underline: false
+    underline: false,
   },
   element: null,
   previewCanvas: null,

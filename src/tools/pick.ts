@@ -9,12 +9,21 @@ export class PickTool implements Tool {
 
   onPointerMove(x: number, y: number, drawingContext: DrawingContext): void {
     if (drawingContext.context) {
-      drawingContext.previewColor = this.pickColor(x, y, drawingContext.context);
+      drawingContext.previewColor = this.pickColor(
+        x,
+        y,
+        drawingContext.context,
+      );
       updateContext(drawingContext.element);
     }
   }
 
-  onPointerUp(x: number, y: number, drawingContext: DrawingContext, color: ToolColor): void {
+  onPointerUp(
+    x: number,
+    y: number,
+    drawingContext: DrawingContext,
+    color: ToolColor,
+  ): void {
     if (drawingContext.context) {
       drawingContext.previewColor = null;
       drawingContext.colors[color.stroke.key] = this.pickColor(

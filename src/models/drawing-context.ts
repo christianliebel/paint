@@ -27,7 +27,7 @@ export interface DrawingContext {
     toolBox: boolean;
     textToolbar: boolean;
   };
-  document: { title: string, handle?: FileSystemHandle };
+  document: { title: string; handle?: FileSystemHandle };
   text: TextContext;
   history: History | null;
 

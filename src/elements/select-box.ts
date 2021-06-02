@@ -16,9 +16,8 @@ export class SelectBox extends LitElement {
   }
 
   render(): TemplateResult {
-    return html`
-        <div>
-            <slot></slot>
-        </div>`;
+    return html` <div>
+      <slot></slot>
+    </div>`;
   }
 }

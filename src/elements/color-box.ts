@@ -48,7 +48,7 @@ export class ColorBox extends LitElement {
     // Swap colors only for pen and touch presses, but not for the mouse.
     // Pen and touch don't have a secondary input mode, and classic Paint didn't
     // offer to swap the colors with the mouse.
-    if (['pen', 'touch'].includes(pointerType)){
+    if (['pen', 'touch'].includes(pointerType)) {
       const { primary, secondary } = this.drawingContext.colors;
       this.drawingContext.colors.primary = secondary;
       this.drawingContext.colors.secondary = primary;

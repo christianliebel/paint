@@ -3,7 +3,12 @@ import type { DrawingContext } from '../models/drawing-context';
 import type { ToolColor, Tool } from '../models/tool';
 
 export class FillTool implements Tool {
-  onPointerDown(x: number, y: number, { canvas, context }: DrawingContext, color: ToolColor): void {
+  onPointerDown(
+    x: number,
+    y: number,
+    { canvas, context }: DrawingContext,
+    color: ToolColor,
+  ): void {
     if (canvas && context) {
       const floodFill = new FloodFill(
         context.getImageData(0, 0, canvas.width, canvas.height),

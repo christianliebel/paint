@@ -6,7 +6,7 @@ import type { BrushType } from '../models/brush';
 
 interface BrushConfig {
   type: BrushType;
-  sizes: { value: number, path: string }[];
+  sizes: { value: number; path: string }[];
 }
 
 @customElement('paint-tool-brush')
@@ -53,8 +53,7 @@ export class ToolBrush extends LitElement {
       sizes: [
         {
           value: 8,
-          path:
-            'M8,0H7v1H6v1H5v1H4v1H3v1H2v1H1v1H0v1h1V7h1V6h1V5h1V4h1V3h1V2h1V1h1V0z',
+          path: 'M8,0H7v1H6v1H5v1H4v1H3v1H2v1H1v1H0v1h1V7h1V6h1V5h1V4h1V3h1V2h1V1h1V0z',
         },
         {
           value: 5,
@@ -71,8 +70,7 @@ export class ToolBrush extends LitElement {
       sizes: [
         {
           value: 8,
-          path:
-            'M0,0h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1H7V7H6V6H5V5H4V4H3V3H2V2H1V1H0V0z',
+          path: 'M0,0h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1H7V7H6V6H5V5H4V4H3V3H2V2H1V1H0V0z',
         },
         {
           value: 5,
@@ -130,7 +128,10 @@ export class ToolBrush extends LitElement {
         ({ value: size, path }) => html`<div
             @click=${() => this.onSelect(type, size)}
             class="${
-              this.drawingContext.brush.size === size && this.drawingContext.brush.type === type ? 'selected' : ''
+              this.drawingContext.brush.size === size &&
+              this.drawingContext.brush.type === type
+                ? 'selected'
+                : ''
             }"
           ><svg viewBox="0 0 8 8"><path d="${path}"></svg>
           <div class="selection"></div>
