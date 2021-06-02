@@ -28,6 +28,10 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Generate license file
+        if: github.ref == 'refs/heads/main'
+        run: npm run generate-license-file
+
       - name: Generate Service Worker
         if: github.ref == 'refs/heads/main'
         run: npm run generate-sw

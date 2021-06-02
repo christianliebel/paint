@@ -7,7 +7,8 @@
     "build": "snowpack build",
     "test": "jest",
     "lint": "eslint \"src/**/*.{js,ts}\"",
-    "generate-sw": "workbox generateSW"
+    "generate-sw": "workbox generateSW",
+    "generate-license-file": "generate-license-file --input package.json --output public/3rdpartylicenses.txt"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "@typescript-eslint/parser": "^4.26.0",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
+    "generate-license-file": "^1.1.0",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "lint-staged": "^11.0.0",
