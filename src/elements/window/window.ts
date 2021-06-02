@@ -112,8 +112,9 @@ export class Window extends LitElement {
   }
 
   onPointerMove({ clientX, clientY }: PointerPosition): void {
-    // TODO: Disallow moving out of bounds
     if (this.mousePosition) {
+      clientX = Window.clamp(clientX, 0, innerWidth);
+      clientY = Window.clamp(clientY, 0, innerHeight);
       const deltaX = clientX - this.mousePosition.clientX;
       const deltaY = clientY - this.mousePosition.clientY;
       this.position.x = this.position.x + deltaX;
@@ -121,6 +122,10 @@ export class Window extends LitElement {
       this.mousePosition = { clientX, clientY };
       this.moveWindow();
     }
+  }
+
+  private static clamp(value: number, min: number, max: number): number {
+    return Math.min(Math.max(value, min), max);
   }
 
   onPointerUp(): void {
