@@ -127,10 +127,10 @@ export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotat
           </div>
           <div class="buttons">
             <paint-button @click="${this.onCancel}" tabindex="0">
-                OK
+              OK
             </paint-button>
             <paint-button @click="${this.onCancel}" tabindex="0">
-                Cancel
+              Cancel
             </paint-button>
           </div>
         </div>

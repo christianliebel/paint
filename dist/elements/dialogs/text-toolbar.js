@@ -188,13 +188,13 @@ export let TextToolbarDialog = _decorate([customElement('paint-dialog-text-toolb
                 </option>`)}
           </select>
           <paint-button @click="${() => this.toggle('bold')}" tabindex="0">
-              B
+            B
           </paint-button>
           <paint-button @click="${() => this.toggle('italic')}" tabindex="0">
-              I
+            I
           </paint-button>
           <paint-button @click="${() => this.toggle('underline')}" tabindex="0">
-              U
+            U
           </paint-button>
         </div>
       </paint-window>

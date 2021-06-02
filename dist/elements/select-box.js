@@ -63,10 +63,9 @@ export let SelectBox = _decorate([customElement('paint-select-box')], function (
       kind: "method",
       key: "render",
       value: function render() {
-        return html`
-        <div>
-            <slot></slot>
-        </div>`;
+        return html` <div>
+      <slot></slot>
+    </div>`;
       }
     }]
   };

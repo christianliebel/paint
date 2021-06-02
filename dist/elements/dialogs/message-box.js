@@ -134,7 +134,7 @@ export let MessageBox = _decorate([customElement('paint-dialog-message-box')], f
       paint-window .prompt {
         grid-column-start: 2;
         grid-column-end: 3;
-        
+
         white-space: pre-wrap;
       }
 
