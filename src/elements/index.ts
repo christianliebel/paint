@@ -1,6 +1,7 @@
 import './dialogs/about';
 import './dialogs/flip-and-rotate';
 import './dialogs/text-toolbar';
+import './dialogs/message-box';
 import './window/window';
 import './window/title-bar-button';
 import './app';
