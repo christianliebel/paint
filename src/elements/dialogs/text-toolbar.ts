@@ -10,7 +10,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../../data/drawing-context';
 import { FONT_SIZES } from '../../data/font-sizes';
 import { evaluateTextToolbarVisibility } from '../../helpers/evaluate-text-toolbar-visibility';
-import { getLocalFonts } from '../../helpers/get-local-fonts';
+import { getFonts, requestLocalFonts } from '../../helpers/font-cache';
 import { updateContext } from '../../helpers/update-context';
 
 @customElement('paint-dialog-text-toolbar')
@@ -59,7 +59,7 @@ export class TextToolbarDialog extends LitElement {
   ): Promise<void> {
     super.firstUpdated(_changedProperties);
 
-    this.fonts = await getLocalFonts();
+    this.fonts = await getFonts();
     this.addEventListener('close', () => {
       this.drawingContext.text.showToolbar = false;
       evaluateTextToolbarVisibility(this.drawingContext);
@@ -94,6 +94,7 @@ export class TextToolbarDialog extends LitElement {
         <div class="content">
           <select
             class="font-list"
+            @click="${() => this.onFontListClick()}"
             @change="${(event: Event) => this.updateFont(event)}"
           >
             ${this.fonts.map(
@@ -131,5 +132,11 @@ export class TextToolbarDialog extends LitElement {
         </div>
       </paint-window>
     `;
+  }
+
+  async onFontListClick(): Promise<void> {
+    if (requestLocalFonts()) {
+      this.fonts = await getFonts();
+    }
   }
 }
