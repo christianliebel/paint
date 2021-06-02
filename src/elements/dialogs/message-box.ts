@@ -53,6 +53,8 @@ export class MessageBox extends LitElement {
       paint-window .prompt {
         grid-column-start: 2;
         grid-column-end: 3;
+        
+        white-space: pre-wrap;
       }
 
       paint-window .buttons {
