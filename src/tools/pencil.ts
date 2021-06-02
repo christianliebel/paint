@@ -6,7 +6,12 @@ import type { ToolColor, Tool } from '../models/tool';
 export class PencilTool implements Tool {
   private previous: Point = { x: 0, y: 0 };
 
-  onPointerDown(x: number, y: number, { context }: DrawingContext, color: ToolColor): void {
+  onPointerDown(
+    x: number,
+    y: number,
+    { context }: DrawingContext,
+    color: ToolColor,
+  ): void {
     if (context) {
       context.fillStyle = color.stroke.value;
       context.fillRect(x, y, 1, 1);

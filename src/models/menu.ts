@@ -1,9 +1,9 @@
 import type { MenuAction } from './menu-action';
 
 export interface MenuEntry {
-  caption: string,
-  mnemonic?: string,
-  helpText: string,
+  caption: string;
+  mnemonic?: string;
+  helpText: string;
 
   instance?: MenuAction | null;
   shortcut?: string;

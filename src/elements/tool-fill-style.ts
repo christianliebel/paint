@@ -4,7 +4,6 @@ import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { updateContext } from '../helpers/update-context';
 import type { FillStyle } from '../models/fill-style';
 
-
 @customElement('paint-tool-fill-style')
 export class ToolFillStyle extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;

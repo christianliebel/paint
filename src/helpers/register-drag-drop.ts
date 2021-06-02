@@ -27,7 +27,7 @@ export function registerDragDrop(
         await loadFileAndAdjustCanvas(blob, drawingContext);
 
         updateDocumentContext(
-          (handle as unknown) as FileSystemHandle,
+          handle as unknown as FileSystemHandle,
           handle.name,
           drawingContext,
         );

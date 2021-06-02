@@ -9,7 +9,12 @@ import type { ToolColor, Tool } from '../models/tool';
 export class BrushTool implements Tool {
   private previous: Point = { x: 0, y: 0 };
 
-  onPointerHover(x: number, y: number, { canvas, brush, previewContext }: DrawingContext, color: ToolColor): void {
+  onPointerHover(
+    x: number,
+    y: number,
+    { canvas, brush, previewContext }: DrawingContext,
+    color: ToolColor,
+  ): void {
     if (canvas && previewContext) {
       clearContext(previewContext);
       previewContext.fillStyle = color.stroke.value;
@@ -17,7 +22,12 @@ export class BrushTool implements Tool {
     }
   }
 
-  onPointerDown(x: number, y: number, { brush, context }: DrawingContext, color: ToolColor): void {
+  onPointerDown(
+    x: number,
+    y: number,
+    { brush, context }: DrawingContext,
+    color: ToolColor,
+  ): void {
     if (context) {
       context.fillStyle = color.stroke.value;
       this.drawBrush(x, y, brush, context);
@@ -25,7 +35,11 @@ export class BrushTool implements Tool {
     }
   }
 
-  onPointerMove(x: number, y: number, { brush, context }: DrawingContext): void {
+  onPointerMove(
+    x: number,
+    y: number,
+    { brush, context }: DrawingContext,
+  ): void {
     if (context) {
       let previousBresenham = { ...this.previous };
       line(this.previous.x, this.previous.y, x, y, (x, y) => {
@@ -39,7 +53,13 @@ export class BrushTool implements Tool {
     }
   }
 
-  drawBrush(x: number, y: number, { type, size }: Brush, context: CanvasRenderingContext2D, posDiff?: Point): void {
+  drawBrush(
+    x: number,
+    y: number,
+    { type, size }: Brush,
+    context: CanvasRenderingContext2D,
+    posDiff?: Point,
+  ): void {
     if (type === 'circle') {
       return drawCircle(x, y, size, context);
     }
@@ -72,11 +92,24 @@ export class BrushTool implements Tool {
     throw new Error('Unknown brush type.');
   }
 
-  drawSquare(x: number, y: number, diff: number, size: number, context: CanvasRenderingContext2D): void {
+  drawSquare(
+    x: number,
+    y: number,
+    diff: number,
+    size: number,
+    context: CanvasRenderingContext2D,
+  ): void {
     context.fillRect(x - diff, y - diff, size, size);
   }
 
-  drawForwardLine(x: number, y: number, diff: number, correction: number, size: number, context: CanvasRenderingContext2D): void {
+  drawForwardLine(
+    x: number,
+    y: number,
+    diff: number,
+    correction: number,
+    size: number,
+    context: CanvasRenderingContext2D,
+  ): void {
     const start = { x: x - diff, y: y + diff + correction };
     const end = { x: x + diff + correction, y: y - diff };
     line(start.x, start.y, end.x, end.y, (x, y) => {
@@ -84,7 +117,14 @@ export class BrushTool implements Tool {
     });
   }
 
-  drawBackwardLine(x: number, y: number, diff: number, correction: number, size: number, context: CanvasRenderingContext2D): void {
+  drawBackwardLine(
+    x: number,
+    y: number,
+    diff: number,
+    correction: number,
+    size: number,
+    context: CanvasRenderingContext2D,
+  ): void {
     const start = { x: x - diff, y: y - diff };
     const end = { x: x + diff + correction, y: y + diff + correction };
     line(start.x, start.y, end.x, end.y, (x, y) => {

@@ -15,6 +15,7 @@ export class ToolColorPreview extends LitElement {
   }
 
   render(): void {
-    this.style.backgroundColor = this.drawingContext?.previewColor ?? 'transparent';
+    this.style.backgroundColor =
+      this.drawingContext?.previewColor ?? 'transparent';
   }
 }

@@ -1,4 +1,9 @@
-export function drawCircle(x: number, y: number, lineWidth: number, context: CanvasRenderingContext2D): void {
+export function drawCircle(
+  x: number,
+  y: number,
+  lineWidth: number,
+  context: CanvasRenderingContext2D,
+): void {
   // TODO: Extend for arbitrary circle sizes
   if (lineWidth === 1) {
     context.fillRect(x, y, 1, 1);

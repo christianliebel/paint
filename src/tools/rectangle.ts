@@ -11,12 +11,12 @@ export class RectangleTool implements Tool {
     this.startPosition = { x, y };
   }
 
-  onPointerMove(x: number, y: number, {
-    canvas,
-    lineWidth,
-    fillStyle,
-    previewContext,
-  }: DrawingContext, color: ToolColor): void {
+  onPointerMove(
+    x: number,
+    y: number,
+    { canvas, lineWidth, fillStyle, previewContext }: DrawingContext,
+    color: ToolColor,
+  ): void {
     if (canvas && previewContext) {
       this.drawRectangle(
         x,
@@ -56,7 +56,7 @@ export class RectangleTool implements Tool {
     y: number,
     targetContext: CanvasRenderingContext2D,
     previewContext: CanvasRenderingContext2D,
-    fillStyle: { fill: boolean, stroke: boolean },
+    fillStyle: { fill: boolean; stroke: boolean },
     lineWidth: number,
     canvas: HTMLCanvasElement,
     color: ToolColor,
@@ -89,7 +89,13 @@ export class RectangleTool implements Tool {
     }
   }
 
-  getPointsForLine(x1: number, y1: number, x2: number, y2: number, lineWidth: number): Point[] {
+  getPointsForLine(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    lineWidth: number,
+  ): Point[] {
     const points: Point[] = [];
     for (let i = 0; i < lineWidth; i++) {
       line(x1 + i, y1 + i, x2, y1 + i, (x, y) => points.push({ x, y }));

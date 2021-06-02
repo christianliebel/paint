@@ -9,7 +9,7 @@ export function getLaunchImage(drawingContext: DrawingContext): void {
       if (handle) {
         const file = await handle.getFile();
         drawingContext.document.title = file.name;
-        drawingContext.document.handle = (handle as unknown) as FileSystemHandle;
+        drawingContext.document.handle = handle as unknown as FileSystemHandle;
         await loadFileAndAdjustCanvas(file, drawingContext);
       }
     });

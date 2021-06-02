@@ -57,15 +57,15 @@ export class ToolBox extends LitElement {
   render(): TemplateResult {
     return html`
       ${tools.map(
-      (tool) => html` <paint-tool
+        (tool) => html` <paint-tool
           .tool=${tool}
           title="${tool.tooltip}"
           class="${this.drawingContext?.tool === tool
-        ? 'active'
-        : ''} ${tool.instance ? '' : 'unavailable'}"
+            ? 'active'
+            : ''} ${tool.instance ? '' : 'unavailable'}"
           @pointerup="${() => this.selectTool(tool)}"
         ></paint-tool>`,
-    )}
+      )}
       <paint-inset-container>
         ${this.getToolHtml(this.drawingContext.tool)}
       </paint-inset-container>

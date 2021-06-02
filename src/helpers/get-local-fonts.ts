@@ -12,9 +12,9 @@ export function getLocalFonts(): Promise<string[]> {
 }
 
 async function getFontsViaLocalFontAccess(): Promise<string[]> {
-  const status = await navigator.permissions.query(({
+  const status = await navigator.permissions.query({
     name: 'font-access',
-  } as unknown) as PermissionDescriptor);
+  } as unknown as PermissionDescriptor);
   if (status.state === 'denied')
     throw new Error('Cannot enumerate local fonts');
 

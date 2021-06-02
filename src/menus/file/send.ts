@@ -6,7 +6,9 @@ export class SendAction implements MenuAction {
   private readonly fakePng = this.getFileFromPngBlob(new Blob(), 'fake.png');
 
   canExecute(): boolean {
-    return !!navigator.canShare && navigator.canShare({ files: [this.fakePng] });
+    return (
+      !!navigator.canShare && navigator.canShare({ files: [this.fakePng] })
+    );
   }
 
   async execute({ canvas, document }: DrawingContext): Promise<void> {
