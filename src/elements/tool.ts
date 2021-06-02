@@ -44,7 +44,7 @@ export class Tool extends LitElement {
       }
 
       :host(.active),
-      :host(:active) {
+      :host(:active:hover) {
         border: 1px solid var(--button-light);
         border-top: 1px solid var(--button-darker);
         border-left: 1px solid var(--button-darker);
@@ -52,13 +52,13 @@ export class Tool extends LitElement {
       }
 
       :host(.active) div.wrapper,
-      :host(:active) div.wrapper {
+      :host(:active:hover) div.wrapper {
         border: 1px solid var(--button-face);
         border-top: 1px solid var(--button-dark);
         border-left: 1px solid var(--button-dark);
       }
 
-      :host(:active) div.wrapper {
+      :host(:active:hover) div.wrapper {
         background-color: var(--button-face);
       }
 
@@ -66,7 +66,7 @@ export class Tool extends LitElement {
         margin: 3px;
       }
 
-      :host(:active) div.tool {
+      :host(:active:hover) div.tool {
         margin: 4px;
       }
     `;

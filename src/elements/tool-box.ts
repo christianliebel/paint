@@ -63,7 +63,7 @@ export class ToolBox extends LitElement {
           class="${this.drawingContext?.tool === tool
             ? 'active'
             : ''} ${tool.instance ? '' : 'unavailable'}"
-          @pointerup="${() => this.selectTool(tool)}"
+          @click="${() => this.selectTool(tool)}"
         ></paint-tool>`,
       )}
       <paint-inset-container>
