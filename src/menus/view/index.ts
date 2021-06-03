@@ -1,3 +1,4 @@
+import { CustomAction } from './custom';
 import { LargeSizeAction } from './large-size';
 import { NormalSizeAction } from './normal-size';
 import { TextToolbarAction } from './text-toolbar';
@@ -58,6 +59,7 @@ export const viewMenu: MenuEntry = {
           caption: 'Custom…',
           mnemonic: 'u',
           helpText: 'Zooms the picture.',
+          instance: new CustomAction(),
         },
         {
           separator: true,

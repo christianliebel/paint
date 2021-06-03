@@ -11,7 +11,7 @@ import { renderMnemonic } from '../../helpers/render-mnemonic';
 import { Window } from '../window/window';
 
 export type MessageBoxIcon = 'warning' | null;
-export type CloseReason = 'ok' | 'yes' | 'no' | 'cancel';
+export type MessageBoxResult = 'ok' | 'yes' | 'no' | 'cancel';
 export type DialogLayout = 'ok' | 'yes-no-cancel';
 
 @customElement('paint-dialog-message-box')
@@ -128,7 +128,7 @@ export class MessageBox extends LitElement {
     throw new Error('Unsupported Layout.');
   }
 
-  onClose(reason: CloseReason): void {
-    this.dispatchEvent(new CustomEvent('close', { detail: { reason } }));
+  onClose(detail: MessageBoxResult): void {
+    this.dispatchEvent(new CustomEvent('close', { detail }));
   }
 }
