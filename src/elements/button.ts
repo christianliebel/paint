@@ -3,7 +3,6 @@ import { customElement } from 'lit/decorators.js';
 
 // TODO: Disabled State
 // TODO: Check padding inside focus box
-// TODO: Allow "clicking" via keyboard
 
 @customElement('paint-button')
 export class Button extends LitElement {
@@ -93,6 +92,15 @@ export class Button extends LitElement {
         text-decoration: underline;
       }
     `;
+  }
+
+  constructor() {
+    super();
+    this.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (['Space', 'Enter'].includes(e.code)) {
+        this.dispatchEvent(new MouseEvent('click'));
+      }
+    });
   }
 
   render(): TemplateResult {
