@@ -7,6 +7,8 @@
     "build": "snowpack build",
     "test": "jest",
     "lint": "eslint \"src/**/*.{js,ts}\"",
+    "cypress:run": "cypress run --headless --browser chrome",
+    "cypress:open": "cypress open",
     "generate-sw": "workbox generateSW",
     "generate-license-file": "generate-license-file --input package.json --output build/3rdpartylicenses.txt"
   },
@@ -39,6 +41,7 @@
     "@types/snowpack-env": "^2.3.2",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "cypress": "^7.4.0",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "generate-license-file": "^1.1.0",
@@ -58,7 +61,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,js}": "eslint --cache --fix && prettier --write",
+    "{src,cypress}/**/*.{ts,js}": "eslint --cache --fix && prettier --write",
     "public/*.{css,html}": "prettier --write",
     "*.md": "prettier --write"
   }
