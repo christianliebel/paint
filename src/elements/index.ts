@@ -1,4 +1,5 @@
 import './dialogs/about';
+import './dialogs/custom-zoom';
 import './dialogs/flip-and-rotate';
 import './dialogs/text-toolbar';
 import './dialogs/message-box';
