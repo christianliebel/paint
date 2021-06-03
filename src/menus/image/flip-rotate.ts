@@ -1,4 +1,4 @@
-import type { FlipRotateParams } from '../../elements/dialogs/flip-and-rotate';
+import type { FlipRotateResult } from '../../elements/dialogs/flip-and-rotate';
 import { showDialog } from '../../helpers/dialog';
 import type { History } from '../../helpers/history';
 import type { DrawingContext } from '../../models/drawing-context';
@@ -11,7 +11,7 @@ export class FlipRotateAction implements MenuAction {
     previewCanvas,
     history,
   }: DrawingContext): Promise<void> {
-    const result = await showDialog<FlipRotateParams>(
+    const result = await showDialog(
       'paint-dialog-flip-and-rotate',
     );
 
@@ -29,7 +29,7 @@ export class FlipRotateAction implements MenuAction {
   }
 
   private static flipOrRotate(
-    result: FlipRotateParams,
+    result: FlipRotateResult,
     canvas: HTMLCanvasElement,
     previewCanvas: HTMLCanvasElement,
     context: CanvasRenderingContext2D,
