@@ -46,7 +46,7 @@
     "eslint-config-prettier": "^8.3.0",
     "generate-license-file": "^1.1.0",
     "husky": "^6.0.0",
-    "jest": "^27.0.3",
+    "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
     "snowpack": "3.2.2",
