@@ -6,7 +6,7 @@
     "start": "snowpack dev",
     "build": "snowpack build",
     "test": "jest",
-    "lint": "eslint \"src/**/*.{js,ts}\"",
+    "lint": "eslint \"{src,cypress}/**/*.{js,ts}\"",
     "cypress:run": "cypress run --headless --browser chrome",
     "cypress:open": "cypress open",
     "generate-sw": "workbox generateSW",
