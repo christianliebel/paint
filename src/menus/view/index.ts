@@ -1,3 +1,5 @@
+import { LargeSizeAction } from './large-size';
+import { NormalSizeAction } from './normal-size';
 import { TextToolbarAction } from './text-toolbar';
 import { ViewBitmapAction } from './view-bitmap';
 import { StatusBarAction } from './status-bar';
@@ -43,12 +45,14 @@ export const viewMenu: MenuEntry = {
           mnemonic: 'N',
           shortcut: 'Ctrl+PgUp',
           helpText: 'Zooms the picture to 100%.',
+          instance: new NormalSizeAction(),
         },
         {
           caption: 'Large Size',
           mnemonic: 'L',
           shortcut: 'Ctrl+PgDn',
           helpText: 'Zooms the picture to 400%.',
+          instance: new LargeSizeAction(),
         },
         {
           caption: 'Custom…',
