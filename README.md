@@ -42,7 +42,7 @@ This project demonstrates the use of:
 
 1. Clone this repository
 2. Run `npm i`
-3. Run `npm start`
+3. Run `npm run start-bugfix` (for now, due to a [Snowpack bug](https://github.com/christianliebel/paint/issues/313))
 4. Done!
 
 ## Wait, I’ve seen this before

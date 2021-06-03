@@ -4,6 +4,7 @@
   "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
   "scripts": {
     "start": "snowpack dev",
+    "start-bugfix": "npm i --save-dev snowpack@3.2.2 && snowpack dev",
     "build": "snowpack build",
     "test": "jest",
     "lint": "eslint \"src/**/*.{js,ts}\"",
@@ -49,7 +50,7 @@
     "jest": "^27.0.3",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
-    "snowpack": "3.2.2",
+    "snowpack": "^3.5.4",
     "ts-jest": "^27.0.2",
     "ts-mockito": "^2.6.1",
     "typescript": "^4.3.2",
