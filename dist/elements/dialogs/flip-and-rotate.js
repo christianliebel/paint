@@ -31,7 +31,7 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
-import { customElement } from '../../../_snowpack/pkg/lit/decorators.js';
+import { customElement, state } from '../../../_snowpack/pkg/lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic.js';
 export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotate')], function (_initialize, _LitElement) {
   class FlipAndRotate extends _LitElement {
@@ -91,6 +91,61 @@ export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotat
     `;
       }
     }, {
+      kind: "field",
+      key: "modes",
+
+      value() {
+        return [{
+          value: 'flip-horizontal',
+          text: 'Flip horizontal',
+          mnemonic: 'F'
+        }, {
+          value: 'flip-vertical',
+          text: 'Flip vertical',
+          mnemonic: 'v'
+        }, {
+          value: 'rotate',
+          text: 'Rotate by angle',
+          mnemonic: 'R'
+        }];
+      }
+
+    }, {
+      kind: "field",
+      decorators: [state()],
+      key: "selectedMode",
+
+      value() {
+        return this.modes[0].value;
+      }
+
+    }, {
+      kind: "field",
+      key: "degrees",
+
+      value() {
+        return [{
+          value: 90,
+          mnemonic: '9'
+        }, {
+          value: 180,
+          mnemonic: '1'
+        }, {
+          value: 270,
+          mnemonic: '2'
+        }];
+      }
+
+    }, {
+      kind: "field",
+      decorators: [state()],
+      key: "selectedDegree",
+
+      value() {
+        return this.degrees[0].value;
+      }
+
+    }, {
       kind: "method",
       key: "render",
       value: function render() {
@@ -101,41 +156,70 @@ export let FlipAndRotate = _decorate([customElement('paint-dialog-flip-and-rotat
             <fieldset>
               <legend>Flip and Rotate</legend>
               <div class="options">
-                <label
-                  ><input type="radio" name="mode" disabled /> ${renderMnemonic('Flip horizontal', 'F')}</label
-                >
-                <label
-                  ><input type="radio" name="mode" disabled /> ${renderMnemonic('Flip vertical', 'v')}</label
-                >
-                <label
-                  ><input type="radio" name="mode" disabled /> ${renderMnemonic('Rotate by angle', 'R')}</label
-                >
-                <label
-                  ><input type="radio" name="degree" disabled />
-                  ${renderMnemonic('90°', '9')}</label
-                >
-                <label
-                  ><input type="radio" name="degree" disabled />
-                  ${renderMnemonic('180°', '1')}</label
-                >
-                <label
-                  ><input type="radio" name="degree" disabled />
-                  ${renderMnemonic('270°', '2')}</label
-                >
+                ${this.modes.map(mode => html`
+                    <label
+                      ><input
+                        type="radio"
+                        name="mode"
+                        value="${mode.value}"
+                        @change="${() => this.selectedMode = mode.value}"
+                        .checked="${mode.value === this.selectedMode}"
+                      />
+                      ${renderMnemonic(mode.text, mode.mnemonic)}</label
+                    >
+                  `)}
+                ${this.degrees.map(degree => html`
+                    <label
+                      ><input
+                        type="radio"
+                        name="degree"
+                        value="${degree.value}"
+                        @change="${() => this.selectedDegree = degree.value}"
+                        .checked="${degree.value == this.selectedDegree}"
+                        ?disabled="${this.selectedMode !== 'rotate'}"
+                      />
+                      ${renderMnemonic(`${degree.value}°`, degree.mnemonic)}</label
+                    >
+                  `)}
               </div>
             </fieldset>
           </div>
           <div class="buttons">
-            <paint-button @click="${this.onCancel}" tabindex="0">
+            <paint-button @click="${() => this.onOk()}" tabindex="0">
               OK
             </paint-button>
-            <paint-button @click="${this.onCancel}" tabindex="0">
+            <paint-button @click="${() => this.onCancel()}" tabindex="0">
               Cancel
             </paint-button>
           </div>
         </div>
       </paint-window>
     `;
+      }
+    }, {
+      kind: "method",
+      key: "getFlipRotateParams",
+      value: function getFlipRotateParams() {
+        if (this.selectedMode === 'rotate') {
+          return {
+            action: 'rotate',
+            param: this.selectedDegree
+          };
+        } else {
+          const param = this.selectedMode === 'flip-horizontal' ? 'horizontal' : 'vertical';
+          return {
+            action: 'flip',
+            param
+          };
+        }
+      }
+    }, {
+      kind: "method",
+      key: "onOk",
+      value: function onOk() {
+        this.dispatchEvent(new CustomEvent('close', {
+          detail: this.getFlipRotateParams()
+        }));
       }
     }, {
       kind: "method",
