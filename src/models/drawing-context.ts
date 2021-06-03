@@ -19,7 +19,7 @@ export interface DrawingContext {
   brush: Brush;
   fillStyle: FillStyle;
   tool: ToolDefinition;
-  previousEditingTool?: ToolDefinition;
+  previousEditingTool: ToolDefinition;
   selection: Selection | null;
   view: {
     statusBar: boolean;

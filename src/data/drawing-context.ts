@@ -20,6 +20,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
     fill: false,
   },
   tool: PENCIL,
+  previousEditingTool: PENCIL,
   selection: null,
   view: {
     statusBar: true,
