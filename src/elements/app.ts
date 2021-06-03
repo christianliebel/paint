@@ -2,6 +2,7 @@ import hotkeys from 'hotkeys-js';
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
+import { deselectTextToolWhenZoomedIn } from '../helpers/deselect-text-tool-when-zoomed-in';
 import { getLaunchImage } from '../helpers/file-handling-api';
 import { History } from '../helpers/history';
 import { normalizeHotkey } from '../helpers/normalize-hotkey';
@@ -149,8 +150,12 @@ export class App extends LitElement {
         ? `${event.detail.width}x${event.detail.height}`
         : '';
     }) as EventListener);
-    this.addEventListener('drawing-context-changed', ((event: CustomEvent) => {
-      this.drawingContext = event.detail;
+    this.addEventListener('drawing-context-changed', ((
+      event: CustomEvent<DrawingContext>,
+    ) => {
+      const newContext = event.detail;
+      deselectTextToolWhenZoomedIn(newContext);
+      this.drawingContext = newContext;
     }) as EventListener);
     this.addEventListener('invoke-action', ((event: CustomEvent) => {
       event.detail(this.drawingContext);
