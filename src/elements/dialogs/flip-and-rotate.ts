@@ -2,17 +2,17 @@ import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic';
 
-interface FlipParams {
+interface FlipResult {
   action: 'flip';
   param: 'vertical' | 'horizontal';
 }
 
-interface RotateParams {
+interface RotateResult {
   action: 'rotate';
   param: 90 | 180 | 270;
 }
 
-export type FlipRotateParams = FlipParams | RotateParams;
+export type FlipRotateResult = FlipResult | RotateResult;
 
 @customElement('paint-dialog-flip-and-rotate')
 export class FlipAndRotate extends LitElement {
@@ -149,7 +149,7 @@ export class FlipAndRotate extends LitElement {
     `;
   }
 
-  getFlipRotateParams(): FlipRotateParams {
+  getFlipRotateParams(): FlipRotateResult {
     if (this.selectedMode === 'rotate') {
       return { action: 'rotate', param: this.selectedDegree };
     } else {
@@ -161,7 +161,7 @@ export class FlipAndRotate extends LitElement {
 
   onOk(): void {
     this.dispatchEvent(
-      new CustomEvent<FlipRotateParams>('close', {
+      new CustomEvent<FlipRotateResult>('close', {
         detail: this.getFlipRotateParams(),
       }),
     );

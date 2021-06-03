@@ -2,6 +2,7 @@ import type {
   CustomZoom,
   CustomZoomResult,
 } from '../elements/dialogs/custom-zoom';
+import type { FlipRotateResult } from '../elements/dialogs/flip-and-rotate';
 import type {
   MessageBox,
   MessageBoxResult,
@@ -16,6 +17,9 @@ export function showDialog(
   selector: 'paint-dialog-message-box',
   propertyBag: Partial<MessageBox>,
 ): Promise<MessageBoxResult | undefined>;
+export function showDialog(
+  selector: 'paint-dialog-flip-and-rotate'
+): Promise<FlipRotateResult | undefined>;
 export function showDialog(
   selector: string,
   propertyBag: Record<string, unknown> = {},
