@@ -25,6 +25,7 @@ export class Window extends LitElement {
         display: flex;
         position: absolute;
         z-index: var(--z-index-dialog);
+        box-sizing: border-box;
       }
 
       .wrapper {
