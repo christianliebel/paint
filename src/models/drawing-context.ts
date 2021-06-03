@@ -10,6 +10,7 @@ export interface DrawingContext {
   lineWidth: number;
   eraserSize: number;
   magnifierSize: number;
+  previousMagnifierSize: number;
   airbrushSize: number;
 
   colors: { primary: string; secondary: string };

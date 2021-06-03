@@ -10,6 +10,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
   drawOpaque: true,
   eraserSize: 8,
   magnifierSize: -1,
+  previousMagnifierSize: 4,
   brush: {
     type: 'circle',
     size: 4,
