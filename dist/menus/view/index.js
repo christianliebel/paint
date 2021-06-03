@@ -1,3 +1,6 @@
+import { CustomAction } from './custom.js';
+import { LargeSizeAction } from './large-size.js';
+import { NormalSizeAction } from './normal-size.js';
 import { TextToolbarAction } from './text-toolbar.js';
 import { ViewBitmapAction } from './view-bitmap.js';
 import { StatusBarAction } from './status-bar.js';
@@ -34,16 +37,19 @@ export const viewMenu = {
       caption: 'Normal Size',
       mnemonic: 'N',
       shortcut: 'Ctrl+PgUp',
-      helpText: 'Zooms the picture to 100%.'
+      helpText: 'Zooms the picture to 100%.',
+      instance: new NormalSizeAction()
     }, {
       caption: 'Large Size',
       mnemonic: 'L',
       shortcut: 'Ctrl+PgDn',
-      helpText: 'Zooms the picture to 400%.'
+      helpText: 'Zooms the picture to 400%.',
+      instance: new LargeSizeAction()
     }, {
       caption: 'Custom…',
       mnemonic: 'u',
-      helpText: 'Zooms the picture.'
+      helpText: 'Zooms the picture.',
+      instance: new CustomAction()
     }, {
       separator: true
     }, {

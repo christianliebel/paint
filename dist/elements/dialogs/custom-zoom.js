@@ -37,10 +37,10 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
-import { customElement, property, query } from '../../../_snowpack/pkg/lit/decorators.js';
+import { customElement, property, state } from '../../../_snowpack/pkg/lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic.js';
-export let MessageBox = _decorate([customElement('paint-dialog-message-box')], function (_initialize, _LitElement) {
-  class MessageBox extends _LitElement {
+export let CustomZoom = _decorate([customElement('paint-dialog-custom-zoom')], function (_initialize, _LitElement) {
+  class CustomZoom extends _LitElement {
     constructor(...args) {
       super(...args);
 
@@ -50,106 +50,105 @@ export let MessageBox = _decorate([customElement('paint-dialog-message-box')], f
   }
 
   return {
-    F: MessageBox,
+    F: CustomZoom,
     d: [{
       kind: "field",
       decorators: [property({
-        type: String
+        type: Number,
+        attribute: false
       })],
-      key: "prompt",
+      key: "currentMagnifierSize",
 
       value() {
-        return '';
+        return 1;
       }
 
     }, {
       kind: "field",
-      decorators: [property({
-        type: String
-      })],
-      key: "title",
+      key: "magnifierSizes",
 
       value() {
-        return '';
+        return [1, 2, 4, 6, 8];
       }
 
     }, {
       kind: "field",
-      decorators: [property({
-        type: String
-      })],
-      key: "icon",
+      decorators: [state()],
+      key: "selectedMagnifierSize",
 
       value() {
-        return null;
+        return 1;
       }
 
-    }, {
-      kind: "field",
-      decorators: [property({
-        type: String
-      })],
-      key: "layout",
-
-      value() {
-        return 'ok';
-      }
-
-    }, {
-      kind: "field",
-      decorators: [query('paint-window')],
-      key: "window",
-      value: void 0
     }, {
       kind: "get",
       static: true,
       key: "styles",
       value: function styles() {
         return css`
-      paint-window {
+      :host {
         position: absolute;
+        left: 0;
+        bottom: 0;
         top: 0;
-
-        max-width: 400px;
+        right: 0;
       }
 
-      paint-window .content {
-        margin: 11px;
-        display: grid;
+      paint-window {
+        width: 306px;
+      }
 
-        grid-template-columns: auto 1fr;
-        grid-row-gap: 17px;
+      div.container {
+        display: flex;
+        margin: 11px;
+      }
+
+      div.container > form {
+        flex: 1;
+      }
+
+      div.container > form > div.current-level {
+        display: flex;
+        margin-bottom: 6px;
+      }
+
+      div.container > form > div.current-level > span.label {
+        margin-left: 10px;
+        width: 128px;
+      }
+
+      div.container > form > fieldset {
+        margin: 0;
+      }
+      
+      div.container > form > fieldset > div.zoom-levels {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-auto-flow: column;
         align-items: center;
       }
 
-      paint-window img.icon {
-        width: 32px;
-        height: 32px;
-
-        margin-right: 17px;
-
-        image-rendering: pixelated;
+      div.container > form > fieldset label {
+        margin: 7px 0;
       }
 
-      paint-window .prompt {
-        grid-column-start: 2;
-        grid-column-end: 3;
-
-        white-space: pre-wrap;
+      div.container > form > fieldset label input[type='radio'] {
+        margin-left: 0;
+        margin-right: 0;
       }
 
-      paint-window .buttons {
-        grid-row-start: 2;
-        grid-row-end: 3;
-        grid-column-start: 1;
-        grid-column-end: 3;
-
+      div.container > div.buttons {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        margin: 0 1px 0 11px;
       }
 
-      paint-window .buttons paint-button + paint-button {
-        margin-left: 6px;
+      div.container > div.buttons > paint-button {
+        margin-bottom: 5px;
+      }
+
+      span.mnemonic {
+        text-decoration: underline;
       }
     `;
       }
@@ -157,73 +156,65 @@ export let MessageBox = _decorate([customElement('paint-dialog-message-box')], f
       kind: "method",
       key: "firstUpdated",
       value: function firstUpdated(_changedProperties) {
-        _get(_getPrototypeOf(MessageBox.prototype), "firstUpdated", this).call(this, _changedProperties);
+        _get(_getPrototypeOf(CustomZoom.prototype), "firstUpdated", this).call(this, _changedProperties);
 
-        requestAnimationFrame(() => this.window?.center());
+        this.selectedMagnifierSize = this.currentMagnifierSize;
       }
     }, {
       kind: "method",
       key: "render",
       value: function render() {
         return html`
-      <paint-window caption="${this.title}" close>
-        <div class="content">
-          ${this.getIcon()}
-          <div class="prompt">${this.prompt}</div>
-          <div class="buttons">${this.getDialogLayout()}</div>
+      <paint-window caption="Custom Zoom" help close>
+        <div class="container">
+          <form>
+            <div class="current-level">
+              <span class="label">Current zoom:</span>
+              <span>${this.currentMagnifierSize * 100}</span>
+            </div>
+            <fieldset>
+              <legend>Zoom to</legend>
+              <div class="zoom-levels">
+                ${this.magnifierSizes.map(size => html`
+                    <label>
+                      <input
+                        type="radio"
+                        name="zoom"
+                        value="${size}"
+                        @change="${() => this.selectedMagnifierSize = size}"
+                        .checked="${this.selectedMagnifierSize === size}"
+                      />
+                      ${renderMnemonic((size * 100).toString(), size.toString())}%
+                    </label>
+                  `)}
+              </div>
+            </fieldset>
+          </form>
+          <div class="buttons">
+            <paint-button @click="${() => this.onOk()}">OK</paint-button>
+            <paint-button @click="${() => this.onCancel()}"
+              >Cancel
+            </paint-button>
+          </div>
         </div>
       </paint-window>
     `;
       }
     }, {
       kind: "method",
-      key: "getIcon",
-      value: function getIcon() {
-        if (this.icon === 'warning') {
-          return html` <img
-        class="icon"
-        alt=""
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAElBMVEUAAAAAAAAAgACAgIDAwMD//wCJvpKsAAAAAXRSTlMAQObYZgAAAIxJREFUKJFlj9EJAjAMREN1gXy4gf0vZAGhOoCQ7L+KNpWkZ+6vD+71QrRzJ0yzxz+YA0A3LUCwYTYLGNAwlDgQaDBImr35dkq6Ay1ADsUCKQkworGBFiC5W/mV5yywhoVk7TayPMeBZ0uaZWYCtpB4w7/9SQBIKDgkp9MlHYAWIHR9nplfq2CILvAeH0wjUtKxjmmsAAAAAElFTkSuQmCC"
-      />`;
-        }
-
-        return html``;
-      }
-    }, {
-      kind: "method",
-      key: "getDialogLayout",
-      value: function getDialogLayout() {
-        if (this.layout === 'ok') {
-          return html` <paint-button
-        @click="${() => this.onClose('ok')}"
-        tabindex="0"
-        >OK
-      </paint-button>`;
-        }
-
-        if (this.layout === 'yes-no-cancel') {
-          return html`
-        <paint-button @click="${() => this.onClose('yes')}" tabindex="0"
-          >${renderMnemonic('Yes', 'Y')}
-        </paint-button>
-        <paint-button @click="${() => this.onClose('no')}" tabindex="0"
-          >${renderMnemonic('No', 'N')}
-        </paint-button>
-        <paint-button @click="${() => this.onClose('cancel')}" tabindex="0"
-          >Cancel
-        </paint-button>
-      `;
-        }
-
-        throw new Error('Unsupported Layout.');
-      }
-    }, {
-      kind: "method",
-      key: "onClose",
-      value: function onClose(detail) {
+      key: "onOk",
+      value: function onOk() {
         this.dispatchEvent(new CustomEvent('close', {
-          detail
+          detail: {
+            magnifierSize: this.selectedMagnifierSize
+          }
         }));
+      }
+    }, {
+      kind: "method",
+      key: "onCancel",
+      value: function onCancel() {
+        this.dispatchEvent(new CustomEvent('close'));
       }
     }]
   };

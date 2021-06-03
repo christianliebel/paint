@@ -167,6 +167,7 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
 
       canvas {
         image-rendering: pixelated;
+        transform-origin: top left;
       }
 
       canvas.preview {
@@ -209,6 +210,7 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
               class="main"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
+              style="transform: scale(${this.drawingContext.magnifierSize})"
               @pointerdown="${this.onPointerDown}"
               @contextmenu="${event => event.preventDefault()}"
               @pointerenter="${this.onPointerEnter}"
@@ -217,6 +219,7 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
             <!-- for operations with previews (line, rectangle, brush, …) -->
             <canvas
               class="preview"
+              style="transform: scale(${this.drawingContext.magnifierSize})"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
             ></canvas>
@@ -401,8 +404,8 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
           left,
           top
         } = this.drawingContext.canvas.getBoundingClientRect();
-        const x = Math.floor(clientX - left);
-        const y = Math.floor(clientY - top);
+        const x = Math.floor((clientX - left) / this.drawingContext.magnifierSize);
+        const y = Math.floor((clientY - top) / this.drawingContext.magnifierSize);
         return {
           x,
           y

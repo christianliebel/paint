@@ -40,11 +40,12 @@ import hotkeys from '../../_snowpack/pkg/hotkeys-js.js';
 import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
 import { customElement, state } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
+import { deselectTextToolWhenZoomedIn } from '../helpers/deselect-text-tool-when-zoomed-in.js';
 import { getLaunchImage } from '../helpers/file-handling-api.js';
+import { History } from '../helpers/history.js';
 import { normalizeHotkey } from '../helpers/normalize-hotkey.js';
 import { registerDragDrop } from '../helpers/register-drag-drop.js';
 import { menus } from '../menus/all.js';
-import { History } from '../helpers/history.js';
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
 export let App = _decorate([customElement('paint-app')], function (_initialize, _LitElement) {
   class App extends _LitElement {
@@ -69,7 +70,9 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
         this.areaText = event.detail ? `${event.detail.width}x${event.detail.height}` : '';
       });
       this.addEventListener('drawing-context-changed', event => {
-        this.drawingContext = event.detail;
+        const newContext = event.detail;
+        deselectTextToolWhenZoomedIn(newContext);
+        this.drawingContext = newContext;
       });
       this.addEventListener('invoke-action', event => {
         event.detail(this.drawingContext);

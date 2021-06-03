@@ -130,6 +130,7 @@ export let Window = _decorate([customElement('paint-window')], function (_initia
         display: flex;
         position: absolute;
         z-index: var(--z-index-dialog);
+        box-sizing: border-box;
       }
 
       .wrapper {

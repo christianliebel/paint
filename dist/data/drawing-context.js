@@ -8,7 +8,8 @@ export const DRAWING_CONTEXT = {
   previewColor: null,
   drawOpaque: true,
   eraserSize: 8,
-  magnifierSize: -1,
+  magnifierSize: 1,
+  previousMagnifierSize: 4,
   brush: {
     type: 'circle',
     size: 4
@@ -19,6 +20,7 @@ export const DRAWING_CONTEXT = {
     fill: false
   },
   tool: PENCIL,
+  previousEditingTool: PENCIL,
   selection: null,
   view: {
     statusBar: true,

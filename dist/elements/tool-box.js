@@ -135,13 +135,13 @@ export let ToolBox = _decorate([customElement('paint-tool-box')], function (_ini
       key: "getToolHtml",
       value: function getToolHtml(tool) {
         if (PICK_COLOR === tool) {
-          return html`<paint-tool-color-preview
+          return html` <paint-tool-color-preview
         .drawingContext="${this.drawingContext}"
       ></paint-tool-color-preview>`;
         }
 
         if ([LINE, CURVE].includes(tool)) {
-          return html`<paint-tool-line-width
+          return html` <paint-tool-line-width
         .drawingContext="${this.drawingContext}"
       ></paint-tool-line-width>`;
         }
