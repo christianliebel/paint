@@ -71,6 +71,7 @@ export class Canvas extends LitElement {
 
       canvas {
         image-rendering: pixelated;
+        transform-origin: top left;
       }
 
       canvas.preview {
@@ -111,6 +112,7 @@ export class Canvas extends LitElement {
               class="main"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
+              style="transform: scale(${this.drawingContext.magnifierSize})"
               @pointerdown="${this.onPointerDown}"
               @contextmenu="${(event: Event) => event.preventDefault()}"
               @pointerenter="${this.onPointerEnter}"
@@ -119,6 +121,7 @@ export class Canvas extends LitElement {
             <!-- for operations with previews (line, rectangle, brush, …) -->
             <canvas
               class="preview"
+              style="transform: scale(${this.drawingContext.magnifierSize})"
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
             ></canvas>
@@ -277,8 +280,8 @@ export class Canvas extends LitElement {
     }
 
     const { left, top } = this.drawingContext.canvas.getBoundingClientRect();
-    const x = Math.floor(clientX - left);
-    const y = Math.floor(clientY - top);
+    const x = Math.floor((clientX - left) / this.drawingContext.magnifierSize);
+    const y = Math.floor((clientY - top) / this.drawingContext.magnifierSize);
     return { x, y };
   }
 }
