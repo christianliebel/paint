@@ -3,10 +3,10 @@ import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { getLaunchImage } from '../helpers/file-handling-api';
+import { History } from '../helpers/history';
 import { normalizeHotkey } from '../helpers/normalize-hotkey';
 import { registerDragDrop } from '../helpers/register-drag-drop';
 import { menus } from '../menus/all';
-import { History } from '../helpers/history';
 import type { DrawingContext } from '../models/drawing-context';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
 
@@ -254,7 +254,7 @@ export class App extends LitElement {
     }
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     super.disconnectedCallback();
 
     if (this.beforeUnloadListener) {

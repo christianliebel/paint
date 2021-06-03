@@ -100,13 +100,13 @@ export class ToolBox extends LitElement {
 
   getToolHtml(tool: ToolDefinition): TemplateResult | '' {
     if (PICK_COLOR === tool) {
-      return html`<paint-tool-color-preview
+      return html` <paint-tool-color-preview
         .drawingContext="${this.drawingContext}"
       ></paint-tool-color-preview>`;
     }
 
     if ([LINE, CURVE].includes(tool)) {
-      return html`<paint-tool-line-width
+      return html` <paint-tool-line-width
         .drawingContext="${this.drawingContext}"
       ></paint-tool-line-width>`;
     }

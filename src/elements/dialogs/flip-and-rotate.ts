@@ -122,7 +122,7 @@ export class FlipAndRotate extends LitElement {
                         type="radio"
                         name="degree"
                         value="${degree.value}"
-                        @change="${() => this.selectedDegree = degree.value}"
+                        @change="${() => (this.selectedDegree = degree.value)}"
                         .checked="${degree.value == this.selectedDegree}"
                         ?disabled="${this.selectedMode !== 'rotate'}"
                       />
