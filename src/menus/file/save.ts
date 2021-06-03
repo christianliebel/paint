@@ -6,7 +6,6 @@ import { SaveAsAction } from './save-as';
 
 export class SaveAction implements MenuAction {
   async execute(drawingContext: DrawingContext): Promise<void> {
-    // TODO: Document Context
     if (drawingContext.canvas && drawingContext.document.handle) {
       const blob = await toBlob(drawingContext.canvas);
       await fileSave(blob, undefined, drawingContext.document.handle);

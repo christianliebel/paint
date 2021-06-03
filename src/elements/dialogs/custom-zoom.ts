@@ -56,7 +56,7 @@ export class CustomZoom extends LitElement {
       div.container > form > fieldset {
         margin: 0;
       }
-      
+
       div.container > form > fieldset > div.zoom-levels {
         display: grid;
         grid-template-rows: 1fr 1fr;

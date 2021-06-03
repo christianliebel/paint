@@ -74,7 +74,7 @@ export const viewMenu: MenuEntry = {
           caption: 'Show Thumbnail',
           mnemonic: 'h',
           helpText: 'Shows or hides the thumbnail view of the picture.',
-          checked: true,
+          // TODO: checked by default
         },
       ],
     },
