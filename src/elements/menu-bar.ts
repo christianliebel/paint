@@ -48,6 +48,7 @@ export class MenuBar extends LitElement {
       paint-menu {
         display: none;
       }
+
       li.active paint-menu {
         display: block;
       }
@@ -66,9 +67,8 @@ export class MenuBar extends LitElement {
   }
 
   render(): TemplateResult {
-    // TODO: mnemonic support
+    // TODO: Mnemonic support
     // TODO: Keyboard support
-    // TODO: Shortcut support
     return html`
       <ul @click="${(event: Event) => event.stopPropagation()}">
         ${this.entries.map(
@@ -77,18 +77,14 @@ export class MenuBar extends LitElement {
               @click="${() => this.onClick(entry)}"
               @pointerenter="${() => this.onPointerEnter(entry)}"
               @pointerleave="${() => this.onPointerLeave()}"
-              class="${this.activeMenu === entry
-                ? 'active'
-                : ''} ${entry.disabled ? 'disabled' : ''}"
+              class="${this.activeMenu === entry ? 'active' : ''}"
             >
               ${renderMnemonic(entry.caption, entry.mnemonic)}
-              ${!entry.disabled && entry.entries
-                ? html`<paint-menu
-                    .entries="${entry.entries}"
-                    .drawingContext="${this.drawingContext}"
-                  >
-                  </paint-menu>`
-                : ''}
+              <paint-menu
+                .entries="${entry.entries}"
+                .drawingContext="${this.drawingContext}"
+              >
+              </paint-menu>
             </li>
           `,
         )}

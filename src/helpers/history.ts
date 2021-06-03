@@ -9,7 +9,7 @@ interface CanvasHistoryEntry {
   width: number;
 }
 
-// TODO: Support all actions (skew, rotate, selection moves, …)
+// TODO: Support all actions (skew, selection moves, …)
 export class History {
   private readonly stack: CanvasHistoryEntry[] = [];
   private stackPointer = -1;

@@ -51,8 +51,6 @@ export class About extends LitElement {
   }
 
   async firstUpdated(_changedProperties: PropertyValues): Promise<void> {
-    // TODO: Button style
-
     super.firstUpdated(_changedProperties);
 
     if ('storage' in navigator) {
