@@ -33,14 +33,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
 import { customElement } from '../../_snowpack/pkg/lit/decorators.js'; // TODO: Disabled State
 // TODO: Check padding inside focus box
-// TODO: Allow "clicking" via keyboard
 
 export let Button = _decorate([customElement('paint-button')], function (_initialize, _LitElement) {
   class Button extends _LitElement {
-    constructor(...args) {
-      super(...args);
+    constructor() {
+      super();
 
       _initialize(this);
+
+      this.addEventListener('keydown', e => {
+        if (['Space', 'Enter'].includes(e.code)) {
+          this.dispatchEvent(new MouseEvent('click'));
+        }
+      });
     }
 
   }
