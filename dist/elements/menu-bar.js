@@ -120,6 +120,7 @@ export let MenuBar = _decorate([customElement('paint-menu-bar')], function (_ini
       paint-menu {
         display: none;
       }
+
       li.active paint-menu {
         display: block;
       }
@@ -133,9 +134,8 @@ export let MenuBar = _decorate([customElement('paint-menu-bar')], function (_ini
       kind: "method",
       key: "render",
       value: function render() {
-        // TODO: mnemonic support
+        // TODO: Mnemonic support
         // TODO: Keyboard support
-        // TODO: Shortcut support
         return html`
       <ul @click="${event => event.stopPropagation()}">
         ${this.entries.map(entry => html`
@@ -143,14 +143,14 @@ export let MenuBar = _decorate([customElement('paint-menu-bar')], function (_ini
               @click="${() => this.onClick(entry)}"
               @pointerenter="${() => this.onPointerEnter(entry)}"
               @pointerleave="${() => this.onPointerLeave()}"
-              class="${this.activeMenu === entry ? 'active' : ''} ${entry.disabled ? 'disabled' : ''}"
+              class="${this.activeMenu === entry ? 'active' : ''}"
             >
               ${renderMnemonic(entry.caption, entry.mnemonic)}
-              ${!entry.disabled && entry.entries ? html`<paint-menu
-                    .entries="${entry.entries}"
-                    .drawingContext="${this.drawingContext}"
-                  >
-                  </paint-menu>` : ''}
+              <paint-menu
+                .entries="${entry.entries}"
+                .drawingContext="${this.drawingContext}"
+              >
+              </paint-menu>
             </li>
           `)}
       </ul>

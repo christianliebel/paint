@@ -2,7 +2,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 import { updateContext } from './update-context.js';
 const MAX_STACK_SIZE = 3;
-// TODO: Support all actions (skew, rotate, selection moves, …)
+// TODO: Support all actions (skew, selection moves, …)
 export class History {
   constructor(drawingContext) {
     this.drawingContext = drawingContext;

@@ -108,7 +108,6 @@ export let About = _decorate([customElement('paint-dialog-about')], function (_i
       kind: "method",
       key: "firstUpdated",
       value: async function firstUpdated(_changedProperties) {
-        // TODO: Button style
         _get(_getPrototypeOf(About.prototype), "firstUpdated", this).call(this, _changedProperties);
 
         if ('storage' in navigator) {
