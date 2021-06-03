@@ -1,6 +1,18 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic';
+
+interface FlipParams {
+  action: 'flip';
+  param: 'vertical' | 'horizontal';
+}
+
+interface RotateParams {
+  action: 'rotate';
+  param: 90 | 180 | 270;
+}
+
+export type FlipRotateParams = FlipParams | RotateParams;
 
 @customElement('paint-dialog-flip-and-rotate')
 export class FlipAndRotate extends LitElement {
@@ -46,6 +58,41 @@ export class FlipAndRotate extends LitElement {
     `;
   }
 
+  readonly modes = [
+    {
+      value: 'flip-horizontal',
+      text: 'Flip horizontal',
+      mnemonic: 'F',
+    },
+    {
+      value: 'flip-vertical',
+      text: 'Flip vertical',
+      mnemonic: 'v',
+    },
+    {
+      value: 'rotate',
+      text: 'Rotate by angle',
+      mnemonic: 'R',
+    },
+  ] as const;
+  @state() selectedMode: string = this.modes[0].value;
+
+  readonly degrees = [
+    {
+      value: 90,
+      mnemonic: '9',
+    },
+    {
+      value: 180,
+      mnemonic: '1',
+    },
+    {
+      value: 270,
+      mnemonic: '2',
+    },
+  ] as const;
+  @state() selectedDegree: 90 | 180 | 270 = this.degrees[0].value;
+
   render(): TemplateResult {
     return html`
       <paint-window caption="Flip and Rotate" help close>
@@ -54,50 +101,70 @@ export class FlipAndRotate extends LitElement {
             <fieldset>
               <legend>Flip and Rotate</legend>
               <div class="options">
-                <label
-                  ><input type="radio" name="mode" disabled /> ${renderMnemonic(
-                    'Flip horizontal',
-                    'F',
-                  )}</label
-                >
-                <label
-                  ><input type="radio" name="mode" disabled /> ${renderMnemonic(
-                    'Flip vertical',
-                    'v',
-                  )}</label
-                >
-                <label
-                  ><input type="radio" name="mode" disabled /> ${renderMnemonic(
-                    'Rotate by angle',
-                    'R',
-                  )}</label
-                >
-                <label
-                  ><input type="radio" name="degree" disabled />
-                  ${renderMnemonic('90°', '9')}</label
-                >
-                <label
-                  ><input type="radio" name="degree" disabled />
-                  ${renderMnemonic('180°', '1')}</label
-                >
-                <label
-                  ><input type="radio" name="degree" disabled />
-                  ${renderMnemonic('270°', '2')}</label
-                >
+                ${this.modes.map(
+                  (mode) => html`
+                    <label
+                      ><input
+                        type="radio"
+                        name="mode"
+                        value="${mode.value}"
+                        @change="${() => (this.selectedMode = mode.value)}"
+                        .checked="${mode.value === this.selectedMode}"
+                      />
+                      ${renderMnemonic(mode.text, mode.mnemonic)}</label
+                    >
+                  `,
+                )}
+                ${this.degrees.map(
+                  (degree) => html`
+                    <label
+                      ><input
+                        type="radio"
+                        name="degree"
+                        value="${degree.value}"
+                        @change="${() => this.selectedDegree = degree.value}"
+                        .checked="${degree.value == this.selectedDegree}"
+                        ?disabled="${this.selectedMode !== 'rotate'}"
+                      />
+                      ${renderMnemonic(
+                        `${degree.value}°`,
+                        degree.mnemonic,
+                      )}</label
+                    >
+                  `,
+                )}
               </div>
             </fieldset>
           </div>
           <div class="buttons">
-            <paint-button @click="${this.onCancel}" tabindex="0">
+            <paint-button @click="${() => this.onOk()}" tabindex="0">
               OK
             </paint-button>
-            <paint-button @click="${this.onCancel}" tabindex="0">
+            <paint-button @click="${() => this.onCancel()}" tabindex="0">
               Cancel
             </paint-button>
           </div>
         </div>
       </paint-window>
     `;
+  }
+
+  getFlipRotateParams(): FlipRotateParams {
+    if (this.selectedMode === 'rotate') {
+      return { action: 'rotate', param: this.selectedDegree };
+    } else {
+      const param =
+        this.selectedMode === 'flip-horizontal' ? 'horizontal' : 'vertical';
+      return { action: 'flip', param };
+    }
+  }
+
+  onOk(): void {
+    this.dispatchEvent(
+      new CustomEvent<FlipRotateParams>('close', {
+        detail: this.getFlipRotateParams(),
+      }),
+    );
   }
 
   onCancel(): void {
