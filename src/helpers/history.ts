@@ -62,10 +62,10 @@ export class History {
 
   private restoreEntry(): void {
     const { height, width, imageData } = this.stack[this.stackPointer];
-    const { canvas, context } = this.drawingContext;
-    if (canvas && context) {
-      canvas.height = height;
-      canvas.width = width;
+    const { canvas, previewCanvas, context } = this.drawingContext;
+    if (canvas && previewCanvas && context) {
+      canvas.height = previewCanvas.height = height;
+      canvas.width = previewCanvas.width = width;
       context.putImageData(imageData, 0, 0);
     }
 

@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 
 // TODO: Disabled State
 // TODO: Check padding inside focus box
+// TODO: Add attribute to autofocus button
 
 @customElement('paint-button')
 export class Button extends LitElement {

@@ -1,3 +1,4 @@
+import { AttributesAction } from './attributes';
 import { InvertColorsAction } from './invert-image';
 import { ClearImageAction } from './clear-image';
 import { FlipRotateAction } from './flip-rotate';
@@ -33,6 +34,7 @@ export const imageMenu: MenuEntry = {
       mnemonic: 'A',
       shortcut: 'Ctrl+E',
       helpText: 'Changes the attributes of the picture.',
+      instance: new AttributesAction(),
     },
     {
       caption: 'Clear Image',

@@ -127,8 +127,10 @@ export class CustomZoom extends LitElement {
             </fieldset>
           </form>
           <div class="buttons">
-            <paint-button @click="${() => this.onOk()}">OK</paint-button>
-            <paint-button @click="${() => this.onCancel()}"
+            <paint-button @click="${() => this.onOk()}" tabindex="0"
+              >OK</paint-button
+            >
+            <paint-button @click="${() => this.onCancel()}" tabindex="0"
               >Cancel
             </paint-button>
           </div>
