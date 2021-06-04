@@ -191,8 +191,10 @@ export let CustomZoom = _decorate([customElement('paint-dialog-custom-zoom')], f
             </fieldset>
           </form>
           <div class="buttons">
-            <paint-button @click="${() => this.onOk()}">OK</paint-button>
-            <paint-button @click="${() => this.onCancel()}"
+            <paint-button @click="${() => this.onOk()}" tabindex="0"
+              >OK</paint-button
+            >
+            <paint-button @click="${() => this.onCancel()}" tabindex="0"
               >Cancel
             </paint-button>
           </div>

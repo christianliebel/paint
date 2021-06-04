@@ -157,7 +157,9 @@ export let About = _decorate([customElement('paint-dialog-about')], function (_i
               <span>${this.getFreeMemoryPercentage()}% Free</span>
             </div>
             <br />
-            <paint-button tabindex="0" @click="${this.onOK}">OK</paint-button>
+            <paint-button tabindex="0" @click="${this.onOK}"
+              >OK</paint-button
+            >
           </div>
         </div>
       </paint-window>

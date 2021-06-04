@@ -1,4 +1,5 @@
 import './dialogs/about.js';
+import './dialogs/attributes.js';
 import './dialogs/custom-zoom.js';
 import './dialogs/flip-and-rotate.js';
 import './dialogs/text-toolbar.js';

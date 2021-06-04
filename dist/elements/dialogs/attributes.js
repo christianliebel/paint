@@ -30,116 +30,164 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-import { css, html, LitElement } from '../../_snowpack/pkg/lit.js';
-import { customElement } from '../../_snowpack/pkg/lit/decorators.js'; // TODO: Disabled State
-// TODO: Check padding inside focus box
-// TODO: Add attribute to autofocus button
-
-export let Button = _decorate([customElement('paint-button')], function (_initialize, _LitElement) {
-  class Button extends _LitElement {
-    constructor() {
-      super();
+import { css, html, LitElement } from '../../../_snowpack/pkg/lit.js';
+import { customElement, state } from '../../../_snowpack/pkg/lit/decorators.js';
+import { showMessageBox } from '../../helpers/message-box.js';
+import { renderMnemonic } from '../../helpers/render-mnemonic.js';
+export // TODO: Color and unit selection
+// TODO: Form fields and radio buttons in Win95 UI
+// TODO: Pixel-perfectness
+let Attributes = _decorate([customElement('paint-dialog-attributes')], function (_initialize, _LitElement) {
+  class Attributes extends _LitElement {
+    constructor(...args) {
+      super(...args);
 
       _initialize(this);
-
-      this.addEventListener('keydown', e => {
-        if (['Space', 'Enter'].includes(e.code)) {
-          this.dispatchEvent(new MouseEvent('click'));
-        }
-      });
     }
 
   }
 
   return {
-    F: Button,
+    F: Attributes,
     d: [{
+      kind: "field",
+      decorators: [state()],
+      key: "width",
+
+      value() {
+        return '';
+      }
+
+    }, {
+      kind: "field",
+      decorators: [state()],
+      key: "height",
+
+      value() {
+        return '';
+      }
+
+    }, {
+      kind: "field",
+      decorators: [state()],
+      key: "unit",
+
+      value() {
+        return 'pels';
+      }
+
+    }, {
+      kind: "field",
+      decorators: [state()],
+      key: "color",
+
+      value() {
+        return 'colors';
+      }
+
+    }, {
+      kind: "field",
+      key: "units",
+
+      value() {
+        return [{
+          value: 'inches',
+          label: 'Inches',
+          mnemonic: 'I'
+        }, {
+          value: 'cm',
+          label: 'Cm',
+          mnemonic: 'm'
+        }, {
+          value: 'pels',
+          label: 'Pels',
+          mnemonic: 'P'
+        }];
+      }
+
+    }, {
+      kind: "field",
+      key: "colors",
+
+      value() {
+        return [{
+          value: 'black-and-white',
+          label: 'Black and white',
+          mnemonic: 'B'
+        }, {
+          value: 'colors',
+          label: 'Colors',
+          mnemonic: 'l'
+        }];
+      }
+
+    }, {
       kind: "get",
       static: true,
       key: "styles",
       value: function styles() {
         return css`
-      :host,
-      * {
-        box-sizing: border-box;
-      }
-
       :host {
-        display: inline-block;
-
-        background-color: var(--button-face);
-        color: var(--button-text);
-
-        border: 1px solid var(--button-light);
-        border-right-color: var(--button-darker);
-        border-bottom-color: var(--button-darker);
-
-        width: 75px;
-        height: 23px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        right: 0;
       }
 
-      div.inline-border {
-        width: 100%;
-        height: 100%;
-
-        padding: 2px;
-
-        border: 1px solid transparent;
-        border-right-color: var(--button-dark);
-        border-bottom-color: var(--button-dark);
+      paint-window {
+        width: 306px;
       }
 
-      div.focus-border {
+      div.container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 100%;
-        height: 100%;
+        margin: 11px 12px;
       }
 
-      :host(:focus) {
-        border-color: var(--button-darker);
-        border-right-width: 2px;
-        border-bottom-width: 2px;
+      div.container > form {
+        flex: 1;
+      }
+
+      div.container > form > div.dimensions {
+        display: grid;
+        grid-template-columns: 44px 45px 47px 50px;
+        align-items: center;
+      }
+
+      div.container > form > div.dimensions > span {
+        padding-left: 2px; /* 9px; */
+      }
+
+      div.container > form > div.dimensions > input[type='text'] {
+        box-sizing: border-box;
+        width: 100%;
+        height: 23px;
         outline: none;
       }
 
-      :host(:focus) div.inline-border {
-        border-top-color: var(--button-light);
-        border-left-color: var(--button-light);
-
-        padding-right: 1px;
-        padding-bottom: 1px;
+      div.container > form > fieldset {
+        margin: 8px 0 1px 0;
       }
 
-      :host(:focus) div.focus-border {
-        border: 1px dotted var(--button-text);
+      div.container > form > fieldset input[type='radio'] {
+        margin: 0;
       }
 
-      :host(:active:hover) {
-        border-color: var(--button-darker);
-        border-right-width: 1px;
-        border-bottom-width: 1px;
+      div.container > div.buttons {
+        display: flex;
+        flex-direction: column;
+        margin-left: 12px;
       }
 
-      :host(:active:hover) div.inline-border {
-        border-color: var(--button-dark);
-
-        padding-right: 2px;
-        padding-bottom: 2px;
+      div.container > div.buttons paint-button + paint-button {
+        margin-top: 5px;
       }
 
-      :host(:active:hover) div.focus-border {
-        padding-top: 1px;
-        padding-left: 1px;
+      div.container > div.buttons paint-button:last-of-type {
+        margin-top: 6px;
       }
 
-      path {
-        color: currentColor;
-      }
-
-      ::slotted(.mnemonic) {
+      span.mnemonic {
         text-decoration: underline;
       }
     `;
@@ -148,11 +196,119 @@ export let Button = _decorate([customElement('paint-button')], function (_initia
       kind: "method",
       key: "render",
       value: function render() {
-        return html` <div class="inline-border">
-      <div class="focus-border">
-        <slot></slot>
+        return html` <paint-window caption="Attributes" help close>
+      <div class="container">
+        <form>
+          <div class="dimensions">
+            <span>${renderMnemonic('Width:', 'W')}</span>
+            <input
+              type="text"
+              .value="${this.width}"
+              @change="${event => this.width = event.target.value}"
+            />
+            <span>${renderMnemonic('Height:', 'H')}</span>
+            <input
+              type="text"
+              .value="${this.height}"
+              @change="${event => this.height = event.target.value}"
+            />
+          </div>
+
+          <fieldset>
+            <legend>Units</legend>
+            ${this.units.map(({
+          value,
+          label,
+          mnemonic
+        }) => html`
+                <label
+                  ><input
+                    type="radio"
+                    name="unit"
+                    value="${value}"
+                    .checked="${this.unit === value}"
+                    @change="${() => this.unit = value}"
+                    disabled
+                  />
+                  ${renderMnemonic(label, mnemonic)}</label
+                >
+              `)}
+          </fieldset>
+
+          <fieldset>
+            <legend>Colors</legend>
+            ${this.colors.map(({
+          value,
+          label,
+          mnemonic
+        }) => html`
+                <label
+                  ><input
+                    type="radio"
+                    name="color"
+                    value="${value}"
+                    .checked="${this.color === value}"
+                    @change="${() => this.color = value}"
+                    disabled
+                  />
+                  ${renderMnemonic(label, mnemonic)}</label
+                >
+              `)}
+          </fieldset>
+        </form>
+
+        <div class="buttons">
+          <paint-button @click="${this.onOk}" tabindex="0">OK</paint-button>
+          <paint-button @click="${this.onCancel}" tabindex="0"
+            >Cancel
+          </paint-button>
+          <paint-button @click="${this.onDefault}" tabindex="0"
+            >${renderMnemonic('Default', 'D')}
+          </paint-button>
+        </div>
       </div>
-    </div>`;
+    </paint-window>`;
+      }
+    }, {
+      kind: "method",
+      key: "onOk",
+      value: async function onOk() {
+        const {
+          width,
+          height,
+          unit,
+          color
+        } = this;
+
+        if (width.length > 5 || height.length > 5) {
+          await showMessageBox('Please enter no more than 5 characters.', 'warning', 'Paint'); // TODO: Focus box that was responsible for this warning.
+
+          return;
+        }
+
+        this.dispatchEvent(new CustomEvent('close', {
+          detail: {
+            width,
+            height,
+            unit,
+            color
+          }
+        }));
+      }
+    }, {
+      kind: "method",
+      key: "onCancel",
+      value: function onCancel() {
+        this.dispatchEvent(new CustomEvent('close'));
+      }
+    }, {
+      kind: "method",
+      key: "onDefault",
+      value: function onDefault() {
+        this.width = screen.width.toString();
+        this.height = screen.height.toString();
+        this.unit = 'pels';
+        this.color = 'colors';
       }
     }]
   };

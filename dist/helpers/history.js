@@ -72,12 +72,13 @@ export class History {
     } = this.stack[this.stackPointer];
     const {
       canvas,
+      previewCanvas,
       context
     } = this.drawingContext;
 
-    if (canvas && context) {
-      canvas.height = height;
-      canvas.width = width;
+    if (canvas && previewCanvas && context) {
+      canvas.height = previewCanvas.height = height;
+      canvas.width = previewCanvas.width = width;
       context.putImageData(imageData, 0, 0);
     } // TODO: An external component should do this.
 
