@@ -11,9 +11,7 @@ export class FlipRotateAction implements MenuAction {
     previewCanvas,
     history,
   }: DrawingContext): Promise<void> {
-    const result = await showDialog(
-      'paint-dialog-flip-and-rotate',
-    );
+    const result = await showDialog('paint-dialog-flip-and-rotate');
 
     if (!result || !canvas || !context || !previewCanvas || !history) {
       return;

@@ -5,11 +5,13 @@ export function clearCanvas({
   context,
   colors,
   history,
-}: DrawingContext): void {
+}: DrawingContext, commit = true): void {
   if (canvas && context && history) {
     context.fillStyle = colors.secondary;
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    history.commit();
+    if (commit) {
+      history.commit();
+    }
   }
 }

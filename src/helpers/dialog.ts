@@ -1,4 +1,8 @@
 import type {
+  Attributes,
+  AttributesResult,
+} from '../elements/dialogs/attributes';
+import type {
   CustomZoom,
   CustomZoomResult,
 } from '../elements/dialogs/custom-zoom';
@@ -10,6 +14,10 @@ import type {
 
 export function showDialog(selector: 'paint-dialog-about'): Promise<void>;
 export function showDialog(
+  selector: 'paint-dialog-attributes',
+  propertyBag: Partial<Attributes>,
+): Promise<AttributesResult | undefined>;
+export function showDialog(
   selector: 'paint-dialog-custom-zoom',
   propertyBag: Partial<CustomZoom>,
 ): Promise<CustomZoomResult | undefined>;
@@ -18,7 +26,7 @@ export function showDialog(
   propertyBag: Partial<MessageBox>,
 ): Promise<MessageBoxResult | undefined>;
 export function showDialog(
-  selector: 'paint-dialog-flip-and-rotate'
+  selector: 'paint-dialog-flip-and-rotate',
 ): Promise<FlipRotateResult | undefined>;
 export function showDialog(
   selector: string,
