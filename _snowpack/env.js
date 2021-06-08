@@ -1,3 +1,3 @@
-export const MODE = "development";
-export const NODE_ENV = "development";
+export const MODE = "production";
+export const NODE_ENV = "production";
 export const SSR = false;
