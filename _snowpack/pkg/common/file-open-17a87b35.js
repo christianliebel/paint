@@ -10,6 +10,8 @@ var fileOpen = (async (t = {}) => {
     i[e] = t.extensions || [];
   }) : i["*/*"] = t.extensions || [];
   const n = await window.showOpenFilePicker({
+    id: t.id,
+    startIn: t.startIn,
     types: [{
       description: t.description || "",
       accept: i

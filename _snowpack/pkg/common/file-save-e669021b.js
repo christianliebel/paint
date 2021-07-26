@@ -11,6 +11,8 @@ var fileSave = (async (e, t = {}, i = null, a = !1) => {
   }
   const n = i || (await window.showSaveFilePicker({
     suggestedName: t.fileName,
+    id: t.id,
+    startIn: t.startIn,
     types: [{
       description: t.description || "",
       accept: s

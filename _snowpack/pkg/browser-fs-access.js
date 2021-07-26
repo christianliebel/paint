@@ -13,16 +13,16 @@ const e = (() => {
 })();
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const s = e ? "chooseFileSystemEntries" === e ? import('./common/file-open-430cd9a7.js') : import('./common/file-open-02457eb1.js') : import('./common/file-open-1c0a12f9.js');
+const s = e ? "chooseFileSystemEntries" === e ? import('./common/file-open-430cd9a7.js') : import('./common/file-open-17a87b35.js') : import('./common/file-open-1c0a12f9.js');
 async function fileOpen(...e) {
   return (await s).default(...e);
 }
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const o = e ? "chooseFileSystemEntries" === e ? import('./common/directory-open-b1926eca.js') : import('./common/directory-open-037507cf.js') : import('./common/directory-open-5a48976a.js');
+const o = e ? "chooseFileSystemEntries" === e ? import('./common/directory-open-b1926eca.js') : import('./common/directory-open-ae5779fa.js') : import('./common/directory-open-5a48976a.js');
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const s$1 = e ? "chooseFileSystemEntries" === e ? import('./common/file-save-37f64574.js') : import('./common/file-save-43578d3f.js') : import('./common/file-save-9ebdfaae.js');
+const s$1 = e ? "chooseFileSystemEntries" === e ? import('./common/file-save-37f64574.js') : import('./common/file-save-e669021b.js') : import('./common/file-save-9ebdfaae.js');
 async function fileSave(...e) {
   return (await s$1).default(...e);
 }
