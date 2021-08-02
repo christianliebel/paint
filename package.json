@@ -41,7 +41,7 @@
     "@snowpack/plugin-typescript": "^1.2.0",
     "@types/jest": "^26.0.24",
     "@types/snowpack-env": "^2.3.4",
-    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "cypress": "^8.0.0",
     "eslint": "^7.31.0",
