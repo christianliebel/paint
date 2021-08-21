@@ -11,18 +11,19 @@ var fileOpen = (async (t = [{}]) => {
     i[t] = {
       description: e.description || "",
       accept: {}
-    }, e.mimeTypes ? e.mimeTypes.map(a => {
-      i[t].accept[a] = e.extensions || [];
+    }, e.mimeTypes ? e.mimeTypes.map(c => {
+      i[t].accept[c] = e.extensions || [];
     }) : i[t].accept["*/*"] = e.extensions || [];
   });
-  const a = await window.showOpenFilePicker({
+  const c = await window.showOpenFilePicker({
     id: t[0].id,
     startIn: t[0].startIn,
     types: i,
-    multiple: t[0].multiple || !1
+    multiple: t[0].multiple || !1,
+    excludeAcceptAllOption: t[0].excludeAcceptAllOption || !1
   }),
-        s = await Promise.all(a.map(e));
-  return t[0].multiple ? s : s[0];
+        a = await Promise.all(c.map(e));
+  return t[0].multiple ? a : a[0];
 });
 
 export default fileOpen;
