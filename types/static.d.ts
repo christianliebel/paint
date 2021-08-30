@@ -63,22 +63,6 @@ declare module 'bresenham-zingl' {
   export function ellipseRect(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => any);
 }
 
-// Type declarations for Clipboard API
-// https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
-interface Clipboard {
-  write(items: ClipboardItem[]): Promise<any>;
-  read(): Promise<ClipboardItem[]>;
-}
-
-declare const ClipboardItem: {
-  new(item: { [key: string]: Blob }): ClipboardItem;
-}
-
-interface ClipboardItem {
-  types: string[];
-  getType(type: string): Promise<Blob>;
-}
-
 // Type declarations for File System Access API
 
 interface FileSystemFileHandle {
