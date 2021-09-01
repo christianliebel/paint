@@ -12,7 +12,8 @@ export class CopyAction {
   }) {
     if (context && selection) {
       const blob = await getBlobFromSelection(context, selection);
-      await navigator.clipboard.write([new ClipboardItem({
+      await navigator.clipboard.write([// TODO: Workaround for wrong typings in TypeScript 4.4.2
+      new ClipboardItem({
         [blob.type]: blob
       })]);
     }
