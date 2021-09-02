@@ -129,6 +129,14 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
       key: "beforeUnloadListener",
       value: void 0
     }, {
+      kind: "field",
+      key: "previousTitle",
+
+      value() {
+        return '';
+      }
+
+    }, {
       kind: "get",
       static: true,
       key: "styles",
@@ -282,7 +290,8 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
       kind: "method",
       key: "render",
       value: function render() {
-        document.title = `${this.drawingContext.document.title} - Paint`;
+        // TODO: Should not happen as a part of the render loop.
+        this.dispatchTitleChangeEvent();
         return html`
       <paint-menu-bar
         .entries="${menus}"
@@ -312,6 +321,21 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
             .drawingContext="${this.drawingContext}"
           ></paint-dialog-text-toolbar>` : ''}
     `;
+      }
+    }, {
+      kind: "method",
+      key: "dispatchTitleChangeEvent",
+      value: function dispatchTitleChangeEvent() {
+        if (this.previousTitle !== this.drawingContext.document.title) {
+          this.previousTitle = this.drawingContext.document.title;
+          this.dispatchEvent(new CustomEvent('titlechange', {
+            detail: {
+              title: this.drawingContext.document.title
+            },
+            composed: true,
+            bubbles: true
+          }));
+        }
       }
     }, {
       kind: "method",
