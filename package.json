@@ -58,8 +58,11 @@
     "workbox-cli": "^6.2.4"
   },
   "lint-staged": {
-    "{src,cypress}/**/*.{ts,js}": ["eslint --cache --fix", "prettier --write"],
-    "public/*.{css,html}": "prettier --write",
+    "{src,cypress}/**/*.{ts,js}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "public/*.{css,html,json}": "prettier --write",
     "*.md": "prettier --write"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "tags": [
+    {
+      "name": "paint-app",
+      "description": "An open-source, Web Components-based remake of MS Paint using modern web capabilities.",
+      "properties": [],
+      "events": [
+        {
+          "name": "titlechange",
+          "description": "The titlechange event fires whenever the document's title changes, for example, when a document is saved with a new name, or a document was opened from the file system.",
+          "type": "{ title: string }"
+        }
+      ],
+      "slots": [],
+      "cssProperties": []
+    }
+  ]
+}
