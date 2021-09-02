@@ -21,6 +21,7 @@ export class App extends LitElement {
   @state() drawingContext = DRAWING_CONTEXT;
 
   private readonly beforeUnloadListener?: (event: BeforeUnloadEvent) => void;
+  private previousTitle = '';
 
   static get styles(): CSSResultGroup {
     return css`
@@ -212,7 +213,9 @@ export class App extends LitElement {
   }
 
   render(): TemplateResult {
-    document.title = `${this.drawingContext.document.title} - Paint`;
+    // TODO: Should not happen as a part of the render loop.
+    this.dispatchTitleChangeEvent();
+
     return html`
       <paint-menu-bar
         .entries="${menus}"
@@ -250,6 +253,19 @@ export class App extends LitElement {
           ></paint-dialog-text-toolbar>`
         : ''}
     `;
+  }
+
+  private dispatchTitleChangeEvent(): void {
+    if (this.previousTitle !== this.drawingContext.document.title) {
+      this.previousTitle = this.drawingContext.document.title;
+      this.dispatchEvent(
+        new CustomEvent<{ title: string }>('titlechange', {
+          detail: { title: this.drawingContext.document.title },
+          composed: true,
+          bubbles: true,
+        }),
+      );
+    }
   }
 
   onBeforeUnload(event: BeforeUnloadEvent): void {
