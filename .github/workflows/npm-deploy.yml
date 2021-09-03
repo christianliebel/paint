@@ -33,6 +33,9 @@ jobs:
       - name: Copy package.json
         run: npx ncp package-publish.json build/package.json
 
+      - name: Copy README.md
+        run: npx ncp README.md build/README.md
+
       - name: Replace version in package.json
         run: npx replace '#.#.#' ${GITHUB_REF#refs/tags/v} build/package.json
 

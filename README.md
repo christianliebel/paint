@@ -6,7 +6,7 @@
 
 Paint is back—right in your browser! Try it on [paint.js.org](https://paint.js.org).
 
-![Paint](docs/screenshot.png)
+![Paint](https://raw.githubusercontent.com/christianliebel/paint/main/docs/screenshot.png)
 
 This project aims to demonstrate modern web capabilities and Web Component-based application architectures on the example of a productivity app dinosaur: Paint.
 All offline-capable and installable, just as [Progressive Web Apps](https://web.dev/progressive-web-apps/) should be.
