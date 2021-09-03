@@ -19,7 +19,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -37,6 +37,6 @@ jobs:
         run: npx replace '#.#.#' ${GITHUB_REF#refs/tags/v} build/package.json
 
       - name: Publish
-        run: npm publish ./build
+        run: npm publish ./build --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
