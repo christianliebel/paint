@@ -28,7 +28,7 @@ jobs:
         run: npx ncp package-publish.json build/package.json
 
       - name: Replace version in package.json
-        run: npx replace '#.#.#' '${GITHUB_REF#refs/tags/v}' build/package.json
+        run: npx replace '#.#.#' ${GITHUB_REF#refs/tags/v} build/package.json
 
       - name: Publish
         run: npm publish ./build
