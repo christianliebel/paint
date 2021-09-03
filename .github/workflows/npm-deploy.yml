@@ -1,0 +1,36 @@
+name: NPM Deploy
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Delete irrelevant files
+        run: npx rimraf build/assets build/*.* build/dist/index.js
+
+      - name: Copy custom-elements.json
+        run: npx ncp custom-elements.json build/custom-elements.json
+
+      - name: Copy package.json
+        run: npx ncp package-publish.json build/package.json
+
+      - name: Replace version in package.json
+        run: npx replace '#.#.#' '${GITHUB_REF#refs/tags/v}' build/package.json
+
+      - name: Publish
+        run: npm publish ./build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

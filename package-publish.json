@@ -1,0 +1,16 @@
+{
+  "name": "@paint/web-component",
+  "version": "#.#.#",
+  "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christianliebel/paint.git"
+  },
+  "author": "Christian Liebel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/christianliebel/paint/issues"
+  },
+  "main": "dist/elements/index.js",
+  "customElements": "custom-elements.json"
+}
