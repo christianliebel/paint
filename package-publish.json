@@ -1,5 +1,5 @@
 {
-  "name": "@paint/web-component",
+  "name": "@christianliebel/paint",
   "version": "#.#.#",
   "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
   "repository": {
