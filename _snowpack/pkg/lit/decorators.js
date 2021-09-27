@@ -59,10 +59,9 @@ function e(e) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-function r(r) {
-  return e({ ...r,
-    state: !0,
-    attribute: !1
+function t(t) {
+  return e({ ...t,
+    state: !0
   });
 }
 
@@ -104,31 +103,31 @@ const o = ({
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-function o$1(o$1, r) {
+function i$1(i, n) {
   return o({
-    descriptor: t => {
-      const i = {
+    descriptor: o => {
+      const t = {
         get() {
-          var t;
-          return null === (t = this.renderRoot) || void 0 === t ? void 0 : t.querySelector(o$1);
+          var o, n;
+          return null !== (n = null === (o = this.renderRoot) || void 0 === o ? void 0 : o.querySelector(i)) && void 0 !== n ? n : null;
         },
 
         enumerable: !0,
         configurable: !0
       };
 
-      if (r) {
-        const r = "symbol" == typeof t ? Symbol() : "__" + t;
+      if (n) {
+        const n = "symbol" == typeof o ? Symbol() : "__" + o;
 
-        i.get = function () {
-          var t;
-          return void 0 === this[r] && (this[r] = null === (t = this.renderRoot) || void 0 === t ? void 0 : t.querySelector(o$1)), this[r];
+        t.get = function () {
+          var o, t;
+          return void 0 === this[n] && (this[n] = null !== (t = null === (o = this.renderRoot) || void 0 === o ? void 0 : o.querySelector(i)) && void 0 !== t ? t : null), this[n];
         };
       }
 
-      return i;
+      return t;
     }
   });
 }
 
-export { n as customElement, e as property, o$1 as query, r as state };
+export { n as customElement, e as property, i$1 as query, t as state };
