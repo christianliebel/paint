@@ -50,7 +50,7 @@
     "husky": "^7.0.2",
     "jest": "^27.2.2",
     "lint-staged": "^11.1.2",
-    "prettier": "^2.4.0",
+    "prettier": "^2.4.1",
     "snowpack": "3.8.8",
     "ts-jest": "^27.0.5",
     "ts-mockito": "^2.6.1",
