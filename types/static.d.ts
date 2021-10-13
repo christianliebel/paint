@@ -63,18 +63,6 @@ declare module 'bresenham-zingl' {
   export function ellipseRect(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => any);
 }
 
-// Type declarations for File System Access API
-
-interface FileSystemFileHandle {
-  getFile(): Promise<File>;
-  kind: 'directory' | 'file';
-  name: string;
-}
-
-interface DataTransferItem {
-  getAsFileSystemHandle(): Promise<FileSystemFileHandle>;
-}
-
 // Type declarations for File Handling API
 
 interface LaunchParams {
