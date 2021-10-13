@@ -21,19 +21,21 @@ export function registerDragDrop(
       ({ kind }) => kind === 'file',
     );
     for (const file of files) {
-      if (file.kind === 'file') {
-        const handle = await file.getAsFileSystemHandle();
-        const blob = await handle.getFile();
-        await loadFileAndAdjustCanvas(blob, drawingContext);
-
-        updateDocumentContext(
-          handle as unknown as FileSystemHandle,
-          handle.name,
-          drawingContext,
-        );
-
-        return;
+      const handle = await file.getAsFileSystemHandle();
+      if (handle?.kind !== 'file') {
+        continue;
       }
+
+      const blob = await handle.getFile();
+      await loadFileAndAdjustCanvas(blob, drawingContext);
+
+      updateDocumentContext(
+        handle as unknown as FileSystemHandle,
+        handle.name,
+        drawingContext,
+      );
+
+      return;
     }
   });
 }
