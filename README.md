@@ -45,6 +45,17 @@ This project demonstrates the use of:
 3. Run `npm start`
 4. Done!
 
+## Using the Web Component
+
+Paint is available as a web component, so you can easily embed it into other applications or websites.
+
+1. Install the library
+   - Download the npm package [@christianliebel/paint](https://www.npmjs.com/package/@christianliebel/paint) and register the elements by importing the library: `import '@christianliebel/paint';`
+   - Alternatively, use a service like unpkg.com: `<script src="https://unpkg.com/@christianliebel/paint/dist/elements/index.js" type="module"></script>`
+2. Use the `<paint-app>` component in your application.
+3. Optional: If you want to react to changes of the document title, listen to the `titlechange` event. You can find the updated title in the `event.details.title` property.
+4. Done!
+
 ## Wait, I’ve seen this before
 
 You’re right! The awesome [JSPaint](https://jspaint.app/) ([GitHub](https://github.com/1j01/jspaint)) has been around for a long time and is, by far, more complete.
