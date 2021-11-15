@@ -16,7 +16,7 @@ async function fileOpen(...e) {
 }
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
-const o$1 = e ? import('./common/directory-open-ae5779fa.js') : import('./common/directory-open-6ea1e22b.js');
+const o$1 = e ? import('./common/directory-open-d1a4dc33.js') : import('./common/directory-open-6c40f0c6.js');
 
 // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
 const s = e ? import('./common/file-save-84fd15c1.js') : import('./common/file-save-cd2cc3cb.js');
