@@ -1,8 +1,8 @@
 The following NPM packages may be included in this product:
 
- - @lit/reactive-element@1.0.0
- - lit-element@3.0.0
- - lit@2.0.2
+ - @lit/reactive-element@1.1.1
+ - lit-element@3.1.1
+ - lit@2.1.1
 
 These packages each contain the following license and notice below:
 
@@ -674,7 +674,7 @@ SOFTWARE.
 
 The following NPM package may be included in this product:
 
- - lit-html@2.0.0
+ - lit-html@2.1.1
 
 This package contains the following license and notice below:
 
