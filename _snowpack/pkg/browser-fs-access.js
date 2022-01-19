@@ -1,37 +1,31 @@
-var y = Object.defineProperty;
+var T = Object.defineProperty;
 
-var F = e => y(e, "__esModule", {
-  value: !0
-});
+var f = (e, t) => () => (e && (t = e(e = 0)), t);
 
-var u = (e, t) => () => (e && (t = e(e = 0)), t);
-
-var m = (e, t) => {
-  F(e);
-
-  for (var i in t) y(e, i, {
+var d = (e, t) => {
+  for (var i in t) T(e, i, {
     get: t[i],
     enumerable: !0
   });
 };
 
-var p = {};
-m(p, {
-  default: () => N
+var y = {};
+d(y, {
+  default: () => E
 });
-var N,
-    o = u(() => {
-  N = async (e = [{}]) => (Array.isArray(e) || (e = [e]), new Promise((t, i) => {
+var E,
+    p = f(() => {
+  E = async (e = [{}]) => (Array.isArray(e) || (e = [e]), new Promise((t, i) => {
     let r = document.createElement("input");
     r.type = "file";
-    let n = [...e.map(s => s.mimeTypes || []).join(), e.map(s => s.extensions || []).join()].join();
-    r.multiple = e[0].multiple || !1, r.accept = n || "";
+    let l = [...e.map(s => s.mimeTypes || []).join(), e.map(s => s.extensions || []).join()].join();
+    r.multiple = e[0].multiple || !1, r.accept = l || "";
 
-    let l = () => c(i),
+    let n = () => c(i),
         a = s => {
       typeof c == "function" && c(), t(s);
     },
-        c = e[0].legacySetup && e[0].legacySetup(a, l, r);
+        c = e[0].legacySetup && e[0].legacySetup(a, n, r);
 
     r.addEventListener("change", () => {
       a(r.multiple ? Array.from(r.files) : r.files[0]);
@@ -39,25 +33,25 @@ var N,
   }));
 });
 var w = {};
-m(w, {
-  default: () => U
+d(w, {
+  default: () => I
 });
-var I,
-    U,
-    h = u(() => {
-  I = async e => {
+var N,
+    I,
+    h = f(() => {
+  N = async e => {
     let t = await e.getFile();
     return t.handle = e, t;
-  }, U = async (e = [{}]) => {
+  }, I = async (e = [{}]) => {
     Array.isArray(e) || (e = [e]);
     let t = [];
-    e.forEach((n, l) => {
-      t[l] = {
-        description: n.description || "",
+    e.forEach((l, n) => {
+      t[n] = {
+        description: l.description || "",
         accept: {}
-      }, n.mimeTypes ? n.mimeTypes.map(a => {
-        t[l].accept[a] = n.extensions || [];
-      }) : t[l].accept["*/*"] = n.extensions || [];
+      }, l.mimeTypes ? l.mimeTypes.map(a => {
+        t[n].accept[a] = l.extensions || [];
+      }) : t[n].accept["*/*"] = l.extensions || [];
     });
     let i = await window.showOpenFilePicker({
       id: e[0].id,
@@ -66,74 +60,74 @@ var I,
       multiple: e[0].multiple || !1,
       excludeAcceptAllOption: e[0].excludeAcceptAllOption || !1
     }),
-        r = await Promise.all(i.map(I));
+        r = await Promise.all(i.map(N));
     return e[0].multiple ? r : r[0];
   };
 });
-var j = {};
-m(j, {
-  default: () => B
+var o = {};
+d(o, {
+  default: () => M
 });
-var B,
-    v = u(() => {
-  B = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, i) => {
+var M,
+    A = f(() => {
+  M = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, i) => {
     let r = document.createElement("input");
     r.type = "file", r.webkitdirectory = !0;
 
-    let n = () => a(i),
-        l = c => {
+    let l = () => a(i),
+        n = c => {
       typeof a == "function" && a(), t(c);
     },
-        a = e[0].legacySetup && e[0].legacySetup(l, n, r);
+        a = e[0].legacySetup && e[0].legacySetup(n, l, r);
 
     r.addEventListener("change", () => {
       let c = Array.from(r.files);
-      e[0].recursive ? e[0].recursive && e[0].skipDirectory && (c = c.filter(s => s.webkitRelativePath.split("/").every(T => !e[0].skipDirectory({
-        name: T,
+      e[0].recursive ? e[0].recursive && e[0].skipDirectory && (c = c.filter(s => s.webkitRelativePath.split("/").every(S => !e[0].skipDirectory({
+        name: S,
         kind: "directory"
-      })))) : c = c.filter(s => s.webkitRelativePath.split("/").length === 2), l(c);
+      })))) : c = c.filter(s => s.webkitRelativePath.split("/").length === 2), n(c);
     }), r.click();
   }));
 });
-var g = {};
-m(g, {
-  default: () => D
+var x = {};
+d(x, {
+  default: () => B
 });
-var A,
-    D,
-    x = u(() => {
-  A = async (e, t, i = e.name, r) => {
-    let n = [],
-        l = [];
+var v,
+    B,
+    g = f(() => {
+  v = async (e, t, i = e.name, r) => {
+    let l = [],
+        n = [];
 
     for await (let a of e.values()) {
       let c = `${i}/${a.name}`;
-      a.kind === "file" ? l.push(a.getFile().then(s => (s.directoryHandle = e, Object.defineProperty(s, "webkitRelativePath", {
+      a.kind === "file" ? n.push(a.getFile().then(s => (s.directoryHandle = e, s.handle = a, Object.defineProperty(s, "webkitRelativePath", {
         configurable: !0,
         enumerable: !0,
         get: () => c
-      })))) : a.kind === "directory" && t && (!r || !r(a)) && n.push(A(a, t, c, r));
+      })))) : a.kind === "directory" && t && (!r || !r(a)) && l.push(v(a, t, c, r));
     }
 
-    return [...(await Promise.all(n)).flat(), ...(await Promise.all(l))];
-  }, D = async (e = {}) => {
+    return [...(await Promise.all(l)).flat(), ...(await Promise.all(n))];
+  }, B = async (e = {}) => {
     e.recursive = e.recursive || !1;
     let t = await window.showDirectoryPicker({
       id: e.id,
       startIn: e.startIn
     });
-    return A(t, e.recursive, void 0, e.skipDirectory);
+    return v(t, e.recursive, void 0, e.skipDirectory);
   };
 });
 var k = {};
-m(k, {
-  default: () => $
+d(k, {
+  default: () => W
 });
 
-async function q(e, t) {
+async function $(e, t) {
   let i = e.getReader(),
       r = new ReadableStream({
-    start(l) {
+    start(n) {
       return a();
 
       async function a() {
@@ -142,75 +136,75 @@ async function q(e, t) {
           value: s
         }) => {
           if (c) {
-            l.close();
+            n.close();
             return;
           }
 
-          return l.enqueue(s), a();
+          return n.enqueue(s), a();
         });
       }
     }
 
   }),
-      n = new Response(r);
-  return i.releaseLock(), new Blob([await n.blob()], {
+      l = new Response(r);
+  return i.releaseLock(), new Blob([await l.blob()], {
     type: t
   });
 }
 
-var $,
-    P = u(() => {
-  $ = async (e, t = {}) => {
+var W,
+    P = f(() => {
+  W = async (e, t = {}) => {
     Array.isArray(t) && (t = t[0]);
     let i = document.createElement("a"),
         r = e;
-    "body" in e && (r = await q(e.body, e.headers.get("content-type"))), i.download = t.fileName || "Untitled", i.href = URL.createObjectURL(r);
+    "body" in e && (r = await $(e.body, e.headers.get("content-type"))), i.download = t.fileName || "Untitled", i.href = URL.createObjectURL(r);
 
-    let n = () => a(reject),
-        l = () => {
+    let l = () => a(reject),
+        n = () => {
       typeof a == "function" && a();
     },
-        a = t.legacySetup && t.legacySetup(l, n, i);
+        a = t.legacySetup && t.legacySetup(n, l, i);
 
     return i.addEventListener("click", () => {
-      setTimeout(() => URL.revokeObjectURL(i.href), 30 * 1e3), l();
+      setTimeout(() => URL.revokeObjectURL(i.href), 30 * 1e3), n();
     }), i.click(), null;
   };
 });
-var L = {};
-m(L, {
-  default: () => z
+var j = {};
+d(j, {
+  default: () => q
 });
-var z,
-    S = u(() => {
-  z = async (e, t = [{}], i = null, r = !1) => {
+var q,
+    L = f(() => {
+  q = async (e, t = [{}], i = null, r = !1) => {
     Array.isArray(t) || (t = [t]), t[0].fileName = t[0].fileName || "Untitled";
-    let n = [];
+    let l = [];
     if (t.forEach((c, s) => {
-      n[s] = {
+      l[s] = {
         description: c.description || "",
         accept: {}
-      }, c.mimeTypes ? (s === 0 && (e.type ? c.mimeTypes.push(e.type) : e.headers && e.headers.get("content-type") && c.mimeTypes.push(e.headers.get("content-type"))), c.mimeTypes.map(d => {
-        n[s].accept[d] = c.extensions || [];
-      })) : e.type && (n[s].accept[e.type] = c.extensions || []);
+      }, c.mimeTypes ? (s === 0 && (e.type ? c.mimeTypes.push(e.type) : e.headers && e.headers.get("content-type") && c.mimeTypes.push(e.headers.get("content-type"))), c.mimeTypes.map(m => {
+        l[s].accept[m] = c.extensions || [];
+      })) : e.type && (l[s].accept[e.type] = c.extensions || []);
     }), i) try {
       await i.getFile();
     } catch (c) {
       if (i = null, r) throw c;
     }
-    let l = i || (await window.showSaveFilePicker({
+    let n = i || (await window.showSaveFilePicker({
       suggestedName: t[0].fileName,
       id: t[0].id,
       startIn: t[0].startIn,
-      types: n,
+      types: l,
       excludeAcceptAllOption: t[0].excludeAcceptAllOption || !1
     })),
-        a = await l.createWritable();
-    return "stream" in e ? (await e.stream().pipeTo(a), l) : "body" in e ? (await e.body.pipeTo(a), l) : (await a.write(blob), await a.close(), l);
+        a = await n.createWritable();
+    return "stream" in e ? (await e.stream().pipeTo(a), n) : "body" in e ? (await e.body.pipeTo(a), n) : (await a.write(blob), await a.close(), n);
   };
 });
 
-var E = (() => {
+var F = (() => {
   if (typeof self == "undefined") return !1;
   if ("top" in self && self !== top) try {
     top.location + "";
@@ -219,21 +213,21 @@ var E = (() => {
   } else if ("showOpenFilePicker" in self) return "showOpenFilePicker";
   return !1;
 })(),
-    f = E;
+    u = F;
 
-var _ = f ? Promise.resolve().then(() => (h(), w)) : Promise.resolve().then(() => (o(), p));
+var U = u ? Promise.resolve().then(() => (h(), w)) : Promise.resolve().then(() => (p(), y));
 
-async function M(...e) {
-  return (await _).default(...e);
+async function _(...e) {
+  return (await U).default(...e);
 }
 
-var O = f ? Promise.resolve().then(() => (x(), g)) : Promise.resolve().then(() => (v(), j));
+var D = u ? Promise.resolve().then(() => (g(), x)) : Promise.resolve().then(() => (A(), o));
 
-var C = f ? Promise.resolve().then(() => (S(), L)) : Promise.resolve().then(() => (P(), k));
+var z = u ? Promise.resolve().then(() => (L(), j)) : Promise.resolve().then(() => (P(), k));
 
-async function G(...e) {
-  return (await C).default(...e);
+async function C(...e) {
+  return (await z).default(...e);
 }
  // @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
 
-export { M as fileOpen, G as fileSave };
+export { _ as fileOpen, C as fileSave };
