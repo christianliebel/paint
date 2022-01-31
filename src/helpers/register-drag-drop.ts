@@ -26,7 +26,7 @@ export function registerDragDrop(
         continue;
       }
 
-      const blob = await handle.getFile();
+      const blob = await (handle as FileSystemFileHandle).getFile();
       await loadFileAndAdjustCanvas(blob, drawingContext);
 
       updateDocumentContext(
