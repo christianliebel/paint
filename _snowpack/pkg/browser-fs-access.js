@@ -18,7 +18,7 @@ var E,
   E = async (e = [{}]) => (Array.isArray(e) || (e = [e]), new Promise((t, i) => {
     let r = document.createElement("input");
     r.type = "file";
-    let l = [...e.map(s => s.mimeTypes || []).join(), e.map(s => s.extensions || []).join()].join();
+    let l = [...e.map(s => s.mimeTypes || []), ...e.map(s => s.extensions || [])].join();
     r.multiple = e[0].multiple || !1, r.accept = l || "";
 
     let n = () => c(i),
@@ -205,7 +205,7 @@ var q,
 });
 
 var F = (() => {
-  if (typeof self == "undefined") return !1;
+  if (typeof self > "u") return !1;
   if ("top" in self && self !== top) try {
     top.location + "";
   } catch {
