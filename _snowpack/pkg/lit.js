@@ -265,10 +265,10 @@ class a extends HTMLElement {
 
   requestUpdate(t, i, s) {
     let e = !0;
-    void 0 !== t && (((s = s || this.constructor.getPropertyOptions(t)).hasChanged || n$1)(this[t], i) ? (this._$AL.has(t) || this._$AL.set(t, i), !0 === s.reflect && this._$Ei !== t && (void 0 === this._$E_ && (this._$E_ = new Map()), this._$E_.set(t, s))) : e = !1), !this.isUpdatePending && e && (this._$Ep = this._$EC());
+    void 0 !== t && (((s = s || this.constructor.getPropertyOptions(t)).hasChanged || n$1)(this[t], i) ? (this._$AL.has(t) || this._$AL.set(t, i), !0 === s.reflect && this._$Ei !== t && (void 0 === this._$EC && (this._$EC = new Map()), this._$EC.set(t, s))) : e = !1), !this.isUpdatePending && e && (this._$Ep = this._$E_());
   }
 
-  async _$EC() {
+  async _$E_() {
     this.isUpdatePending = !0;
 
     try {
@@ -331,7 +331,7 @@ class a extends HTMLElement {
   }
 
   update(t) {
-    void 0 !== this._$E_ && (this._$E_.forEach((t, i) => this._$ES(i, this[i], t)), this._$E_ = void 0), this._$EU();
+    void 0 !== this._$EC && (this._$EC.forEach((t, i) => this._$ES(i, this[i], t)), this._$EC = void 0), this._$EU();
   }
 
   updated(t) {}
@@ -344,7 +344,7 @@ a.finalized = !0, a.elementProperties = new Map(), a.elementStyles = [], a.shado
   mode: "open"
 }, null == h || h({
   ReactiveElement: a
-}), (null !== (s$1 = globalThis.reactiveElementVersions) && void 0 !== s$1 ? s$1 : globalThis.reactiveElementVersions = []).push("1.1.1");
+}), (null !== (s$1 = globalThis.reactiveElementVersions) && void 0 !== s$1 ? s$1 : globalThis.reactiveElementVersions = []).push("1.3.0");
 
 /**
  * @license
@@ -374,7 +374,7 @@ const i$1 = globalThis.trustedTypes,
       f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g,
       _ = /'/g,
       m = /"/g,
-      g = /^(?:script|style|textarea)$/i,
+      g = /^(?:script|style|textarea|title)$/i,
       p = t => (i, ...s) => ({
   _$litType$: t,
   strings: i,
@@ -588,19 +588,19 @@ class N {
   }
 
   _$AI(t, i = this) {
-    t = P(this, t, i), r$2(t) ? t === w || null == t || "" === t ? (this._$AH !== w && this._$AR(), this._$AH = w) : t !== this._$AH && t !== b && this.$(t) : void 0 !== t._$litType$ ? this.T(t) : void 0 !== t.nodeType ? this.S(t) : u(t) ? this.A(t) : this.$(t);
+    t = P(this, t, i), r$2(t) ? t === w || null == t || "" === t ? (this._$AH !== w && this._$AR(), this._$AH = w) : t !== this._$AH && t !== b && this.$(t) : void 0 !== t._$litType$ ? this.T(t) : void 0 !== t.nodeType ? this.k(t) : u(t) ? this.S(t) : this.$(t);
   }
 
-  M(t, i = this._$AB) {
+  A(t, i = this._$AB) {
     return this._$AA.parentNode.insertBefore(t, i);
   }
 
-  S(t) {
-    this._$AH !== t && (this._$AR(), this._$AH = this.M(t));
+  k(t) {
+    this._$AH !== t && (this._$AR(), this._$AH = this.A(t));
   }
 
   $(t) {
-    this._$AH !== w && r$2(this._$AH) ? this._$AA.nextSibling.data = t : this.S(l$1.createTextNode(t)), this._$AH = t;
+    this._$AH !== w && r$2(this._$AH) ? this._$AA.nextSibling.data = t : this.k(l$1.createTextNode(t)), this._$AH = t;
   }
 
   T(t) {
@@ -613,7 +613,7 @@ class N {
     if ((null === (i = this._$AH) || void 0 === i ? void 0 : i._$AD) === o) this._$AH.m(s);else {
       const t = new V(o, this),
             i = t.p(this.options);
-      t.m(s), this.S(i), this._$AH = t;
+      t.m(s), this.k(i), this._$AH = t;
     }
   }
 
@@ -622,13 +622,13 @@ class N {
     return void 0 === i && T.set(t.strings, i = new E(t)), i;
   }
 
-  A(t) {
+  S(t) {
     d(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
     let s,
         e = 0;
 
-    for (const o of t) e === i.length ? i.push(s = new N(this.M(h$1()), this.M(h$1()), this, this.options)) : s = i[e], s._$AI(o), e++;
+    for (const o of t) e === i.length ? i.push(s = new N(this.A(h$1()), this.A(h$1()), this, this.options)) : s = i[e], s._$AI(o), e++;
 
     e < i.length && (this._$AR(s && s._$AB.nextSibling, e), i.length = e);
   }
@@ -671,10 +671,10 @@ class S$1 {
 
       for (t = o[0], l = 0; l < o.length - 1; l++) h = P(this, e[s + l], i, l), h === b && (h = this._$AH[l]), n || (n = !r$2(h) || h !== this._$AH[l]), h === w ? t = w : t !== w && (t += (null != h ? h : "") + o[l + 1]), this._$AH[l] = h;
     }
-    n && !e && this.k(t);
+    n && !e && this.C(t);
   }
 
-  k(t) {
+  C(t) {
     t === w ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, null != t ? t : "");
   }
 
@@ -685,7 +685,7 @@ class M extends S$1 {
     super(...arguments), this.type = 3;
   }
 
-  k(t) {
+  C(t) {
     this.element[this.name] = t === w ? void 0 : t;
   }
 
@@ -698,7 +698,7 @@ class H extends S$1 {
     super(...arguments), this.type = 4;
   }
 
-  k(t) {
+  C(t) {
     t && t !== w ? this.element.setAttribute(this.name, k) : this.element.removeAttribute(this.name);
   }
 
@@ -741,7 +741,7 @@ class L {
 }
 
 const z = window.litHtmlPolyfillSupport;
-null == z || z(E, N), (null !== (t$1 = globalThis.litHtmlVersions) && void 0 !== t$1 ? t$1 : globalThis.litHtmlVersions = []).push("2.1.1");
+null == z || z(E, N), (null !== (t$1 = globalThis.litHtmlVersions) && void 0 !== t$1 ? t$1 : globalThis.litHtmlVersions = []).push("2.2.0");
 
 /**
  * @license
@@ -792,6 +792,6 @@ const n$3 = globalThis.litElementPolyfillSupport;
 null == n$3 || n$3({
   LitElement: s$3
 });
-(null !== (o$3 = globalThis.litElementVersions) && void 0 !== o$3 ? o$3 : globalThis.litElementVersions = []).push("3.1.1");
+(null !== (o$3 = globalThis.litElementVersions) && void 0 !== o$3 ? o$3 : globalThis.litElementVersions = []).push("3.2.0");
 
 export { s$3 as LitElement, r as css, $ as html };

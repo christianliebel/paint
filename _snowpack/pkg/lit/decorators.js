@@ -130,4 +130,13 @@ function i$1(i, n) {
   });
 }
 
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+var n$1;
+const e$1 = null != (null === (n$1 = window.HTMLSlotElement) || void 0 === n$1 ? void 0 : n$1.prototype.assignedElements) ? (o, n) => o.assignedElements(n) : (o, n) => o.assignedNodes(n).filter(o => o.nodeType === Node.ELEMENT_NODE);
+
 export { n as customElement, e as property, i$1 as query, t as state };
