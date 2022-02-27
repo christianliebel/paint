@@ -1,19 +1,41 @@
 {
-  "version": 2,
-  "tags": [
+  "schemaVersion": "1.0.0",
+  "readme": "README.md",
+  "modules": [
     {
-      "name": "paint-app",
-      "description": "An open-source, Web Components-based remake of MS Paint using modern web capabilities.",
-      "properties": [],
-      "events": [
+      "kind": "javascript-module",
+      "path": "dist/elements/index.js",
+      "declarations": [
         {
-          "name": "titlechange",
-          "description": "The titlechange event fires whenever the document's title changes, for example, when a document is saved with a new name, or a document was opened from the file system.",
-          "type": "{ title: string }"
+          "kind": "class",
+          "description": "An open-source, Web Components-based remake of MS Paint using modern web capabilities.",
+          "name": "App",
+          "events": [
+            {
+              "name": "titlechange",
+              "description": "The titlechange event fires whenever the document's title changes, for example, when a document is saved with a new name, or a document was opened from the file system.",
+              "type": {
+                "title": "String"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LitElement"
+          },
+          "tagName": "paint-app",
+          "customElement": true
         }
       ],
-      "slots": [],
-      "cssProperties": []
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "paint-app",
+          "declaration": {
+            "name": "App",
+            "module": "dist/elements/index.js"
+          }
+        }
+      ]
     }
   ]
 }
