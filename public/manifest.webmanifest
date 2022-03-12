@@ -13,6 +13,10 @@
         "action": "/",
         "accept": {
             "image/png": [".png"]
-        }
+        },
+        "icons": [{
+            "src": "favicon.ico",
+            "sizes": "16x16 32x32"
+        }]
     }]
 }
