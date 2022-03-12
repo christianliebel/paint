@@ -35,7 +35,7 @@ import { customElement, property } from '../../_snowpack/pkg/lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context.js';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility.js';
 import { updateContext } from '../helpers/update-context.js';
-import { AIRBRUSH, BRUSH, CURVE, ERASER, FREE_FORM_SELECT, LINE, MAGNIFIER, PENCIL, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, SELECT, TEXT, tools } from '../tools/all.js';
+import { AIRBRUSH, BRUSH, CURVE, ELLIPSE, ERASER, FREE_FORM_SELECT, LINE, MAGNIFIER, PENCIL, PICK_COLOR, POLYGON, RECTANGLE, ROUNDED_RECTANGLE, SELECT, TEXT, tools } from '../tools/all.js';
 export let ToolBox = _decorate([customElement('paint-tool-box')], function (_initialize, _LitElement) {
   class ToolBox extends _LitElement {
     constructor(...args) {
@@ -146,9 +146,7 @@ export let ToolBox = _decorate([customElement('paint-tool-box')], function (_ini
       ></paint-tool-line-width>`;
         }
 
-        if ([RECTANGLE,
-        /* ELLIPSE, */
-        POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
+        if ([RECTANGLE, ELLIPSE, POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
           return html` <paint-tool-fill-style
         .drawingContext="${this.drawingContext}"
       ></paint-tool-fill-style>`;

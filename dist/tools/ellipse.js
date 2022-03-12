@@ -10,44 +10,87 @@ export class EllipseTool {
     });
   }
 
-  onPointerDown(x, y, {
-    previewContext,
-    context
-  }, color) {
-    if (context && previewContext) {
-      this.startPosition = {
-        x,
-        y
-      };
-      context.fillStyle = previewContext.fillStyle = color.stroke.value;
-    }
+  onPointerDown(x, y) {
+    this.startPosition = {
+      x,
+      y
+    };
   }
 
   onPointerMove(x, y, {
+    fillStyle,
     canvas,
     previewContext
-  }) {
+  }, color) {
     if (canvas && previewContext) {
-      this.drawEllipse(x, y, canvas, previewContext, previewContext);
+      this.drawEllipse(x, y, fillStyle, color, canvas, previewContext, previewContext);
     }
   }
 
   onPointerUp(x, y, {
+    fillStyle,
     canvas,
     context,
     previewContext
-  }) {
+  }, color) {
     if (canvas && context && previewContext) {
-      this.drawEllipse(x, y, canvas, context, previewContext);
+      this.drawEllipse(x, y, fillStyle, color, canvas, context, previewContext);
     }
   }
 
-  drawEllipse(x, y, canvas, targetContext, previewContext) {
-    // TODO: Fill styles
+  drawEllipse(x, y, fillStyle, color, canvas, targetContext, previewContext) {
     clearContext(previewContext);
+    const ellipsePixels = [];
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
-      targetContext.fillRect(Math.floor(x), Math.floor(y), 1, 1);
+      ellipsePixels.push({
+        x,
+        y
+      });
     });
+
+    if (fillStyle.fill) {
+      targetContext.fillStyle = color.fill.value;
+      ellipsePixels.sort((a, b) => a.y - b.y || a.x - b.x);
+      const fillPixels = this.getFillPixels(ellipsePixels);
+      Array.from(fillPixels).forEach(pixel => {
+        this.drawPixel(targetContext, pixel);
+      });
+    }
+
+    if (fillStyle.stroke) {
+      targetContext.fillStyle = color.stroke.value;
+    }
+
+    ellipsePixels.forEach(pixel => {
+      this.drawPixel(targetContext, pixel);
+    });
+  }
+
+  drawPixel(context, {
+    x,
+    y
+  }) {
+    context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
+  }
+
+  *getFillPixels(pixels) {
+    let previousPixel;
+
+    for (const pixel of pixels) {
+      if (previousPixel?.y === pixel.y && pixel.x - previousPixel.x > 1) {
+        const minX = Math.min(previousPixel.x, pixel.x);
+        const maxX = Math.max(previousPixel.x, pixel.x);
+
+        for (let i = minX; i <= maxX; i++) {
+          yield {
+            x: i,
+            y: pixel.y
+          };
+        }
+      }
+
+      previousPixel = pixel;
+    }
   }
 
 }
