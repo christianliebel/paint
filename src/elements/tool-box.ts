@@ -8,6 +8,7 @@ import {
   AIRBRUSH,
   BRUSH,
   CURVE,
+  ELLIPSE,
   ERASER,
   FREE_FORM_SELECT,
   LINE,
@@ -111,7 +112,7 @@ export class ToolBox extends LitElement {
       ></paint-tool-line-width>`;
     }
 
-    if ([RECTANGLE, /* ELLIPSE, */ POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
+    if ([RECTANGLE, ELLIPSE, POLYGON, ROUNDED_RECTANGLE].includes(tool)) {
       return html` <paint-tool-fill-style
         .drawingContext="${this.drawingContext}"
       ></paint-tool-fill-style>`;
