@@ -18,7 +18,7 @@ export function registerDragDrop(element) {
     for (const file of files) {
       const handle = await file.getAsFileSystemHandle();
 
-      if (handle?.kind !== 'file') {
+      if (!handle || !isFileHandle(handle)) {
         continue;
       }
 
@@ -28,4 +28,8 @@ export function registerDragDrop(element) {
       return;
     }
   });
+}
+
+function isFileHandle(handle) {
+  return handle.kind === 'file';
 }
