@@ -1,4 +1,3 @@
-import type { FileSystemHandle } from 'browser-fs-access';
 import type { DrawingContext } from '../models/drawing-context';
 import { loadFileAndAdjustCanvas } from './load-file-and-adjust-canvas';
 import { updateDocumentContext } from './update-document-context';
@@ -22,20 +21,22 @@ export function registerDragDrop(
     );
     for (const file of files) {
       const handle = await file.getAsFileSystemHandle();
-      if (handle?.kind !== 'file') {
+      if (!handle || !isFileHandle(handle)) {
         continue;
       }
 
-      const blob = await (handle as FileSystemFileHandle).getFile();
+      const blob = await handle.getFile();
       await loadFileAndAdjustCanvas(blob, drawingContext);
 
-      updateDocumentContext(
-        handle as unknown as FileSystemHandle,
-        handle.name,
-        drawingContext,
-      );
+      updateDocumentContext(handle, handle.name, drawingContext);
 
       return;
     }
   });
+}
+
+function isFileHandle(
+  handle: FileSystemHandle,
+): handle is FileSystemFileHandle {
+  return handle.kind === 'file';
 }

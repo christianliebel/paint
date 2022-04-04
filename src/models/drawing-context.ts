@@ -1,4 +1,3 @@
-import type { FileSystemHandle } from 'browser-fs-access';
 import type { History } from '../helpers/history';
 import type { Brush } from './brush';
 import type { FillStyle } from './fill-style';

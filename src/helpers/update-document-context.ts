@@ -1,4 +1,3 @@
-import type { FileSystemHandle } from 'browser-fs-access';
 import type { DrawingContext } from '../models/drawing-context';
 import { updateContext } from './update-context';
 
