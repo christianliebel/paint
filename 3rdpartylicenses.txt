@@ -642,7 +642,7 @@ Apache License
 
 The following NPM package may be included in this product:
 
- - hotkeys-js@3.8.7
+ - hotkeys-js@3.8.8
 
 This package contains the following license and notice below:
 

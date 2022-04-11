@@ -1,11 +1,10 @@
-/*!
- * hotkeys-js v3.8.7
- * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
+/**! 
+ * hotkeys-js v3.8.8 
+ * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies. 
  * 
- * Copyright (c) 2021 kenny wong <wowohoo@qq.com>
- * http://jaywcjlove.github.io/hotkeys
- * 
- * Licensed under the MIT license.
+ * Copyright (c) 2022 kenny wong <wowohoo@qq.com> 
+ * http://jaywcjlove.github.io/hotkeys 
+ * Licensed under the MIT license 
  */
 var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false; // 绑定事件
 
@@ -153,6 +152,8 @@ for (var k = 1; k < 20; k++) {
 }
 
 var _downKeys = []; // 记录摁下的绑定键
+
+var winListendFocus = false; // window是否已经监听了focus事件
 
 var _scope = 'all'; // 默认热键范围
 
@@ -305,15 +306,10 @@ var eachUnbind = function eachUnbind(_ref) {
 
     if (!scope) scope = getScope();
     var mods = len > 1 ? getMods(_modifier, unbindKeys) : [];
-    _handlers[keyCode] = _handlers[keyCode].map(function (record) {
+    _handlers[keyCode] = _handlers[keyCode].filter(function (record) {
       // 通过函数判断，是否解除绑定，函数相等直接返回
       var isMatchingMethod = method ? record.method === method : true;
-
-      if (isMatchingMethod && record.scope === scope && compareArray(record.mods, mods)) {
-        return {};
-      }
-
-      return record;
+      return !(isMatchingMethod && record.scope === scope && compareArray(record.mods, mods));
     });
   });
 }; // 对监听对应快捷键的回调函数进行处理
@@ -528,9 +524,14 @@ function hotkeys(key, option, method) {
     addEvent(element, 'keydown', function (e) {
       dispatch(e);
     });
-    addEvent(window, 'focus', function () {
-      _downKeys = [];
-    });
+
+    if (!winListendFocus) {
+      winListendFocus = true;
+      addEvent(window, 'focus', function () {
+        _downKeys = [];
+      });
+    }
+
     addEvent(element, 'keyup', function (e) {
       dispatch(e);
       clearModifier(e);
