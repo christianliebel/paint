@@ -18,7 +18,12 @@ export class SaveAsAction implements MenuAction {
     });
 
     if (file) {
-      updateDocumentContext(file, file.name, drawingContext);
+      // TODO: Remove cast to unknown once types overlap
+      updateDocumentContext(
+        file as unknown as FileSystemHandle,
+        file.name,
+        drawingContext,
+      );
     }
   }
 }
