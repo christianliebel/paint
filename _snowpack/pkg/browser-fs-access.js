@@ -15,10 +15,10 @@ async function n(...e) {
 
 const i = e ? import('./common/directory-open-4ed118d0-26f1a5bb.js') : import('./common/directory-open-01563666-fb6d297a.js');
 
-const o = e ? import('./common/file-save-d7634209-35210275.js') : import('./common/file-save-c8e3403f-4c88c01c.js');
+const o = e ? import('./common/file-save-f7b10bb1-ead11b22.js') : import('./common/file-save-c8e3403f-4c88c01c.js');
 
-async function s(...e) {
+async function f(...e) {
   return (await o).default(...e);
 }
 
-export { n as fileOpen, s as fileSave };
+export { n as fileOpen, f as fileSave };
