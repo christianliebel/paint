@@ -14,7 +14,7 @@ var e = async (e, t = [{}], a = null, i = !1, n = null) => {
   } catch (e) {
     if (a = null, i) throw e;
   }
-  const l = a || (await window.showSaveFilePicker({
+  const r = a || (await window.showSaveFilePicker({
     suggestedName: t[0].fileName,
     id: t[0].id,
     startIn: t[0].startIn,
@@ -22,14 +22,14 @@ var e = async (e, t = [{}], a = null, i = !1, n = null) => {
     excludeAcceptAllOption: t[0].excludeAcceptAllOption || !1
   }));
   !a && n && n();
-  const r = await l.createWritable();
+  const l = await r.createWritable();
 
   if ("stream" in e) {
     const t = e.stream();
-    return await t.pipeTo(r), l;
+    return await t.pipeTo(l), r;
   }
 
-  return "body" in e ? (await e.body.pipeTo(r), l) : (await r.write(blob), await r.close(), l);
+  return "body" in e ? (await e.body.pipeTo(l), r) : (await l.write(await e), await l.close(), r);
 };
 
 export default e;

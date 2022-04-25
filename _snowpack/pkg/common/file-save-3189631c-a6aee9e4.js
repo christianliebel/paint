@@ -15,11 +15,12 @@ var e = async (e, t = {}) => {
         });
       }()
     }),
-          r = new Response(a);
-    return n.releaseLock(), new Blob([await r.blob()], {
+          r = new Response(a),
+          c = await r.blob();
+    return n.releaseLock(), new Blob([c], {
       type: t
     });
-  }(e.body, e.headers.get("content-type"))), n.download = t.fileName || "Untitled", n.href = URL.createObjectURL(a);
+  }(e.body, e.headers.get("content-type"))), n.download = t.fileName || "Untitled", n.href = URL.createObjectURL(await a);
 
   const r = () => {
     "function" == typeof c && c();
