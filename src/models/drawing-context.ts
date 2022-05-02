@@ -123,11 +123,11 @@ export interface DrawingContext {
      */
     dirty: boolean;
     /**
-     * Contains the document's {@see FileSystemHandle} to overwrite its file on
+     * Contains the document's {@see FileSystemFileHandle} to overwrite its file on
      * the local file system. Requires support for the Local File System Access
      * API on the user's target platform.
      */
-    handle?: FileSystemHandle;
+    handle?: FileSystemFileHandle;
   };
 
   /**
