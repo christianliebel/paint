@@ -25,7 +25,7 @@ var e = async (e, t = {}) => {
   const r = () => {
     "function" == typeof c && c();
   },
-        c = t.legacySetup && t.legacySetup(r, () => c(reject), n);
+        c = t.legacySetup && t.legacySetup(r, () => c(), n);
 
   return n.addEventListener("click", () => {
     setTimeout(() => URL.revokeObjectURL(n.href), 3e4), r();

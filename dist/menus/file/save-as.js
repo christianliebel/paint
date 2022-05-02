@@ -15,7 +15,6 @@ export class SaveAsAction {
     });
 
     if (file) {
-      // TODO: Remove cast to unknown once types overlap
       updateDocumentContext(file, file.name, drawingContext);
     }
   }

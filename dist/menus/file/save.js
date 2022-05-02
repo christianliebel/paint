@@ -4,8 +4,7 @@ import { SaveAsAction } from './save-as.js';
 export class SaveAction {
   async execute(drawingContext) {
     if (drawingContext.canvas && drawingContext.document.handle) {
-      const blob = await toBlob(drawingContext.canvas); // TODO: Remove cast to unknown once types overlap
-
+      const blob = await toBlob(drawingContext.canvas);
       await fileSave(blob, undefined, drawingContext.document.handle);
     } else {
       await new SaveAsAction().execute(drawingContext);
