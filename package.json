@@ -27,7 +27,7 @@
     "break-styled-lines": "^1.3.1",
     "bresenham-zingl": "^0.1.1",
     "browser-fs-access": "^0.29.4",
-    "hotkeys-js": "^3.9.2",
+    "hotkeys-js": "^3.9.3",
     "lit": "^2.2.3",
     "q-floodfill": "^1.3.1"
   },
