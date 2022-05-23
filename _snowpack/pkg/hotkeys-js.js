@@ -1,5 +1,5 @@
 /**! 
- * hotkeys-js v3.9.3 
+ * hotkeys-js v3.9.4 
  * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies. 
  * 
  * Copyright (c) 2022 kenny wong <wowohoo@qq.com> 
@@ -253,7 +253,7 @@ function clearModifier(event) {
 
 function unbind(keysInfo) {
   // unbind(), unbind all keys
-  if (!keysInfo) {
+  if (typeof keysInfo === 'undefined') {
     Object.keys(_handlers).forEach(function (key) {
       return delete _handlers[key];
     });
