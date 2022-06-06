@@ -8,7 +8,7 @@ const e = (() => {
   return !1;
 })(),
       t = e ? Promise.resolve().then(function () {
-  return c;
+  return l;
 }) : Promise.resolve().then(function () {
   return h;
 });
@@ -33,12 +33,12 @@ async function o(...e) {
   return (await a).default(...e);
 }
 
-const l = async e => {
+const s = async e => {
   const t = await e.getFile();
   return t.handle = e, t;
 };
 
-var s = async (e = [{}]) => {
+var c = async (e = [{}]) => {
   Array.isArray(e) || (e = [e]);
   const t = [];
   e.forEach((e, n) => {
@@ -56,12 +56,12 @@ var s = async (e = [{}]) => {
     multiple: e[0].multiple || !1,
     excludeAcceptAllOption: e[0].excludeAcceptAllOption || !1
   }),
-        r = await Promise.all(n.map(l));
+        r = await Promise.all(n.map(s));
   return e[0].multiple ? r : r[0];
 },
-    c = {
+    l = {
   __proto__: null,
-  default: s
+  default: c
 };
 
 function u(e) {
@@ -102,11 +102,11 @@ const p = async (e, t, n = e.name, r) => {
   const i = [],
         a = [];
   var o,
-      l = !1,
-      s = !1;
+      s = !1,
+      c = !1;
 
   try {
-    for (var c, y = function (e) {
+    for (var l, y = function (e) {
       var t,
           n,
           r,
@@ -119,22 +119,22 @@ const p = async (e, t, n = e.name, r) => {
       }
 
       throw new TypeError("Object is not async iterable");
-    }(e.values()); l = !(c = await y.next()).done; l = !1) {
-      const o = c.value,
-            l = `${n}/${o.name}`;
+    }(e.values()); s = !(l = await y.next()).done; s = !1) {
+      const o = l.value,
+            s = `${n}/${o.name}`;
       "file" === o.kind ? a.push(o.getFile().then(t => (t.directoryHandle = e, t.handle = o, Object.defineProperty(t, "webkitRelativePath", {
         configurable: !0,
         enumerable: !0,
-        get: () => l
-      })))) : "directory" !== o.kind || !t || r && r(o) || i.push(p(o, t, l, r));
+        get: () => s
+      })))) : "directory" !== o.kind || !t || r && r(o) || i.push(p(o, t, s, r));
     }
   } catch (e) {
-    s = !0, o = e;
+    c = !0, o = e;
   } finally {
     try {
-      l && null != y.return && (await y.return());
+      s && null != y.return && (await y.return());
     } finally {
-      if (s) throw o;
+      if (c) throw o;
     }
   }
 
@@ -163,13 +163,13 @@ var y = async (e = {}) => {
       accept: {}
     }, e.mimeTypes ? (0 === t && o && e.mimeTypes.push(o), e.mimeTypes.map(n => {
       a[t].accept[n] = e.extensions || [];
-    })) : o && (a[t].accept[o] = e.extensions || []);
+    })) : o ? a[t].accept[o] = e.extensions || [] : a[t].accept["*/*"] = e.extensions || [];
   }), n) try {
     await n.getFile();
   } catch (e) {
     if (n = null, r) throw e;
   }
-  const l = n || (await window.showSaveFilePicker({
+  const s = n || (await window.showSaveFilePicker({
     suggestedName: t[0].fileName,
     id: t[0].id,
     startIn: t[0].startIn,
@@ -177,14 +177,14 @@ var y = async (e = {}) => {
     excludeAcceptAllOption: t[0].excludeAcceptAllOption || !1
   }));
   !n && i && i();
-  const s = await l.createWritable();
+  const c = await s.createWritable();
 
   if ("stream" in e) {
     const t = e.stream();
-    return await t.pipeTo(s), l;
+    return await t.pipeTo(c), s;
   }
 
-  return "body" in e ? (await e.body.pipeTo(s), l) : (await s.write(await e), await s.close(), l);
+  return "body" in e ? (await e.body.pipeTo(c), s) : (await c.write(await e), await c.close(), s);
 },
     m = {
   __proto__: null,
