@@ -10,7 +10,7 @@ const e = (() => {
       t = e ? Promise.resolve().then(function () {
   return l;
 }) : Promise.resolve().then(function () {
-  return h;
+  return v;
 });
 
 async function n(...e) {
@@ -18,7 +18,7 @@ async function n(...e) {
 }
 
 const r = e ? Promise.resolve().then(function () {
-  return f;
+  return d;
 }) : Promise.resolve().then(function () {
   return b;
 });
@@ -149,11 +149,11 @@ var y = async (e = {}) => {
   });
   return p(t, e.recursive, void 0, e.skipDirectory);
 },
-    f = {
+    d = {
   __proto__: null,
   default: y
 },
-    d = async (e, t = [{}], n = null, r = !1, i = null) => {
+    f = async (e, t = [{}], n = null, r = !1, i = null) => {
   Array.isArray(t) || (t = [t]), t[0].fileName = t[0].fileName || "Untitled";
   const a = [];
   let o = null;
@@ -176,7 +176,7 @@ var y = async (e = {}) => {
     types: a,
     excludeAcceptAllOption: t[0].excludeAcceptAllOption || !1
   }));
-  !n && i && i();
+  !n && i && i(s);
   const c = await s.createWritable();
 
   if ("stream" in e) {
@@ -188,28 +188,33 @@ var y = async (e = {}) => {
 },
     m = {
   __proto__: null,
-  default: d
+  default: f
 },
     w = async (e = [{}]) => (Array.isArray(e) || (e = [e]), new Promise((t, n) => {
   const r = document.createElement("input");
   r.type = "file";
   const i = [...e.map(e => e.mimeTypes || []), ...e.map(e => e.extensions || [])].join();
-  r.multiple = e[0].multiple || !1, r.accept = i || "";
+  r.multiple = e[0].multiple || !1, r.accept = i || "", r.style.display = "none", document.body.append(r);
 
   const a = e => {
     "function" == typeof o && o(), t(e);
   },
-        o = e[0].legacySetup && e[0].legacySetup(a, () => o(n), r);
+        o = e[0].legacySetup && e[0].legacySetup(a, () => o(n), r),
+        s = () => {
+    window.removeEventListener("focus", s), r.remove();
+  };
 
-  r.addEventListener("change", () => {
-    a(r.multiple ? Array.from(r.files) : r.files[0]);
+  r.addEventListener("click", () => {
+    window.addEventListener("focus", s);
+  }), r.addEventListener("change", () => {
+    window.removeEventListener("focus", s), r.remove(), a(r.multiple ? Array.from(r.files) : r.files[0]);
   }), r.click();
 })),
-    h = {
+    v = {
   __proto__: null,
   default: w
 },
-    v = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, n) => {
+    h = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, n) => {
   const r = document.createElement("input");
   r.type = "file", r.webkitdirectory = !0;
 
@@ -228,7 +233,7 @@ var y = async (e = {}) => {
 })),
     b = {
   __proto__: null,
-  default: v
+  default: h
 },
     P = async (e, t = {}) => {
   Array.isArray(t) && (t = t[0]);
