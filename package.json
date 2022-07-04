@@ -28,7 +28,7 @@
     "bresenham-zingl": "^0.1.1",
     "browser-fs-access": "^0.30.1",
     "hotkeys-js": "^3.9.4",
-    "lit": "^2.2.6",
+    "lit": "^2.2.7",
     "q-floodfill": "^1.3.1"
   },
   "devDependencies": {
