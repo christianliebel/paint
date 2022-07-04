@@ -43,7 +43,7 @@ var c = async (e = [{}]) => {
   const t = [];
   e.forEach((e, n) => {
     t[n] = {
-      description: e.description || "",
+      description: e.description || "Files",
       accept: {}
     }, e.mimeTypes ? e.mimeTypes.map(r => {
       t[n].accept[r] = e.extensions || [];
@@ -159,7 +159,7 @@ var y = async (e = {}) => {
   let o = null;
   if (e instanceof Blob && e.type ? o = e.type : e.headers && e.headers.get("content-type") && (o = e.headers.get("content-type")), t.forEach((e, t) => {
     a[t] = {
-      description: e.description || "",
+      description: e.description || "Files",
       accept: {}
     }, e.mimeTypes ? (0 === t && o && e.mimeTypes.push(o), e.mimeTypes.map(n => {
       a[t].accept[n] = e.extensions || [];
