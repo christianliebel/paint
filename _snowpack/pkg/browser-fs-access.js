@@ -18,7 +18,7 @@ async function n(...e) {
 }
 
 const r = e ? Promise.resolve().then(function () {
-  return d;
+  return y;
 }) : Promise.resolve().then(function () {
   return b;
 });
@@ -106,7 +106,7 @@ const p = async (e, t, n = e.name, r) => {
       c = !1;
 
   try {
-    for (var l, y = function (e) {
+    for (var l, d = function (e) {
       var t,
           n,
           r,
@@ -119,7 +119,7 @@ const p = async (e, t, n = e.name, r) => {
       }
 
       throw new TypeError("Object is not async iterable");
-    }(e.values()); s = !(l = await y.next()).done; s = !1) {
+    }(e.values()); s = !(l = await d.next()).done; s = !1) {
       const o = l.value,
             s = `${n}/${o.name}`;
       "file" === o.kind ? a.push(o.getFile().then(t => (t.directoryHandle = e, t.handle = o, Object.defineProperty(t, "webkitRelativePath", {
@@ -132,7 +132,7 @@ const p = async (e, t, n = e.name, r) => {
     c = !0, o = e;
   } finally {
     try {
-      s && null != y.return && (await y.return());
+      s && null != d.return && (await d.return());
     } finally {
       if (c) throw o;
     }
@@ -141,17 +141,18 @@ const p = async (e, t, n = e.name, r) => {
   return [...(await Promise.all(i)).flat(), ...(await Promise.all(a))];
 };
 
-var y = async (e = {}) => {
-  e.recursive = e.recursive || !1;
+var d = async (e = {}) => {
+  e.recursive = e.recursive || !1, e.mode = e.mode || "read";
   const t = await window.showDirectoryPicker({
     id: e.id,
-    startIn: e.startIn
+    startIn: e.startIn,
+    mode: e.mode
   });
   return p(t, e.recursive, void 0, e.skipDirectory);
 },
-    d = {
+    y = {
   __proto__: null,
-  default: y
+  default: d
 },
     f = async (e, t = [{}], n = null, r = !1, i = null) => {
   Array.isArray(t) || (t = [t]), t[0].fileName = t[0].fileName || "Untitled";
