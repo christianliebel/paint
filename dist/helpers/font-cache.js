@@ -18,7 +18,7 @@ export function requestLocalFonts() {
     return false;
   }
 
-  if ('fonts' in navigator) {
+  if ('queryLocalFonts' in window) {
     fontsPromise = getFontsViaLocalFontAccess();
     return true;
   }
@@ -27,13 +27,9 @@ export function requestLocalFonts() {
 }
 
 async function getFontsViaLocalFontAccess() {
-  const status = await navigator.permissions.query({
-    name: 'font-access'
-  });
-  if (status.state === 'denied') throw new Error('Cannot enumerate local fonts');
   const fonts = [];
 
-  for await (const font of await navigator.fonts.query()) {
+  for await (const font of await window.queryLocalFonts()) {
     fonts.push(font.family);
   }
 
