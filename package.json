@@ -46,7 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
     "cypress": "^10.4.0",
-    "eslint": "^8.21.0",
+    "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "generate-license-file": "^1.3.0",
     "husky": "^8.0.1",
