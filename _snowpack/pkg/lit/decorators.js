@@ -3,21 +3,21 @@
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const n = n => e => "function" == typeof e ? ((n, e) => (window.customElements.define(n, e), e))(n, e) : ((n, e) => {
+const e = e => n => "function" == typeof n ? ((e, n) => (customElements.define(e, n), n))(e, n) : ((e, n) => {
   const {
     kind: t,
-    elements: i
-  } = e;
+    elements: s
+  } = n;
   return {
     kind: t,
-    elements: i,
+    elements: s,
 
-    finisher(e) {
-      window.customElements.define(n, e);
+    finisher(n) {
+      customElements.define(e, n);
     }
 
   };
-})(n, e);
+})(e, n);
 
 /**
  * @license
@@ -47,7 +47,7 @@ const i = (i, e) => "method" === e.kind && e.descriptor && !("value" in e.descri
 
 };
 
-function e(e) {
+function e$1(e) {
   return (n, t) => void 0 !== t ? ((i, e, n) => {
     e.constructor.createProperty(n, i);
   })(e, n, t) : i(e, n);
@@ -60,7 +60,7 @@ function e(e) {
  */
 
 function t(t) {
-  return e({ ...t,
+  return e$1({ ...t,
     state: !0
   });
 }
@@ -136,7 +136,7 @@ function i$1(i, n) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-var n$1;
-const e$1 = null != (null === (n$1 = window.HTMLSlotElement) || void 0 === n$1 ? void 0 : n$1.prototype.assignedElements) ? (o, n) => o.assignedElements(n) : (o, n) => o.assignedNodes(n).filter(o => o.nodeType === Node.ELEMENT_NODE);
+var n;
+const e$2 = null != (null === (n = window.HTMLSlotElement) || void 0 === n ? void 0 : n.prototype.assignedElements) ? (o, n) => o.assignedElements(n) : (o, n) => o.assignedNodes(n).filter(o => o.nodeType === Node.ELEMENT_NODE);
 
-export { n as customElement, e as property, i$1 as query, t as state };
+export { e as customElement, e$1 as property, i$1 as query, t as state };
