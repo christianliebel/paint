@@ -2,7 +2,7 @@ The following NPM packages may be included in this product:
 
  - @lit/reactive-element@1.4.0
  - lit-element@3.2.0
- - lit@2.3.0
+ - lit@2.3.1
 
 These packages each contain the following license and notice below:
 
