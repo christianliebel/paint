@@ -43,7 +43,7 @@
     "@types/jest": "^27.4.1",
     "@types/snowpack-env": "^2.3.4",
     "@types/wicg-file-system-access": "^2020.9.5",
-    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.0",
     "@typescript-eslint/parser": "^5.36.0",
     "cypress": "^10.6.0",
     "eslint": "^8.22.0",
