@@ -11,9 +11,8 @@ export class CopyAction {
     selection
   }) {
     if (context && selection) {
-      const blob = await getBlobFromSelection(context, selection);
       await navigator.clipboard.write([new ClipboardItem({
-        [blob.type]: blob
+        'image/png': getBlobFromSelection(context, selection)
       })]);
     }
   }
