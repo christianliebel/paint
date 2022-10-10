@@ -10,7 +10,7 @@ const e = (() => {
       t = e ? Promise.resolve().then(function () {
   return l;
 }) : Promise.resolve().then(function () {
-  return v;
+  return h;
 });
 
 async function n(...e) {
@@ -20,13 +20,13 @@ async function n(...e) {
 const r = e ? Promise.resolve().then(function () {
   return y;
 }) : Promise.resolve().then(function () {
-  return b;
+  return P;
 });
 
 const a = e ? Promise.resolve().then(function () {
   return m;
 }) : Promise.resolve().then(function () {
-  return _;
+  return k;
 });
 
 async function o(...e) {
@@ -209,13 +209,13 @@ var d = async (e = {}) => {
     window.addEventListener("focus", s);
   }), r.addEventListener("change", () => {
     window.removeEventListener("focus", s), r.remove(), a(r.multiple ? Array.from(r.files) : r.files[0]);
-  }), r.click();
+  }), "showPicker" in HTMLInputElement.prototype ? r.showPicker() : r.click();
 })),
-    v = {
+    h = {
   __proto__: null,
   default: w
 },
-    h = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, n) => {
+    v = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, n) => {
   const r = document.createElement("input");
   r.type = "file", r.webkitdirectory = !0;
 
@@ -230,13 +230,13 @@ var d = async (e = {}) => {
       name: t,
       kind: "directory"
     })))) : t = t.filter(e => 2 === e.webkitRelativePath.split("/").length), i(t);
-  }), r.click();
+  }), "showPicker" in HTMLInputElement.prototype ? r.showPicker() : r.click();
 })),
-    b = {
+    P = {
   __proto__: null,
-  default: h
+  default: v
 },
-    P = async (e, t = {}) => {
+    b = async (e, t = {}) => {
   Array.isArray(t) && (t = t[0]);
   const n = document.createElement("a");
   let r = e;
@@ -269,9 +269,9 @@ var d = async (e = {}) => {
     setTimeout(() => URL.revokeObjectURL(n.href), 3e4), i();
   }), n.click(), null;
 },
-    _ = {
+    k = {
   __proto__: null,
-  default: P
+  default: b
 };
 
 export { n as fileOpen, o as fileSave };
