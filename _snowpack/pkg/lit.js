@@ -392,20 +392,8 @@ const i$1 = window,
       x = Symbol.for("lit-noChange"),
       b = Symbol.for("lit-nothing"),
       T = new WeakMap(),
-      A = (t, i, s) => {
-  var e, o;
-  const n = null !== (e = null == s ? void 0 : s.renderBefore) && void 0 !== e ? e : i;
-  let l = n._$litPart$;
-
-  if (void 0 === l) {
-    const t = null !== (o = null == s ? void 0 : s.renderBefore) && void 0 !== o ? o : null;
-    n._$litPart$ = l = new S$1(i.insertBefore(r$2(), t), t, void 0, null != s ? s : {});
-  }
-
-  return l._$AI(t), l;
-},
-      E = h$1.createTreeWalker(h$1, 129, null, !1),
-      C = (t, i) => {
+      A = h$1.createTreeWalker(h$1, 129, null, !1),
+      E = (t, i) => {
   const s = t.length - 1,
         n = [];
   let h,
@@ -430,7 +418,7 @@ const i$1 = window,
   return [void 0 !== e$2 ? e$2.createHTML(u) : u, n];
 };
 
-class P {
+class C {
   constructor({
     strings: t,
     _$litType$: i
@@ -441,15 +429,15 @@ class P {
         d = 0;
     const u = t.length - 1,
           c = this.parts,
-          [v, a] = C(t, i);
+          [v, a] = E(t, i);
 
-    if (this.el = P.createElement(v, e), E.currentNode = this.el.content, 2 === i) {
+    if (this.el = C.createElement(v, e), A.currentNode = this.el.content, 2 === i) {
       const t = this.el.content,
             i = t.firstChild;
       i.remove(), t.append(...i.childNodes);
     }
 
-    for (; null !== (l = E.nextNode()) && c.length < u;) {
+    for (; null !== (l = A.nextNode()) && c.length < u;) {
       if (1 === l.nodeType) {
         if (l.hasAttributes()) {
           const t = [];
@@ -465,7 +453,7 @@ class P {
                 index: h,
                 name: i[2],
                 strings: t,
-                ctor: "." === i[1] ? R : "?" === i[1] ? H : "@" === i[1] ? I : M
+                ctor: "." === i[1] ? M : "?" === i[1] ? k : "@" === i[1] ? H : S$1
               });
             } else c.push({
               type: 6,
@@ -483,7 +471,7 @@ class P {
           if (i > 0) {
             l.textContent = s$2 ? s$2.emptyScript : "";
 
-            for (let s = 0; s < i; s++) l.append(t[s], r$2()), E.nextNode(), c.push({
+            for (let s = 0; s < i; s++) l.append(t[s], r$2()), A.nextNode(), c.push({
               type: 2,
               index: ++h
             });
@@ -514,17 +502,17 @@ class P {
 
 }
 
-function V(t, i, s = t, e) {
+function P(t, i, s = t, e) {
   var o, n, l, h;
   if (i === x) return i;
-  let r = void 0 !== e ? null === (o = s._$Cl) || void 0 === o ? void 0 : o[e] : s._$Cu;
+  let r = void 0 !== e ? null === (o = s._$Co) || void 0 === o ? void 0 : o[e] : s._$Cl;
   const u = d$1(i) ? void 0 : i._$litDirective$;
-  return (null == r ? void 0 : r.constructor) !== u && (null === (n = null == r ? void 0 : r._$AO) || void 0 === n || n.call(r, !1), void 0 === u ? r = void 0 : (r = new u(t), r._$AT(t, s, e)), void 0 !== e ? (null !== (l = (h = s)._$Cl) && void 0 !== l ? l : h._$Cl = [])[e] = r : s._$Cu = r), void 0 !== r && (i = V(t, r._$AS(t, i.values), r, e)), i;
+  return (null == r ? void 0 : r.constructor) !== u && (null === (n = null == r ? void 0 : r._$AO) || void 0 === n || n.call(r, !1), void 0 === u ? r = void 0 : (r = new u(t), r._$AT(t, s, e)), void 0 !== e ? (null !== (l = (h = s)._$Co) && void 0 !== l ? l : h._$Co = [])[e] = r : s._$Cl = r), void 0 !== r && (i = P(t, r._$AS(t, i.values), r, e)), i;
 }
 
-class N {
+class V {
   constructor(t, i) {
-    this.v = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
+    this.u = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
   }
 
   get parentNode() {
@@ -535,7 +523,7 @@ class N {
     return this._$AM._$AU;
   }
 
-  p(t) {
+  v(t) {
     var i;
     const {
       el: {
@@ -544,8 +532,8 @@ class N {
       parts: e
     } = this._$AD,
           o = (null !== (i = null == t ? void 0 : t.creationScope) && void 0 !== i ? i : h$1).importNode(s, !0);
-    E.currentNode = o;
-    let n = E.nextNode(),
+    A.currentNode = o;
+    let n = A.nextNode(),
         l = 0,
         r = 0,
         d = e[0];
@@ -553,32 +541,32 @@ class N {
     for (; void 0 !== d;) {
       if (l === d.index) {
         let i;
-        2 === d.type ? i = new S$1(n, n.nextSibling, this, t) : 1 === d.type ? i = new d.ctor(n, d.name, d.strings, this, t) : 6 === d.type && (i = new L(n, this, t)), this.v.push(i), d = e[++r];
+        2 === d.type ? i = new N(n, n.nextSibling, this, t) : 1 === d.type ? i = new d.ctor(n, d.name, d.strings, this, t) : 6 === d.type && (i = new I(n, this, t)), this.u.push(i), d = e[++r];
       }
 
-      l !== (null == d ? void 0 : d.index) && (n = E.nextNode(), l++);
+      l !== (null == d ? void 0 : d.index) && (n = A.nextNode(), l++);
     }
 
     return o;
   }
 
-  m(t) {
+  p(t) {
     let i = 0;
 
-    for (const s of this.v) void 0 !== s && (void 0 !== s.strings ? (s._$AI(t, s, i), i += s.strings.length - 2) : s._$AI(t[i])), i++;
+    for (const s of this.u) void 0 !== s && (void 0 !== s.strings ? (s._$AI(t, s, i), i += s.strings.length - 2) : s._$AI(t[i])), i++;
   }
 
 }
 
-class S$1 {
+class N {
   constructor(t, i, s, e) {
     var o;
-    this.type = 2, this._$AH = b, this._$AN = void 0, this._$AA = t, this._$AB = i, this._$AM = s, this.options = e, this._$C_ = null === (o = null == e ? void 0 : e.isConnected) || void 0 === o || o;
+    this.type = 2, this._$AH = b, this._$AN = void 0, this._$AA = t, this._$AB = i, this._$AM = s, this.options = e, this._$Cm = null === (o = null == e ? void 0 : e.isConnected) || void 0 === o || o;
   }
 
   get _$AU() {
     var t, i;
-    return null !== (i = null === (t = this._$AM) || void 0 === t ? void 0 : t._$AU) && void 0 !== i ? i : this._$C_;
+    return null !== (i = null === (t = this._$AM) || void 0 === t ? void 0 : t._$AU) && void 0 !== i ? i : this._$Cm;
   }
 
   get parentNode() {
@@ -596,47 +584,47 @@ class S$1 {
   }
 
   _$AI(t, i = this) {
-    t = V(this, t, i), d$1(t) ? t === b || null == t || "" === t ? (this._$AH !== b && this._$AR(), this._$AH = b) : t !== this._$AH && t !== x && this.$(t) : void 0 !== t._$litType$ ? this.T(t) : void 0 !== t.nodeType ? this.k(t) : c$1(t) ? this.O(t) : this.$(t);
+    t = P(this, t, i), d$1(t) ? t === b || null == t || "" === t ? (this._$AH !== b && this._$AR(), this._$AH = b) : t !== this._$AH && t !== x && this.g(t) : void 0 !== t._$litType$ ? this.$(t) : void 0 !== t.nodeType ? this.T(t) : c$1(t) ? this.k(t) : this.g(t);
   }
 
-  S(t, i = this._$AB) {
+  O(t, i = this._$AB) {
     return this._$AA.parentNode.insertBefore(t, i);
   }
 
-  k(t) {
-    this._$AH !== t && (this._$AR(), this._$AH = this.S(t));
+  T(t) {
+    this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
+  }
+
+  g(t) {
+    this._$AH !== b && d$1(this._$AH) ? this._$AA.nextSibling.data = t : this.T(h$1.createTextNode(t)), this._$AH = t;
   }
 
   $(t) {
-    this._$AH !== b && d$1(this._$AH) ? this._$AA.nextSibling.data = t : this.k(h$1.createTextNode(t)), this._$AH = t;
-  }
-
-  T(t) {
     var i;
     const {
       values: s,
       _$litType$: e
     } = t,
-          o = "number" == typeof e ? this._$AC(t) : (void 0 === e.el && (e.el = P.createElement(e.h, this.options)), e);
-    if ((null === (i = this._$AH) || void 0 === i ? void 0 : i._$AD) === o) this._$AH.m(s);else {
-      const t = new N(o, this),
-            i = t.p(this.options);
-      t.m(s), this.k(i), this._$AH = t;
+          o = "number" == typeof e ? this._$AC(t) : (void 0 === e.el && (e.el = C.createElement(e.h, this.options)), e);
+    if ((null === (i = this._$AH) || void 0 === i ? void 0 : i._$AD) === o) this._$AH.p(s);else {
+      const t = new V(o, this),
+            i = t.v(this.options);
+      t.p(s), this.T(i), this._$AH = t;
     }
   }
 
   _$AC(t) {
     let i = T.get(t.strings);
-    return void 0 === i && T.set(t.strings, i = new P(t)), i;
+    return void 0 === i && T.set(t.strings, i = new C(t)), i;
   }
 
-  O(t) {
+  k(t) {
     u(this._$AH) || (this._$AH = [], this._$AR());
     const i = this._$AH;
     let s,
         e = 0;
 
-    for (const o of t) e === i.length ? i.push(s = new S$1(this.S(r$2()), this.S(r$2()), this, this.options)) : s = i[e], s._$AI(o), e++;
+    for (const o of t) e === i.length ? i.push(s = new N(this.O(r$2()), this.O(r$2()), this, this.options)) : s = i[e], s._$AI(o), e++;
 
     e < i.length && (this._$AR(s && s._$AB.nextSibling, e), i.length = e);
   }
@@ -652,12 +640,12 @@ class S$1 {
 
   setConnected(t) {
     var i;
-    void 0 === this._$AM && (this._$C_ = t, null === (i = this._$AP) || void 0 === i || i.call(this, t));
+    void 0 === this._$AM && (this._$Cm = t, null === (i = this._$AP) || void 0 === i || i.call(this, t));
   }
 
 }
 
-class M {
+class S$1 {
   constructor(t, i, s, e, o) {
     this.type = 1, this._$AH = b, this._$AN = void 0, this.element = t, this.name = i, this._$AM = e, this.options = o, s.length > 2 || "" !== s[0] || "" !== s[1] ? (this._$AH = Array(s.length - 1).fill(new String()), this.strings = s) : this._$AH = b;
   }
@@ -673,53 +661,53 @@ class M {
   _$AI(t, i = this, s, e) {
     const o = this.strings;
     let n = !1;
-    if (void 0 === o) t = V(this, t, i, 0), n = !d$1(t) || t !== this._$AH && t !== x, n && (this._$AH = t);else {
+    if (void 0 === o) t = P(this, t, i, 0), n = !d$1(t) || t !== this._$AH && t !== x, n && (this._$AH = t);else {
       const e = t;
       let l, h;
 
-      for (t = o[0], l = 0; l < o.length - 1; l++) h = V(this, e[s + l], i, l), h === x && (h = this._$AH[l]), n || (n = !d$1(h) || h !== this._$AH[l]), h === b ? t = b : t !== b && (t += (null != h ? h : "") + o[l + 1]), this._$AH[l] = h;
+      for (t = o[0], l = 0; l < o.length - 1; l++) h = P(this, e[s + l], i, l), h === x && (h = this._$AH[l]), n || (n = !d$1(h) || h !== this._$AH[l]), h === b ? t = b : t !== b && (t += (null != h ? h : "") + o[l + 1]), this._$AH[l] = h;
     }
-    n && !e && this.P(t);
+    n && !e && this.j(t);
   }
 
-  P(t) {
+  j(t) {
     t === b ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, null != t ? t : "");
   }
 
 }
 
-class R extends M {
+class M extends S$1 {
   constructor() {
     super(...arguments), this.type = 3;
   }
 
-  P(t) {
+  j(t) {
     this.element[this.name] = t === b ? void 0 : t;
   }
 
 }
 
-const k = s$2 ? s$2.emptyScript : "";
+const R = s$2 ? s$2.emptyScript : "";
 
-class H extends M {
+class k extends S$1 {
   constructor() {
     super(...arguments), this.type = 4;
   }
 
-  P(t) {
-    t && t !== b ? this.element.setAttribute(this.name, k) : this.element.removeAttribute(this.name);
+  j(t) {
+    t && t !== b ? this.element.setAttribute(this.name, R) : this.element.removeAttribute(this.name);
   }
 
 }
 
-class I extends M {
+class H extends S$1 {
   constructor(t, i, s, e, o) {
     super(t, i, s, e, o), this.type = 5;
   }
 
   _$AI(t, i = this) {
     var s;
-    if ((t = null !== (s = V(this, t, i, 0)) && void 0 !== s ? s : b) === x) return;
+    if ((t = null !== (s = P(this, t, i, 0)) && void 0 !== s ? s : b) === x) return;
     const e = this._$AH,
           o = t === b && e !== b || t.capture !== e.capture || t.once !== e.once || t.passive !== e.passive,
           n = t !== b && (e === b || o);
@@ -733,7 +721,7 @@ class I extends M {
 
 }
 
-class L {
+class I {
   constructor(t, i, s) {
     this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = s;
   }
@@ -743,13 +731,26 @@ class L {
   }
 
   _$AI(t) {
-    V(this, t);
+    P(this, t);
   }
 
 }
 
-const Z = i$1.litHtmlPolyfillSupport;
-null == Z || Z(P, S$1), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.3.0");
+const z = i$1.litHtmlPolyfillSupport;
+null == z || z(C, N), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.4.0");
+
+const Z = (t, i, s) => {
+  var e, o;
+  const n = null !== (e = null == s ? void 0 : s.renderBefore) && void 0 !== e ? e : i;
+  let l = n._$litPart$;
+
+  if (void 0 === l) {
+    const t = null !== (o = null == s ? void 0 : s.renderBefore) && void 0 !== o ? o : null;
+    n._$litPart$ = l = new N(i.insertBefore(r$2(), t), t, void 0, null != s ? s : {});
+  }
+
+  return l._$AI(t), l;
+};
 
 /**
  * @license
@@ -774,7 +775,7 @@ class s$3 extends d {
 
   update(t) {
     const i = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Dt = A(i, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Dt = Z(i, this.renderRoot, this.renderOptions);
   }
 
   connectedCallback() {
