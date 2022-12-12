@@ -125,7 +125,7 @@ class d extends HTMLElement {
 
   static addInitializer(t) {
     var i;
-    null !== (i = this.h) && void 0 !== i || (this.h = []), this.h.push(t);
+    this.finalize(), (null !== (i = this.h) && void 0 !== i ? i : this.h = []).push(t);
   }
 
   static get observedAttributes() {
@@ -171,7 +171,7 @@ class d extends HTMLElement {
     this.finalized = !0;
     const t = Object.getPrototypeOf(this);
 
-    if (t.finalize(), this.elementProperties = new Map(t.elementProperties), this._$Ev = new Map(), this.hasOwnProperty("properties")) {
+    if (t.finalize(), void 0 !== t.h && (this.h = [...t.h]), this.elementProperties = new Map(t.elementProperties), this._$Ev = new Map(), this.hasOwnProperty("properties")) {
       const t = this.properties,
             i = [...Object.getOwnPropertyNames(t), ...Object.getOwnPropertySymbols(t)];
 
@@ -354,7 +354,7 @@ d.finalized = !0, d.elementProperties = new Map(), d.elementStyles = [], d.shado
   mode: "open"
 }, null == o$1 || o$1({
   ReactiveElement: d
-}), (null !== (s$1 = e$1.reactiveElementVersions) && void 0 !== s$1 ? s$1 : e$1.reactiveElementVersions = []).push("1.4.0");
+}), (null !== (s$1 = e$1.reactiveElementVersions) && void 0 !== s$1 ? s$1 : e$1.reactiveElementVersions = []).push("1.5.0");
 
 /**
  * @license
@@ -737,7 +737,7 @@ class I {
 }
 
 const z = i$1.litHtmlPolyfillSupport;
-null == z || z(C, N), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.4.0");
+null == z || z(C, N), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.5.0");
 
 const Z = (t, i, s) => {
   var e, o;
