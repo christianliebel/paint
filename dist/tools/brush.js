@@ -1,5 +1,4 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { clearContext } from '../helpers/clear-context.js';
 import { drawCircle } from '../helpers/draw-circle.js';
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
@@ -10,7 +9,6 @@ export class BrushTool {
       y: 0
     });
   }
-
   onPointerHover(x, y, {
     canvas,
     brush,
@@ -22,7 +20,6 @@ export class BrushTool {
       this.drawBrush(x, y, brush, previewContext);
     }
   }
-
   onPointerDown(x, y, {
     brush,
     context
@@ -36,13 +33,13 @@ export class BrushTool {
       };
     }
   }
-
   onPointerMove(x, y, {
     brush,
     context
   }) {
     if (context) {
-      let previousBresenham = { ...this.previous
+      let previousBresenham = {
+        ...this.previous
       };
       line(this.previous.x, this.previous.y, x, y, (x, y) => {
         // Position difference is required for forward lines to ensure
@@ -63,7 +60,6 @@ export class BrushTool {
       };
     }
   }
-
   drawBrush(x, y, {
     type,
     size
@@ -71,43 +67,33 @@ export class BrushTool {
     if (type === 'circle') {
       return drawCircle(x, y, size, context);
     }
-
     const diff = Math.floor(size / 2);
-
     if (type === 'square') {
       return this.drawSquare(x, y, diff, size, context);
     }
-
     const correction = size % 2 === 0 ? -1 : 0;
     const yCorr = posDiff ? y - Math.min(0, posDiff.y) : 0;
-
     if (type === 'forward-diagonal') {
       if (posDiff && posDiff.y !== 0) {
         const xCorr = posDiff.y === -1 && posDiff.x === -1 ? x : x - 1;
         this.drawForwardLine(xCorr, yCorr, diff, correction, size, context);
       }
-
       this.drawForwardLine(x, y, diff, correction, size, context);
       return;
     }
-
     if (type === 'backward-diagonal') {
       if (posDiff && posDiff.y !== 0) {
         const xCorr = posDiff.y === -1 && posDiff.x === 1 ? x : x + 1;
         this.drawBackwardLine(xCorr, yCorr, diff, correction, size, context);
       }
-
       this.drawBackwardLine(x, y, diff, correction, size, context);
       return;
     }
-
     throw new Error('Unknown brush type.');
   }
-
   drawSquare(x, y, diff, size, context) {
     context.fillRect(x - diff, y - diff, size, size);
   }
-
   drawForwardLine(x, y, diff, correction, size, context) {
     const start = {
       x: x - diff,
@@ -121,7 +107,6 @@ export class BrushTool {
       context.fillRect(x, y, 1, 1);
     });
   }
-
   drawBackwardLine(x, y, diff, correction, size, context) {
     const start = {
       x: x - diff,
@@ -135,5 +120,4 @@ export class BrushTool {
       context.fillRect(x, y, 1, 1);
     });
   }
-
 }

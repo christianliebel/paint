@@ -6,7 +6,6 @@ export class CopyToAction {
   }) {
     return !!selection;
   }
-
   async execute({
     context,
     selection
@@ -16,5 +15,4 @@ export class CopyToAction {
       await fileSave(blob);
     }
   }
-
 }

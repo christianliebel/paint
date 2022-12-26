@@ -5,7 +5,6 @@ export class CopyAction {
   }) {
     return 'write' in navigator.clipboard && !!selection;
   }
-
   async execute({
     context,
     selection
@@ -16,5 +15,4 @@ export class CopyAction {
       })]);
     }
   }
-
 }

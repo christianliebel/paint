@@ -5,10 +5,8 @@ export class DrawOpaque {
   }) {
     return drawOpaque;
   }
-
   execute(drawingContext) {
     drawingContext.drawOpaque = !drawingContext.drawOpaque;
     updateContext(drawingContext.element);
   }
-
 }

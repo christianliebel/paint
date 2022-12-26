@@ -10,5 +10,4 @@ export class SaveAction {
       await new SaveAsAction().execute(drawingContext);
     }
   }
-
 }

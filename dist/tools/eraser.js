@@ -1,5 +1,4 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
 import { clearContext } from '../helpers/clear-context.js';
 export class EraserTool {
@@ -9,7 +8,6 @@ export class EraserTool {
       y: 0
     });
   }
-
   onPointerHover(x, y, {
     canvas,
     previewContext,
@@ -18,7 +16,6 @@ export class EraserTool {
   }) {
     if (canvas && previewContext) {
       clearContext(previewContext);
-
       if (x > 0 && x < canvas.width && y > 0 && y < canvas.height) {
         previewContext.fillStyle = 'black';
         previewContext.fillRect(...this.getFillRectArgs(x, y, eraserSize));
@@ -27,7 +24,6 @@ export class EraserTool {
       }
     }
   }
-
   onPointerDown(x, y, {
     context,
     eraserSize,
@@ -44,7 +40,6 @@ export class EraserTool {
       context.fillRect(...this.getFillRectArgs(x, y, eraserSize));
     }
   }
-
   onPointerMove(x, y, {
     eraserSize,
     context
@@ -58,9 +53,7 @@ export class EraserTool {
       y
     };
   }
-
   getFillRectArgs(x, y, eraserSize) {
     return [x - eraserSize / 2, y - eraserSize / 2, eraserSize, eraserSize];
   }
-
 }

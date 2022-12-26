@@ -4,5 +4,4 @@ export class NormalSizeAction {
     drawingContext.magnifierSize = 1;
     updateContext(drawingContext.element);
   }
-
 }

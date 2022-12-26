@@ -7,10 +7,8 @@ export class ColorBoxAction {
   }) {
     return colorBox;
   }
-
   execute(drawingContext) {
     drawingContext.view.colorBox = !drawingContext.view.colorBox;
     updateContext(drawingContext.element);
   }
-
 }

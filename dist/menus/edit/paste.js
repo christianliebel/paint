@@ -4,14 +4,12 @@ export class PasteAction {
     // TODO: Is there something we can paste?
     return !!navigator.clipboard?.read;
   }
-
   async execute({
     context
   }) {
     if (context) {
       // TODO: Selection
       const items = await navigator.clipboard.read();
-
       for (const item of items) {
         try {
           for (const type of item.types) {
@@ -27,5 +25,4 @@ export class PasteAction {
       }
     }
   }
-
 }

@@ -60,8 +60,8 @@ export const viewMenu = {
     }, {
       caption: 'Show Thumbnail',
       mnemonic: 'h',
-      helpText: 'Shows or hides the thumbnail view of the picture.' // TODO: checked by default
-
+      helpText: 'Shows or hides the thumbnail view of the picture.'
+      // TODO: checked by default
     }]
   }, {
     caption: 'View Bitmap',

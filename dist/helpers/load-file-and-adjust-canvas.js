@@ -5,7 +5,6 @@ export async function loadFileAndAdjustCanvas(file, {
   context
 }) {
   const image = await getImageFromBlob(file);
-
   if (canvas && previewCanvas && context) {
     canvas.width = previewCanvas.width = image.width;
     canvas.height = previewCanvas.height = image.height;

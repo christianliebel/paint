@@ -6,5 +6,4 @@ export class ViewBitmapAction {
       await canvas.requestFullscreen();
     }
   }
-
 }

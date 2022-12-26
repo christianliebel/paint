@@ -5,11 +5,9 @@ export class CustomAction {
     const result = await showDialog('paint-dialog-custom-zoom', {
       currentMagnifierSize: drawingContext.magnifierSize
     });
-
     if (result?.magnifierSize) {
       drawingContext.magnifierSize = result.magnifierSize;
       updateContext(drawingContext.element);
     }
   }
-
 }

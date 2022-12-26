@@ -10,5 +10,4 @@ export class OpenAction {
     updateDocumentContext(file.handle, file.name, drawingContext);
     await loadFileAndAdjustCanvas(file, drawingContext);
   }
-
 }

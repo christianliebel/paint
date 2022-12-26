@@ -4,5 +4,4 @@ export class LargeSizeAction {
     drawingContext.magnifierSize = 4;
     updateContext(drawingContext.element);
   }
-
 }

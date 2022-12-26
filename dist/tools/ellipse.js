@@ -1,5 +1,4 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { ellipseRect } from '../../_snowpack/pkg/bresenham-zingl.js';
 import { clearContext } from '../helpers/clear-context.js';
 export class EllipseTool {
@@ -9,14 +8,12 @@ export class EllipseTool {
       y: 0
     });
   }
-
   onPointerDown(x, y) {
     this.startPosition = {
       x,
       y
     };
   }
-
   onPointerMove(x, y, {
     fillStyle,
     canvas,
@@ -26,7 +23,6 @@ export class EllipseTool {
       this.drawEllipse(x, y, fillStyle, color, canvas, previewContext, previewContext);
     }
   }
-
   onPointerUp(x, y, {
     fillStyle,
     canvas,
@@ -37,7 +33,6 @@ export class EllipseTool {
       this.drawEllipse(x, y, fillStyle, color, canvas, context, previewContext);
     }
   }
-
   drawEllipse(x, y, fillStyle, color, canvas, targetContext, previewContext) {
     clearContext(previewContext);
     const ellipsePixels = [];
@@ -47,7 +42,6 @@ export class EllipseTool {
         y
       });
     });
-
     if (fillStyle.fill) {
       targetContext.fillStyle = color.fill.value;
       ellipsePixels.sort((a, b) => a.y - b.y || a.x - b.x);
@@ -56,31 +50,25 @@ export class EllipseTool {
         this.drawPixel(targetContext, pixel);
       });
     }
-
     if (fillStyle.stroke) {
       targetContext.fillStyle = color.stroke.value;
     }
-
     ellipsePixels.forEach(pixel => {
       this.drawPixel(targetContext, pixel);
     });
   }
-
   drawPixel(context, {
     x,
     y
   }) {
     context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
   }
-
   *getFillPixels(pixels) {
     let previousPixel;
-
     for (const pixel of pixels) {
       if (previousPixel?.y === pixel.y && pixel.x - previousPixel.x > 1) {
         const minX = Math.min(previousPixel.x, pixel.x);
         const maxX = Math.max(previousPixel.x, pixel.x);
-
         for (let i = minX; i <= maxX; i++) {
           yield {
             x: i,
@@ -88,9 +76,7 @@ export class EllipseTool {
           };
         }
       }
-
       previousPixel = pixel;
     }
   }
-
 }

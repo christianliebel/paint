@@ -11,5 +11,4 @@ export class PasteFromAction {
       context.drawImage(image, 0, 0);
     }
   }
-
 }

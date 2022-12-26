@@ -8,13 +8,14 @@ export class NewAction {
       await handleUnsavedChanges(drawingContext);
       updateDocumentContext(undefined, 'untitled', drawingContext);
       drawingContext.palette = [...DEFAULT_PALETTE];
-      drawingContext.colors = { ...DEFAULT_COLORS
+      drawingContext.colors = {
+        ...DEFAULT_COLORS
       };
       drawingContext.history?.clear();
       new ClearImageAction().execute(drawingContext);
       drawingContext.document.dirty = false;
-    } catch {// Silently catch any errors
+    } catch {
+      // Silently catch any errors
     }
   }
-
 }

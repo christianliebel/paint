@@ -4,7 +4,6 @@ export class ClearSelectionAction {
   }) {
     return !!selection;
   }
-
   execute({
     selection,
     context,
@@ -21,5 +20,4 @@ export class ClearSelectionAction {
       context.fillRect(x, y, width, height);
     }
   }
-
 }

@@ -4,15 +4,12 @@ export class TextToolbarAction {
   isChecked(drawingContext) {
     return drawingContext.text.showToolbar ?? false;
   }
-
   canExecute(drawingContext) {
     return drawingContext.text.active;
   }
-
   execute(drawingContext) {
     drawingContext.text.showToolbar = !drawingContext.text.showToolbar;
     evaluateTextToolbarVisibility(drawingContext);
     updateContext(drawingContext.element);
   }
-
 }

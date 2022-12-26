@@ -2,7 +2,8 @@ import { PENCIL } from '../tools/all.js';
 import { DEFAULT_COLORS, DEFAULT_PALETTE } from './colors.js';
 export const DRAWING_CONTEXT = {
   lineWidth: 1,
-  colors: { ...DEFAULT_COLORS
+  colors: {
+    ...DEFAULT_COLORS
   },
   palette: [...DEFAULT_PALETTE],
   previewColor: null,

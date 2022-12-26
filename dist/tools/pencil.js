@@ -1,5 +1,4 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { line } from '../../_snowpack/pkg/bresenham-zingl.js';
 export class PencilTool {
   constructor() {
@@ -8,7 +7,6 @@ export class PencilTool {
       y: 0
     });
   }
-
   onPointerDown(x, y, {
     context
   }, color) {
@@ -21,7 +19,6 @@ export class PencilTool {
       };
     }
   }
-
   onPointerMove(x, y, {
     context
   }) {
@@ -33,5 +30,4 @@ export class PencilTool {
       y
     };
   }
-
 }

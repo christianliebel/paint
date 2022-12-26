@@ -1,5 +1,4 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { clearContext } from '../helpers/clear-context.js';
 import { dispatchAreaEvent } from '../helpers/dispatch-area-event.js';
 import { drawAreaRectangle } from '../helpers/draw-area-rectangle.js';
@@ -11,14 +10,12 @@ export class SelectTool {
       y: 0
     });
   }
-
   onPointerDown(x, y) {
     this.startPosition = {
       x,
       y
     };
   }
-
   onPointerMove(x, y, {
     element,
     previewContext
@@ -32,7 +29,6 @@ export class SelectTool {
       y
     }, element);
   }
-
   onPointerUp(x, y, drawingContext) {
     const {
       element,
@@ -53,5 +49,4 @@ export class SelectTool {
     };
     updateContext(element);
   }
-
 }

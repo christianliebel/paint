@@ -7,11 +7,9 @@ export class AttributesAction {
       previewCanvas,
       context
     } = drawingContext;
-
     if (!previewCanvas || !context) {
       return;
     }
-
     const {
       canvas
     } = context;
@@ -21,19 +19,15 @@ export class AttributesAction {
       unit: 'pels',
       color: 'colors'
     });
-
     if (!result) {
       return;
     }
-
     const newWidth = parseInt(result.width, 10);
     const newHeight = parseInt(result.height, 10);
-
     if (!this.isValidValue(newWidth) || !this.isValidValue(newHeight)) {
       await showMessageBox('Bitmaps must be greater than one pixel on a side.', 'warning', 'Paint');
       return;
     }
-
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     canvas.width = previewCanvas.width = newWidth;
     canvas.height = previewCanvas.height = newHeight;
@@ -41,9 +35,7 @@ export class AttributesAction {
     context.putImageData(imageData, 0, 0);
     drawingContext.history?.commit();
   }
-
   isValidValue(value) {
     return isFinite(value) && value > 0;
   }
-
 }

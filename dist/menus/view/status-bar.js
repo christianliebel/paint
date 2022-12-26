@@ -7,10 +7,8 @@ export class StatusBarAction {
   }) {
     return statusBar;
   }
-
   execute(drawingContext) {
     drawingContext.view.statusBar = !drawingContext.view.statusBar;
     updateContext(drawingContext.element);
   }
-
 }

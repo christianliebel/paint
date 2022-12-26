@@ -15,5 +15,4 @@ export class SelectAllAction {
       updateContext(drawingContext.element);
     }
   }
-
 }

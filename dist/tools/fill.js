@@ -10,5 +10,4 @@ export class FillTool {
       context.putImageData(floodFill.imageData, 0, 0);
     }
   }
-
 }

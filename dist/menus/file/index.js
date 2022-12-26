@@ -64,13 +64,11 @@ export const fileMenu = {
     mnemonic: 'W',
     helpText: 'Tiles this bitmap as the desktop wallpaper.',
     instance: null // not exposed to web
-
   }, {
     caption: 'Set As Wallpaper (Centered)',
     mnemonic: 'l',
     helpText: 'Centers this bitmap as the desktop wallpaper.',
     instance: null // not exposed to web
-
   }, {
     separator: true
   }, {

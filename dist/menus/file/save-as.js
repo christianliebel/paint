@@ -6,17 +6,14 @@ export class SaveAsAction {
     if (!drawingContext.canvas) {
       return;
     }
-
     const blob = await toBlob(drawingContext.canvas);
     const file = await fileSave(blob, {
       fileName: drawingContext.document.title,
       extensions: ['.png'],
       description: 'PNG files'
     });
-
     if (file) {
       updateDocumentContext(file, file.name, drawingContext);
     }
   }
-
 }

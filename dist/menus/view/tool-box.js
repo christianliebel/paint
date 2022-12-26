@@ -7,10 +7,8 @@ export class ToolBoxAction {
   }) {
     return toolBox;
   }
-
   execute(drawingContext) {
     drawingContext.view.toolBox = !drawingContext.view.toolBox;
     updateContext(drawingContext.element);
   }
-
 }

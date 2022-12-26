@@ -3,5 +3,4 @@ export class AboutAction {
   execute() {
     showDialog('paint-dialog-about');
   }
-
 }

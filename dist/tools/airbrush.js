@@ -1,18 +1,14 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 import { fillEllipse } from '../helpers/fill-ellipse.js';
 export class Airbrush {
   constructor() {
     _defineProperty(this, "intervalHandle", void 0);
-
     _defineProperty(this, "currentPosition", void 0);
   }
-
   onPointerDown(x, y, drawingContext, color) {
     if (drawingContext.context) {
       drawingContext.context.fillStyle = color.stroke.value;
     }
-
     this.currentPosition = {
       x,
       y
@@ -20,7 +16,6 @@ export class Airbrush {
     this.spray(drawingContext);
     this.intervalHandle = setInterval(() => this.spray(drawingContext), 30);
   }
-
   spray({
     airbrushSize,
     context
@@ -33,7 +28,6 @@ export class Airbrush {
       } = this.currentPosition;
       const points = [];
       fillEllipse(x, y, radius, radius, point => points.push(point));
-
       for (let i = 0; i < 10; i++) {
         const index = Math.round(Math.random() * (points.length - 1));
         const {
@@ -44,7 +38,6 @@ export class Airbrush {
       }
     }
   }
-
   onPointerMove(x, y, drawingContext) {
     if (typeof this.intervalHandle !== 'undefined') {
       this.spray(drawingContext);
@@ -54,12 +47,10 @@ export class Airbrush {
       };
     }
   }
-
   onPointerUp() {
     if (typeof this.intervalHandle !== 'undefined') {
       clearInterval(this.intervalHandle);
       this.intervalHandle = this.currentPosition = undefined;
     }
   }
-
 }

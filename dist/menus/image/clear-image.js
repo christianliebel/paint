@@ -5,9 +5,7 @@ export class ClearImageAction {
   }) {
     return !selection;
   }
-
   execute(drawingContext) {
     clearCanvas(drawingContext);
   }
-
 }
