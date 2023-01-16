@@ -282,7 +282,7 @@ d.finalized = !0, d.elementProperties = new Map(), d.elementStyles = [], d.shado
   mode: "open"
 }, null == o$1 || o$1({
   ReactiveElement: d
-}), (null !== (s$1 = e$1.reactiveElementVersions) && void 0 !== s$1 ? s$1 : e$1.reactiveElementVersions = []).push("1.5.0");
+}), (null !== (s$1 = e$1.reactiveElementVersions) && void 0 !== s$1 ? s$1 : e$1.reactiveElementVersions = []).push("1.6.1");
 
 /**
  * @license
@@ -594,7 +594,7 @@ class I {
   }
 }
 const z = i$1.litHtmlPolyfillSupport;
-null == z || z(C, N), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.5.0");
+null == z || z(C, N), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.6.1");
 const Z = (t, i, s) => {
   var e, o;
   const n = null !== (e = null == s ? void 0 : s.renderBefore) && void 0 !== e ? e : i;
