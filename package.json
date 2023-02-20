@@ -45,7 +45,7 @@
     "@types/wicg-file-system-access": "^2020.9.5",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.52.0",
-    "cypress": "^12.5.1",
+    "cypress": "^12.6.0",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "generate-license-file": "^2.0.0",
