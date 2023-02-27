@@ -10,7 +10,7 @@ const e = (() => {
   t = e ? Promise.resolve().then(function () {
     return l;
   }) : Promise.resolve().then(function () {
-    return h;
+    return v;
   });
 async function n(...e) {
   return (await t).default(...e);
@@ -134,7 +134,7 @@ var d = async (e = {}) => {
       startIn: e.startIn,
       mode: e.mode
     });
-    return p(t, e.recursive, void 0, e.skipDirectory);
+    return (await (await t.values()).next()).done ? [t] : p(t, e.recursive, void 0, e.skipDirectory);
   },
   y = {
     __proto__: null,
@@ -193,11 +193,11 @@ var d = async (e = {}) => {
       window.removeEventListener("focus", s), r.remove(), a(r.multiple ? Array.from(r.files) : r.files[0]);
     }), "showPicker" in HTMLInputElement.prototype ? r.showPicker() : r.click();
   })),
-  h = {
+  v = {
     __proto__: null,
     default: w
   },
-  v = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, n) => {
+  h = async (e = [{}]) => (Array.isArray(e) || (e = [e]), e[0].recursive = e[0].recursive || !1, new Promise((t, n) => {
     const r = document.createElement("input");
     r.type = "file", r.webkitdirectory = !0;
     const i = e => {
@@ -214,7 +214,7 @@ var d = async (e = {}) => {
   })),
   P = {
     __proto__: null,
-    default: v
+    default: h
   },
   b = async (e, t = {}) => {
     Array.isArray(t) && (t = t[0]);
