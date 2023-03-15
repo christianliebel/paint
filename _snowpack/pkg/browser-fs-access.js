@@ -4,8 +4,8 @@ const e = (() => {
       top;
     } catch (e) {
       return !1;
-    } else if ("showOpenFilePicker" in self) return "showOpenFilePicker";
-    return !1;
+    }
+    return "showOpenFilePicker" in self;
   })(),
   t = e ? Promise.resolve().then(function () {
     return l;
@@ -18,7 +18,7 @@ async function n(...e) {
 const r = e ? Promise.resolve().then(function () {
   return y;
 }) : Promise.resolve().then(function () {
-  return P;
+  return b;
 });
 const a = e ? Promise.resolve().then(function () {
   return m;
@@ -212,11 +212,11 @@ var d = async (e = {}) => {
       })))) : t = t.filter(e => 2 === e.webkitRelativePath.split("/").length), i(t);
     }), "showPicker" in HTMLInputElement.prototype ? r.showPicker() : r.click();
   })),
-  P = {
+  b = {
     __proto__: null,
     default: h
   },
-  b = async (e, t = {}) => {
+  P = async (e, t = {}) => {
     Array.isArray(t) && (t = t[0]);
     const n = document.createElement("a");
     let r = e;
@@ -249,7 +249,7 @@ var d = async (e = {}) => {
   },
   k = {
     __proto__: null,
-    default: b
+    default: P
   };
 
 export { n as fileOpen, o as fileSave };
