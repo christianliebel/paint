@@ -3,7 +3,7 @@ https://www.npmjs.com/package/generate-license-file
 
 The following npm package may be included in this product:
 
- - @lit-labs/ssr-dom-shim@1.0.0
+ - @lit-labs/ssr-dom-shim@1.1.0
 
 This package contains the following license and notice below:
 
@@ -71,8 +71,8 @@ Please see [CONTRIBUTING.md](../../../CONTRIBUTING.md).
 The following npm packages may be included in this product:
 
  - @lit/reactive-element@1.6.1
- - lit-element@3.2.0
- - lit@2.6.1
+ - lit-element@3.3.0
+ - lit@2.7.0
 
 These packages each contain the following license and notice below:
 
@@ -744,7 +744,7 @@ SOFTWARE.
 
 The following npm package may be included in this product:
 
- - lit-html@2.6.1
+ - lit-html@2.7.0
 
 This package contains the following license and notice below:
 
