@@ -21,7 +21,6 @@ import { renderMnemonic } from '../../helpers/render-mnemonic.js';
 // TODO: Color and unit selection
 // TODO: Form fields and radio buttons in Win95 UI
 // TODO: Pixel-perfectness
-
 export let Attributes = _decorate([customElement('paint-dialog-attributes')], function (_initialize, _LitElement) {
   class Attributes extends _LitElement {
     constructor(...args) {

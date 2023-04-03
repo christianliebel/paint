@@ -1,6 +1,5 @@
 // Filled Ellipse Algorithm 1 from:
 // https://enchantia.com/software/graphapp/doc/tech/ellipses.html
-
 export function fillEllipse(xc, yc, a, b, setPixel) {
   let x = 0;
   let y = b;
