@@ -19,7 +19,7 @@ This project is in an early state. Not all tools and actions are implemented rig
 
 This project demonstrates the use of:
 
-- [Web Components](https://www.webcomponents.org/introduction), the native component model of the web (via [Lit](https://lit.dev/))
+- [Web Components](https://www.webcomponents.org/introduction), the built-in component model of the web (via [Lit](https://lit.dev/))
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers) for offline capability (via [Workbox](https://developers.google.com/web/tools/workbox))
 - [Web App Manifest](https://github.com/w3c/manifest) for installability
 - [File System Access API](https://web.dev/file-system-access/) for file system access (via [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access)), including drag and drop
@@ -35,7 +35,7 @@ This project demonstrates the use of:
 
 - This implementation tries to stick as closely as possible to the original Paint for Windows 95—not more, but also not less. You might want to check out [Felix Rieseberg’s windows95 to run the original Paint](https://github.com/felixrieseberg/windows95).
 - This implementation should stay smaller (= transferred bytes) than Paint’s executable size of 340K.
-- Everything must be achieved with native web technology only, so no Cordova or Electron builds. Features that are not exposed to the web must be disabled in the menu.
+- Everything must be achieved with web technology only, so no Cordova/Capacitor or Electron/Tauri builds. Features that are not exposed to the web must be disabled in the menu.
 - Where modern web APIs are used, they should be [progressively enhanced](https://web.dev/progressively-enhance-your-pwa/).
 
 ## Setup
@@ -59,8 +59,7 @@ Paint is available as a web component, so you can easily embed it into other app
 ## Wait, I’ve seen this before
 
 You’re right! The awesome [JSPaint](https://jspaint.app/) ([GitHub](https://github.com/1j01/jspaint)) has been around for a long time and is, by far, more complete.
-In contrast to JSPaint, this project is licensed under an OSS license, so you can fork this repository, use it in your demos, and contribute.
-Please do not copy over code from JSPaint to this repository.
+In contrast to JSPaint, this project is offline-capable and makes use of modern web platform APIs.
 
 ## License
 
