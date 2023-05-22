@@ -185,12 +185,12 @@ var d = async (e = {}) => {
       },
       o = e[0].legacySetup && e[0].legacySetup(a, () => o(n), r),
       s = () => {
-        window.removeEventListener("focus", s), r.remove();
+        window.removeEventListener("focus", s, !0), r.remove();
       };
     r.addEventListener("click", () => {
       window.addEventListener("focus", s);
     }), r.addEventListener("change", () => {
-      window.removeEventListener("focus", s), r.remove(), a(r.multiple ? Array.from(r.files) : r.files[0]);
+      window.removeEventListener("focus", s, !0), r.remove(), a(r.multiple ? Array.from(r.files) : r.files[0]);
     }), "showPicker" in HTMLInputElement.prototype ? r.showPicker() : r.click();
   })),
   v = {
