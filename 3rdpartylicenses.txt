@@ -502,7 +502,7 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 The following npm package may be included in this product:
 
- - browser-fs-access@0.34.0
+ - browser-fs-access@0.34.1
 
 This package contains the following license and notice below:
 
