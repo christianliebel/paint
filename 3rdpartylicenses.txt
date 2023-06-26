@@ -712,7 +712,7 @@ Apache License
 
 The following npm package may be included in this product:
 
- - hotkeys-js@3.10.2
+ - hotkeys-js@3.10.3
 
 This package contains the following license and notice below:
 
