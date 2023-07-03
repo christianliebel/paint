@@ -1,5 +1,5 @@
 /**! 
- * hotkeys-js v3.10.3 
+ * hotkeys-js v3.10.4 
  * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies. 
  * 
  * Copyright (c) 2023 kenny wong <wowohoo@qq.com> 
@@ -424,7 +424,7 @@ function dispatch(event, element) {
         for (var a = 0; a < keyShortcut.length; a++) {
           _downKeysCurrent.push(code(keyShortcut[a]));
         }
-        if (_downKeysCurrent.sort().join('') === _downKeys.slice().sort().join('')) {
+        if (_downKeysCurrent.sort().join('') === _downKeys.sort().join('')) {
           // 找到处理内容
           eventHandler(event, record, scope, element);
         }
