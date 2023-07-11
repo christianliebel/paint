@@ -1,9 +1,9 @@
 /**! 
- * hotkeys-js v3.10.4 
+ * hotkeys-js v3.11.1 
  * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies. 
  * 
  * Copyright (c) 2023 kenny wong <wowohoo@qq.com> 
- * http://jaywcjlove.github.io/hotkeys 
+ * https://jaywcjlove.github.io/hotkeys-js 
  * Licensed under the MIT license 
  */
 
@@ -320,6 +320,8 @@ function eventHandler(event, handler, scope, element) {
     } // 调用处理程序，如果是修饰键不做处理
 
     if (handler.mods.length === 0 && !_mods[16] && !_mods[18] && !_mods[17] && !_mods[91] || modifiersMatch || handler.shortcut === '*') {
+      handler.keys = [];
+      handler.keys = handler.keys.concat(_downKeys);
       if (handler.method(event, handler) === false) {
         if (event.preventDefault) event.preventDefault();else event.returnValue = false;
         if (event.stopPropagation) event.stopPropagation();
