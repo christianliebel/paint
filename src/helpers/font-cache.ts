@@ -30,7 +30,7 @@ export function requestLocalFonts(): boolean {
 
 async function getFontsViaLocalFontAccess(): Promise<string[]> {
   const fonts: string[] = [];
-  for await (const font of await (window as any).queryLocalFonts()) {
+  for await (const font of await window.queryLocalFonts()) {
     fonts.push(font.family);
   }
 

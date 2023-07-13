@@ -1,7 +1,7 @@
 document
   .querySelector('paint-app')
   ?.addEventListener(
-    'titlechange' as any,
+    'titlechange' as never,
     (evt: CustomEvent<{ title: string }>) =>
       (document.title = `${evt.detail.title} - Paint`),
   );
