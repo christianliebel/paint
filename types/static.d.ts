@@ -59,8 +59,8 @@ declare module '*.png' {
 /* CUSTOM: ADD YOUR OWN HERE */
 
 declare module 'bresenham-zingl' {
-  export function line(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => any);
-  export function ellipseRect(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => any);
+  export function line(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => unknown);
+  export function ellipseRect(x0: number, y0: number, x1: number, y1: number, setPixel: (x: number, y: number) => unknown);
 }
 
 // Type declarations for File Handling API
@@ -70,11 +70,12 @@ interface LaunchParams {
 }
 
 interface LaunchQueue {
-  setConsumer(consumer: (launchParams: LaunchParams) => any): void;
+  setConsumer(consumer: (launchParams: LaunchParams) => unknown): void;
 }
 
 interface Window {
   launchQueue: LaunchQueue;
+  queryLocalFonts: () => Promise<{ family: string }[]>;
 }
 
 // Type declarations for Web Share API + Files ("Level 2")
