@@ -135,6 +135,7 @@ export let App = _decorate([customElement('paint-app')], function (_initialize, 
         flex-direction: column;
         background-color: var(--canvas);
         color: var(--button-text);
+        isolation: isolate;
 
         user-select: none;
         -webkit-user-select: none;
