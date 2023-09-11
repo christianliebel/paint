@@ -1,6 +1,6 @@
 {
   "name": "paint",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Open-Source, Web Components-based remake of MS Paint using modern web capabilities.",
   "scripts": {
     "start": "snowpack dev",

@@ -2,12 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.1.1](https://github.com/christianliebel/paint/compare/v1.1.0...v1.1.1) (2022-02-28)
+## [1.2.0](https://github.com/christianliebel/paint/compare/v1.1.0...v1.2.0) (2023-09-11)
 
+### Features
+
+- add file handler icon ([a817e21](https://github.com/christianliebel/paint/commit/a817e21260c1d8e1c9a3405fbd1f5e9a30f59b2e)), closes [#568](https://github.com/christianliebel/paint/issues/568)
+- **e2e:** migrate to Cypress 10 ([6d3e99a](https://github.com/christianliebel/paint/commit/6d3e99abce06b0f4fe03f48beaa24525a48b9dd7))
+- **helpers:** bring back Local Font Access API ([63c8f8f](https://github.com/christianliebel/paint/commit/63c8f8f766ee8751fb08bbc2430b3b949a33e3c2))
+- **tools:** implement ellipse tool ([468166c](https://github.com/christianliebel/paint/commit/468166c8f4ea6e71750f9f41061f84a097041453)), closes [#27](https://github.com/christianliebel/paint/issues/27)
 
 ### Bug Fixes
 
-* **custom-elements:** update manifest to match spec ([bf03dd5](https://github.com/christianliebel/paint/commit/bf03dd520c7a3add34280a686cfce70cfec54649))
+- **custom-elements:** update manifest to match spec ([bf03dd5](https://github.com/christianliebel/paint/commit/bf03dd520c7a3add34280a686cfce70cfec54649))
+- **edit:** fix copy command for Safari ([13c4d52](https://github.com/christianliebel/paint/commit/13c4d521d8a5a47f20862c8025edda6c3832e6c3))
+- **elements:** update app.ts - fix bug with z-index ([e58e653](https://github.com/christianliebel/paint/commit/e58e653a8e3cfc1a976a7e9a1f96204a43d54915))
+- **menus:** cast to unknown as FileSystemHandle types don’t overlap ([3e96547](https://github.com/christianliebel/paint/commit/3e965470eb5adcaaedf75875d1dd9a8730186801))
+- use built-in FileSystemHandle types ([179e6a0](https://github.com/christianliebel/paint/commit/179e6a014d06f5e45baaacd027e28169a805d211))
+
+### [1.1.1](https://github.com/christianliebel/paint/compare/v1.1.0...v1.1.1) (2022-02-28)
+
+### Bug Fixes
+
+- **custom-elements:** update manifest to match spec ([bf03dd5](https://github.com/christianliebel/paint/commit/bf03dd520c7a3add34280a686cfce70cfec54649))
 
 ### [1.1.0](https://github.com/christianliebel/paint/compare/v1.0.1...v1.1.0) (2021-09-03)
 
