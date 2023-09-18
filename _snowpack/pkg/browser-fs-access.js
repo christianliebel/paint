@@ -1,7 +1,7 @@
 const e = (() => {
     if ("undefined" == typeof self) return !1;
     if ("top" in self && self !== top) try {
-      top;
+      top.window.document._ = 0;
     } catch (e) {
       return !1;
     }
