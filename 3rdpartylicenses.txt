@@ -3,505 +3,6 @@ https://www.npmjs.com/package/generate-license-file
 
 The following npm package may be included in this product:
 
- - @lit-labs/ssr-dom-shim@1.1.0
-
-This package contains the following license and notice below:
-
-# @lit-labs/ssr-dom-shim
-
-## Overview
-
-This package provides minimal implementations of `Element`, `HTMLElement`,
-`CustomElementRegistry`, and `customElements`, designed to be used when Server
-Side Rendering (SSR) web components from Node, including Lit components.
-
-## Usage
-
-### Usage from Lit
-
-Lit itself automatically imports these shims when running in Node, so Lit users
-should typically not need to directly depend on or import from this package.
-
-See the [lit.dev SSR docs](https://lit.dev/docs/ssr/overview/) for general
-information about server-side rendering with Lit.
-
-### Usage in other contexts
-
-Other libraries or frameworks who wish to support SSR are welcome to also depend
-on these shims. (This package is planned to eventually move to
-`@webcomponents/ssr-dom-shim` to better reflect this use case). There are two
-main patterns for providing access to these shims to users:
-
-1. Assigning shims to `globalThis`, ensuring that assignment occurs before
-   user-code runs.
-
-2. Importing shims directly from the module that provides your base class, using
-   the `node` [export
-   condition](https://nodejs.org/api/packages.html#conditional-exports) to
-   ensure this only happens when running in Node, and not in the browser.
-
-Lit takes approach #2 for all of the shims except for `customElements`, so that
-users who have imported `lit` are able to call `customElements.define` in their
-components from Node.
-
-### Exports
-
-The main module exports the following values. Note that no globals are set by
-this module.
-
-- [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element)
-  - [`attachShadow`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow)
-  - [`shadowRoot`](https://developer.mozilla.org/en-US/docs/Web/API/Element/shadowRoot)
-  - [`attributes`](https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes)
-  - [`hasAttribute`](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute)
-  - [`getAttribute`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute)
-  - [`setAttribute`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)
-  - [`removeAttribute`](https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute)
-- [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
-  - (Inherits from Element)
-- [`CustomElementRegistry`](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry)
-- [`customElements`](https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements)
-
-## Contributing
-
-Please see [CONTRIBUTING.md](../../../CONTRIBUTING.md).
-
------------
-
-The following npm packages may be included in this product:
-
- - @lit/reactive-element@1.6.1
- - lit-element@3.3.0
- - lit@2.8.0
-
-These packages each contain the following license and notice below:
-
-BSD 3-Clause License
-
-Copyright (c) 2017 Google LLC. All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-3. Neither the name of the copyright holder nor the names of its
-   contributors may be used to endorse or promote products derived from
-   this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
------------
-
-The following npm package may be included in this product:
-
- - @types/trusted-types@2.0.2
-
-This package contains the following license and notice below:
-
-MIT License
-
-    Copyright (c) Microsoft Corporation.
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE
-
------------
-
-The following npm package may be included in this product:
-
- - break-styled-lines@1.3.1
-
-This package contains the following license and notice below:
-
-MIT License
-
-Copyright (c) 2021 Sam Gwilym
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
------------
-
-The following npm package may be included in this product:
-
- - bresenham-zingl@0.1.1
-
-This package contains the following license and notice below:
-
-# Bresenham rasterisation functions by Alois Zingl
-
-![Screenshot](https://w8r.github.io/bresenham-zingl/demo/bresenham-zingl.png)
-
-Port of [C code](https://gist.github.com/w8r/2f57de439a736b0a079b70ed24c9a246) by Alois Zingl from this paper
-
-[ALOIS ZINGL: "A Rasterizing Algorithm for Drawing Curves", 8 November 2012 (2012-11-08), pages 1 - 81](https://github.com/Traumflug/Teacup_Firmware/raw/master/research/A_Rasterizing_Algorithm_for_Drawing_Curves_-_Alois_Zingl_2012.pdf)
-
-## Install
-
-```
-npm i -S bresenham-zingl
-```
-
-```js
-import { line, circle, quadBezier } from 'bresenham-zingl';
-
-quadBezier(0,0, 10, 10, 0, 10, (x, y) => console.log(x, y)); // 0,0, ...
-
-```
-
-## [Demo](https://w8r.github.io/bresenham-zingl/demo/)
-
-## API
-
-### User-defined callbacks
-
-### `setPixel(x, y)`
-
-Use that callback to fill the pixel on canvas.
-
-### Parameters
-
-| parameter | type   | description |
-| --------- | ------ | ----------- |
-| `x`       | number |             |
-| `y`       | number |             |
-
-
-
-### `setPixelAlpha(x, y, alpha)`
-
-Callback that would also receive the alpha value for the pixel
-
-### Parameters
-
-| parameter | type   | description |
-| --------- | ------ | ----------- |
-| `x`       | number |             |
-| `y`       | number |             |
-| `alpha`   | number |             |
-
-### `line(x0, y0, x1, y1, setPixel)`
-
-Line segment rasterisation
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `lineAA(x0, y0, x1, y1, setPixelAA)`
-
-Draw a black (0) anti-aliased line on white (255) background
-
-### Parameters
-
-| parameter    | type          | description |
-| ------------ | ------------- | ----------- |
-| `x0`         | number        |             |
-| `y0`         | number        |             |
-| `x1`         | number        |             |
-| `y1`         | number        |             |
-| `setPixelAA` | setPixelAlpha |             |
-
-
-
-**Returns** `number`,
-
-
-### `lineWidth(x0, y0, x1, y1, wd, setPixel)`
-
-Plot an anti-aliased line of width wd
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `wd`       | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `quadRationalBezierSegment(x0, y0, x1, y1, x2, y2, w, setPixel)`
-
-plot a limited rational Bezier segment, squared weight
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `x2`       | number   |             |
-| `y2`       | number   |             |
-| `w`        | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `quadRationalBezierSegmentAA(x0, y0, x1, y1, x2, y2, w, setPixelAA)`
-
-draw an anti-aliased rational quadratic Bezier segment, squared weight
-
-### Parameters
-
-| parameter    | type          | description |
-| ------------ | ------------- | ----------- |
-| `x0`         | number        |             |
-| `y0`         | number        |             |
-| `x1`         | number        |             |
-| `y1`         | number        |             |
-| `x2`         | number        |             |
-| `y2`         | number        |             |
-| `w`          | number        |             |
-| `setPixelAA` | setPixelAlpha |             |
-
-
-
-### `rotatedEllipse(x, y, a, b, angle, setPixel)`
-
-Plot ellipse rotated by angle (radian)
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x`        | number   |             |
-| `y`        | number   |             |
-| `a`        | number   |             |
-| `b`        | number   |             |
-| `angle`    | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `rotatedEllipseRect(x0, y0, x1, y1, zd, setPixel)`
-
-Rectangle encloMath.sing the ellipse, integer rotation angle
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `zd`       | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `ellipseRect(x0, y0, x1, y1, setPixel)`
-
-Rectangular parameter encloMath.sing the ellipse
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `circle(xm, ym, r, setPixel)`
-
-Circle rasterisation
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `xm`       | number   |             |
-| `ym`       | number   |             |
-| `r`        | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `circleAA(xm, ym, r, setPixelAA)`
-
-Draw a black anti-aliased circle on white background
-
-### Parameters
-
-| parameter    | type          | description |
-| ------------ | ------------- | ----------- |
-| `xm`         | number        |             |
-| `ym`         | number        |             |
-| `r`          | number        |             |
-| `setPixelAA` | setPixelAlpha |             |
-
-
-
-### `quadBezierSegment(x0, y0, x1, y1, x2, y2, setPixel)`
-
-plot a limited quadratic Bezier segment
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `x2`       | number   |             |
-| `y2`       | number   |             |
-| `setPixel` | setPixel |             |
-
-
-
-### `quadBezierAA(x0, y0, x1, y1, x2, y2, setPixelAA)`
-
-Plot any quadratic Bezier curve with anti-alias
-
-### Parameters
-
-| parameter    | type          | description |
-| ------------ | ------------- | ----------- |
-| `x0`         | number        |             |
-| `y0`         | number        |             |
-| `x1`         | number        |             |
-| `y1`         | number        |             |
-| `x2`         | number        |             |
-| `y2`         | number        |             |
-| `setPixelAA` | setPixelAlpha |             |
-
-
-
-### `quadBezierSegmentAA(x0, y0, x1, y1, x2, y2, setPixelAA)`
-
-Draw an limited anti-aliased quadratic Bezier segment
-
-### Parameters
-
-| parameter    | type          | description |
-| ------------ | ------------- | ----------- |
-| `x0`         | number        |             |
-| `y0`         | number        |             |
-| `x1`         | number        |             |
-| `y1`         | number        |             |
-| `x2`         | number        |             |
-| `y2`         | number        |             |
-| `setPixelAA` | setPixelAlpha |             |
-
-
-
-### `cubicBezier(x0, y0, x1, y1, x2, y2, x3, y3, setPixel)`
-
-plot any cubic Bezier curve
-
-### Parameters
-
-| parameter  | type     | description |
-| ---------- | -------- | ----------- |
-| `x0`       | number   |             |
-| `y0`       | number   |             |
-| `x1`       | number   |             |
-| `y1`       | number   |             |
-| `x2`       | number   |             |
-| `y2`       | number   |             |
-| `x3`       | number   |             |
-| `y3`       | number   |             |
-| `setPixel` | setPixel |             |
-
-### `cubicBezierAA(x0, y0, x1, y1, x2, y2, x3, y3, setPixelAA)`
-
-plot any cubic Bezier curve
-
-### Parameters
-
-| parameter  | type          | description |
-| ---------- | ------------- | ----------- |
-| `x0`       | number        |             |
-| `y0`       | number        |             |
-| `x1`       | number        |             |
-| `y1`       | number        |             |
-| `x2`       | number        |             |
-| `y2`       | number        |             |
-| `x3`       | number        |             |
-| `y3`       | number        |             |
-| `setPixel` | setPixelAlpha |             |
-
-
-## License
-
-(The MIT License)
-
-Copyright (c) 2012 Alois Zingl
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
------------
-
-The following npm package may be included in this product:
-
  - browser-fs-access@0.35.0
 
 This package contains the following license and notice below:
@@ -712,33 +213,70 @@ Apache License
 
 The following npm package may be included in this product:
 
- - hotkeys-js@3.13.1
+ - @types/trusted-types@2.0.2
 
 This package contains the following license and notice below:
 
 MIT License
 
-Copyright (c) 2015-present, Kenny Wong.
+    Copyright (c) Microsoft Corporation.
 
-Copyright (c) 2011-2013 Thomas Fuchs (https://github.com/madrobby/keymaster)
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+-----------
+
+The following npm packages may be included in this product:
+
+ - @lit/reactive-element@1.6.1
+ - lit-element@3.3.0
+ - lit@2.8.0
+
+These packages each contain the following license and notice below:
+
+BSD 3-Clause License
+
+Copyright (c) 2017 Google LLC. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -----------
 
@@ -781,6 +319,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The following npm package may be included in this product:
 
+ - @lit-labs/ssr-dom-shim@1.1.0
+
+This package contains the following license and notice below:
+
+BSD-3-Clause
+
+-----------
+
+The following npm package may be included in this product:
+
  - q-floodfill@1.3.1
 
 This package contains the following license and notice below:
@@ -792,6 +340,78 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-----------
+
+The following npm package may be included in this product:
+
+ - bresenham-zingl@0.1.1
+
+This package contains the following license and notice below:
+
+MIT
+
+-----------
+
+The following npm package may be included in this product:
+
+ - hotkeys-js@3.13.1
+
+This package contains the following license and notice below:
+
+MIT License
+
+Copyright (c) 2015-present, Kenny Wong.
+
+Copyright (c) 2011-2013 Thomas Fuchs (https://github.com/madrobby/keymaster)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-----------
+
+The following npm package may be included in this product:
+
+ - break-styled-lines@1.3.1
+
+This package contains the following license and notice below:
+
+MIT License
+
+Copyright (c) 2021 Sam Gwilym
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 -----------
 
