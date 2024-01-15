@@ -355,7 +355,7 @@ MIT
 
 The following npm package may be included in this product:
 
- - hotkeys-js@3.13.3
+ - hotkeys-js@3.13.5
 
 This package contains the following license and notice below:
 
