@@ -51,7 +51,7 @@
     "generate-license-file": "^3.0.1",
     "husky": "^9.0.6",
     "jest": "^27.5.1",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.2.1",
     "prettier": "^3.2.5",
     "snowpack": "3.8.8",
     "ts-jest": "^27.1.4",
