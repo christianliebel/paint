@@ -1,5 +1,5 @@
 /**! 
- * hotkeys-js v3.13.5 
+ * hotkeys-js v3.13.6 
  * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies. 
  * 
  * Copyright (c) 2024 kenny wong <wowohoo@qq.com> 
@@ -211,8 +211,9 @@ function filter(event) {
     tagName
   } = target;
   let flag = true;
+  const isInput = tagName === 'INPUT' && !['checkbox', 'radio', 'range', 'button', 'file', 'reset', 'submit', 'color'].includes(target.type);
   // ignore: isContentEditable === 'true', <input> and <textarea> when readOnly state is false, <select>
-  if (target.isContentEditable || (tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT') && !target.readOnly) {
+  if (target.isContentEditable || (isInput || tagName === 'TEXTAREA' || tagName === 'SELECT') && !target.readOnly) {
     flag = false;
   }
   return flag;
