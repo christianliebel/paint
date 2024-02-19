@@ -21,6 +21,7 @@ export class Canvas extends LitElement {
 
   private pointerDown = false;
   private previewColor: 'primary' | 'secondary' = 'primary';
+  private lastPointerEventTime = 0;
 
   static get styles(): CSSResultGroup {
     return css`
@@ -167,15 +168,23 @@ export class Canvas extends LitElement {
     clearCanvas(this.drawingContext);
     this.drawingContext.document.dirty = false;
     updateContext(this);
+    document.addEventListener('pointermove', (event) => this.throttledPointerMove(event));
 
-    document.addEventListener('pointermove', (event) =>
-      this.onPointerMove(event),
-    );
     document.addEventListener('pointerup', (event) => this.onPointerUp(event));
 
     this.dispatchEvent(
       new CustomEvent('canvas-ready', { bubbles: true, composed: true }),
     );
+    
+  }
+
+  throttledPointerMove(event: PointerEvent): void {
+    const currentTime = Date.now();
+    if (currentTime - this.lastPointerEventTime < 8) { // Throttle mouse polling rate to ~125hz 1000/125 = 8
+      return;
+    }
+    this.lastPointerEventTime = currentTime;
+    this.onPointerMove(event);
   }
 
   getToolEventArgs(
