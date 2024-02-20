@@ -83,6 +83,12 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
         return 'primary';
       }
     }, {
+      kind: "field",
+      key: "lastPointerEventTime",
+      value() {
+        return 0;
+      }
+    }, {
       kind: "get",
       static: true,
       key: "styles",
@@ -233,12 +239,24 @@ export let Canvas = _decorate([customElement('paint-canvas')], function (_initia
         clearCanvas(this.drawingContext);
         this.drawingContext.document.dirty = false;
         updateContext(this);
-        document.addEventListener('pointermove', event => this.onPointerMove(event));
+        document.addEventListener('pointermove', event => this.throttledPointerMove(event));
         document.addEventListener('pointerup', event => this.onPointerUp(event));
         this.dispatchEvent(new CustomEvent('canvas-ready', {
           bubbles: true,
           composed: true
         }));
+      }
+    }, {
+      kind: "method",
+      key: "throttledPointerMove",
+      value: function throttledPointerMove(event) {
+        const currentTime = Date.now();
+        if (currentTime - this.lastPointerEventTime < 8) {
+          // Throttle mouse polling rate to ~125hz 1000/125 = 8
+          return;
+        }
+        this.lastPointerEventTime = currentTime;
+        this.onPointerMove(event);
       }
     }, {
       kind: "method",
