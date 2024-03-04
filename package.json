@@ -44,7 +44,7 @@
     "@types/snowpack-env": "^2.3.7",
     "@types/wicg-file-system-access": "^2023.10.4",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
+    "@typescript-eslint/parser": "^7.1.0",
     "cypress": "^13.6.6",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
