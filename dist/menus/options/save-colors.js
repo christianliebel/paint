@@ -39,7 +39,6 @@ export class SaveColorsAction {
       dataView.setUint8(offset + 2, b); // peBlue
       dataView.setUint8(offset + 3, 0); // peFlags
     }
-
     const blob = new Blob([buffer], {
       type: 'application/octet-stream'
     });

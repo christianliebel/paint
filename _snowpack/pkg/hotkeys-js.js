@@ -224,7 +224,6 @@ function isPressed(keyCode) {
   if (typeof keyCode === 'string') {
     keyCode = code(keyCode); // 转换成键码
   }
-
   return _downKeys.indexOf(keyCode) !== -1;
 }
 
@@ -515,7 +514,6 @@ function hotkeys(key, option, method) {
     if (typeof option.splitKey === 'string') splitKey = option.splitKey; // eslint-disable-line
     if (option.single === true) single = true; // eslint-disable-line
   }
-
   if (typeof option === 'string') scope = option;
 
   // 如果只允许单个callback，先unbind
