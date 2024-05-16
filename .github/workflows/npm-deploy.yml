@@ -25,21 +25,21 @@ jobs:
         run: npm run build
 
       - name: Delete irrelevant files
-        run: npx rimraf build/assets build/*.* build/dist/index.js
+        run: npx rimraf dist/assets dist/*.* dist/dist/index.js
 
       - name: Copy custom-elements.json
-        run: npx ncp custom-elements.json build/custom-elements.json
+        run: npx ncp custom-elements.json dist/custom-elements.json
 
       - name: Copy package.json
-        run: npx ncp package-publish.json build/package.json
+        run: npx ncp package-publish.json dist/package.json
 
       - name: Copy README.md
-        run: npx ncp README.md build/README.md
+        run: npx ncp README.md dist/README.md
 
       - name: Replace version in package.json
-        run: npx replace '#.#.#' ${GITHUB_REF#refs/tags/v} build/package.json
+        run: npx replace '#.#.#' ${GITHUB_REF#refs/tags/v} dist/package.json
 
       - name: Publish
-        run: npm publish ./build --access=public
+        run: npm publish ./dist --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
