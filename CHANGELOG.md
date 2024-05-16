@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/christianliebel/paint/compare/v1.1.0...v1.3.0) (2024-05-16)
+
+### Features
+
+- add file handler icon ([a817e21](https://github.com/christianliebel/paint/commit/a817e21260c1d8e1c9a3405fbd1f5e9a30f59b2e)), closes [#568](https://github.com/christianliebel/paint/issues/568)
+- **e2e:** migrate to Cypress 10 ([6d3e99a](https://github.com/christianliebel/paint/commit/6d3e99abce06b0f4fe03f48beaa24525a48b9dd7))
+- **elements:** add throttledPointerMove method to Canvas class ([0a5cdbd](https://github.com/christianliebel/paint/commit/0a5cdbd6889d01bbccba05229b0a366186728f8f))
+- **helpers:** bring back Local Font Access API ([63c8f8f](https://github.com/christianliebel/paint/commit/63c8f8f766ee8751fb08bbc2430b3b949a33e3c2))
+- **index.html:** reference files in public folder ([698e96c](https://github.com/christianliebel/paint/commit/698e96c8ae868244b3fdcbf8f3f60c2dae20b026))
+- **tools:** implement ellipse tool ([468166c](https://github.com/christianliebel/paint/commit/468166c8f4ea6e71750f9f41061f84a097041453)), closes [#27](https://github.com/christianliebel/paint/issues/27)
+
+### Bug Fixes
+
+- **custom-elements:** update manifest to match spec ([bf03dd5](https://github.com/christianliebel/paint/commit/bf03dd520c7a3add34280a686cfce70cfec54649))
+- do not process manifest ([ed04e36](https://github.com/christianliebel/paint/commit/ed04e364950f2d1e235c6be1026ece72ca96a5e7))
+- **edit:** fix copy command for Safari ([13c4d52](https://github.com/christianliebel/paint/commit/13c4d521d8a5a47f20862c8025edda6c3832e6c3))
+- **elements:** update app.ts - fix bug with z-index ([e58e653](https://github.com/christianliebel/paint/commit/e58e653a8e3cfc1a976a7e9a1f96204a43d54915))
+- expose Vite port locally ([9ad8b31](https://github.com/christianliebel/paint/commit/9ad8b31262f7b461f8d3493f121ec541481d4cbb))
+- **menus:** cast to unknown as FileSystemHandle types don’t overlap ([3e96547](https://github.com/christianliebel/paint/commit/3e965470eb5adcaaedf75875d1dd9a8730186801))
+- **tools:** fix TypeScript errors after migration to TS 5 ([f2341e0](https://github.com/christianliebel/paint/commit/f2341e01746c06ef5a7a09610d4559361b50a7f7))
+- update default ports to Vite’s 5173 ([d942ccd](https://github.com/christianliebel/paint/commit/d942ccdc169e79fd367a89c7ebec4ccba9ef14e5))
+- use built-in FileSystemHandle types ([179e6a0](https://github.com/christianliebel/paint/commit/179e6a014d06f5e45baaacd027e28169a805d211))
+
 ## [1.2.0](https://github.com/christianliebel/paint/compare/v1.1.0...v1.2.0) (2023-09-11)
 
 ### Features
