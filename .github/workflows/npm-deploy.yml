@@ -22,10 +22,13 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npm run build -- --config vite-publish.config.js
+
+      - name: Copy index.js
+        run: npx ncp dist/dist/elements/out/index.mjs dist/dist/elements/index.js
 
       - name: Delete irrelevant files
-        run: npx rimraf dist/assets dist/*.* dist/dist/index.js
+        run: npx rimraf dist/dist/elements/out
 
       - name: Copy custom-elements.json
         run: npx ncp custom-elements.json dist/custom-elements.json
