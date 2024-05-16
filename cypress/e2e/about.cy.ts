@@ -1,6 +1,6 @@
 context('About', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080');
+    cy.visit('http://localhost:5173');
   });
 
   it('clicking Help > About should open about dialog', () => {
