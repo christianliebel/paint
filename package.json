@@ -12,7 +12,7 @@
     "cypress:run": "cypress run --headless --browser chrome",
     "cypress:open": "cypress open",
     "generate-sw": "workbox generateSW",
-    "generate-license-file": "generate-license-file --input package.json --output build/3rdpartylicenses.txt"
+    "generate-license-file": "generate-license-file --input package.json --output dist/3rdpartylicenses.txt"
   },
   "repository": {
     "type": "git",

@@ -38,7 +38,7 @@ jobs:
 
       - name: Add .nojekyll file
         if: github.ref == 'refs/heads/main'
-        run: touch build/.nojekyll
+        run: touch dist/.nojekyll
 
       - name: Add CNAME file
         if: github.ref == 'refs/heads/main'
@@ -49,4 +49,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
-          folder: build
+          folder: dist
