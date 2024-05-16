@@ -29,7 +29,7 @@ This project demonstrates the use of:
 - [StorageManager API](https://web.dev/storage-for-the-web/#check) for estimating storage usage in _Help > About Paint_
 - [prefers-color-scheme](https://web.dev/prefers-color-scheme/) for dark mode
 - [Local Font Access API](https://web.dev/local-fonts/) for accessing local fonts
-- [Snowpack](https://www.snowpack.dev/), a lightning-fast frontend build tool
+- [Vite](https://vitejs.dev/), a lightning-fast frontend build tool
 
 ## Goals
 
