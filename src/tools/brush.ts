@@ -74,18 +74,18 @@ export class BrushTool implements Tool {
     if (type === 'forward-diagonal') {
       if (posDiff && posDiff.y !== 0) {
         const xCorr = posDiff.y === -1 && posDiff.x === -1 ? x : x - 1;
-        this.drawForwardLine(xCorr, yCorr, diff, correction, size, context);
+        this.drawForwardLine(xCorr, yCorr, diff, correction, context);
       }
-      this.drawForwardLine(x, y, diff, correction, size, context);
+      this.drawForwardLine(x, y, diff, correction, context);
       return;
     }
 
     if (type === 'backward-diagonal') {
       if (posDiff && posDiff.y !== 0) {
         const xCorr = posDiff.y === -1 && posDiff.x === 1 ? x : x + 1;
-        this.drawBackwardLine(xCorr, yCorr, diff, correction, size, context);
+        this.drawBackwardLine(xCorr, yCorr, diff, correction, context);
       }
-      this.drawBackwardLine(x, y, diff, correction, size, context);
+      this.drawBackwardLine(x, y, diff, correction, context);
       return;
     }
 
@@ -107,7 +107,6 @@ export class BrushTool implements Tool {
     y: number,
     diff: number,
     correction: number,
-    size: number,
     context: CanvasRenderingContext2D,
   ): void {
     const start = { x: x - diff, y: y + diff + correction };
@@ -122,7 +121,6 @@ export class BrushTool implements Tool {
     y: number,
     diff: number,
     correction: number,
-    size: number,
     context: CanvasRenderingContext2D,
   ): void {
     const start = { x: x - diff, y: y - diff };

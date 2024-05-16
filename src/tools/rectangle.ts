@@ -25,7 +25,6 @@ export class RectangleTool implements Tool {
         previewContext,
         fillStyle,
         lineWidth,
-        canvas,
         color,
       );
     }
@@ -45,7 +44,6 @@ export class RectangleTool implements Tool {
         previewContext,
         fillStyle,
         lineWidth,
-        canvas,
         color,
       );
     }
@@ -58,7 +56,6 @@ export class RectangleTool implements Tool {
     previewContext: CanvasRenderingContext2D,
     fillStyle: { fill: boolean; stroke: boolean },
     lineWidth: number,
-    canvas: HTMLCanvasElement,
     color: ToolColor,
   ): void {
     clearContext(previewContext);

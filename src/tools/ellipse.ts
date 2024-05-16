@@ -19,15 +19,7 @@ export class EllipseTool implements Tool {
     color: ToolColor,
   ): void {
     if (canvas && previewContext) {
-      this.drawEllipse(
-        x,
-        y,
-        fillStyle,
-        color,
-        canvas,
-        previewContext,
-        previewContext,
-      );
+      this.drawEllipse(x, y, fillStyle, color, previewContext, previewContext);
     }
   }
 
@@ -38,7 +30,7 @@ export class EllipseTool implements Tool {
     color: ToolColor,
   ): void {
     if (canvas && context && previewContext) {
-      this.drawEllipse(x, y, fillStyle, color, canvas, context, previewContext);
+      this.drawEllipse(x, y, fillStyle, color, context, previewContext);
     }
   }
 
@@ -47,7 +39,6 @@ export class EllipseTool implements Tool {
     y: number,
     fillStyle: FillStyle,
     color: ToolColor,
-    canvas: HTMLCanvasElement,
     targetContext: CanvasRenderingContext2D,
     previewContext: CanvasRenderingContext2D,
   ): void {
