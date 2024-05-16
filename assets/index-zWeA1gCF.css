@@ -1,0 +1,1 @@
+html,body{width:100%;height:100%;margin:0;padding:0;overflow:hidden;display:flex;background-color:gray}paint-app{width:100%;margin:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0)}
