@@ -26,7 +26,7 @@ export class LineTool implements Tool {
     { previewContext, canvas, lineWidth }: DrawingContext,
   ): void {
     if (canvas && previewContext) {
-      this.drawLine(x, y, previewContext, previewContext, canvas, lineWidth);
+      this.drawLine(x, y, previewContext, previewContext, lineWidth);
     }
   }
 
@@ -36,7 +36,7 @@ export class LineTool implements Tool {
     { previewContext, context, canvas, lineWidth }: DrawingContext,
   ): void {
     if (previewContext && context && canvas) {
-      this.drawLine(x, y, context, previewContext, canvas, lineWidth);
+      this.drawLine(x, y, context, previewContext, lineWidth);
     }
   }
 
@@ -45,7 +45,6 @@ export class LineTool implements Tool {
     y: number,
     targetContext: CanvasRenderingContext2D,
     previewContext: CanvasRenderingContext2D,
-    canvas: HTMLCanvasElement,
     lineWidth: number,
   ): void {
     clearContext(previewContext);
