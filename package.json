@@ -54,7 +54,7 @@
     "ts-mockito": "^2.6.1",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
-    "workbox-cli": "^7.1.0"
+    "workbox-cli": "^7.3.0"
   },
   "lint-staged": {
     "{src,cypress}/**/*.{ts,js}": [
