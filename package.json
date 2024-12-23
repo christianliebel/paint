@@ -42,7 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.17.0",
     "cypress": "^13.16.1",
-    "eslint": "^9.16.0",
+    "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "generate-license-file": "^3.6.0",
     "globals": "^15.13.0",
