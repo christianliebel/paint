@@ -39,7 +39,7 @@
     "@eslint/js": "^9.18.0",
     "@types/jest": "^29.5.14",
     "@types/wicg-file-system-access": "^2023.10.5",
-    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
     "cypress": "^13.17.0",
     "eslint": "^9.18.0",
