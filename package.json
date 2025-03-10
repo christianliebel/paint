@@ -40,7 +40,7 @@
     "@types/jest": "^29.5.14",
     "@types/wicg-file-system-access": "^2023.10.5",
     "@typescript-eslint/eslint-plugin": "^8.25.0",
-    "@typescript-eslint/parser": "^8.23.0",
+    "@typescript-eslint/parser": "^8.26.0",
     "cypress": "^14.1.0",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.0.2",
