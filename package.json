@@ -53,7 +53,7 @@
     "ts-jest": "^29.3.0",
     "ts-mockito": "^2.6.1",
     "typescript": "^5.8.2",
-    "vite": "^6.2.3",
+    "vite": "^6.2.4",
     "workbox-cli": "^7.3.0"
   },
   "lint-staged": {
