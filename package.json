@@ -52,7 +52,7 @@
     "prettier": "^3.5.3",
     "ts-jest": "^29.3.1",
     "ts-mockito": "^2.6.1",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "vite": "^6.2.5",
     "workbox-cli": "^7.3.0"
   },
