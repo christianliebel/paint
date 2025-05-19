@@ -345,7 +345,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 The following npm package may be included in this product:
 
- - hotkeys-js@3.13.9
+ - hotkeys-js@3.13.10
 
 This package contains the following license:
 
