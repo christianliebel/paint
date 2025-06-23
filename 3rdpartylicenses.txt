@@ -3,7 +3,7 @@ https://www.npmjs.com/package/generate-license-file
 
 The following npm package may be included in this product:
 
- - browser-fs-access@0.37.0
+ - browser-fs-access@0.38.0
 
 This package contains the following license:
 
