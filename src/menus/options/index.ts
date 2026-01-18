@@ -1,6 +1,7 @@
 import { SaveColorsAction } from './save-colors';
 import { GetColorsAction } from './get-colors';
 import { DrawOpaque } from './draw-opaque';
+import { EditColorsAction } from './edit-colors';
 import type { MenuEntry } from '../../models/menu';
 
 export const optionsMenu: MenuEntry = {
@@ -12,6 +13,7 @@ export const optionsMenu: MenuEntry = {
       caption: 'Edit Colors…',
       mnemonic: 'E',
       helpText: 'Creates a new color.',
+      instance: new EditColorsAction(),
     },
     {
       caption: 'Get Colors…',

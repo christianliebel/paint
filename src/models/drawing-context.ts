@@ -48,6 +48,11 @@ export interface DrawingContext {
   palette: string[];
 
   /**
+   * Contains the index of the last clicked color in the palette.
+   */
+  selectedPaletteIndex: number;
+
+  /**
    * Contains the hovered color when the Pick Color is used.
    */
   previewColor: string | null;

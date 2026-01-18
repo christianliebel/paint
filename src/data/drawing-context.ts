@@ -6,6 +6,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
   lineWidth: 1,
   colors: { ...DEFAULT_COLORS },
   palette: [...DEFAULT_PALETTE],
+  selectedPaletteIndex: 0,
   previewColor: null,
   drawOpaque: true,
   eraserSize: 8,
