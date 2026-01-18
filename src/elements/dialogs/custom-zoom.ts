@@ -8,6 +8,7 @@ import {
 } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic';
+import { MAGNIFIER_SIZES } from '../../data/magnifier-sizes';
 
 export interface CustomZoomResult {
   magnifierSize: number;
@@ -17,7 +18,6 @@ export interface CustomZoomResult {
 export class CustomZoom extends LitElement {
   @property({ type: Number, attribute: false }) currentMagnifierSize = 1;
 
-  readonly magnifierSizes = [1, 2, 4, 6, 8] as const;
   @state() selectedMagnifierSize = 1;
 
   static get styles(): CSSResultGroup {
@@ -106,7 +106,7 @@ export class CustomZoom extends LitElement {
             <fieldset>
               <legend>Zoom to</legend>
               <div class="zoom-levels">
-                ${this.magnifierSizes.map(
+                ${MAGNIFIER_SIZES.map(
                   (size) => html`
                     <label>
                       <input

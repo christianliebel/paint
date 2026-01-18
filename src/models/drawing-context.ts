@@ -31,6 +31,12 @@ export interface DrawingContext {
    */
   previousMagnifierSize: number;
 
+  /*
+   * Defines if the grid should be shown. Only applied when the zoom level is
+   * greater than or equal to 400%. 
+   */
+  showGrid: boolean;
+
   /**
    * Contains the size of the Airbrush tool.
    */

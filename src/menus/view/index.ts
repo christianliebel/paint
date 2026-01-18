@@ -6,6 +6,7 @@ import { ViewBitmapAction } from './view-bitmap';
 import { StatusBarAction } from './status-bar';
 import { ToolBoxAction } from './tool-box';
 import { ColorBoxAction } from './color-box';
+import { ShowGridAction } from './show-grid';
 import type { MenuEntry } from '../../models/menu';
 
 export const viewMenu: MenuEntry = {
@@ -69,6 +70,7 @@ export const viewMenu: MenuEntry = {
           mnemonic: 'G',
           shortcut: 'Ctrl+G',
           helpText: 'Shows or hides the grid.',
+          instance: new ShowGridAction(),
         },
         {
           caption: 'Show Thumbnail',

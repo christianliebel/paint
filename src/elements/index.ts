@@ -12,6 +12,7 @@ import './canvas';
 import './color-box';
 import './color-picker';
 import './color-switcher';
+import './grid';
 import './handle';
 import './inset-container';
 import './menu';

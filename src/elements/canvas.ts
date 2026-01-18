@@ -8,6 +8,7 @@ import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
 import type { PointerPosition } from '../models/pointer-position';
 import type { Tool, ToolColor } from '../models/tool';
+import { MIN_GRID_MAGNIFICATION } from '../data/magnifier-sizes';
 
 @customElement('paint-canvas')
 export class Canvas extends LitElement {
@@ -65,7 +66,8 @@ export class Canvas extends LitElement {
       }
 
       canvas,
-      paint-text-area {
+      paint-text-area,
+      paint-grid {
         grid-row: 2;
         grid-column: 2;
       }
@@ -126,6 +128,16 @@ export class Canvas extends LitElement {
               width="${this.canvasWidth}"
               height="${this.canvasHeight}"
             ></canvas>
+            ${this.drawingContext.showGrid &&
+            this.drawingContext.magnifierSize >= MIN_GRID_MAGNIFICATION
+              ? html`<paint-grid
+                  style="width: ${this.canvasWidth *
+                  this.drawingContext.magnifierSize}px; height: ${this
+                    .canvasHeight *
+                  this.drawingContext.magnifierSize}px; --grid-size: ${this
+                    .drawingContext.magnifierSize}px"
+                ></paint-grid>`
+              : ''}
             <paint-text-area
               .drawingContext="${this.drawingContext}"
             ></paint-text-area>
