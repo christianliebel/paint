@@ -12,6 +12,7 @@ export const DRAWING_CONTEXT: DrawingContext = {
   eraserSize: 8,
   magnifierSize: 1,
   previousMagnifierSize: 4,
+  showGrid: false,
   brush: {
     type: 'circle',
     size: 4,
