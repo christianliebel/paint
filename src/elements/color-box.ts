@@ -34,9 +34,9 @@ export class ColorBox extends LitElement {
       >
       </paint-color-switcher>
       ${this.drawingContext.palette.map(
-        (color) =>
+        (_, index) =>
           html` <paint-color-picker
-            color="${color}"
+            .index="${index}"
             .drawingContext="${this.drawingContext}"
           >
           </paint-color-picker>`,
