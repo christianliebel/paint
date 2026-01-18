@@ -150,7 +150,10 @@ export class Canvas extends LitElement {
     const previewCanvas = this.shadowRoot.querySelector(
       'canvas.preview',
     ) as HTMLCanvasElement;
-    const context = canvas.getContext('2d', { desynchronized: true });
+    const context = canvas.getContext('2d', {
+      desynchronized: true,
+      willReadFrequently: true,
+    });
     const previewContext = previewCanvas.getContext('2d', {
       desynchronized: true,
     });
