@@ -10,6 +10,36 @@ export class ColorPicker extends LitElement {
 
   @query('input') colorInput!: HTMLInputElement;
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.addEventListener('click', () => {
+      this.dispatchColorEvent('primary');
+    });
+    this.addEventListener('contextmenu', (event) => {
+      this.dispatchColorEvent('secondary');
+      event.preventDefault();
+    });
+    this.addEventListener('dblclick', () => {
+      this.openColorPicker();
+    });
+
+    this.drawingContext.element?.addEventListener('edit-color', this.onEditColor);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    
+    this.drawingContext.element?.removeEventListener('edit-color', this.onEditColor);
+  }
+
+  private readonly onEditColor = () => {
+    const selectedPaletteIndex = this.drawingContext.selectedPaletteIndex;
+    if (this.index === selectedPaletteIndex) {
+      this.openColorPicker();
+    }
+  };
+
   get color(): string {
     return this.drawingContext.palette[this.index];
   }
@@ -43,20 +73,6 @@ export class ColorPicker extends LitElement {
     `;
   }
 
-  constructor() {
-    super();
-    this.addEventListener('click', () => {
-      this.dispatchColorEvent('primary');
-    });
-    this.addEventListener('contextmenu', (event) => {
-      this.dispatchColorEvent('secondary');
-      event.preventDefault();
-    });
-    this.addEventListener('dblclick', () => {
-      this.openColorPicker();
-    });
-  }
-
   openColorPicker(): void {
     try {
       this.colorInput.showPicker();
@@ -74,6 +90,7 @@ export class ColorPicker extends LitElement {
   }
 
   dispatchColorEvent(type: 'primary' | 'secondary'): void {
+    this.drawingContext.selectedPaletteIndex = this.index;
     this.drawingContext.colors[type] = this.color;
     updateContext(this);
   }
