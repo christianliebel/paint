@@ -10,7 +10,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { renderMnemonic } from '../../helpers/render-mnemonic';
 import { Window } from '../window/window';
 
-export type MessageBoxIcon = 'warning' | null;
+export type MessageBoxIcon = 'warning' | 'question' | null;
 export type MessageBoxResult = 'ok' | 'yes' | 'no' | 'cancel';
 export type DialogLayout = 'ok' | 'yes-no-cancel';
 
@@ -96,6 +96,14 @@ export class MessageBox extends LitElement {
         class="icon"
         alt=""
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAElBMVEUAAAAAAAAAgACAgIDAwMD//wCJvpKsAAAAAXRSTlMAQObYZgAAAIxJREFUKJFlj9EJAjAMREN1gXy4gf0vZAGhOoCQ7L+KNpWkZ+6vD+71QrRzJ0yzxz+YA0A3LUCwYTYLGNAwlDgQaDBImr35dkq6Ay1ADsUCKQkworGBFiC5W/mV5yywhoVk7TayPMeBZ0uaZWYCtpB4w7/9SQBIKDgkp9MlHYAWIHR9nplfq2CILvAeH0wjUtKxjmmsAAAAAElFTkSuQmCC"
+      />`;
+    }
+
+    if (this.icon === 'question') {
+      return html` <img
+        class="icon"
+        alt=""
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAD1BMVEX///////8AAP/AwMAAAACA2A1yAAAAAXRSTlMAQObYZgAAAIJJREFUeNqtk8EKwyAUBLPu/v83F5LQTacWC8lcPMyoCM/tOZIy1brwnUQg0+3jhIdE9S0UBoNBDI9AsXlB1500OIwY2NdA9Q2MYNQ3gF8HWgSaBKWeQWHAO+C9fRR4wz8Bx6k+9fOJ8s7PmawveUtoHHLKeiaBBkex+l8IiO2bBXkBpqwEhmxT96QAAAAASUVORK5CYII="
       />`;
     }
 
