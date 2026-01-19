@@ -11,15 +11,15 @@ export class Grid extends LitElement {
         background-image:
           conic-gradient(
             from 0deg at 1px 1px,
-            #c0c0c0 0deg 90deg,
+            rgb(192 192 192) 0deg 90deg,
             transparent 90deg 270deg,
-            #a0a0a0 270deg 360deg
+            rgb(128 128 128) 270deg 360deg
           ),
           conic-gradient(
             from 0deg at 1px 1px,
             transparent 0deg 180deg,
-            #c0c0c0 180deg 270deg,
-            #a0a0a0 270deg 360deg
+            rgb(192 192 192) 180deg 270deg,
+            rgb(128 128 128) 270deg 360deg
           );
         background-size:
           2px var(--grid-size),
