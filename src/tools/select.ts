@@ -9,8 +9,11 @@ import type { Tool } from '../models/tool';
 export class SelectTool implements Tool {
   private startPosition: Point = { x: 0, y: 0 };
 
-  onPointerDown(x: number, y: number): void {
+  onPointerDown(x: number, y: number, drawingContext: DrawingContext): void {
     this.startPosition = { x, y };
+
+    drawingContext.selection = null;
+    updateContext(drawingContext.element);
   }
 
   onPointerMove(
