@@ -6,11 +6,12 @@ export class ClearSelectionAction implements MenuAction {
     return !!selection;
   }
 
-  execute({ selection, context, colors }: DrawingContext): void {
-    if (selection && context) {
-      context.fillStyle = colors.secondary;
-      const { x, y, width, height } = selection;
-      context.fillRect(x, y, width, height);
+  execute(drawingContext: DrawingContext): void {
+    if (drawingContext.selection && drawingContext.context) {
+      drawingContext.context.fillStyle = drawingContext.colors.secondary;
+      const { x, y, width, height } = drawingContext.selection;
+      drawingContext.context.fillRect(x, y, width, height);
+      drawingContext.selection = null;
     }
   }
 }
