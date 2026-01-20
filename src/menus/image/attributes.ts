@@ -34,12 +34,7 @@ export class AttributesAction implements MenuAction {
       return;
     }
 
-    const imageData = context.getImageData(
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-    );
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
     canvas.width = previewCanvas.width = newWidth;
     canvas.height = previewCanvas.height = newHeight;

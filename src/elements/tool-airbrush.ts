@@ -66,18 +66,17 @@ export class ToolAirbrush extends LitElement {
     return html`
       <ul>
         ${this.options.map(
-          ({ size, selectionWidth, width, height, path }) =>
-            html`
-              <li
-                class="${airbrushSize === size ? 'selected' : ''}"
-                style="width: ${selectionWidth}px"
-                @click="${() => this.setSize(size)}"
-              >
-                <svg style="width: ${width}px; height: ${height}px;">
-                  <path d="${path}"></path>
-                </svg>
-              </li>
-            `,
+          ({ size, selectionWidth, width, height, path }) => html`
+            <li
+              class="${airbrushSize === size ? 'selected' : ''}"
+              style="width: ${selectionWidth}px"
+              @click="${() => this.setSize(size)}"
+            >
+              <svg style="width: ${width}px; height: ${height}px;">
+                <path d="${path}"></path>
+              </svg>
+            </li>
+          `,
         )}
       </ul>
     `;

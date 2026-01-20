@@ -134,7 +134,7 @@ export class Attributes extends LitElement {
                     name="unit"
                     value="${value}"
                     .checked="${this.unit === value}"
-                    @change="${() => this.unit = value}"
+                    @change="${() => (this.unit = value)}"
                     disabled
                   />
                   ${renderMnemonic(label, mnemonic)}</label
@@ -153,7 +153,7 @@ export class Attributes extends LitElement {
                     name="color"
                     value="${value}"
                     .checked="${this.color === value}"
-                    @change="${() => this.color = value}"
+                    @change="${() => (this.color = value)}"
                     disabled
                   />
                   ${renderMnemonic(label, mnemonic)}</label

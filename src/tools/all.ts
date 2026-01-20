@@ -50,7 +50,7 @@ export const PICK_COLOR: ToolDefinition = {
 export const MAGNIFIER: ToolDefinition = {
   tooltip: 'Magnifier',
   helpText: 'Changes the magnification.',
-  imagePosition: '-80px 0',  
+  imagePosition: '-80px 0',
   instance: new MagnifierTool(),
   cursor: 'zoom-in',
 };

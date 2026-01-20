@@ -49,14 +49,15 @@ export class ToolLineWidth extends LitElement {
     return html`
       <ul>
         ${this.lineWidths.map(
-          (lineWidth) => html` <li
-            @click="${() => this.onUpdateWidth(lineWidth)}"
-            class="${this.drawingContext.lineWidth === lineWidth
-              ? 'selected'
-              : ''}"
-          >
-            <div style="height: ${lineWidth}px"></div>
-          </li>`,
+          (lineWidth) =>
+            html` <li
+              @click="${() => this.onUpdateWidth(lineWidth)}"
+              class="${this.drawingContext.lineWidth === lineWidth
+                ? 'selected'
+                : ''}"
+            >
+              <div style="height: ${lineWidth}px"></div>
+            </li>`,
         )}
       </ul>
     `;
