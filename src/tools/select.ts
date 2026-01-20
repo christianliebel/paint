@@ -21,6 +21,9 @@ export class SelectTool implements Tool {
     y: number,
     { element, previewContext }: DrawingContext,
   ): void {
+    // todo: +1
+    // todo: zoom resets selection
+    // todo: tool chg resets selection
     drawAreaRectangle(this.startPosition, { x, y }, previewContext);
     dispatchAreaEvent(this.startPosition, { x, y }, element);
   }
@@ -33,17 +36,21 @@ export class SelectTool implements Tool {
       new CustomEvent('area', { bubbles: true, composed: true }),
     );
 
-    const width = x - this.startPosition.x;
-    const height = y - this.startPosition.y;
-    drawingContext.selection =
-      width === 0 && height === 0
-        ? null
-        : {
-            x: this.startPosition.x,
-            y: this.startPosition.y,
-            width,
-            height,
-          };
+    const width = Math.abs(x - this.startPosition.x);
+    const height = Math.abs(y - this.startPosition.y);
+    const startX = Math.min(x, this.startPosition.x);
+    const startY = Math.min(y, this.startPosition.y);
+
+    if (width === 0 || height === 0) {
+      return;
+    }
+
+    drawingContext.selection = {
+      x: startX,
+      y: startY,
+      width,
+      height,
+    };
     updateContext(element);
   }
 }
