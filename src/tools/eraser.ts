@@ -1,8 +1,9 @@
 import { line } from 'bresenham-zingl';
 import { clearContext } from '../helpers/clear-context';
+import { hexToRgb } from '../helpers/hex-to-rgb';
 import type { DrawingContext } from '../models/drawing-context';
 import type { Point } from '../models/point';
-import type { Tool } from '../models/tool';
+import type { Tool, ToolColor } from '../models/tool';
 
 export class EraserTool implements Tool {
   private previous: Point = { x: 0, y: 0 };
@@ -12,6 +13,7 @@ export class EraserTool implements Tool {
     y: number,
     { canvas, previewContext, eraserSize, colors }: DrawingContext,
   ): void {
+    // TODO: Eraser outline remains 1px when zoomed in, and above grid.
     if (canvas && previewContext) {
       clearContext(previewContext);
 
@@ -27,25 +29,71 @@ export class EraserTool implements Tool {
   onPointerDown(
     x: number,
     y: number,
-    { context, eraserSize, colors: { secondary } }: DrawingContext,
+    drawingContext: DrawingContext,
+    color: ToolColor,
   ): void {
-    if (context) {
-      context.fillStyle = secondary;
-      this.previous = { x, y };
-      context.fillRect(...this.getFillRectArgs(x, y, eraserSize));
-    }
+    this.previous = { x, y };
+    this.handleEraser(x, y, drawingContext, color);
   }
 
   onPointerMove(
     x: number,
     y: number,
-    { eraserSize, context }: DrawingContext,
+    drawingContext: DrawingContext,
+    color: ToolColor,
   ): void {
-    // TODO: Color eraser
     line(this.previous.x, this.previous.y, x, y, (x, y) => {
-      context?.fillRect(...this.getFillRectArgs(x, y, eraserSize));
+      this.handleEraser(x, y, drawingContext, color);
     });
     this.previous = { x, y };
+  }
+
+  private handleEraser(
+    x: number,
+    y: number,
+    { context, eraserSize, colors }: DrawingContext,
+    color: ToolColor,
+  ) {
+    if (!context) {
+      return;
+    }
+
+    if (color.stroke.key === 'primary') {
+      // Normal eraser
+      context.fillStyle = colors.secondary;
+      context.fillRect(...this.getFillRectArgs(x, y, eraserSize));
+    } else {
+      // Color eraser
+      const { r: matchR, g: matchG, b: matchB } = hexToRgb(colors.primary);
+      const {
+        r: replaceR,
+        g: replaceG,
+        b: replaceB,
+      } = hexToRgb(colors.secondary);
+
+      const [rectX, rectY, rectW, rectH] = this.getFillRectArgs(
+        x,
+        y,
+        eraserSize,
+      );
+
+      const imageData = context.getImageData(rectX, rectY, rectW, rectH);
+      const { data } = imageData;
+
+      for (let i = 0; i < data.length; i += 4) {
+        if (
+          data[i] === matchR &&
+          data[i + 1] === matchG &&
+          data[i + 2] === matchB
+        ) {
+          data[i] = replaceR;
+          data[i + 1] = replaceG;
+          data[i + 2] = replaceB;
+        }
+      }
+
+      context.putImageData(imageData, rectX, rectY);
+    }
   }
 
   getFillRectArgs(
