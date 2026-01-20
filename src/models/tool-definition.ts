@@ -21,8 +21,7 @@ export interface ToolDefinition {
    */
   instance?: Tool;
   /**
-   * Defines the cursor to show. Currently, only 'none' is supported, which will
-   * hide the user's cursor (i.e., for the Eraser/Color Eraser tool).
+   * Defines the cursor to show.
    */
-  cursor?: 'none';
+  cursor?: string;
 }

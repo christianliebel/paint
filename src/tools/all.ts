@@ -10,6 +10,7 @@ import { SelectTool } from './select';
 import { EraserTool } from './eraser';
 import { EllipseTool } from './ellipse';
 import { TextTool } from './text';
+import { MagnifierTool } from './magnifier';
 
 export const FREE_FORM_SELECT: ToolDefinition = {
   tooltip: 'Free-Form Select',
@@ -49,7 +50,9 @@ export const PICK_COLOR: ToolDefinition = {
 export const MAGNIFIER: ToolDefinition = {
   tooltip: 'Magnifier',
   helpText: 'Changes the magnification.',
-  imagePosition: '-80px 0',
+  imagePosition: '-80px 0',  
+  instance: new MagnifierTool(),
+  cursor: 'zoom-in',
 };
 
 export const PENCIL: ToolDefinition = {
