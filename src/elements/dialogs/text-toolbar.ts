@@ -107,12 +107,13 @@ export class TextToolbarDialog extends LitElement {
             @change="${(event: Event) => this.updateFont(event)}"
           >
             ${this.fonts.map(
-              (font) => html` <option
-                value="${font}"
-                ?selected="${font === this.drawingContext.text.font}"
-              >
-                ${font}
-              </option>`,
+              (font) =>
+                html` <option
+                  value="${font}"
+                  ?selected="${font === this.drawingContext.text.font}"
+                >
+                  ${font}
+                </option>`,
             )}
           </select>
           <select

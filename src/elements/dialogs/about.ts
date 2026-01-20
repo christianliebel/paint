@@ -95,9 +95,7 @@ export class About extends LitElement {
               <span>${this.getFreeMemoryPercentage()}% Free</span>
             </div>
             <br />
-            <paint-button tabindex="0" @click="${this.onOK}"
-              >OK</paint-button
-            >
+            <paint-button tabindex="0" @click="${this.onOK}">OK</paint-button>
           </div>
         </div>
       </paint-window>

@@ -42,8 +42,9 @@ export class App extends LitElement {
         --z-index-menu: 10;
         --z-index-dialog: 20;
 
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
           'Segoe UI Symbol';
         font-size: 9pt;
 

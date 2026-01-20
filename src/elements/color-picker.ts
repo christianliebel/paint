@@ -24,13 +24,19 @@ export class ColorPicker extends LitElement {
       this.openColorPicker();
     });
 
-    this.drawingContext.element?.addEventListener('edit-color', this.onEditColor);
+    this.drawingContext.element?.addEventListener(
+      'edit-color',
+      this.onEditColor,
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    
-    this.drawingContext.element?.removeEventListener('edit-color', this.onEditColor);
+
+    this.drawingContext.element?.removeEventListener(
+      'edit-color',
+      this.onEditColor,
+    );
   }
 
   private readonly onEditColor = () => {
@@ -97,13 +103,9 @@ export class ColorPicker extends LitElement {
 
   render(): TemplateResult {
     return html`<div
-      class="frame"
-      style="background-color: ${this.color};"
-    ></div>
-    <input
-      type="color"
-      .value="${this.color}"
-      @change="${this.onChange}"
-    />`;
+        class="frame"
+        style="background-color: ${this.color};"
+      ></div>
+      <input type="color" .value="${this.color}" @change="${this.onChange}" />`;
   }
 }
