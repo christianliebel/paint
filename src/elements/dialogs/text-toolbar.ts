@@ -51,6 +51,15 @@ export class TextToolbarDialog extends LitElement {
         height: 22px;
         width: 23px;
       }
+
+      paint-button svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      paint-button svg path {
+        fill: currentColor;
+      }
     `;
   }
 
@@ -121,13 +130,13 @@ export class TextToolbarDialog extends LitElement {
             )}
           </select>
           <paint-button @click="${() => this.toggle('bold')}" tabindex="0">
-            B
+            <svg><path d="M0,0h7v1h1v3H7v1h1v3H7v1H0V8h5V1H4v3h1v1H4v3H1V1H0z"></svg>
           </paint-button>
           <paint-button @click="${() => this.toggle('italic')}" tabindex="0">
-            I
+            <svg><path d="M4,0h5v1H7v1H6v2H5v2H4v2h1v1H0V8h2V6h1V4h1V2h1V1H4z"></svg>
           </paint-button>
           <paint-button @click="${() => this.toggle('underline')}" tabindex="0">
-            U
+            <svg><path d="M0,0h3v5h2V0h2v9H1V8h6V7H2V6H1V1H0z"></svg>
           </paint-button>
         </div>
       </paint-window>
