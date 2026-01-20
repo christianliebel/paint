@@ -143,7 +143,9 @@ export class ToolBox extends LitElement {
     }
 
     if (MAGNIFIER === tool) {
-      return html`TBD`;
+      return html` <paint-tool-magnifier-size
+        .drawingContext="${this.drawingContext}"
+      ></paint-tool-magnifier-size>`;
     }
 
     return '';
