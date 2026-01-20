@@ -67,9 +67,7 @@
               <span>${this.getFreeMemoryPercentage()}% Free</span>
             </div>
             <br />
-            <paint-button tabindex="0" @click="${this.onOK}"
-              >OK</paint-button
-            >
+            <paint-button tabindex="0" @click="${this.onOK}">OK</paint-button>
           </div>
         </div>
       </paint-window>
@@ -434,11 +432,11 @@
             @change="${e=>this.updateFont(e)}"
           >
             ${this.fonts.map(e=>v` <option
-                value="${e}"
-                ?selected="${e===this.drawingContext.text.font}"
-              >
-                ${e}
-              </option>`)}
+                  value="${e}"
+                  ?selected="${e===this.drawingContext.text.font}"
+                >
+                  ${e}
+                </option>`)}
           </select>
           <select
             class="font-sizes"
@@ -674,8 +672,9 @@ This file is not in the correct format.`,"warning","Paint")}}readPalette(t){cons
         --z-index-menu: 10;
         --z-index-dialog: 20;
 
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-          Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
           'Segoe UI Symbol';
         font-size: 9pt;
 
@@ -1039,14 +1038,10 @@ This file is not in the correct format.`,"warning","Paint")}}readPalette(t){cons
         pointer-events: none;
       }
     `}openColorPicker(){try{this.colorInput.showPicker()}catch{this.colorInput.focus(),this.colorInput.click()}}onChange(e){const t=e.target;this.drawingContext.palette[this.index]=t.value,this.drawingContext.colors.primary=t.value,w(this)}dispatchColorEvent(e){this.drawingContext.selectedPaletteIndex=this.index,this.drawingContext.colors[e]=this.color,w(this)}render(){return v`<div
-      class="frame"
-      style="background-color: ${this.color};"
-    ></div>
-    <input
-      type="color"
-      .value="${this.color}"
-      @change="${this.onChange}"
-    />`}};Ut([m()],dt.prototype,"drawingContext",2);Ut([m({type:Number})],dt.prototype,"index",2);Ut([Se("input")],dt.prototype,"colorInput",2);dt=Ut([y("paint-color-picker")],dt);var Br=Object.defineProperty,Rr=Object.getOwnPropertyDescriptor,Le=(e,t,i,n)=>{for(var o=n>1?void 0:n?Rr(t,i):t,r=e.length-1,s;r>=0;r--)(s=e[r])&&(o=(n?s(t,i,o):s(o))||o);return n&&o&&Br(t,i,o),o};let Vt=class extends b{constructor(){super(...arguments),this.primaryColor="",this.secondaryColor=""}static get styles(){return x`
+        class="frame"
+        style="background-color: ${this.color};"
+      ></div>
+      <input type="color" .value="${this.color}" @change="${this.onChange}" />`}};Ut([m()],dt.prototype,"drawingContext",2);Ut([m({type:Number})],dt.prototype,"index",2);Ut([Se("input")],dt.prototype,"colorInput",2);dt=Ut([y("paint-color-picker")],dt);var Br=Object.defineProperty,Rr=Object.getOwnPropertyDescriptor,Le=(e,t,i,n)=>{for(var o=n>1?void 0:n?Rr(t,i):t,r=e.length-1,s;r>=0;r--)(s=e[r])&&(o=(n?s(t,i,o):s(o))||o);return n&&o&&Br(t,i,o),o};let Vt=class extends b{constructor(){super(...arguments),this.primaryColor="",this.secondaryColor=""}static get styles(){return x`
       :host {
         border: 1px solid var(--button-light);
         border-top-color: var(--button-dark);
@@ -1519,16 +1514,16 @@ This file is not in the correct format.`,"warning","Paint")}}readPalette(t){cons
     `}render(){const{airbrushSize:e}=this.drawingContext;return v`
       <ul>
         ${this.options.map(({size:t,selectionWidth:i,width:n,height:o,path:r})=>v`
-              <li
-                class="${e===t?"selected":""}"
-                style="width: ${i}px"
-                @click="${()=>this.setSize(t)}"
-              >
-                <svg style="width: ${n}px; height: ${o}px;">
-                  <path d="${r}"></path>
-                </svg>
-              </li>
-            `)}
+            <li
+              class="${e===t?"selected":""}"
+              style="width: ${i}px"
+              @click="${()=>this.setSize(t)}"
+            >
+              <svg style="width: ${n}px; height: ${o}px;">
+                <path d="${r}"></path>
+              </svg>
+            </li>
+          `)}
       </ul>
     `}setSize(e){this.drawingContext.airbrushSize=e,w(this)}};Qi([m({type:Object})],ue.prototype,"drawingContext",2);ue=Qi([y("paint-tool-airbrush")],ue);var hs=Object.getOwnPropertyDescriptor,ps=(e,t,i,n)=>{for(var o=n>1?void 0:n?hs(t,i):t,r=e.length-1,s;r>=0;r--)(s=e[r])&&(o=s(o)||o);return o};let hi=class extends b{static get styles(){return x`
       :host {
@@ -1560,11 +1555,11 @@ This file is not in the correct format.`,"warning","Paint")}}readPalette(t){cons
       }
     `}render(){return v`
       ${eo.map(e=>v` <paint-tool
-          .tool=${e}
-          title="${e.tooltip}"
-          class="${this.drawingContext?.tool===e?"active":""} ${e.instance?"":"unavailable"}"
-          @click="${()=>this.selectTool(e)}"
-        ></paint-tool>`)}
+            .tool=${e}
+            title="${e.tooltip}"
+            class="${this.drawingContext?.tool===e?"active":""} ${e.instance?"":"unavailable"}"
+            @click="${()=>this.selectTool(e)}"
+          ></paint-tool>`)}
       <paint-inset-container>
         ${this.getToolHtml(this.drawingContext.tool)}
       </paint-inset-container>
@@ -1802,11 +1797,11 @@ This file is not in the correct format.`,"warning","Paint")}}readPalette(t){cons
     `}render(){return v`
       <ul>
         ${this.lineWidths.map(e=>v` <li
-            @click="${()=>this.onUpdateWidth(e)}"
-            class="${this.drawingContext.lineWidth===e?"selected":""}"
-          >
-            <div style="height: ${e}px"></div>
-          </li>`)}
+              @click="${()=>this.onUpdateWidth(e)}"
+              class="${this.drawingContext.lineWidth===e?"selected":""}"
+            >
+              <div style="height: ${e}px"></div>
+            </li>`)}
       </ul>
     `}onUpdateWidth(e){this.drawingContext.lineWidth=e,w(this)}};tn([m()],be.prototype,"drawingContext",2);be=tn([y("paint-tool-line-width")],be);var Es=Object.defineProperty,_s=Object.getOwnPropertyDescriptor,en=(e,t,i,n)=>{for(var o=n>1?void 0:n?_s(t,i):t,r=e.length-1,s;r>=0;r--)(s=e[r])&&(o=(n?s(t,i,o):s(o))||o);return n&&o&&Es(t,i,o),o};let xe=class extends b{constructor(){super(...arguments),this.drawingContext=S,this.selectedMagnifierSize=0,this.selections=[{path:"M3,0H4V9H3V2H1V1H3zM7,3V5H8V7H7V9H8V7h2V9h1V7H10V5h1V3H10V5H8V3zM19,5h1V6H19z",magnifierSize:1},{path:"M0,1H1V0H4V1H5V4H4V5H3V6H2V7H1V8H5V9H0V7H1V6H2V5H3V4H4V1H1V2H0zM6,3V5H7V7H6V9H7V7H9V9h1V7H9V5h1V3H9V5H7V3zM18,4h2V6H18z",magnifierSize:2},{path:"M1,0h3v1h1v1H4V1H1v3h3v1h1v3H4v1H1V8h3V5H1v3H0V1h1zM6,3V5H7V7H6V9H7V7H9V9h1V7H9V5h1V3H9V5H7V3zM16,2h6V8H16z",magnifierSize:6},{path:"M1,0h3v1h1v3H4v1h1v3H4v1H1V8h3V5H1v3H0V5h1V4h3V1H1v3H0V1h1zM6,3V5H7V7H6V9H7V7H9V9h1V7H9V5h1V3H9V5H7V3zm9-2h8V9H15z",magnifierSize:8}]}static get styles(){return x`
       ul {
