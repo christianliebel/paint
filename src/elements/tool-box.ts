@@ -81,7 +81,13 @@ export class ToolBox extends LitElement {
       this.drawingContext.previousEditingTool = this.drawingContext.tool;
     }
 
-    this.drawingContext.tool = tool;
+    // Special case: Clicking pick color or magnifier twice resets to previous editing tool.
+    if (this.drawingContext.tool === tool && [PICK_COLOR, MAGNIFIER].includes(tool)) {
+      this.drawingContext.tool = this.drawingContext.previousEditingTool;
+    } else {
+      this.drawingContext.tool = tool;
+    }
+
     updateContext(this);
   }
 
