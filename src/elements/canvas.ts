@@ -164,7 +164,8 @@ export class Canvas extends LitElement {
     ) as HTMLCanvasElement;
     const context = canvas.getContext('2d', {
       desynchronized: true,
-      willReadFrequently: true,
+      // Apparently not supported by ChromeOS
+      // willReadFrequently: true,
     });
     const previewContext = previewCanvas.getContext('2d', {
       desynchronized: true,
