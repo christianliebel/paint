@@ -35,7 +35,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.4.2",
-    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
     "@types/wicg-file-system-access": "^2023.10.7",
