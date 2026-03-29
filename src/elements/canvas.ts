@@ -23,6 +23,7 @@ export class Canvas extends LitElement {
   private pointerDown = false;
   private previewColor: 'primary' | 'secondary' = 'primary';
   private lastPointerEventTime = 0;
+  private strokeStartSnapshot: ImageData | null = null;
 
   static get styles(): CSSResultGroup {
     return css`
@@ -190,6 +191,29 @@ export class Canvas extends LitElement {
 
     document.addEventListener('pointerup', (event) => this.onPointerUp(event));
 
+    document.addEventListener('pointerdown', (event) => {
+      if (!this.pointerDown) return;
+      const isCancelButton =
+        (this.previewColor === 'primary' && event.button === 2) ||
+        (this.previewColor === 'secondary' && event.button === 0);
+      if (isCancelButton) {
+        this.cancelStroke(0, 0);
+        event.preventDefault();
+      }
+    });
+
+    document.addEventListener('contextmenu', (event) => {
+      if (this.pointerDown) {
+        event.preventDefault();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && this.pointerDown) {
+        this.cancelStroke(0, 0);
+      }
+    });
+
     this.dispatchEvent(
       new CustomEvent('canvas-ready', { bubbles: true, composed: true }),
     );
@@ -225,8 +249,26 @@ export class Canvas extends LitElement {
   }
 
   onPointerDown(event: PointerEvent): void {
+    if (this.pointerDown) {
+      // A stroke is already in progress; cancellation is handled by the
+      // document-level pointerdown listener. Ignore this event.
+      event.preventDefault();
+      return;
+    }
+
     this.pointerDown = true;
     this.previewColor = event.button !== 2 ? 'primary' : 'secondary';
+
+    // Snapshot canvas state before stroke begins so it can be restored on cancel
+    const { context, canvas } = this.drawingContext;
+    if (context && canvas) {
+      this.strokeStartSnapshot = context.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+      );
+    }
 
     this.drawingContext.text.active = false;
     evaluateTextToolbarVisibility(this.drawingContext);
@@ -238,6 +280,27 @@ export class Canvas extends LitElement {
     }
 
     event.preventDefault();
+  }
+
+  cancelStroke(x: number, y: number): void {
+    const { context, canvas, previewContext, previewCanvas } =
+      this.drawingContext;
+
+    if (context && canvas && this.strokeStartSnapshot) {
+      context.putImageData(this.strokeStartSnapshot, 0, 0);
+    }
+
+    if (previewContext && previewCanvas) {
+      previewContext.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+    }
+
+    this.tool?.onCancel?.(this.drawingContext);
+    this.pointerDown = false;
+    this.strokeStartSnapshot = null;
+
+    if (this.tool?.onPointerHover) {
+      this.tool.onPointerHover(...this.getToolEventArgs(x, y));
+    }
   }
 
   onPointerMove(event: PointerEvent): void {
@@ -280,6 +343,7 @@ export class Canvas extends LitElement {
     // -> after the right-click pointer (secondary tool color) is up,
     //    tools should preview the primary color again
     this.pointerDown = false;
+    this.strokeStartSnapshot = null;
 
     if (this.tool?.onPointerHover) {
       this.tool.onPointerHover(...this.getToolEventArgs(x, y));

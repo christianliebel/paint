@@ -39,4 +39,5 @@ export interface Tool {
     drawingContext?: DrawingContext,
     color?: ToolColor,
   ): void;
+  onCancel?(drawingContext?: DrawingContext): void;
 }

@@ -45,6 +45,14 @@ export class Airbrush implements Tool {
   }
 
   onPointerUp(): void {
+    this.stopSpray();
+  }
+
+  onCancel(): void {
+    this.stopSpray();
+  }
+
+  private stopSpray(): void {
     if (typeof this.intervalHandle !== 'undefined') {
       clearInterval(this.intervalHandle);
       this.intervalHandle = this.currentPosition = undefined;
