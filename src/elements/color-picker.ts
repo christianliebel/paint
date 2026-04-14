@@ -1,14 +1,13 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
+import { showDialog } from '../helpers/dialog';
 import { updateContext } from '../helpers/update-context';
 
 @customElement('paint-color-picker')
 export class ColorPicker extends LitElement {
   @property() drawingContext = DRAWING_CONTEXT;
   @property({ type: Number }) index = 0;
-
-  @query('input') colorInput!: HTMLInputElement;
 
   connectedCallback() {
     super.connectedCallback();
@@ -66,33 +65,18 @@ export class ColorPicker extends LitElement {
         border-left-color: var(--button-darker);
         height: 100%;
       }
-
-      input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        pointer-events: none;
-      }
     `;
   }
 
-  openColorPicker(): void {
-    try {
-      this.colorInput.showPicker();
-    } catch {
-      this.colorInput.focus();
-      this.colorInput.click();
+  async openColorPicker(): Promise<void> {
+    const result = await showDialog('paint-dialog-edit-colors', {
+      color: this.color,
+    });
+    if (result) {
+      this.drawingContext.palette[this.index] = result.color;
+      this.drawingContext.colors.primary = result.color;
+      updateContext(this);
     }
-  }
-
-  onChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.drawingContext.palette[this.index] = input.value;
-    this.drawingContext.colors.primary = input.value;
-    updateContext(this);
   }
 
   dispatchColorEvent(type: 'primary' | 'secondary'): void {
@@ -103,9 +87,8 @@ export class ColorPicker extends LitElement {
 
   render(): TemplateResult {
     return html`<div
-        class="frame"
-        style="background-color: ${this.color};"
-      ></div>
-      <input type="color" .value="${this.color}" @change="${this.onChange}" />`;
+      class="frame"
+      style="background-color: ${this.color};"
+    ></div>`;
   }
 }

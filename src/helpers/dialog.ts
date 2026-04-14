@@ -6,6 +6,10 @@ import type {
   CustomZoom,
   CustomZoomResult,
 } from '../elements/dialogs/custom-zoom';
+import type {
+  EditColors,
+  EditColorsResult,
+} from '../elements/dialogs/edit-colors';
 import type { FlipRotateResult } from '../elements/dialogs/flip-and-rotate';
 import type {
   MessageBox,
@@ -21,6 +25,10 @@ export function showDialog(
   selector: 'paint-dialog-custom-zoom',
   propertyBag: Partial<CustomZoom>,
 ): Promise<CustomZoomResult | undefined>;
+export function showDialog(
+  selector: 'paint-dialog-edit-colors',
+  propertyBag: Partial<EditColors>,
+): Promise<EditColorsResult | undefined>;
 export function showDialog(
   selector: 'paint-dialog-message-box',
   propertyBag: Partial<MessageBox>,
