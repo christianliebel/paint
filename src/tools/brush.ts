@@ -25,12 +25,12 @@ export class BrushTool implements Tool {
   onPointerDown(
     x: number,
     y: number,
-    { brush, context }: DrawingContext,
+    { brush, previewContext }: DrawingContext,
     color: ToolColor,
   ): void {
-    if (context) {
-      context.fillStyle = color.stroke.value;
-      this.drawBrush(x, y, brush, context);
+    if (previewContext) {
+      previewContext.fillStyle = color.stroke.value;
+      this.drawBrush(x, y, brush, previewContext);
       this.previous = { x, y };
     }
   }
@@ -38,15 +38,15 @@ export class BrushTool implements Tool {
   onPointerMove(
     x: number,
     y: number,
-    { brush, context }: DrawingContext,
+    { brush, previewContext }: DrawingContext,
   ): void {
-    if (context) {
+    if (previewContext) {
       let previousBresenham = { ...this.previous };
       line(this.previous.x, this.previous.y, x, y, (x, y) => {
         // Position difference is required for forward lines to ensure
         // continuous drawing.
         const diff = { x: x - previousBresenham.x, y: y - previousBresenham.y };
-        this.drawBrush(x, y, brush, context, diff);
+        this.drawBrush(x, y, brush, previewContext, diff);
         previousBresenham = { x, y };
       });
       this.previous = { x, y };

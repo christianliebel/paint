@@ -6,15 +6,15 @@ export class FillTool implements Tool {
   onPointerDown(
     x: number,
     y: number,
-    { canvas, context }: DrawingContext,
+    { canvas, context, previewContext }: DrawingContext,
     color: ToolColor,
   ): void {
-    if (canvas && context) {
+    if (canvas && context && previewContext) {
       const floodFill = new FloodFill(
         context.getImageData(0, 0, canvas.width, canvas.height),
       );
       floodFill.fill(color.stroke.value, x, y, 0);
-      context.putImageData(floodFill.imageData, 0, 0);
+      previewContext.putImageData(floodFill.imageData, 0, 0);
     }
   }
 }

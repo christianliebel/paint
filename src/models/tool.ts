@@ -39,4 +39,10 @@ export interface Tool {
     drawingContext?: DrawingContext,
     color?: ToolColor,
   ): void;
+  /**
+   * Called when an operation in progress is cancelled (e.g., by pressing Esc
+   * or the opposite mouse button while drawing). Tools should reset transient
+   * state here. The canvas clears the preview and restores the main canvas.
+   */
+  onCancel?(drawingContext?: DrawingContext): void;
 }
