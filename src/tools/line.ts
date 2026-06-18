@@ -11,45 +11,38 @@ export class LineTool implements Tool {
   onPointerDown(
     x: number,
     y: number,
-    { previewContext, context }: DrawingContext,
+    { previewContext }: DrawingContext,
     color: ToolColor,
   ): void {
-    if (previewContext && context) {
+    if (previewContext) {
       this.startPosition = { x, y };
-      previewContext.fillStyle = context.fillStyle = color.stroke.value;
+      previewContext.fillStyle = color.stroke.value;
     }
   }
 
   onPointerMove(
     x: number,
     y: number,
-    { previewContext, canvas, lineWidth }: DrawingContext,
+    { previewContext, lineWidth }: DrawingContext,
   ): void {
-    if (canvas && previewContext) {
-      this.drawLine(x, y, previewContext, previewContext, lineWidth);
+    if (previewContext) {
+      this.drawLine(x, y, previewContext, lineWidth);
     }
   }
 
-  onPointerUp(
-    x: number,
-    y: number,
-    { previewContext, context, canvas, lineWidth }: DrawingContext,
-  ): void {
-    if (previewContext && context && canvas) {
-      this.drawLine(x, y, context, previewContext, lineWidth);
-    }
+  onPointerUp(x: number, y: number, drawingContext: DrawingContext): void {
+    this.onPointerMove(x, y, drawingContext);
   }
 
   drawLine(
     x: number,
     y: number,
-    targetContext: CanvasRenderingContext2D,
     previewContext: CanvasRenderingContext2D,
     lineWidth: number,
   ): void {
     clearContext(previewContext);
     line(x, y, this.startPosition.x, this.startPosition.y, (x, y) => {
-      drawCircle(x, y, lineWidth, targetContext);
+      drawCircle(x, y, lineWidth, previewContext);
     });
   }
 }
