@@ -28,6 +28,12 @@ export class SelectTool implements Tool {
     dispatchAreaEvent(this.startPosition, { x, y }, element);
   }
 
+  onCancel(drawingContext?: DrawingContext): void {
+    drawingContext?.element?.dispatchEvent(
+      new CustomEvent('area', { bubbles: true, composed: true }),
+    );
+  }
+
   onPointerUp(x: number, y: number, drawingContext: DrawingContext): void {
     const { element, previewContext } = drawingContext;
     clearContext(previewContext);
