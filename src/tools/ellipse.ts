@@ -15,23 +15,21 @@ export class EllipseTool implements Tool {
   onPointerMove(
     x: number,
     y: number,
-    { fillStyle, canvas, previewContext }: DrawingContext,
+    { fillStyle, previewContext }: DrawingContext,
     color: ToolColor,
   ): void {
-    if (canvas && previewContext) {
-      this.drawEllipse(x, y, fillStyle, color, previewContext, previewContext);
+    if (previewContext) {
+      this.drawEllipse(x, y, fillStyle, color, previewContext);
     }
   }
 
   onPointerUp(
     x: number,
     y: number,
-    { fillStyle, canvas, context, previewContext }: DrawingContext,
+    drawingContext: DrawingContext,
     color: ToolColor,
   ): void {
-    if (canvas && context && previewContext) {
-      this.drawEllipse(x, y, fillStyle, color, context, previewContext);
-    }
+    this.onPointerMove(x, y, drawingContext, color);
   }
 
   private drawEllipse(
@@ -40,9 +38,8 @@ export class EllipseTool implements Tool {
     fillStyle: FillStyle,
     color: ToolColor,
     targetContext: CanvasRenderingContext2D,
-    previewContext: CanvasRenderingContext2D,
   ): void {
-    clearContext(previewContext);
+    clearContext(targetContext);
 
     const ellipsePixels: Point[] = [];
     ellipseRect(this.startPosition.x, this.startPosition.y, x, y, (x, y) => {
