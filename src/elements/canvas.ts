@@ -2,6 +2,7 @@ import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { clearCanvas } from '../helpers/clear-canvas';
+import { clearContext } from '../helpers/clear-context';
 import { evaluateTextToolbarVisibility } from '../helpers/evaluate-text-toolbar-visibility';
 import { updateContext } from '../helpers/update-context';
 import type { DrawingContext } from '../models/drawing-context';
@@ -190,12 +191,22 @@ export class Canvas extends LitElement {
 
     document.addEventListener('pointerup', (event) => this.onPointerUp(event));
 
+    document.addEventListener('keydown', (event) => this.onKeyDown(event));
+
     this.dispatchEvent(
       new CustomEvent('canvas-ready', { bubbles: true, composed: true }),
     );
   }
 
   throttledPointerMove(event: PointerEvent): void {
+    // Pressing the opposite mouse button while drawing cancels the operation.
+    // Chorded button presses arrive as pointermove events, so this must be
+    // checked before throttling drops the event.
+    if (this.pointerDown && this.isOppositeButtonPressed(event)) {
+      this.cancelOperation();
+      return;
+    }
+
     const currentTime = Date.now();
     if (currentTime - this.lastPointerEventTime < 8) {
       // Throttle mouse polling rate to ~125hz 1000/125 = 8
@@ -232,6 +243,10 @@ export class Canvas extends LitElement {
     evaluateTextToolbarVisibility(this.drawingContext);
     updateContext(this);
 
+    // Stale hover previews (e.g., the brush shape or eraser outline) must not
+    // become part of the operation that is committed on pointer up.
+    clearContext(this.drawingContext.previewContext);
+
     if (this.tool?.onPointerDown) {
       const { x, y } = this.getCoordinates(event);
       this.tool.onPointerDown(...this.getToolEventArgs(x, y));
@@ -255,7 +270,9 @@ export class Canvas extends LitElement {
       );
     }
 
-    if (this.tool?.onPointerHover) {
+    // Hover previews would clear the preview canvas and therefore wipe the
+    // operation in progress, so they are suspended while the pointer is down.
+    if (!this.pointerDown && this.tool?.onPointerHover) {
       this.tool.onPointerHover(...this.getToolEventArgs(x, y));
     }
 
@@ -274,6 +291,15 @@ export class Canvas extends LitElement {
       this.tool.onPointerUp(...this.getToolEventArgs(x, y));
     }
 
+    // Tools draw exclusively onto the preview canvas. The result is committed
+    // to the main canvas here. Tools that use the preview canvas for UI
+    // overlays only (e.g., Select, Text) clear it in their onPointerUp.
+    const { context, previewCanvas, previewContext } = this.drawingContext;
+    if (context && previewCanvas) {
+      context.drawImage(previewCanvas, 0, 0);
+    }
+    clearContext(previewContext);
+
     this.drawingContext.history?.commit();
 
     // This position is important for correct preview behavior
@@ -284,6 +310,62 @@ export class Canvas extends LitElement {
     if (this.tool?.onPointerHover) {
       this.tool.onPointerHover(...this.getToolEventArgs(x, y));
     }
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key !== 'Escape') {
+      return;
+    }
+
+    // Don't interfere with open dialogs (e.g., Attributes, Custom Zoom).
+    const inDialog = event
+      .composedPath()
+      .some(
+        (target) =>
+          target instanceof HTMLElement &&
+          target.tagName.toLowerCase().startsWith('paint-dialog'),
+      );
+    if (inDialog) {
+      return;
+    }
+
+    if (this.pointerDown) {
+      this.cancelOperation();
+      return;
+    }
+
+    if (this.drawingContext.text.active) {
+      this.drawingContext.text.active = false;
+      evaluateTextToolbarVisibility(this.drawingContext);
+      updateContext(this);
+      return;
+    }
+
+    if (this.drawingContext.selection) {
+      this.drawingContext.selection = null;
+      this.dispatchEvent(
+        new CustomEvent('area', { bubbles: true, composed: true }),
+      );
+      updateContext(this);
+    }
+  }
+
+  cancelOperation(): void {
+    if (!this.pointerDown) {
+      return;
+    }
+
+    this.pointerDown = false;
+    this.tool?.onCancel?.(this.drawingContext);
+    // Tools draw exclusively onto the preview canvas, so discarding the
+    // preview is all it takes to cancel the operation.
+    clearContext(this.drawingContext.previewContext);
+  }
+
+  isOppositeButtonPressed({ buttons }: PointerEvent): boolean {
+    // previewColor is 'primary' when drawing started with the left button.
+    const oppositeButtonMask = this.previewColor === 'primary' ? 2 : 1;
+    return (buttons & oppositeButtonMask) !== 0;
   }
 
   onPointerEnter(): void {
