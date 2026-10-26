@@ -1,4 +1,3 @@
-import { fileOpen } from 'browser-fs-access';
 import { showMessageBox } from '../../helpers/message-box';
 import { updateContext } from '../../helpers/update-context';
 import type { DrawingContext } from '../../models/drawing-context';
@@ -7,7 +6,7 @@ import type { MenuAction } from '../../models/menu-action';
 export class GetColorsAction implements MenuAction {
   async execute(drawingContext: DrawingContext): Promise<void> {
     try {
-      const file = await fileOpen({
+      const file = await drawingContext.fileSystem.fileOpen({
         extensions: ['.pal'],
         description: 'Palette',
       });
