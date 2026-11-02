@@ -14,51 +14,32 @@ export class RectangleTool implements Tool {
   onPointerMove(
     x: number,
     y: number,
-    { canvas, lineWidth, fillStyle, previewContext }: DrawingContext,
+    { lineWidth, fillStyle, previewContext }: DrawingContext,
     color: ToolColor,
   ): void {
-    if (canvas && previewContext) {
-      this.drawRectangle(
-        x,
-        y,
-        previewContext,
-        previewContext,
-        fillStyle,
-        lineWidth,
-        color,
-      );
+    if (previewContext) {
+      this.drawRectangle(x, y, previewContext, fillStyle, lineWidth, color);
     }
   }
 
   onPointerUp(
     x: number,
     y: number,
-    { canvas, context, lineWidth, fillStyle, previewContext }: DrawingContext,
+    drawingContext: DrawingContext,
     color: ToolColor,
   ): void {
-    if (canvas && context && previewContext) {
-      this.drawRectangle(
-        x,
-        y,
-        context,
-        previewContext,
-        fillStyle,
-        lineWidth,
-        color,
-      );
-    }
+    this.onPointerMove(x, y, drawingContext, color);
   }
 
   drawRectangle(
     x: number,
     y: number,
     targetContext: CanvasRenderingContext2D,
-    previewContext: CanvasRenderingContext2D,
     fillStyle: { fill: boolean; stroke: boolean },
     lineWidth: number,
     color: ToolColor,
   ): void {
-    clearContext(previewContext);
+    clearContext(targetContext);
 
     const x1 = Math.min(this.startPosition.x, x);
     const x2 = Math.max(this.startPosition.x, x);
