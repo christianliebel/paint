@@ -1,3 +1,4 @@
+import type { FileSystem } from './file-system';
 import type { History } from '../helpers/history';
 import type { Brush } from './brush';
 import type { FillStyle } from './fill-style';
@@ -140,6 +141,12 @@ export interface DrawingContext {
      */
     handle?: FileSystemFileHandle;
   };
+
+  /**
+   * How files are opened and saved: the user's file system by default, or one
+   * provided by an application embedding Paint {@see FileSystem}.
+   */
+  fileSystem: FileSystem;
 
   /**
    * Contains the text context.

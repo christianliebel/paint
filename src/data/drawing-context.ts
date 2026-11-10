@@ -1,8 +1,10 @@
 import type { DrawingContext } from '../models/drawing-context';
 import { PENCIL } from '../tools/all';
+import { BROWSER_FILE_SYSTEM } from './file-system';
 import { DEFAULT_COLORS, DEFAULT_PALETTE } from './colors';
 
 export const DRAWING_CONTEXT: DrawingContext = {
+  fileSystem: BROWSER_FILE_SYSTEM,
   lineWidth: 1,
   colors: { ...DEFAULT_COLORS },
   palette: [...DEFAULT_PALETTE],

@@ -1,4 +1,3 @@
-import { fileSave } from 'browser-fs-access';
 import { toBlob } from '../../helpers/to-blob';
 import { updateDocumentContext } from '../../helpers/update-document-context';
 import type { DrawingContext } from '../../models/drawing-context';
@@ -11,7 +10,7 @@ export class SaveAsAction implements MenuAction {
     }
 
     const blob = await toBlob(drawingContext.canvas);
-    const file = await fileSave(blob, {
+    const file = await drawingContext.fileSystem.fileSave(blob, {
       fileName: drawingContext.document.title,
       extensions: ['.png'],
       description: 'PNG files',

@@ -1,6 +1,6 @@
 import hotkeys from 'hotkeys-js';
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { DRAWING_CONTEXT } from '../data/drawing-context';
 import { deselectTextToolWhenZoomedIn } from '../helpers/deselect-text-tool-when-zoomed-in';
 import { getLaunchImage } from '../helpers/file-handling-api';
@@ -9,6 +9,7 @@ import { normalizeHotkey } from '../helpers/normalize-hotkey';
 import { registerDragDrop } from '../helpers/register-drag-drop';
 import { menus } from '../menus/all';
 import type { DrawingContext } from '../models/drawing-context';
+import type { FileSystem } from '../models/file-system';
 import type { MenuEntry, MenuSeparator } from '../models/menu';
 
 const defaultHelpText = 'For Help, click Help Topics on the Help Menu.';
@@ -19,6 +20,19 @@ export class App extends LitElement {
   @state() coordinateText = '';
   @state() helpText = defaultHelpText;
   @state() drawingContext = DRAWING_CONTEXT;
+
+  /**
+   * How Paint opens and saves files. Set it to keep images in the embedding
+   * application's own storage instead of the user's file system.
+   */
+  @property({ attribute: false })
+  get fileSystem(): FileSystem {
+    return this.drawingContext.fileSystem;
+  }
+
+  set fileSystem(fileSystem: FileSystem) {
+    this.drawingContext = { ...this.drawingContext, fileSystem };
+  }
 
   private readonly beforeUnloadListener?: (event: BeforeUnloadEvent) => void;
   private previousTitle = '';
