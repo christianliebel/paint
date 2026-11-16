@@ -9,19 +9,23 @@ export class PencilTool implements Tool {
   onPointerDown(
     x: number,
     y: number,
-    { context }: DrawingContext,
+    { previewContext }: DrawingContext,
     color: ToolColor,
   ): void {
-    if (context) {
-      context.fillStyle = color.stroke.value;
-      context.fillRect(x, y, 1, 1);
+    if (previewContext) {
+      previewContext.fillStyle = color.stroke.value;
+      previewContext.fillRect(x, y, 1, 1);
       this.previous = { x, y };
     }
   }
 
-  onPointerMove(x: number, y: number, { context }: DrawingContext): void {
+  onPointerMove(
+    x: number,
+    y: number,
+    { previewContext }: DrawingContext,
+  ): void {
     line(this.previous.x, this.previous.y, x, y, (x, y) => {
-      context?.fillRect(x, y, 1, 1);
+      previewContext?.fillRect(x, y, 1, 1);
     });
     this.previous = { x, y };
   }
