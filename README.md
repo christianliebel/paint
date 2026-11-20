@@ -54,7 +54,15 @@ Paint is available as a web component, so you can easily embed it into other app
    - Alternatively, use a service like unpkg.com: `<script src="https://unpkg.com/@christianliebel/paint/dist/elements/index.js" type="module"></script>`
 2. Use the `<paint-app>` component in your application.
 3. Optional: If you want to react to changes of the document title, listen to the `titlechange` event. You can find the updated title in the `event.details.title` property.
-4. Done!
+4. Optional: If you want images opened from and saved to your application's own storage instead of the user's file system, set the `fileSystem` property to an object with `fileOpen` and `fileSave` functions. They take the same arguments as [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access)'s functions of the same name, which Paint uses by default. Whatever your `fileSave` returns is handed back to it on the next _File > Save_, so it can stand for the document in your storage.
+   ```js
+   document.querySelector('paint-app').fileSystem = {
+     fileOpen: async (options) => pickFromMyStorage(options), // a File, or File[] if options.multiple
+     fileSave: async (blob, options, handle) =>
+       saveToMyStorage(blob, options, handle), // returns the handle
+   };
+   ```
+5. Done!
 
 ## Wait, I’ve seen this before
 

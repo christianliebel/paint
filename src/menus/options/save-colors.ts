@@ -1,9 +1,8 @@
-import { fileSave } from 'browser-fs-access';
 import type { MenuAction } from '../../models/menu-action';
 import type { DrawingContext } from '../../models/drawing-context';
 
 export class SaveColorsAction implements MenuAction {
-  async execute({ palette }: DrawingContext): Promise<void> {
+  async execute({ palette, fileSystem }: DrawingContext): Promise<void> {
     const count = palette.length;
     const chunkSize = 4 + count * 4;
     const size = 24 + count * 4;
@@ -43,7 +42,7 @@ export class SaveColorsAction implements MenuAction {
     }
 
     const blob = new Blob([buffer], { type: 'application/octet-stream' });
-    await fileSave(blob, {
+    await fileSystem.fileSave(blob, {
       fileName: 'untitled.pal',
       extensions: ['.pal'],
       description: 'Palette',
