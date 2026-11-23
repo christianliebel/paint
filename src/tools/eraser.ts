@@ -51,17 +51,17 @@ export class EraserTool implements Tool {
   private handleEraser(
     x: number,
     y: number,
-    { context, eraserSize, colors }: DrawingContext,
+    { context, previewContext, eraserSize, colors }: DrawingContext,
     color: ToolColor,
   ) {
-    if (!context) {
+    if (!context || !previewContext) {
       return;
     }
 
     if (color.stroke.key === 'primary') {
       // Normal eraser
-      context.fillStyle = colors.secondary;
-      context.fillRect(...this.getFillRectArgs(x, y, eraserSize));
+      previewContext.fillStyle = colors.secondary;
+      previewContext.fillRect(...this.getFillRectArgs(x, y, eraserSize));
     } else {
       // Color eraser
       const { r: matchR, g: matchG, b: matchB } = hexToRgb(colors.primary);
@@ -92,7 +92,7 @@ export class EraserTool implements Tool {
         }
       }
 
-      context.putImageData(imageData, rectX, rectY);
+      previewContext.putImageData(imageData, rectX, rectY);
     }
   }
 
